@@ -6,7 +6,7 @@ import vue.Fenetre;
 public class Main{
     public static void main(String[] args)
     {
-        Fenetre fen = new Fenetre("Prototype de Sylvain le truand");
+        Fenetre fen = new Fenetre("Prototype Truand2laGalere");
         javax.swing.SwingUtilities.invokeLater(fen);
     }
 }
