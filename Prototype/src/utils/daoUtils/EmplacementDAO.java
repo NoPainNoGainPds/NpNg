@@ -1,31 +1,31 @@
 package utils.daoUtils;
 
-import model.Boutique;
+import model.Emplacement;
 import utils.Constants;
 import utils.DAO;
 
-public class BoutiqueDAO extends DAO<Boutique> {
-    public BoutiqueDAO()
+public class EmplacementDAO extends DAO<Emplacement> {
+    public EmplacementDAO()
     {
         super(Constants.DB.getConnection());
     }
     @Override
-    public boolean create(Boutique obj) {
+    public boolean create(Emplacement obj) {
         return false;
     }
 
     @Override
-    public boolean delete(Boutique obj) {
+    public boolean delete(Emplacement obj) {
         return false;
     }
 
     @Override
-    public boolean update(Boutique obj) {
+    public boolean update(Emplacement obj) {
         return false;
     }
 
     @Override
-    public Boutique find(int id) {
+    public Emplacement find(int id) {
         return null;
     }
 }
