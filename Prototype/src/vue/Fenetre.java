@@ -8,6 +8,7 @@ public class Fenetre extends JFrame implements Runnable{
     {
         super(s);
         this.setSize(Constants.WIDTH,Constants.HEIGHT);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     @Override
     public void run() {
