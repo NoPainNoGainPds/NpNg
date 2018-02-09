@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.sql.Connection;
 
 public abstract class DAO<T> {
-    private Connection connection;
+    protected Connection connection;
     public DAO(Connection connection)
     {
         this.connection = connection;

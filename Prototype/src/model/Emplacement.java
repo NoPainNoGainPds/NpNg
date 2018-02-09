@@ -1,9 +1,13 @@
 package model;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class Emplacement {
     private int id;
     private String nom;
     private Boutique reference;
+    private ArrayList<Point> path;
     public Emplacement(String nom,int id)
     {
         this.nom = nom;
