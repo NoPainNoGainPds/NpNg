@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class UpdateWindow<T> extends JFrame {
     private T update;
-    private ArrayList<JTextField> fields;
+    private ArrayList<TextLabel> fields;
     public UpdateWindow(T update)
     {
         this.update = update;
@@ -42,11 +42,14 @@ public class UpdateWindow<T> extends JFrame {
                         //c'est compliqué mais en gros ici je recupere la liste des id en reference.
                         ArrayList list = ((DAO)(((ModelObject)type[0].newInstance()).getDaoClass().newInstance())).findFromReference(0);
                         String met = name.substring(3,name.length()-3);
+                        JLabel label = new JLabel(met);
                         met = "get"+met;
+
                         Method meth = update.getClass().getMethod(met,null);
                         System.out.println(met);
                         JComboBox listDeroulante = new JComboBox(list.toArray());
-                        listDeroulante.setSelectedItem(meth.invoke(update));
+                        System.out.println(meth.invoke(update));
+                        listDeroulante.getModel().setSelectedItem(meth.invoke(update));
                         //listDeroulante.setSelectedItem();
                         listDeroulante.addActionListener(event -> {
                             try {
@@ -58,6 +61,7 @@ public class UpdateWindow<T> extends JFrame {
                             }
                             System.out.println(update);
                         });
+                        panel.add(label);
                         panel.add(listDeroulante);
 
                     }catch(InstantiationException e)
@@ -89,15 +93,17 @@ public class UpdateWindow<T> extends JFrame {
                                 System.out.println(update);
                             }
                     );
-                    this.fields.add(textField);
+                    TextLabel temp = new TextLabel(textField,new JLabel(name));
+                    this.fields.add(temp);
                 }
             }
         }
         //ajout a la fenetre
 
-        for(JTextField textField : fields)
+        for(TextLabel textLabel : fields)
         {
-            panel.add(textField);
+            panel.add(textLabel.label);
+            panel.add(textLabel.field);
         }
         this.add(panel);
         JButton bouton = new JButton("Save");
@@ -123,5 +129,15 @@ public class UpdateWindow<T> extends JFrame {
         this.setSize(Constants.WIDTH,Constants.HEIGHT);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
+    }
+}
+class TextLabel
+{
+    public JTextField field;
+    public JLabel label;
+
+    public TextLabel(JTextField field, JLabel label) {
+        this.field = field;
+        this.label = label;
     }
 }
