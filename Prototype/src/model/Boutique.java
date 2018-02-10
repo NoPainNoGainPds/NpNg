@@ -1,9 +1,17 @@
 package model;
 
-public class Boutique {
+import utils.Constants;
+import utils.ModelObject;
+import utils.daoUtils.BoutiqueDAO;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class Boutique implements ModelObject {
     private String nom;
     private int id;
     private Emplacement emplacement;
+    private ArrayList<Produit> listeProduit;
     public Boutique()
     {
 
@@ -13,7 +21,10 @@ public class Boutique {
         this.id = id;
         this.nom = nom;
     }
+    public void populateListProduit()
+    {
 
+    }
     public String getNom() {
         return nom;
     }
@@ -34,11 +45,24 @@ public class Boutique {
         return emplacement;
     }
 
-    public void setEmplacement(Emplacement emplacement) {
+    public void setEmplacementRef(Emplacement emplacement) {
         this.emplacement = emplacement;
+    }
+
+    public ArrayList<Produit> getListeProduit() {
+        return listeProduit;
+    }
+
+    public void setListeProduit(ArrayList<Produit> listProduit)
+    {
+        this.listeProduit = listProduit;
     }
     public String toString()
     {
         return "Boutique:"+this.nom+"";
+    }
+    public Class getDaoClass()
+    {
+        return BoutiqueDAO.class;
     }
 }

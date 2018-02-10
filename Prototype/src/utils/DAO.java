@@ -2,6 +2,7 @@ package utils;
 
 import java.lang.reflect.Array;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public abstract class DAO<T> {
     protected Connection connection;
@@ -49,4 +50,13 @@ public abstract class DAO<T> {
      */
 
     public abstract T find(int id);
+
+    /**
+     * Methode de recherche de toute la table
+     * grace a une cle etrangere.
+     *
+     * @param id
+     * @return ArrayList<T>
+     */
+    public abstract ArrayList<T> findFromReference(int id);
 }

@@ -4,6 +4,8 @@ import model.Emplacement;
 import utils.Constants;
 import utils.DAO;
 
+import java.util.ArrayList;
+
 public class EmplacementDAO extends DAO<Emplacement> {
     public EmplacementDAO()
     {
@@ -26,6 +28,11 @@ public class EmplacementDAO extends DAO<Emplacement> {
 
     @Override
     public Emplacement find(int id) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Emplacement> findFromReference(int id) {
         return null;
     }
 }

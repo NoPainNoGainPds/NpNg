@@ -15,7 +15,12 @@ public class Produit {
         this.id = id;
         this.nom = nom;
     }
-
+    public Produit(int id,String nom,int quantite)
+    {
+        this.id = id;
+        this.nom = nom;
+        this.quantite = quantite;
+    }
     public int getQuantite() {
         return quantite;
     }
@@ -57,6 +62,6 @@ public class Produit {
     }
     public String toString()
     {
-        return "Produit:"+this.nom+"";
+        return "Produit:"+this.nom+" quantite :"+this.quantite+"";
     }
 }
