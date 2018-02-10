@@ -3,6 +3,7 @@ package vue;
 import javax.swing.*;
 
 import model.Boutique;
+import model.Emplacement;
 import model.Produit;
 import utils.Constants;
 import utils.daoUtils.BoutiqueDAO;

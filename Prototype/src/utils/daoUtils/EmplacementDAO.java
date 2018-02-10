@@ -4,6 +4,9 @@ import model.Emplacement;
 import utils.Constants;
 import utils.DAO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class EmplacementDAO extends DAO<Emplacement> {
@@ -33,6 +36,20 @@ public class EmplacementDAO extends DAO<Emplacement> {
 
     @Override
     public ArrayList<Emplacement> findFromReference(int id) {
-        return null;
+        try
+        {
+            String requete = "SELECT idEmplacement,nom FROM Emplacement";
+            Statement stmt = Constants.DB.getConnection().createStatement();
+            ResultSet res = stmt.executeQuery(requete);
+            ArrayList<Emplacement> list = new ArrayList<>();
+            while(res.next())
+            {
+                list.add(new Emplacement(res.getString("nom"),res.getInt("idEmplacement")));
+            }
+            return list;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

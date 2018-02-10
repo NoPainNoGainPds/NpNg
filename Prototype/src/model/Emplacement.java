@@ -1,13 +1,22 @@
 package model;
 
+import utils.DAO;
+import utils.ModelObject;
+import utils.daoUtils.EmplacementDAO;
+
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Emplacement {
+public class Emplacement implements ModelObject{
     private int id;
     private String nom;
     private Boutique reference;
     private ArrayList<Point> path;
+    public Emplacement()
+    {
+        this.nom = "fictif";
+        this.id = -1;
+    }
     public Emplacement(String nom,int id)
     {
         this.nom = nom;
@@ -36,5 +45,14 @@ public class Emplacement {
 
     public void setReference(Boutique reference) {
         this.reference = reference;
+    }
+    public String toString()
+    {
+        return ""+this.id+" ; "+this.nom+"";
+    }
+
+    @Override
+    public Class getDaoClass() {
+        return EmplacementDAO.class;
     }
 }

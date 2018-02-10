@@ -59,7 +59,7 @@ public class Boutique implements ModelObject {
     }
     public String toString()
     {
-        return "Boutique:"+this.nom+"";
+        return "Boutique:"+this.nom+"; Emplacement :"+this.emplacement;
     }
     public Class getDaoClass()
     {
