@@ -1,5 +1,6 @@
 package utils.daoUtils;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import model.Boutique;
 import model.Produit;
 import utils.Constants;
@@ -27,6 +28,18 @@ public class BoutiqueDAO extends DAO<Boutique> {
 
     @Override
     public boolean update(Boutique obj) {
+        try
+        {
+            int idEmplacement;
+            if(obj.getEmplacement()!=null)
+                idEmplacement = obj.getEmplacement().getId();
+            String requete = "UPDATE Boutique set ";
+            Statement stmt = Constants.DB.getConnection().createStatement();
+            return (stmt.executeUpdate(requete))>0 ? true : false;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
         return false;
     }
 

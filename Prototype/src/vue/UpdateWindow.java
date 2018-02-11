@@ -110,7 +110,7 @@ public class UpdateWindow<T> extends JFrame {
         bouton.addActionListener(event ->
         {
             try {
-                if(((DAO)(((ModelObject)update).getDaoClass().newInstance())).update(update))
+                if(!((DAO)(((ModelObject)update).getDaoClass().newInstance())).update(update))
                 {
                     System.out.println("Erreur lors de la sauvegarde");
                 }
