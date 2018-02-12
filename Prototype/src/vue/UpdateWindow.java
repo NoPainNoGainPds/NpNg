@@ -8,6 +8,7 @@ import utils.ModelObject;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
@@ -104,20 +105,23 @@ public class UpdateWindow<T> extends JFrame {
                         JTextField textField = new JTextField(25);
                         textField.addActionListener(event -> {
                                     String s = textField.getText();
-                                    if(s.matches("*"))
-                                    {
-                                        try {
-                                            methodes[j].invoke(update, (Object) s);
-                                        } catch (IllegalAccessException e1) {
-                                            e1.printStackTrace();
-                                        } catch (InvocationTargetException e1) {
-                                            e1.printStackTrace();
+                                    try {
+                                        int x = Integer.parseInt(s);
+                                        if (s.matches("[0-9]+")) {
+                                            try {
+                                                methodes[j].invoke(update, (Object) x);
+                                            } catch (IllegalAccessException e1) {
+                                                e1.printStackTrace();
+                                            } catch (InvocationTargetException e1) {
+                                                e1.printStackTrace();
+                                            }
+                                            System.out.println(update);
+                                        } else {
+                                            System.out.println("erreur");
                                         }
-                                        System.out.println(update);
-                                    }
-                                    else
+                                    }catch(NumberFormatException e)
                                     {
-                                        System.out.println("erreur");
+                                        e.printStackTrace();
                                     }
                                 }
                         );
@@ -138,9 +142,9 @@ public class UpdateWindow<T> extends JFrame {
 
         for(TextLabel textLabel : fields)
         {
-            panel.add(textLabel.label);
-            panel.add(textLabel.field);
+            panel.add(textLabel);
         }
+        panel.setLayout(new BoxLayout(panel,BoxLayout.PAGE_AXIS));
         this.add(panel);
         JButton bouton = new JButton("Save");
         bouton.addActionListener(event ->
@@ -167,7 +171,7 @@ public class UpdateWindow<T> extends JFrame {
         this.setVisible(true);
     }
 }
-class TextLabel<J extends JComponent>
+class TextLabel<J extends JComponent> extends JPanel
 {
     public J field;
     public JLabel label;
@@ -175,5 +179,7 @@ class TextLabel<J extends JComponent>
     public TextLabel(J field, JLabel label) {
         this.field = field;
         this.label = label;
+        this.add(this.label);
+        this.add(this.field);
     }
 }

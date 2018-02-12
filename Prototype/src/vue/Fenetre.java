@@ -43,7 +43,9 @@ public class Fenetre extends JFrame implements Runnable{
         });
         btn2.addActionListener(event ->
         {
-            System.out.println("afficher");
+            //System.out.println("afficher");
+            Boutique b = (Boutique)list.getSelectedValue();
+            new VueBoutique(b);
         });
         JPanel panel2 = new JPanel();
         panel2.add(btn1);
@@ -62,7 +64,7 @@ public class Fenetre extends JFrame implements Runnable{
                 //System.out.println(p);
             }
         }*/
-        new UpdateWindow<StockSortie>(new StockSortie());
+        //new UpdateWindow<StockSortie>(new StockSortie());
     }
     @Override
     public void run() {

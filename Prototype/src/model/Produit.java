@@ -9,6 +9,7 @@ public class Produit implements ModelObject{
     private String nom;
     private StockEntree stckEntree;
     private StockSortie stckSortie;
+    private CategorieProduit catProd;
     public Produit()
     {
 
