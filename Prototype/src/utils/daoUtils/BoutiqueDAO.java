@@ -30,10 +30,10 @@ public class BoutiqueDAO extends DAO<Boutique> {
     public boolean update(Boutique obj) {
         try
         {
-            int idEmplacement;
+            int idEmplacement = -1;
             if(obj.getEmplacement()!=null)
                 idEmplacement = obj.getEmplacement().getId();
-            String requete = "UPDATE Boutique set ";
+            String requete = "REPLACE INTO emplacement_boutique (id_emplacement,id_boutique) VALUES ("+idEmplacement+","+obj.getId()+") ";
             Statement stmt = Constants.DB.getConnection().createStatement();
             return (stmt.executeUpdate(requete))>0 ? true : false;
         }catch(SQLException e)
