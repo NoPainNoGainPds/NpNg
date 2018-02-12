@@ -3,8 +3,16 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/Desktop/jackson-all-1.9.0.jar!/" />
       <root url="jar://$USER_HOME$/Desktop/mariadb-java-client-2.2.1.jar!/" />
+      <root url="file://$USER_HOME$/Desktop" />
+      <root url="jar://$PROJECT_DIR$/jcalendar-1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jgoodies-common-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jgoodies-looks-2.4.1.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Desktop" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Desktop" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Desktop" recursive="false" type="SOURCES" />
   </library>
 </component>

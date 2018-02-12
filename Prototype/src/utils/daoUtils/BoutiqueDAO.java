@@ -79,4 +79,23 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
         return null;
     }
+    @Override
+    public ArrayList<Boutique> findFromReference() {
+        try
+        {
+            Statement stmt =  this.connection.createStatement();
+            String requete = "SELECT idBoutique,nom_boutique,categorie FROM boutique";
+            ResultSet res = stmt.executeQuery(requete);
+            ArrayList<Boutique> listBoutique = new ArrayList<>();
+
+            while(res.next())
+            {
+                listBoutique.add(new Boutique(res.getInt("idBoutique"),res.getString("nom_boutique")));
+            }
+            return listBoutique;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

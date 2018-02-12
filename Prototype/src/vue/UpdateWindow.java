@@ -5,6 +5,7 @@ import model.Produit;
 import utils.Constants;
 import utils.DAO;
 import utils.ModelObject;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Class qui represente une fenetre qui permet de modifier tout les champs d'un objet metier et de l'enregistrer en base de données
@@ -35,20 +37,20 @@ public class UpdateWindow<T> extends JFrame {
             {
                 if(name.endsWith("Ref"))
                 {
-                    //System.out.println("REF:"+name);
+                    System.out.println("REF:"+name);
                     Class[] type = methodes[j].getParameterTypes();
                     try
                     {
                         //c'est compliqué mais en gros ici je recupere la liste des id en reference.
-                        ArrayList list = ((DAO)(((ModelObject)type[0].newInstance()).getDaoClass().newInstance())).findFromReference(0);
+                        ArrayList list = ((DAO)(((ModelObject)type[0].newInstance()).getDaoClass().newInstance())).findFromReference();
                         String met = name.substring(3,name.length()-3);
                         JLabel label = new JLabel(met);
                         met = "get"+met;
 
-                        Method meth = update.getClass().getMethod(met,null);
-                        System.out.println(met);
+                        Method meth = update.getClass().getMethod(met);
+                        //System.out.println(met);
                         JComboBox listDeroulante = new JComboBox(list.toArray());
-                        System.out.println(meth.invoke(update));
+                        //System.out.println(meth.invoke(update));
                         listDeroulante.getModel().setSelectedItem(meth.invoke(update));
                         //listDeroulante.setSelectedItem();
                         listDeroulante.addActionListener(event -> {
@@ -79,22 +81,56 @@ public class UpdateWindow<T> extends JFrame {
                 }
                 else
                 {
-                    //System.out.println(name);
-                    JTextField textField = new JTextField(25);
-                    textField.addActionListener(event -> {
-                                String s = textField.getText();
-                                try {
-                                    methodes[j].invoke(update, (Object) s);
-                                } catch (IllegalAccessException e1) {
-                                    e1.printStackTrace();
-                                } catch (InvocationTargetException e1) {
-                                    e1.printStackTrace();
+                    if(methodes[j].getParameterTypes()[0] == String.class) {
+                        //System.out.println(name);
+                        JTextField textField = new JTextField(25);
+                        textField.addActionListener(event -> {
+                                    String s = textField.getText();
+                                    try {
+                                        methodes[j].invoke(update, (Object) s);
+                                    } catch (IllegalAccessException e1) {
+                                        e1.printStackTrace();
+                                    } catch (InvocationTargetException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                    System.out.println(update);
                                 }
-                                System.out.println(update);
-                            }
-                    );
-                    TextLabel temp = new TextLabel(textField,new JLabel(name));
-                    this.fields.add(temp);
+                        );
+                        TextLabel temp = new TextLabel(textField, new JLabel(name));
+                        this.fields.add(temp);
+                    }
+                    else if(methodes[j].getParameterTypes()[0] == int.class)
+                    {
+                        JTextField textField = new JTextField(25);
+                        textField.addActionListener(event -> {
+                                    String s = textField.getText();
+                                    if(s.matches("*"))
+                                    {
+                                        try {
+                                            methodes[j].invoke(update, (Object) s);
+                                        } catch (IllegalAccessException e1) {
+                                            e1.printStackTrace();
+                                        } catch (InvocationTargetException e1) {
+                                            e1.printStackTrace();
+                                        }
+                                        System.out.println(update);
+                                    }
+                                    else
+                                    {
+                                        System.out.println("erreur");
+                                    }
+                                }
+                        );
+                        TextLabel temp = new TextLabel(textField, new JLabel(name));
+                        this.fields.add(temp);
+                    }
+                    else if(methodes[j].getParameterTypes()[0] == Date.class)
+                    {
+                        JDateChooser jdc = new JDateChooser();
+                        TextLabel temp = new TextLabel(jdc, new JLabel(name));
+                        this.fields.add(temp);
+                        System.out.println("DATE");
+                    }
                 }
             }
         }
@@ -131,12 +167,12 @@ public class UpdateWindow<T> extends JFrame {
         this.setVisible(true);
     }
 }
-class TextLabel
+class TextLabel<J extends JComponent>
 {
-    public JTextField field;
+    public J field;
     public JLabel label;
 
-    public TextLabel(JTextField field, JLabel label) {
+    public TextLabel(J field, JLabel label) {
         this.field = field;
         this.label = label;
     }

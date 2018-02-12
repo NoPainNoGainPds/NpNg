@@ -77,4 +77,24 @@ public class ProduitDAO extends DAO<Produit> {
         }
         return null;
     }
+    public ArrayList<Produit> findFromReference()
+    {
+        try
+        {
+            Statement stmt =  this.connection.createStatement();
+            String requete = "SELECT idProduit,nom FROM Produit ";
+            ResultSet res = stmt.executeQuery(requete);
+            ArrayList<Produit> listProduit = new ArrayList<>();
+
+            while(res.next())
+            {
+                listProduit.add(new Produit(res.getInt("idProduit"),res.getString("nom"),0));
+            }
+            return listProduit;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

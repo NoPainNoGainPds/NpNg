@@ -6,6 +6,7 @@ import javax.swing.border.Border;
 import model.Boutique;
 import model.Emplacement;
 import model.Produit;
+import model.StockSortie;
 import utils.Constants;
 import utils.MyListModel;
 import utils.daoUtils.BoutiqueDAO;
@@ -61,7 +62,7 @@ public class Fenetre extends JFrame implements Runnable{
                 //System.out.println(p);
             }
         }*/
-        //new UpdateWindow<Boutique>(listBoutique.get(2));
+        new UpdateWindow<StockSortie>(new StockSortie());
     }
     @Override
     public void run() {

@@ -52,4 +52,22 @@ public class EmplacementDAO extends DAO<Emplacement> {
             return null;
         }
     }
+    @Override
+    public ArrayList<Emplacement> findFromReference() {
+        try
+        {
+            String requete = "SELECT idEmplacement,nom FROM Emplacement";
+            Statement stmt = Constants.DB.getConnection().createStatement();
+            ResultSet res = stmt.executeQuery(requete);
+            ArrayList<Emplacement> list = new ArrayList<>();
+            while(res.next())
+            {
+                list.add(new Emplacement(res.getString("nom"),res.getInt("idEmplacement")));
+            }
+            return list;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

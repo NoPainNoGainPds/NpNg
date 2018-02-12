@@ -1,6 +1,9 @@
 package model;
 
-public class Produit {
+import utils.ModelObject;
+import utils.daoUtils.ProduitDAO;
+
+public class Produit implements ModelObject{
     private int quantite;
     private int id;
     private String nom;
@@ -63,5 +66,9 @@ public class Produit {
     public String toString()
     {
         return "Produit:"+this.nom+" quantite :"+this.quantite+"";
+    }
+    @Override
+    public Class getDaoClass() {
+        return ProduitDAO.class;
     }
 }
