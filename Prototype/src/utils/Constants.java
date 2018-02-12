@@ -5,4 +5,6 @@ public class Constants {
     public static final int HEIGHT = 400;
     public static final String DRIVER_NAME ="org.mariadb.jdbc.Driver";
     public static Database DB;
+    public static String requeteListeBoutique = "SELECT * FROM Boutique";
+    public static String requeteListeProduit = "";
 }
