@@ -38,14 +38,15 @@ public class UpdateWindow<T extends ModelObject> extends JFrame {
             {
                 if(name.endsWith("Ref"))
                 {
-                    System.out.println("REF:"+name);
+                    //System.out.println("REF:"+name);
                     Class[] type = methodes[j].getParameterTypes();
                     try
                     {
                         //c'est compliqué mais en gros ici je recupere la liste des id en reference.
                         //Class model = update.getDaoClass();
-                        DAO dao = update.getDaoClass();
-                        ArrayList list = dao.findFromReference();
+                        ModelObject model = (ModelObject)type[0].newInstance();
+                        DAO dao = model.getDaoClass();
+                        ArrayList<T> list = dao.findFromReference();
                         String met = name.substring(3,name.length()-3);
                         JLabel label = new JLabel(met);
                         met = "get"+met;
@@ -58,7 +59,9 @@ public class UpdateWindow<T extends ModelObject> extends JFrame {
                         //listDeroulante.setSelectedItem();
                         listDeroulante.addActionListener(event -> {
                             try {
+                                System.out.println(listDeroulante.getSelectedItem());
                                 methodes[j].invoke(update, listDeroulante.getSelectedItem());
+
                             } catch (IllegalAccessException e1) {
                                 e1.printStackTrace();
                             } catch (InvocationTargetException e1) {
@@ -75,6 +78,8 @@ public class UpdateWindow<T extends ModelObject> extends JFrame {
                     } catch (NoSuchMethodException e) {
                         e.printStackTrace();
                     } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    } catch (InstantiationException e) {
                         e.printStackTrace();
                     }
 
@@ -96,7 +101,7 @@ public class UpdateWindow<T extends ModelObject> extends JFrame {
                                     System.out.println(update);
                                 }
                         );
-                        TextLabel temp = new TextLabel(textField, new JLabel(name));
+                        TextLabel<JTextField> temp = new TextLabel(textField, new JLabel(name));
                         this.fields.add(temp);
                     }
                     else if(methodes[j].getParameterTypes()[0] == int.class)
@@ -130,7 +135,7 @@ public class UpdateWindow<T extends ModelObject> extends JFrame {
                     else if(methodes[j].getParameterTypes()[0] == Date.class)
                     {
                         JDateChooser jdc = new JDateChooser();
-                        TextLabel temp = new TextLabel(jdc, new JLabel(name));
+                        TextLabel<JDateChooser> temp = new TextLabel(jdc, new JLabel(name));
                         this.fields.add(temp);
                         System.out.println("DATE");
                     }

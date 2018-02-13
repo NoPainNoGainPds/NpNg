@@ -27,7 +27,7 @@ public class Fenetre extends JFrame implements Runnable{
         System.out.println(listBoutique.size());
         MyListModel<Boutique> modelList = new MyListModel<>(listBoutique);
         JPanel panel = new JPanel();
-        JList<Boutique> list = new JList(modelList);
+        JList<Boutique> list = new JList<>(modelList);
 
         JScrollPane scrollPane = new JScrollPane(list);
         panel.add(scrollPane);

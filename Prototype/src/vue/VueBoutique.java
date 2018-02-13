@@ -24,7 +24,7 @@ public class VueBoutique extends JFrame {
         ArrayList<Produit> listProduit = pDao.findFromReference(boutique.getId());
         MyListModel<Produit> listModel = new MyListModel<>(listProduit);
         //donees dans une jlist pour l'afffichage
-        this.jlistProduit = new JList(listModel);
+        this.jlistProduit = new JList<Produit>(listModel);
         //affichage et mise en page
         JScrollPane jscrollPane = new JScrollPane(jlistProduit);
         JPanel panel = new JPanel();
