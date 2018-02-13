@@ -13,6 +13,7 @@ public interface Pool {
 	 * The ArrayList connectionList contains all the connections
 	 */
 	public ArrayList<Connection> connectionList = new ArrayList<Connection>();
+
 	/**
 	 * MAX_POOL_SIZE is the max amount of connection in the ArrayList
 	 */
@@ -26,6 +27,7 @@ public interface Pool {
 	 * @return The connection
 	 */
 	public Connection getConnectionFromPool();
+
 	/**
 	 * Return the connection to the pool
 	 * @param connection
@@ -34,5 +36,6 @@ public interface Pool {
 	/**
 	 * Initialize the pool by adding MAX_POOL_SIZE connections to it
 	 */
+
 	public void initializePool();
 }
