@@ -1,6 +1,7 @@
 package model;
 
 import utils.Constants;
+import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.BoutiqueDAO;
 
@@ -61,8 +62,8 @@ public class Boutique implements ModelObject {
     {
         return "Boutique:"+this.nom+"; Emplacement :"+this.emplacement;
     }
-    public Class getDaoClass()
+    public DAO getDaoClass()
     {
-        return BoutiqueDAO.class;
+        return new BoutiqueDAO();
     }
 }

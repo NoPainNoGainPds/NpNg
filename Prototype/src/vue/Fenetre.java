@@ -27,7 +27,7 @@ public class Fenetre extends JFrame implements Runnable{
         System.out.println(listBoutique.size());
         MyListModel<Boutique> modelList = new MyListModel<>(listBoutique);
         JPanel panel = new JPanel();
-        JList list = new JList(modelList);
+        JList<Boutique> list = new JList(modelList);
 
         JScrollPane scrollPane = new JScrollPane(list);
         panel.add(scrollPane);
@@ -38,13 +38,13 @@ public class Fenetre extends JFrame implements Runnable{
         JButton btn2 = new JButton("Afficher");
         btn1.addActionListener(event ->
         {
-            Boutique b = (Boutique)list.getSelectedValue();
+            Boutique b = list.getSelectedValue();
             new UpdateWindow<Boutique>(b);
         });
         btn2.addActionListener(event ->
         {
             //System.out.println("afficher");
-            Boutique b = (Boutique)list.getSelectedValue();
+            Boutique b = list.getSelectedValue();
             new VueBoutique(b);
         });
         JPanel panel2 = new JPanel();

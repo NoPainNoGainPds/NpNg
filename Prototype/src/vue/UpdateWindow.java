@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Class qui represente une fenetre qui permet de modifier tout les champs d'un objet metier et de l'enregistrer en base de données
+ * Class qui represente une fenetre qui permet de modifier tout les champs d'un objet metier et de l'enregistrer en base de donn?es
  * @param <T>
  */
-public class UpdateWindow<T> extends JFrame {
+public class UpdateWindow<T extends ModelObject> extends JFrame {
     private T update;
     private ArrayList<TextLabel> fields;
     public UpdateWindow(T update)
@@ -43,7 +43,9 @@ public class UpdateWindow<T> extends JFrame {
                     try
                     {
                         //c'est compliqué mais en gros ici je recupere la liste des id en reference.
-                        ArrayList list = ((DAO)(((ModelObject)type[0].newInstance()).getDaoClass().newInstance())).findFromReference();
+                        //Class model = update.getDaoClass();
+                        DAO dao = update.getDaoClass();
+                        ArrayList list = dao.findFromReference();
                         String met = name.substring(3,name.length()-3);
                         JLabel label = new JLabel(met);
                         met = "get"+met;
@@ -67,9 +69,6 @@ public class UpdateWindow<T> extends JFrame {
                         panel.add(label);
                         panel.add(listDeroulante);
 
-                    }catch(InstantiationException e)
-                    {
-                        e.printStackTrace();
                     }catch(IllegalAccessException e)
                     {
                         e.printStackTrace();
@@ -86,9 +85,9 @@ public class UpdateWindow<T> extends JFrame {
                         //System.out.println(name);
                         JTextField textField = new JTextField(25);
                         textField.addActionListener(event -> {
-                                    String s = textField.getText();
+                                    Object s = textField.getText();
                                     try {
-                                        methodes[j].invoke(update, (Object) s);
+                                        methodes[j].invoke(update, s);
                                     } catch (IllegalAccessException e1) {
                                         e1.printStackTrace();
                                     } catch (InvocationTargetException e1) {
@@ -106,10 +105,10 @@ public class UpdateWindow<T> extends JFrame {
                         textField.addActionListener(event -> {
                                     String s = textField.getText();
                                     try {
-                                        int x = Integer.parseInt(s);
+                                        Object x = Integer.parseInt(s);
                                         if (s.matches("[0-9]+")) {
                                             try {
-                                                methodes[j].invoke(update, (Object) x);
+                                                methodes[j].invoke(update,x);
                                             } catch (IllegalAccessException e1) {
                                                 e1.printStackTrace();
                                             } catch (InvocationTargetException e1) {
@@ -149,21 +148,15 @@ public class UpdateWindow<T> extends JFrame {
         JButton bouton = new JButton("Save");
         bouton.addActionListener(event ->
         {
-            try {
-                if(!((DAO)(((ModelObject)update).getDaoClass().newInstance())).update(update))
-                {
-                    System.out.println("Erreur lors de la sauvegarde");
-                }
-                else
-                {
-                    System.out.println("GOOD!!!");
-                }
-                System.out.println("Saved");
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+            if(!update.getDaoClass().update(update))
+            {
+                System.out.println("Erreur lors de la sauvegarde");
             }
+            else
+            {
+                System.out.println("GOOD!!!");
+            }
+            System.out.println("Saved");
         });
         panel.add(bouton);
         this.setSize(Constants.WIDTH,Constants.HEIGHT);
@@ -171,6 +164,12 @@ public class UpdateWindow<T> extends JFrame {
         this.setVisible(true);
     }
 }
+
+/**
+ * Class privé pour un affichage d'un label
+ *
+ * @param <J>
+ */
 class TextLabel<J extends JComponent> extends JPanel
 {
     public J field;

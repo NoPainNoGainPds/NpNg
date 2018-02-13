@@ -1,5 +1,6 @@
 package model;
 
+import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.StockSortieDAO;
 
@@ -65,7 +66,7 @@ public class StockSortie implements ModelObject {
     }
 
     @Override
-    public Class getDaoClass() {
-        return StockSortieDAO.class;
+    public DAO getDaoClass() {
+        return new StockSortieDAO();
     }
 }

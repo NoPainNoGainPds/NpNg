@@ -52,7 +52,7 @@ public class Emplacement implements ModelObject{
     }
 
     @Override
-    public Class getDaoClass() {
-        return EmplacementDAO.class;
+    public DAO getDaoClass() {
+        return new EmplacementDAO();
     }
 }

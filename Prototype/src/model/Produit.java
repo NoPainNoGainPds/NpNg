@@ -1,5 +1,6 @@
 package model;
 
+import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.ProduitDAO;
 
@@ -69,7 +70,7 @@ public class Produit implements ModelObject{
         return "Produit:"+this.nom+" quantite :"+this.quantite+"";
     }
     @Override
-    public Class getDaoClass() {
-        return ProduitDAO.class;
+    public DAO getDaoClass() {
+        return new ProduitDAO();
     }
 }

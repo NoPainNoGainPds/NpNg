@@ -1,10 +1,11 @@
 package model;
 
+import utils.DAO;
 import utils.ModelObject;
 
 public class CategorieProduit implements ModelObject {
     @Override
-    public Class getDaoClass() {
+    public DAO getDaoClass() {
         return null;
     }
 }
