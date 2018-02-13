@@ -19,7 +19,7 @@ public class Fenetre extends JFrame implements Runnable{
     public Fenetre(String s)
     {
         super(s);
-        this.setSize(Constants.WIDTH,Constants.HEIGHT);
+        this.setSize(Constants.WIDTH*3,Constants.HEIGHT*2);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ProduitDAO pDAO = new ProduitDAO();
         BoutiqueDAO bDAO = new BoutiqueDAO();
