@@ -38,7 +38,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
     public ArrayList<Emplacement> findFromReference(int id) {
         try
         {
-            String requete = "SELECT idEmplacement,nom FROM Emplacement";
+            String requete = "SELECT idEmplacement,emplacement.nom FROM Emplacement_boutique join emplacement ON emplacement_boutique.id_Emplacement = emplacement.idEmplacement where id_boutique ="+id;
             Statement stmt = Constants.DB.getConnection().createStatement();
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Emplacement> list = new ArrayList<>();
