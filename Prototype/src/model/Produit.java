@@ -7,7 +7,9 @@ import utils.daoUtils.ProduitDAO;
 public class Produit implements ModelObject{
     private int quantite;
     private int id;
+    private float poid,longueur,largeur;
     private String nom;
+    private Fournisseur fournisseur;
     private StockEntree stckEntree;
     private StockSortie stckSortie;
     private CategorieProduit catProd;
@@ -65,9 +67,42 @@ public class Produit implements ModelObject{
     public void setStckSortie(StockSortie stckSortie) {
         this.stckSortie = stckSortie;
     }
+
+    public void setFournisseurRef(Fournisseur f) {
+        this.fournisseur = fournisseur;
+    }
+
+    public Fournisseur getFournisseur() {
+        return fournisseur;
+    }
+
+    public float getPoid() {
+        return poid;
+    }
+
+    public void setPoid(float poid) {
+        this.poid = poid;
+    }
+
+    public float getLongueur() {
+        return longueur;
+    }
+
+    public void setLongueur(float longueur) {
+        this.longueur = longueur;
+    }
+
+    public float getLargeur() {
+        return largeur;
+    }
+
+    public void setLargeur(float largeur) {
+        this.largeur = largeur;
+    }
+
     public String toString()
     {
-        return "Produit:"+this.nom+" quantite :"+this.quantite+"";
+        return ""+this.nom+" qty :"+this.quantite+"";
     }
     @Override
     public DAO getDaoClass() {

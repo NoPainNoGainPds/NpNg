@@ -27,7 +27,19 @@ public class ProduitDAO extends DAO<Produit> {
 
     @Override
     public boolean update(Produit obj) {
-        return false;
+        try
+        {
+            Statement stmt = Constants.DB.getConnection().createStatement();
+            String requete = "UPDATE Produit SET nom=\""+obj.getNom()+"\""+
+                    " ,poid="+obj.getPoid()+",longueur="+obj.getLongueur()+",largeur="+obj.getLargeur()+" " +
+                    "where idProduit = "+obj.getId()+";";
+            stmt.executeUpdate(requete);
+            return true;
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
