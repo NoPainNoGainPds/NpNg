@@ -30,7 +30,7 @@ public class Main{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Fenetre fen = new Fenetre("Prototype Sylvain");
+        Fenetre fen = new Fenetre("Prototype Lois");
         javax.swing.SwingUtilities.invokeLater(fen);
     }
 }
