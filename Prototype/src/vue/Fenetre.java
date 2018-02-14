@@ -36,10 +36,12 @@ public class Fenetre extends JFrame implements Runnable{
 
         JButton btn1 = new JButton("update");
         JButton btn2 = new JButton("Afficher");
+        JButton btn3 = new JButton("Ajouter");
         btn1.addActionListener(event ->
         {
             Boutique b = list.getSelectedValue();
-            new UpdateWindow<Boutique>(b);
+            //new UpdateBoutique(b);
+            new UpdateWindow<>(b);
         });
         btn2.addActionListener(event ->
         {
@@ -47,9 +49,17 @@ public class Fenetre extends JFrame implements Runnable{
             Boutique b = list.getSelectedValue();
             new VueBoutique(b);
         });
+        btn3.addActionListener(event ->
+        {
+            Boutique b = new Boutique();
+            new InsertBoutique(b);
+            if(bDAO.create(b))
+                modelList.addElement(b);
+        });
         JPanel panel2 = new JPanel();
         panel2.add(btn1);
         panel2.add(btn2);
+        panel2.add(btn3);
         this.add(panel2,BorderLayout.EAST);
         /*for(Boutique b : listBoutique)
         {

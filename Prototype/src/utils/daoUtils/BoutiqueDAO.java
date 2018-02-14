@@ -18,7 +18,28 @@ public class BoutiqueDAO extends DAO<Boutique> {
     }
     @Override
     public boolean create(Boutique obj) {
-        return false;
+        try
+        {
+            int idEmplacement = -1;
+            if(obj.getEmplacement()!=null)
+                idEmplacement = obj.getEmplacement().getId();
+            else
+                return false;
+            String requete = "INSERT INTO boutique (nom_boutique,id_boutique) VALUES ("+obj.getNom()+","+obj.getCategorieBoutique().getId()+") ";
+            Statement stmt = Constants.DB.getConnection().createStatement();
+            stmt.executeUpdate(requete);
+            if(obj.getEmplacement()!=null) {
+                idEmplacement = obj.getEmplacement().getId();
+                String requete2 = "REPLACE INTO emplacement_boutique (id_emplacement,id_boutique) VALUES ("+ idEmplacement + "," + obj.getId() + ") ";
+                Statement stmt2 = Constants.DB.getConnection().createStatement();
+                stmt2.executeQuery(requete2);
+            }
+            return true;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -33,14 +54,23 @@ public class BoutiqueDAO extends DAO<Boutique> {
             int idEmplacement = -1;
             if(obj.getEmplacement()!=null)
                 idEmplacement = obj.getEmplacement().getId();
-            String requete = "REPLACE INTO emplacement_boutique (id_emplacement,id_boutique) VALUES ("+idEmplacement+","+obj.getId()+") ";
+            else
+                return false;
+            String requete = "UPDATE boutique SET nom_boutique=\""+obj.getNom()+"\" ,categorie="+obj.getCategorieBoutique().getId()+" WHERE idBoutique = "+obj.getId()+";";
             Statement stmt = Constants.DB.getConnection().createStatement();
-            return (stmt.executeUpdate(requete))>0 ? true : false;
+            stmt.executeUpdate(requete);
+            if(obj.getEmplacement()!=null) {
+                idEmplacement = obj.getEmplacement().getId();
+                String requete2 = "REPLACE INTO emplacement_boutique (id_emplacement,id_boutique) VALUES ("+ idEmplacement + "," + obj.getId() + ") ";
+                Statement stmt2 = Constants.DB.getConnection().createStatement();
+                stmt2.executeQuery(requete2);
+            }
+            return true;
         }catch(SQLException e)
         {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     @Override

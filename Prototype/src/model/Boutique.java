@@ -13,6 +13,7 @@ public class Boutique implements ModelObject {
     private int id;
     private Emplacement emplacement;
     private ArrayList<Produit> listeProduit;
+    private CategorieBoutique categorieBoutique;
     public Boutique()
     {
 
@@ -21,10 +22,6 @@ public class Boutique implements ModelObject {
     {
         this.id = id;
         this.nom = nom;
-    }
-    public void populateListProduit()
-    {
-
     }
     public String getNom() {
         return nom;
@@ -65,5 +62,13 @@ public class Boutique implements ModelObject {
     public DAO getDaoClass()
     {
         return new BoutiqueDAO();
+    }
+
+    public CategorieBoutique getCategorieBoutique() {
+        return categorieBoutique;
+    }
+
+    public void setCategorieBoutiqueRef(CategorieBoutique categorieBoutique) {
+        this.categorieBoutique = categorieBoutique;
     }
 }
