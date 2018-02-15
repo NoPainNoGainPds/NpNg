@@ -19,13 +19,13 @@ public class VueBoutique extends JFrame {
         this.boutique = boutique;
         this.setSize(Constants.WIDTH,Constants.HEIGHT);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //recuperation de la liste de produits
+        //Recover the products list.
         ProduitDAO pDao = new ProduitDAO();
         ArrayList<Produit> listProduit = pDao.findFromReference(boutique.getId());
         MyListModel<Produit> listModel = new MyListModel<>(listProduit);
-        //donees dans une jlist pour l'afffichage
+        //Data in a jlist for displaying
         this.jlistProduit = new JList<Produit>(listModel);
-        //affichage et mise en page
+        //Display and Layout
         JScrollPane jscrollPane = new JScrollPane(jlistProduit);
         JPanel panel = new JPanel();
         panel.add(jscrollPane);
@@ -35,21 +35,22 @@ public class VueBoutique extends JFrame {
     }
 
     /**
-     * Method qui ajoute le panneau droit
+     * This Method add the right panel
      */
+
     private void panelDroit()
     {
         JPanel panel = new JPanel();
-        //bouton d'ajout de produit
+        // Button to Add a product
         JButton ajout = new JButton("Ajouter");
-        //bouton de suppression de produit
+        //Button to delete a product
         JButton suppr = new JButton("Supprimer");
-        //bouton de modification de produit
+        //Changes of products Button
         JButton modif = new JButton("Modifier");
         panel.add(ajout);
         panel.add(suppr);
         panel.add(modif);
-        //ajout des controler
+        //Additional Controllers
         ajout.addActionListener(event ->
         {
             //action ici :)
