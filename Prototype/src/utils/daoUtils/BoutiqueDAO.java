@@ -81,7 +81,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
             ResultSet res = stmt.executeQuery("SELECT * FROM Boutique WHERE idBoutique ="+id+";");
             if(res.first())
             {
-                Boutique b = new Boutique(res.getInt("idBoutique"),res.getString("nom_boutique"));
+                Boutique b = new Boutique(res.getInt(1),res.getString(2),res.getInt(3),res.getInt(4));
                 return b;
             }
         } catch (SQLException e) {
@@ -95,13 +95,13 @@ public class BoutiqueDAO extends DAO<Boutique> {
         try
         {
             Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT idBoutique,nom_boutique,categorie FROM boutique";
+            String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement FROM boutique";
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Boutique> listBoutique = new ArrayList<>();
 
             while(res.next())
             {
-                listBoutique.add(new Boutique(res.getInt("idBoutique"),res.getString("nom_boutique")));
+                listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement")));
             }
             return listBoutique;
         } catch (SQLException e) {
@@ -114,13 +114,13 @@ public class BoutiqueDAO extends DAO<Boutique> {
         try
         {
             Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT idBoutique,nom_boutique,categorie FROM boutique";
+            String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement FROM boutique";
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Boutique> listBoutique = new ArrayList<>();
 
             while(res.next())
             {
-                listBoutique.add(new Boutique(res.getInt("idBoutique"),res.getString("nom_boutique")));
+                listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement")));
             }
             return listBoutique;
         } catch (SQLException e) {

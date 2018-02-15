@@ -19,7 +19,7 @@ public class CategorieBoutique implements ModelObject {
     }
     @Override
     public DAO getDaoClass() {
-        return new CategorieBoutiqueDAO(Constants.DB.getConnection());
+        return new CategorieBoutiqueDAO();
     }
     @Override
     public String toString()

@@ -2,6 +2,7 @@ package utils.daoUtils;
 
 
 import model.CategorieBoutique;
+import utils.Constants;
 import utils.DAO;
 
 import java.sql.Connection;
@@ -11,8 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
-    public CategorieBoutiqueDAO(Connection connection) {
-        super(connection);
+    public CategorieBoutiqueDAO() {
+        super(Constants.DB.getConnection());
     }
 
     @Override

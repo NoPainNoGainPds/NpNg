@@ -4,6 +4,7 @@ import utils.Constants;
 import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.BoutiqueDAO;
+import utils.daoUtils.CategorieBoutiqueDAO;
 import utils.daoUtils.EmplacementDAO;
 
 import java.lang.reflect.Array;
@@ -19,14 +20,14 @@ public class Boutique implements ModelObject {
     {
 
     }
-    public Boutique(int id,String nom)
+    public Boutique(int id,String nom,int categorie,int emplacement)
     {
         this.id = id;
         this.nom = nom;
         EmplacementDAO eDAO = new EmplacementDAO();
-        ArrayList<Emplacement> listEmpl = eDAO.findFromReference(this.id);
-        if(listEmpl.size()>0)
-            this.emplacement = listEmpl.get(0);
+        this.emplacement = eDAO.find(emplacement);
+        CategorieBoutiqueDAO cbDAO = new CategorieBoutiqueDAO();
+        this.categorieBoutique = cbDAO.find(categorie);
     }
     public String getNom() {
         return nom;
