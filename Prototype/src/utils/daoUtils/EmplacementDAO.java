@@ -1,5 +1,5 @@
 package utils.daoUtils;
-
+import org.apache.log4j.Logger;
 import model.Emplacement;
 import utils.Constants;
 import utils.DAO;
@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class EmplacementDAO extends DAO<Emplacement> {
+    private Logger logger = Logger.getLogger(EmplacementDAO.class);
     public EmplacementDAO()
     {
         super(Constants.DB.getConnection());
@@ -38,17 +39,18 @@ public class EmplacementDAO extends DAO<Emplacement> {
     public ArrayList<Emplacement> findFromReference(int id) {
         try
         {
-            String requete = "SELECT idEmplacement,emplacement.nom FROM Emplacement_boutique join emplacement ON emplacement_boutique.id_Emplacement = emplacement.idEmplacement where id_boutique ="+id;
+            String requete = "SELECT id_emplacement,categorie_emplacement.nom_categorie_emplacement FROM emplacement join categorie_emplacement ON emplacement.id_emplacement = categorie_emplacement.id_emplacement where id_boutique ="+id;
             Statement stmt = Constants.DB.getConnection().createStatement();
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Emplacement> list = new ArrayList<>();
             while(res.next())
             {
-                list.add(new Emplacement(res.getString("nom"),res.getInt("idEmplacement")));
+                list.add(new Emplacement(res.getString("nom_emplacement"),res.getInt("id_emplacement")));
             }
+            logger.info(requete);
             return list;
         }catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("SQLException");
             return null;
         }
     }
@@ -56,17 +58,18 @@ public class EmplacementDAO extends DAO<Emplacement> {
     public ArrayList<Emplacement> findFromReference() {
         try
         {
-            String requete = "SELECT idEmplacement,nom FROM Emplacement";
+            String requete = "SELECT id_emplacement,categorie_emplacement.nom_categorie_emplacement FROM emplacement, categorie_emplacement";
             Statement stmt = Constants.DB.getConnection().createStatement();
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Emplacement> list = new ArrayList<>();
             while(res.next())
             {
-                list.add(new Emplacement(res.getString("nom"),res.getInt("idEmplacement")));
+                list.add(new Emplacement(res.getString("nom_emplacement"),res.getInt("id_emplacement")));
             }
+            logger.info(requete);
             return list;
         }catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("SQLException");
             return null;
         }
     }

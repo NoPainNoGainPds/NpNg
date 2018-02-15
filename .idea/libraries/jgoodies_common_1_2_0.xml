@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jgoodies-common-1.2.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../NpNg/jgoodies-common-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../NpNg/jgoodies-looks-2.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../NpNg/mariadb-java-client-2.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

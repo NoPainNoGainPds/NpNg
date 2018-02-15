@@ -1,5 +1,5 @@
 package utils.daoUtils;
-
+import org.apache.log4j.Logger;
 import model.StockSortie;
 import utils.Constants;
 import utils.DAO;
@@ -7,6 +7,7 @@ import utils.DAO;
 import java.util.ArrayList;
 
 public class StockSortieDAO extends DAO<StockSortie> {
+    private Logger logger = Logger.getLogger(StockSortieDAO.class);
     public StockSortieDAO()
     {
         super(Constants.DB.getConnection());

@@ -1,5 +1,5 @@
 package utils.daoUtils;
-
+import org.apache.log4j.Logger;
 import model.CategorieProduit;
 import utils.DAO;
 
@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 public class CategorieProduitDAO extends DAO<CategorieProduit>{
+    private Logger logger = Logger.getLogger(CategorieProduitDAO.class);
     public CategorieProduitDAO(Connection connection) {
         super(connection);
     }
