@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="jackson-all-1.9.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/jackson-all-1.9.0.jar!/" />
-      <root url="jar://$USER_HOME$/Desktop/mariadb-java-client-2.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../NpNg/jackson-all-1.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../NpNg/jcalendar-1.4.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/Prototype/src" />
+    </SOURCES>
   </library>
 </component>

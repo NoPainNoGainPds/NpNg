@@ -34,9 +34,9 @@ public class Fenetre extends JFrame implements Runnable{
         //panel.add(list);
         this.add(panel, BorderLayout.CENTER);
 
-        JButton btn1 = new JButton("update");
-        JButton btn2 = new JButton("Afficher");
-        JButton btn3 = new JButton("Ajouter");
+        JButton btn1 = new JButton("Modifier boutique");
+        JButton btn2 = new JButton("Afficher boutique");
+        JButton btn3 = new JButton("Ajouter boutique");
         btn1.addActionListener(event ->
         {
             Boutique b = list.getSelectedValue();

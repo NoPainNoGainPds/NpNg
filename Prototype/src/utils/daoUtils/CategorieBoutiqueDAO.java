@@ -1,5 +1,5 @@
 package utils.daoUtils;
-
+import org.apache.log4j.Logger;
 
 import model.CategorieBoutique;
 import utils.Constants;
@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
+    private Logger logger = Logger.getLogger(CategorieBoutiqueDAO.class);
     public CategorieBoutiqueDAO() {
         super(Constants.DB.getConnection());
     }
@@ -46,7 +47,7 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
         try
         {
             Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT idCategorieBoutique,nomCategorie FROM categorieBoutique";
+            String requete = "SELECT id_categorie_boutique,nom FROM categorie_boutique";
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<CategorieBoutique> listBoutique = new ArrayList<>();
 
@@ -54,9 +55,10 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
             {
                 listBoutique.add(new CategorieBoutique(res.getString(2),res.getInt(1)));
             }
+            logger.info(requete);
             return listBoutique;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("SQLException");
         }
         return null;
     }

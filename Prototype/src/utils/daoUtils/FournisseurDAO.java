@@ -1,5 +1,5 @@
 package utils.daoUtils;
-
+import org.apache.log4j.Logger;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import model.Fournisseur;
 import utils.Constants;
@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class FournisseurDAO extends DAO<Fournisseur> {
+    private Logger logger = Logger.getLogger(FournisseurDAO.class);
     public FournisseurDAO(Connection connection) {
         super(connection);
     }
@@ -51,9 +52,10 @@ public class FournisseurDAO extends DAO<Fournisseur> {
             {
                 list.add(new Fournisseur());
             }
+            logger.info("SELECT * FROM FOURNISSEUR");
         }catch(SQLException e)
         {
-            e.printStackTrace();
+            logger.error("SQLException");
         }
         return null;
     }
