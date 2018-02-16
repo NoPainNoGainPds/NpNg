@@ -18,7 +18,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
     /**
      * A //logger. Use to have a trace of what happen during the execution.
      */
-    //private //logger ////logger = //logger.get//logger(BoutiqueDAO.class);
+    private Logger logger = Logger.getLogger(BoutiqueDAO.class);
 
     /**
      * Constructor.
@@ -58,7 +58,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }catch(SQLException e)
         {
             e.printStackTrace();
-            //logger.error("SQLException");
+            logger.error("SQLException");
             return false;
         }
     }
@@ -80,7 +80,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }catch(SQLException e)
         {
             e.printStackTrace();
-            //logger.error("SQLException");
+            logger.error("SQLException");
             return false;
         }
     }
@@ -108,12 +108,12 @@ public class BoutiqueDAO extends DAO<Boutique> {
                 Statement stmt2 = Constants.DB.getConnection().createStatement();
                 stmt2.executeQuery(requete2);
             }
-            //logger.info(requete);
+            logger.info(requete);
             return true;
         }catch(SQLException e)
         {
-            e.printStackTrace();
-            //logger.error("SQLException");
+            //e.printStackTrace();
+            logger.error("SQLException");
             return false;
         }
     }
@@ -136,8 +136,8 @@ public class BoutiqueDAO extends DAO<Boutique> {
                 return b;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            //logger.error("SQLException");
+            //e.printStackTrace();
+            logger.error("SQLException");
         }
         return null;
     }
@@ -160,11 +160,11 @@ public class BoutiqueDAO extends DAO<Boutique> {
             {
                 listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement")));
             }
-            //logger.info(requete);
+            logger.info(requete);
             return listBoutique;
         } catch (SQLException e) {
-            e.printStackTrace();
-            //logger.error("SQLException");
+            //e.printStackTrace();
+            logger.error("SQLException");
         }
         return null;
     }
@@ -186,11 +186,11 @@ public class BoutiqueDAO extends DAO<Boutique> {
             {
                 listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement")));
             }
-            //logger.info(requete);
+            logger.info(requete);
             return listBoutique;
         } catch (SQLException e) {
-            e.printStackTrace();
-            //logger.error("SQLException");
+            //e.printStackTrace();
+            logger.error("SQLException");
         }
         return null;
     }
@@ -209,7 +209,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
                 nb_boutiques++;
             }
         } catch(SQLException e) {
-            //logger.error("SQLException");
+            logger.error("SQLException");
         }
         return nb_boutiques;
     }
