@@ -9,6 +9,8 @@ import utils.daoUtils.EmplacementDAO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class InsertBoutique extends JFrame implements Runnable{
@@ -23,9 +25,22 @@ public class InsertBoutique extends JFrame implements Runnable{
     {
         return this.saved;
     }
-    public InsertBoutique(Boutique b)
+    public InsertBoutique(Boutique b,Fenetre f)
     {
         this.b = b;
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if(saved)
+                {
+                    //nothing
+                    f.notifyBoutique();
+                }else
+                {
+                    f.notifyBoutique();
+                }
+            }
+        });
         this.setSize(Constants.WIDTH,Constants.HEIGHT);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.add(this.setForm(),BorderLayout.CENTER);
@@ -54,6 +69,14 @@ public class InsertBoutique extends JFrame implements Runnable{
         //this.setVisible(true);
 
     }
+
+    public Boutique getBoutique() {
+        if(saved)
+            return b;
+        else
+            return null;
+    }
+
     private JPanel setForm()
     {
         JPanel panel = new JPanel();

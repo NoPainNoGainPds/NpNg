@@ -18,8 +18,9 @@ import java.util.ArrayList;
 
 public class Fenetre extends JFrame implements Runnable{
     private ArrayList<Boutique> listBoutique;
-    JList<Boutique> list;
+    private JList<Boutique> list;
     private JLabel msgError;
+    private InsertBoutique vueInsert;
     public Fenetre(String s)
     {
         super(s);
@@ -27,7 +28,7 @@ public class Fenetre extends JFrame implements Runnable{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ProduitDAO pDAO = new ProduitDAO();
         BoutiqueDAO bDAO = new BoutiqueDAO();
-        ArrayList<Boutique> listBoutique = bDAO.findFromReference();
+        this.listBoutique = bDAO.findFromReference();
         System.out.println(listBoutique.size());
         this.msgError = new JLabel("");
         this.add(this.msgError,BorderLayout.SOUTH);
@@ -74,11 +75,8 @@ public class Fenetre extends JFrame implements Runnable{
         btn3.addActionListener(event ->
         {
             Boutique b = new Boutique();
-            InsertBoutique vueInsert = new InsertBoutique(b);
-            javax.swing.SwingUtilities.invokeLater(vueInsert);
-            listBoutique.add(b);
-            this.list = new JList<>(listBoutique.toArray(new Boutique[listBoutique.size()]));
-
+            this.vueInsert = new InsertBoutique(b,this);
+            javax.swing.SwingUtilities.invokeLater(this.vueInsert);
         });
         JPanel panel2 = new JPanel();
         panel2.add(btn1);
@@ -103,5 +101,15 @@ public class Fenetre extends JFrame implements Runnable{
     @Override
     public void run() {
         this.setVisible(true);
+    }
+    public void notifyBoutique()
+    {
+        Boutique b = this.vueInsert.getBoutique();
+        if(b!=null)
+        {
+            this.listBoutique.add(b);
+            this.list.setListData(this.listBoutique.toArray(new Boutique[listBoutique.size()]));
+            this.repaint();
+        }
     }
 }

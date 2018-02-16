@@ -2,12 +2,18 @@ package vue;
 
 import model.Boutique;
 import model.Produit;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
 import utils.Constants;
 import utils.MyListModel;
 import utils.daoUtils.ProduitDAO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class VueBoutique extends JFrame {
@@ -29,6 +35,24 @@ public class VueBoutique extends JFrame {
             return;
         }
         MyListModel<Produit> listModel = new MyListModel<>(listProduit);
+        JButton saveFile = new JButton("Save JSon");
+        saveFile.addActionListener(event ->
+        {
+            try{
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS,false);
+                Object[] article = listProduit.toArray();
+                objectMapper.writeValue(new File("articles.json") , article);
+            } catch (JsonGenerationException e) {
+                e.printStackTrace();
+            } catch (JsonMappingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+
         //Data in a jlist for displaying
         this.jlistProduit = new JList<Produit>(listModel);
         this.jlistProduit.setFixedCellWidth(80);
@@ -37,7 +61,10 @@ public class VueBoutique extends JFrame {
         JPanel panel = new JPanel();
         panel.add(jscrollPane);
         this.add(panel, BorderLayout.EAST);
-        panelDroit();
+        this.add(this.msgError,BorderLayout.SOUTH);
+        JPanel panelDroit = panelDroit();
+        panelDroit.add(saveFile);
+        this.add(panelDroit,BorderLayout.WEST);
         this.setVisible(true);
     }
 
@@ -45,7 +72,7 @@ public class VueBoutique extends JFrame {
      * This Method add the right panel
      */
 
-    private void panelDroit()
+    private JPanel panelDroit()
     {
         JPanel panel = new JPanel();
         // Button to Add a product
@@ -74,7 +101,8 @@ public class VueBoutique extends JFrame {
         {
             new UpdateWindow<>(jlistProduit.getSelectedValue());
         });
-        this.add(panel,BorderLayout.WEST);
+        return panel;
+        //this.add(panel,BorderLayout.WEST);
 
     }
 }
