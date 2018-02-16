@@ -11,7 +11,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- *
+ * represent Boutique Object with name, place and categorie.
  */
 public class Boutique implements ModelObject {
     private String nom;
@@ -23,6 +23,14 @@ public class Boutique implements ModelObject {
     {
 
     }
+
+    /**
+     * Constructor of Boutique
+     * @param id
+     * @param nom
+     * @param categorie
+     * @param emplacement
+     */
     public Boutique(int id,String nom,int categorie,int emplacement)
     {
         this.id = id;

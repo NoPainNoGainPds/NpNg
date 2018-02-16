@@ -47,6 +47,11 @@ public class UpdateWindow<T extends ModelObject> extends JFrame {
                         ModelObject model = (ModelObject)type[0].newInstance();
                         DAO dao = model.getDaoClass();
                         ArrayList<T> list = dao.findFromReference();
+                        if(list ==null)
+                        {
+                            System.out.println("pas de dispo pour le moment");
+                            return;
+                        }
                         String met = name.substring(3,name.length()-3);
                         JLabel label = new JLabel(met);
                         met = "get"+met;

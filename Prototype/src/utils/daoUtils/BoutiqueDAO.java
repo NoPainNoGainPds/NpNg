@@ -70,7 +70,19 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     @Override
     public boolean delete(Boutique obj) {
-        return false;
+        try
+        {
+            String requete = "DELETE FROM Boutique where id_boutique="+obj.getId()+";";
+            Statement stmt = Constants.DB.getConnection().createStatement();
+            stmt.executeUpdate(requete);
+
+            return true;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            //logger.error("SQLException");
+            return false;
+        }
     }
 
     /**
