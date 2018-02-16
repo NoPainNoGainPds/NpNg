@@ -11,6 +11,7 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/jgoodies-looks-2.4.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/mariadb-java-client-2.2.1.jar" path-in-jar="/" />
       <element id="module-output" name="Prototype" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/log4j-1.2.17.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
