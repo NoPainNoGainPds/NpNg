@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Class qui represente une fenetre qui permet de modifier tout les champs d'un objet metier et de l'enregistrer en base de donn?es
+ * Class (who represente a window) which allows to change all fields of a business object and save that in the DB
  * @param <T>
  */
 public class UpdateWindow<T extends ModelObject> extends JFrame {
@@ -42,7 +42,7 @@ public class UpdateWindow<T extends ModelObject> extends JFrame {
                     Class[] type = methodes[j].getParameterTypes();
                     try
                     {
-                        //c'est compliqué mais en gros ici je recupere la liste des id en reference.
+                        //Recover the id list in reference.
                         //Class model = update.getDaoClass();
                         ModelObject model = (ModelObject)type[0].newInstance();
                         DAO dao = model.getDaoClass();
@@ -142,7 +142,7 @@ public class UpdateWindow<T extends ModelObject> extends JFrame {
                 }
             }
         }
-        //ajout a la fenetre
+        //Add the window
 
         for(TextLabel textLabel : fields)
         {

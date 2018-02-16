@@ -7,6 +7,8 @@ import utils.DAO;
 import java.util.ArrayList;
 
 public class StockSortieDAO extends DAO<StockSortie> {
+
+    //Log after any action in the CRUD
     private Logger logger = Logger.getLogger(StockSortieDAO.class);
     public StockSortieDAO()
     {

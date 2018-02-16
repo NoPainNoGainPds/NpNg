@@ -28,14 +28,14 @@ public class InsertBoutique extends JFrame{
     {
         JPanel panel = new JPanel();
 
-        //nom de la boutique
+        //Store Name
         TextLabel<JTextField> nomboutique = new TextLabel(new JTextField(25),new JLabel("nom Boutique"));
         nomboutique.field.addActionListener(event ->
         {
             String s = nomboutique.field.getText();
             b.setNom(s);
         });
-        //emplacement
+        //Store Location
         ArrayList<Emplacement> list = new EmplacementDAO().findFromReference();
         TextLabel<JComboBox> emplacement = new TextLabel<>(new JComboBox(list.toArray()),new JLabel("Emplacement"));
         panel.add(nomboutique);

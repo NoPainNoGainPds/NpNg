@@ -23,9 +23,9 @@ public class UpdateBoutique extends JFrame {
     {
         JPanel panel = new JPanel();
 
-        //nom de la boutique
+        //Store Name
         TextLabel<JTextField> nomboutique = new TextLabel(new JTextField(25),new JLabel("nom Boutique"));
-        //emplacement
+        //Store Location
         ArrayList<Emplacement> list = new EmplacementDAO().findFromReference();
         TextLabel<JComboBox> emplacement = new TextLabel<>(new JComboBox(list.toArray()),new JLabel("Emplacement"));
         panel.add(nomboutique);

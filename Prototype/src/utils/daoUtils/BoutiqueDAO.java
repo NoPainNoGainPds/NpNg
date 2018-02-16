@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class BoutiqueDAO extends DAO<Boutique> {
+
+    //Log after any action in the CRUD
     private Logger logger = Logger.getLogger(BoutiqueDAO.class);
     public BoutiqueDAO()
     {

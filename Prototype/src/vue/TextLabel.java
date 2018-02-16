@@ -3,7 +3,7 @@ package vue;
 import javax.swing.*;
 
 /**
- * Class privé pour un affichage d'un label
+ * Private Class for display a label
  *
  * @param <J>
  */
