@@ -9,17 +9,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 /**
- * Class which represents a location. It contains the methods which access the database
+ * Class which represents a location. It contains the methods which access the database.
  */
 public class EmplacementDAO extends DAO<Emplacement> {
 
     /**
-     * A logger. Use to have a trace of what happen during the execution
+     * A logger. Use to have a trace of what happen during the execution.
      */
     private Logger logger = Logger.getLogger(EmplacementDAO.class);
 
     /**
-     * Constructor
+     * Constructor.
      */
     public EmplacementDAO()
     {
@@ -27,9 +27,9 @@ public class EmplacementDAO extends DAO<Emplacement> {
     }
 
     /**
-     * Add a new location to the database
-     * @param obj The location to add
-     * @return true if it works, false else
+     * Add a new location to the database.
+     * @param obj The location to add.
+     * @return true if it works, false else.
      */
     @Override
     public boolean create(Emplacement obj) {
@@ -37,9 +37,9 @@ public class EmplacementDAO extends DAO<Emplacement> {
     }
 
     /**
-     * Delete a location from the database
-     * @param obj the location to delete
-     * @return true if it works, false else
+     * Delete a location from the database.
+     * @param obj the location to delete.
+     * @return true if it works, false else.
      */
     @Override
     public boolean delete(Emplacement obj) {
@@ -47,9 +47,9 @@ public class EmplacementDAO extends DAO<Emplacement> {
     }
 
     /**
-     * Update a location from the database
-     * @param obj The location to modify
-     * @return true if it works, false else
+     * Update a location from the database.
+     * @param obj The location to modify.
+     * @return true if it works, false else.
      */
     @Override
     public boolean update(Emplacement obj) {
@@ -57,9 +57,9 @@ public class EmplacementDAO extends DAO<Emplacement> {
     }
 
     /**
-     * Find a location in the database
-     * @param id The location's id
-     * @return the location found
+     * Find a location in the database.
+     * @param id The location's id.
+     * @return the location found.
      */
     @Override
     public Emplacement find(int id) {
@@ -67,9 +67,9 @@ public class EmplacementDAO extends DAO<Emplacement> {
     }
 
     /**
-     * Get all the locations from the database
+     * Get all the locations from the database.
      * @param id
-     * @return a list of the locations
+     * @return a list of the locations.
      */
     @Override
     public ArrayList<Emplacement> findFromReference(int id) {
@@ -91,8 +91,8 @@ public class EmplacementDAO extends DAO<Emplacement> {
         }
     }
     /**
-     * Get all the locations from the database
-     * @return a list of the locations
+     * Get all the locations from the database.
+     * @return a list of the locations.
      */
     @Override
     public ArrayList<Emplacement> findFromReference() {

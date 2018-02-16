@@ -10,17 +10,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Class which represents a product. it contains the methods which access the database
+ * Class which represents a product. it contains the methods which access the database.
  */
 public class ProduitDAO extends DAO<Produit> {
 
     /**
-     * A logger. Use to have a trace of what happen during the execution
+     * A logger. Use to have a trace of what happen during the execution.
      */
     private Logger logger = Logger.getLogger(ProduitDAO.class);
 
     /**
-     * Constructor
+     * Constructor.
      */
     public ProduitDAO()
     {
@@ -28,9 +28,9 @@ public class ProduitDAO extends DAO<Produit> {
     }
 
     /**
-     * Add a new product to the database
-     * @param obj the product to add
-     * @return true if it works, false else
+     * Add a new product to the database.
+     * @param obj the product to add.
+     * @return true if it works, false else.
      */
     @Override
     public boolean create(Produit obj) {
@@ -38,9 +38,9 @@ public class ProduitDAO extends DAO<Produit> {
     }
 
     /**
-     * Delete a product from the database
-     * @param obj The product to delete
-     * @return true if it works, false else
+     * Delete a product from the database.
+     * @param obj The product to delete.
+     * @return true if it works, false else.
      */
     @Override
     public boolean delete(Produit obj) {
@@ -48,9 +48,9 @@ public class ProduitDAO extends DAO<Produit> {
     }
 
     /**
-     * Update a product from the database
-     * @param obj The product to modify
-     * @return true if it works, false else
+     * Update a product from the database.
+     * @param obj The product to modify.
+     * @return true if it works, false else.
      */
     @Override
     public boolean update(Produit obj) {
@@ -71,9 +71,9 @@ public class ProduitDAO extends DAO<Produit> {
     }
 
     /**
-     * Find a product in the database
-     * @param id The product's id
-     * @return the product found
+     * Find a product in the database.
+     * @param id The product's id.
+     * @return the product found.
      */
     @Override
     public Produit find(int id) {
@@ -94,9 +94,9 @@ public class ProduitDAO extends DAO<Produit> {
     }
 
     /**
-     * Get all the products from the database
+     * Get all the products from the database.
      * @param id
-     * @return A list of the products
+     * @return A list of the products.
      */
     @Override
     public ArrayList<Produit> findFromReference(int id)
@@ -131,8 +131,8 @@ public class ProduitDAO extends DAO<Produit> {
         return null;
     }
     /**
-     * Get all the products from the database
-     * @return A list of the products
+     * Get all the products from the database.
+     * @return A list of the products.
      */
     public ArrayList<Produit> findFromReference()
     {

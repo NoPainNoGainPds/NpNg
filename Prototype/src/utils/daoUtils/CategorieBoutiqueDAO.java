@@ -12,26 +12,26 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Class which represents a store category. It contains the methods which access the database
+ * Class which represents a store category. It contains the methods which access the database.
  */
 public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
 
     /**
-     * A logger. Use to have a trace of what happen during the execution
+     * A logger. Use to have a trace of what happen during the execution.
      */
     private Logger logger = Logger.getLogger(CategorieBoutiqueDAO.class);
 
     /**
-     * Constructor
+     * Constructor.
      */
     public CategorieBoutiqueDAO() {
         super(Constants.DB.getConnection());
     }
 
     /**
-     * Add a new store category in the database
-     * @param obj the store category to add
-     * @return true if it works, false else
+     * Add a new store category in the database.
+     * @param obj the store category to add.
+     * @return true if it works, false else.
      */
     @Override
     public boolean create(CategorieBoutique obj) {
@@ -39,9 +39,9 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
     }
 
     /**
-     * Delete a store category from the database
-     * @param obj The store category to delete
-     * @return true if it works, false else
+     * Delete a store category from the database.
+     * @param obj The store category to delete.
+     * @return true if it works, false else.
      */
     @Override
     public boolean delete(CategorieBoutique obj) {
@@ -49,9 +49,9 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
     }
 
     /**
-     * Update a store category from the database
-     * @param obj the store category to modify
-     * @return true if it works, false else
+     * Update a store category from the database.
+     * @param obj the store category to modify.
+     * @return true if it works, false else.
      */
     @Override
     public boolean update(CategorieBoutique obj) {
@@ -59,9 +59,9 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
     }
 
     /**
-     * Find a store category in the database
-     * @param id The store category's id
-     * @return The store category found
+     * Find a store category in the database.
+     * @param id The store category's id.
+     * @return The store category found.
      */
     @Override
     public CategorieBoutique find(int id) {
@@ -74,8 +74,8 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
     }
 
     /**
-     * Get all the store categories from the database
-     * @return A list of the store gategories
+     * Get all the store categories from the database.
+     * @return A list of the store gategories.
      */
     @Override
     public ArrayList<CategorieBoutique> findFromReference() {
