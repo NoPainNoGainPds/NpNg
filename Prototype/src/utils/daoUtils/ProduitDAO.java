@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 
 public class ProduitDAO extends DAO<Produit> {
+
+    //Log after any action in the CRUD
     private Logger logger = Logger.getLogger(ProduitDAO.class);
     public ProduitDAO()
     {

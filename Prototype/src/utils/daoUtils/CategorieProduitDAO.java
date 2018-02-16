@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 public class CategorieProduitDAO extends DAO<CategorieProduit>{
+
+    //Log after any action in the CRUD here
     private Logger logger = Logger.getLogger(CategorieProduitDAO.class);
     public CategorieProduitDAO(Connection connection) {
         super(connection);

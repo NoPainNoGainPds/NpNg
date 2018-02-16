@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class EmplacementDAO extends DAO<Emplacement> {
+
+    //Log after any action in the CRUD
     private Logger logger = Logger.getLogger(EmplacementDAO.class);
     public EmplacementDAO()
     {

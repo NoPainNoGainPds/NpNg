@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class FournisseurDAO extends DAO<Fournisseur> {
+
+    //Log after any action in the CRUD
     private Logger logger = Logger.getLogger(FournisseurDAO.class);
     public FournisseurDAO(Connection connection) {
         super(connection);
