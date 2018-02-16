@@ -82,7 +82,7 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
         try
         {
             Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT id_categorie_boutique,nom FROM categorie_boutique";
+            String requete = "SELECT id_categorie_boutique,nom_categorie_boutique FROM categorie_boutique";
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<CategorieBoutique> listBoutique = new ArrayList<>();
 

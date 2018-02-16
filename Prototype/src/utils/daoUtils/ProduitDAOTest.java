@@ -4,6 +4,7 @@ import model.Produit;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProduitDAOTest {
     private ProduitDAO produitDAO = new ProduitDAO();

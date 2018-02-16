@@ -23,7 +23,7 @@ public class Fenetre extends JFrame implements Runnable{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ProduitDAO pDAO = new ProduitDAO();
         BoutiqueDAO bDAO = new BoutiqueDAO();
-        ArrayList<Boutique> listBoutique = bDAO.findFromReference(0);
+        ArrayList<Boutique> listBoutique = bDAO.findFromReference();
         System.out.println(listBoutique.size());
         MyListModel<Boutique> modelList = new MyListModel<>(listBoutique);
         JPanel panel = new JPanel();
@@ -53,8 +53,8 @@ public class Fenetre extends JFrame implements Runnable{
         {
             Boutique b = new Boutique();
             new InsertBoutique(b);
-            if(bDAO.create(b))
-                modelList.addElement(b);
+            modelList.addElement(b);
+            this.repaint();
         });
         JPanel panel2 = new JPanel();
         panel2.add(btn1);

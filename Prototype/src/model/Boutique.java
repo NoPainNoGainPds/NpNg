@@ -10,6 +10,9 @@ import utils.daoUtils.EmplacementDAO;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Boutique implements ModelObject {
     private String nom;
     private int id;

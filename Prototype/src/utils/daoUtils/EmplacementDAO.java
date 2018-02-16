@@ -98,7 +98,8 @@ public class EmplacementDAO extends DAO<Emplacement> {
     public ArrayList<Emplacement> findFromReference() {
         try
         {
-            String requete = "SELECT id_emplacement,categorie_emplacement.nom_categorie_emplacement FROM emplacement, categorie_emplacement";
+            String requete = "SELECT id_emplacement,nom_emplacement,cemp.nom_categorie_emplacement FROM emplacement emp join categorie_emplacement cemp " +
+                    " ON emp.id_categorie_emplacement = cemp.id_categorie_emplacement;";
             Statement stmt = Constants.DB.getConnection().createStatement();
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Emplacement> list = new ArrayList<>();
