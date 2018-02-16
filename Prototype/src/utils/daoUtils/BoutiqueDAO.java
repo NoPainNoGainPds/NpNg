@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class BoutiqueDAO extends DAO<Boutique> {
     /**
-     * A //logger. Use to have a trace of what happen during the execution.
+     * A logger. Use to have a trace of what happen during the execution.
      */
     private Logger logger = Logger.getLogger(BoutiqueDAO.class);
 
