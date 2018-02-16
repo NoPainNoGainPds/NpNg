@@ -11,14 +11,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class InsertBoutique extends JFrame{
+public class InsertBoutique extends JFrame implements Runnable{
     private Boutique b;
     private TextLabel<JComboBox<Emplacement>> emplacement;
     private TextLabel<JComboBox<CategorieBoutique>> cat;
     private TextLabel<JTextField> nomboutique;
     private JLabel msgErreur ;
+    private boolean saved = false;
 
-
+    public boolean saved()
+    {
+        return this.saved;
+    }
     public InsertBoutique(Boutique b)
     {
         this.b = b;
@@ -37,6 +41,7 @@ public class InsertBoutique extends JFrame{
                 //affichage couleur vert
                 this.msgErreur.setText("OK");
                 this.msgErreur.setForeground(Color.GREEN);
+                this.saved = true;
             }else{
                 //message d'erreur
                 this.msgErreur.setText("Error!");
@@ -46,7 +51,7 @@ public class InsertBoutique extends JFrame{
         });
         this.add(btnSave, BorderLayout.SOUTH);
         this.add(this.msgErreur,BorderLayout.EAST);
-        this.setVisible(true);
+        //this.setVisible(true);
 
     }
     private JPanel setForm()
@@ -83,5 +88,10 @@ public class InsertBoutique extends JFrame{
         panel.add(emplacement);
         panel.add(cat);
         return panel;
+    }
+
+    @Override
+    public void run() {
+        this.setVisible(true);
     }
 }

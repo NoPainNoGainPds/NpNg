@@ -13,9 +13,13 @@ import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.ProduitDAO;
 
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Fenetre extends JFrame implements Runnable{
+    private ArrayList<Boutique> listBoutique;
+    JList<Boutique> list;
+    private JLabel msgError;
     public Fenetre(String s)
     {
         super(s);
@@ -25,11 +29,12 @@ public class Fenetre extends JFrame implements Runnable{
         BoutiqueDAO bDAO = new BoutiqueDAO();
         ArrayList<Boutique> listBoutique = bDAO.findFromReference();
         System.out.println(listBoutique.size());
-        MyListModel<Boutique> modelList = new MyListModel<>(listBoutique);
+        this.msgError = new JLabel("");
+        this.add(this.msgError,BorderLayout.SOUTH);
         JPanel panel = new JPanel();
-        JList<Boutique> list = new JList<>(modelList);
+        this.list = new JList<>(listBoutique.toArray(new Boutique[listBoutique.size()]));
 
-        JScrollPane scrollPane = new JScrollPane(list);
+        JScrollPane scrollPane = new JScrollPane(this.list);
         panel.add(scrollPane);
         //panel.add(list);
         this.add(panel, BorderLayout.CENTER);
@@ -39,22 +44,41 @@ public class Fenetre extends JFrame implements Runnable{
         JButton btn3 = new JButton("Ajouter boutique");
         btn1.addActionListener(event ->
         {
-            Boutique b = list.getSelectedValue();
+            Boutique b = this.list.getSelectedValue();
             //new UpdateBoutique(b);
-            new UpdateWindow<>(b);
+            if(b!=null)
+            {
+                new UpdateWindow<>(b);
+                this.msgError.setText("");
+            }else
+            {
+                this.msgError.setText("No boutique selected");
+                this.msgError.setForeground(Color.RED);
+            }
         });
         btn2.addActionListener(event ->
         {
             //System.out.println("afficher");
-            Boutique b = list.getSelectedValue();
-            new VueBoutique(b);
+            Boutique b = this.list.getSelectedValue();
+            //new UpdateBoutique(b);
+            if(b!=null)
+            {
+                new VueBoutique(b);
+                this.msgError.setText("");
+            }else
+            {
+                this.msgError.setText("No boutique selected");
+                this.msgError.setForeground(Color.RED);
+            }
         });
         btn3.addActionListener(event ->
         {
             Boutique b = new Boutique();
-            new InsertBoutique(b);
-            modelList.addElement(b);
-            this.repaint();
+            InsertBoutique vueInsert = new InsertBoutique(b);
+            javax.swing.SwingUtilities.invokeLater(vueInsert);
+            listBoutique.add(b);
+            this.list = new JList<>(listBoutique.toArray(new Boutique[listBoutique.size()]));
+
         });
         JPanel panel2 = new JPanel();
         panel2.add(btn1);

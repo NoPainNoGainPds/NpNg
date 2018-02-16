@@ -11,16 +11,20 @@ public class Emplacement implements ModelObject{
     private int id;
     private String nom;
     private Boutique reference;
+    private int superficie;
+    private String cat;
     private ArrayList<Point> path;
     public Emplacement()
     {
         this.nom = "fictif";
         this.id = -1;
     }
-    public Emplacement(String nom,int id)
+    public Emplacement(String nom,int id,int superficie, String cat)
     {
         this.nom = nom;
         this.id=id;
+        this.cat = cat;
+        this.superficie = superficie;
     }
 
     public int getId() {
