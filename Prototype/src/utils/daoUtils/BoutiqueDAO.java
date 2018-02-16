@@ -11,14 +11,27 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ * Class which represents a store. It contains the methods which access the database
+ */
 public class BoutiqueDAO extends DAO<Boutique> {
-
-    //Log after any action in the CRUD
+    /**
+     * A logger. Use to have a trace of what happen during the execution
+     */
     private Logger logger = Logger.getLogger(BoutiqueDAO.class);
-    public BoutiqueDAO()
-    {
+
+    /**
+     * Constructor
+     */
+    public BoutiqueDAO() {
         super(Constants.DB.getConnection());
     }
+
+    /**
+     * Add a new store in the database
+     * @param obj The store to add
+     * @return true if it works, false else
+     */
     @Override
     public boolean create(Boutique obj) {
         try
@@ -47,11 +60,21 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
     }
 
+    /**
+     * Delete a store from the database
+     * @param obj The store to delete
+     * @return true if it works, false else
+     */
     @Override
     public boolean delete(Boutique obj) {
         return false;
     }
 
+    /**
+     * Update a store from the database
+     * @param obj The store to modify
+     * @return true if it works, false else
+     */
     @Override
     public boolean update(Boutique obj) {
         try
@@ -79,6 +102,11 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
     }
 
+    /**
+     * Find a store in the database
+     * @param id The store's id
+     * @return The store found
+     */
     @Override
     public Boutique find(int id) {
         try
@@ -97,6 +125,11 @@ public class BoutiqueDAO extends DAO<Boutique> {
         return null;
     }
 
+    /**
+     * Get all the stores from the database
+     * @param id
+     * @return A list of the stores
+     */
     @Override
     public ArrayList<Boutique> findFromReference(int id) {
         try
@@ -117,6 +150,11 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
         return null;
     }
+
+    /**
+     * get all the stores from the database
+     * @return A list of te stores
+     */
     @Override
     public ArrayList<Boutique> findFromReference() {
         try
@@ -136,5 +174,24 @@ public class BoutiqueDAO extends DAO<Boutique> {
             logger.error("SQLException");
         }
         return null;
+    }
+
+    /**
+     * Count the number of stores in the database
+     * @return The number of stores
+     */
+    public int getNbBoutiques() {
+        int nb_boutiques = 0;
+        try {
+            Statement stmt = this.connection.createStatement();
+            String requete = "SELECT id_boutique FROM boutique";
+            ResultSet res = stmt.executeQuery(requete);
+            while(res.next()) {
+                nb_boutiques++;
+            }
+        } catch(SQLException e) {
+            logger.error("SQLException");
+        }
+        return nb_boutiques;
     }
 }
