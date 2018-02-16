@@ -94,8 +94,8 @@ public class ProduitDAO extends DAO<Produit> {
     }
 
     /**
-     * Get all the products from the database.
-     * @param id
+     * Get all the products from a store in the database.
+     * @param id The store's id
      * @return A list of the products.
      */
     @Override
