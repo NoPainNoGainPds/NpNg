@@ -52,7 +52,7 @@ create table ACHAT
 /*==============================================================*/
 create table BOUTIQUE
 (
-   ID_BOUTIQUE          int not null,
+   ID_BOUTIQUE          int not null auto_increment,
    ID_EMPLACEMENT       int not null,
    ID_CATEGORIE_BOUTIQUE int not null,
    NOM_BOUTIQUE         varchar(50),
@@ -102,7 +102,7 @@ create table CLIENT
    PRENOM_CLIENT        varchar(25),
    SEXE                 varchar(25),
    ADRESSE_CLIENT       varchar(100),
-   DATE_NAISSANCE       datetime,
+   DATE_NAISSANCE       date,
    TELEPHONE            char(17),
    primary key (ID_CLIENT)
 );
@@ -202,7 +202,7 @@ create table PERFORMANCE
 (
    ID_PERFORMANCE       int not null auto_increment,
    ID_BOUTIQUE          int not null,
-   DATE_PERFORMANCE     datetime,
+   DATE_PERFORMANCE     date,
    CHIFFRE_AFFAIRE      decimal(10,2),
    TAUX_FREQUENTATION   decimal(2,2),
    TAUX_OCCUPATION      decimal(2,2),
@@ -246,7 +246,7 @@ create table REDEVANCE
    ID_REDEVANCE         int not null auto_increment,
    ID_BOUTIQUE          int not null,
    MONTANT_REDEVANCE    decimal(10,2),
-   DATE_REDEVANCE       datetime,
+   DATE_REDEVANCE       date,
    primary key (ID_REDEVANCE)
 );
 
