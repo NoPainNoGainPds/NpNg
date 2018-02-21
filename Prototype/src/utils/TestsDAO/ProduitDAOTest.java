@@ -1,7 +1,8 @@
-package utils.daoUtils;
+package utils.TestsDAO;
 
 import model.Produit;
 import org.junit.Test;
+import utils.daoUtils.ProduitDAO;
 
 import static org.junit.Assert.*;
 //import static org.junit.jupiter.api.Assertions.assertEquals;

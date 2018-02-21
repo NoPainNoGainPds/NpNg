@@ -4,6 +4,7 @@ import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.StockSortieDAO;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 public class StockSortie implements ModelObject {
@@ -67,6 +68,6 @@ public class StockSortie implements ModelObject {
 
     @Override
     public DAO getDaoClass() {
-        return new StockSortieDAO();
+            return new StockSortieDAO();
     }
 }

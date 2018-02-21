@@ -4,14 +4,14 @@ import model.StockSortie;
 import utils.Constants;
 import utils.DAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StockSortieDAO extends DAO<StockSortie> {
 
     //Log after any action in the CRUD
     private Logger logger = Logger.getLogger(StockSortieDAO.class);
-    public StockSortieDAO()
-    {
+    public StockSortieDAO() {
         super(Constants.DB.getConnection());
     }
 

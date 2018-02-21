@@ -11,7 +11,7 @@ public class ConnectionPool implements Pool {
 	public ConnectionPool() {
 	    try {
 	        ObjectMapper om = new ObjectMapper();
-	        File file = new File("settings.cfg");
+	        File file = new File("DBProperties.txt");
 	        //Database db = om.readValue(file,Database.class);
 			Constants.DB = om.readValue(file,Database.class);
         } catch(Exception e) {

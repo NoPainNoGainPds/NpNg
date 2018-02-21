@@ -72,11 +72,12 @@ public class EmplacementDAO extends DAO<Emplacement> {
             ResultSet res = stmt.executeQuery(requete);
             if(res.first())
             {
+                logger.info(requete);
                 return new Emplacement(res.getString("nom_emplacement"),id,res.getInt("superficie"),res.getString("nom_categorie_emplacement"));
             }
         }catch(SQLException e)
         {
-            e.printStackTrace();
+            logger.error(e.toString());
         }
         return null;
     }
@@ -101,7 +102,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
             logger.info(requete);
             return list;
         }catch (SQLException e) {
-            logger.error("SQLException");
+            logger.error(e.toString());
             return null;
         }
     }
@@ -126,7 +127,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
             logger.info(requete);
             return list;
         }catch (SQLException e) {
-            logger.error("SQLException");
+            logger.error(e.toString());
             return null;
         }
     }

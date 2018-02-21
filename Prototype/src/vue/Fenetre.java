@@ -43,6 +43,7 @@ public class Fenetre extends JFrame implements Runnable{
         JButton btn1 = new JButton("Modifier boutique");
         JButton btn2 = new JButton("Afficher boutique");
         JButton btn3 = new JButton("Ajouter boutique");
+        JButton btn4 = new JButton("Supprimer boutique");
         btn1.addActionListener(event ->
         {
             Boutique b = this.list.getSelectedValue();
@@ -78,10 +79,35 @@ public class Fenetre extends JFrame implements Runnable{
             this.vueInsert = new InsertBoutique(b,this);
             javax.swing.SwingUtilities.invokeLater(this.vueInsert);
         });
+        btn4.addActionListener(event ->
+        {
+            Boutique b = this.list.getSelectedValue();
+            //new UpdateBoutique(b);
+            //test
+            if(b!=null)
+            {
+                if(!bDAO.delete(b))
+                {
+                    this.msgError.setText("error");
+                    this.msgError.setForeground(Color.RED);
+                }else
+                {
+                    this.msgError.setText("");
+                    this.listBoutique.remove(b);
+                    this.list.setListData(this.listBoutique.toArray(new Boutique[listBoutique.size()]));
+                    this.repaint();
+                }
+            }else
+            {
+                this.msgError.setText("No boutique selected");
+                this.msgError.setForeground(Color.RED);
+            }
+        });
         JPanel panel2 = new JPanel();
         panel2.add(btn1);
         panel2.add(btn2);
         panel2.add(btn3);
+        panel2.add(btn4);
         this.add(panel2,BorderLayout.EAST);
         /*for(Boutique b : listBoutique)
         {

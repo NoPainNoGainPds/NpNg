@@ -1,8 +1,9 @@
-package utils.daoUtils;
+package utils.TestsDAO;
 
 import model.Boutique;
 import org.junit.Test;
 import utils.Constants;
+import utils.daoUtils.BoutiqueDAO;
 
 import java.sql.SQLException;
 

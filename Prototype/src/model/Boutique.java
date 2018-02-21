@@ -8,6 +8,7 @@ import utils.daoUtils.CategorieBoutiqueDAO;
 import utils.daoUtils.EmplacementDAO;
 
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -76,8 +77,7 @@ public class Boutique implements ModelObject {
     {
         return "Boutique:"+this.nom+"; Emplacement :"+this.emplacement+" Cat :"+this.categorieBoutique;
     }
-    public DAO getDaoClass()
-    {
+    public DAO getDaoClass() {
         return new BoutiqueDAO();
     }
 

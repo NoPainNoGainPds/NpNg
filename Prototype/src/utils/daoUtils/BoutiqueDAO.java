@@ -20,6 +20,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     private Logger logger = Logger.getLogger(BoutiqueDAO.class);
 
+
     /**
      * Constructor.
      */
@@ -53,12 +54,12 @@ public class BoutiqueDAO extends DAO<Boutique> {
                 return false;
             String requete = "INSERT INTO boutique (nom_boutique,id_categorie_boutique,id_emplacement) VALUES (\""+nom+"\","+catBoutique+","+idEmplacement+")";
             Statement stmt = Constants.DB.getConnection().createStatement();
-
+            logger.info(requete);
             return (stmt.executeUpdate(requete)>0) ? true : false;
         }catch(SQLException e)
         {
-            e.printStackTrace();
-            logger.error("SQLException");
+           // e.printStackTrace();
+            logger.error(e.toString());
             return false;
         }
     }
@@ -75,12 +76,12 @@ public class BoutiqueDAO extends DAO<Boutique> {
             String requete = "DELETE FROM Boutique where id_boutique="+obj.getId()+";";
             Statement stmt = Constants.DB.getConnection().createStatement();
             stmt.executeUpdate(requete);
-
+            logger.info(requete);
             return true;
         }catch(SQLException e)
         {
-            e.printStackTrace();
-            logger.error("SQLException");
+           // e.printStackTrace();
+            logger.error(e.toString());
             return false;
         }
     }
@@ -95,25 +96,19 @@ public class BoutiqueDAO extends DAO<Boutique> {
         try
         {
             int idEmplacement = -1;
-            if(obj.getEmplacement()!=null)
+            if((obj.getEmplacement()!=null) && (obj.getCategorieBoutique()!=null))
                 idEmplacement = obj.getEmplacement().getId();
             else
                 return false;
-            String requete = "UPDATE boutique SET nom_boutique=\""+obj.getNom()+"\" ,id_categorie_boutique="+obj.getCategorieBoutique().getId()+" WHERE id_boutique = "+obj.getId()+";";
+            String requete = "UPDATE boutique SET nom_boutique=\""+obj.getNom()+"\" ,id_categorie_boutique="+obj.getCategorieBoutique().getId()+", id_emplacement="+obj.getEmplacement().getId()+" WHERE id_boutique = "+obj.getId()+";";
             Statement stmt = Constants.DB.getConnection().createStatement();
             stmt.executeUpdate(requete);
-            if(obj.getEmplacement()!=null) {
-                idEmplacement = obj.getEmplacement().getId();
-                String requete2 = "REPLACE INTO boutique (id_emplacement,id_boutique) VALUES ("+ idEmplacement + "," + obj.getId() + ") ";
-                Statement stmt2 = Constants.DB.getConnection().createStatement();
-                stmt2.executeQuery(requete2);
-            }
             logger.info(requete);
             return true;
         }catch(SQLException e)
         {
             //e.printStackTrace();
-            logger.error("SQLException");
+            logger.error(e.toString());
             return false;
         }
     }
@@ -132,12 +127,12 @@ public class BoutiqueDAO extends DAO<Boutique> {
             if(res.first())
             {
                 Boutique b = new Boutique(res.getInt(1),res.getString(2),res.getInt(3),res.getInt(4));
-                //logger.info("SELECT * FROM Boutique WHERE id_boutique ="+id+";");
+                logger.info("SELECT * FROM Boutique WHERE id_boutique ="+id+";");
                 return b;
             }
         } catch (SQLException e) {
             //e.printStackTrace();
-            logger.error("SQLException");
+            logger.error(e.toString());
         }
         return null;
     }
@@ -164,7 +159,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
             return listBoutique;
         } catch (SQLException e) {
             //e.printStackTrace();
-            logger.error("SQLException");
+            logger.error(e.toString());
         }
         return null;
     }
@@ -190,7 +185,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
             return listBoutique;
         } catch (SQLException e) {
             //e.printStackTrace();
-            logger.error("SQLException");
+            logger.error(e.toString());
         }
         return null;
     }
@@ -208,8 +203,9 @@ public class BoutiqueDAO extends DAO<Boutique> {
             while(res.next()) {
                 nb_boutiques++;
             }
+            logger.info(requete);
         } catch(SQLException e) {
-            logger.error("SQLException");
+            logger.error(e.toString());
         }
         return nb_boutiques;
     }

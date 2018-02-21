@@ -7,7 +7,7 @@ public class Database {
     private String url,user,password;
     private Connection con = null;
     /*
-     * Chargement du driver de connexion a la base de données.
+     * Chargement du driver de connexion a la base de donnï¿½es.
      * ceci ne s'execute qu'une seul fois
      */
     static

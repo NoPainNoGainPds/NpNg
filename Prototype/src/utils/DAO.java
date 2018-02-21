@@ -15,7 +15,7 @@ public abstract class DAO<T> {
 
     /**
 
-     * Méthode pour effacer
+     * Mï¿½thode pour effacer
 
      * @param obj
 
@@ -28,7 +28,7 @@ public abstract class DAO<T> {
 
     /**
 
-     * Méthode de mise à jour
+     * Mï¿½thode de mise ï¿½ jour
 
      * @param obj
 
@@ -41,7 +41,7 @@ public abstract class DAO<T> {
 
     /**
 
-     * Méthode de recherche des informations
+     * Mï¿½thode de recherche des informations
 
      * @param id
 
