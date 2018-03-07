@@ -43,6 +43,7 @@ drop table if exists SORTIE_STOCK;
 create table ACHAT
 (
    ID_ACHAT             int not null auto_increment,
+   ID_SORTIE            int not null,
    ID_CLIENT            int not null,
    primary key (ID_ACHAT)
 );
@@ -75,9 +76,7 @@ create table CATEGORIE_BOUTIQUE
 create table CATEGORIE_EMPLACEMENT
 (
    ID_CATEGORIE_EMPLACEMENT int not null auto_increment,
-   NOM_EMPLACEMENT      varchar(25),
-   SUPERFICIE           decimal(5,2),
-   POSITION             varchar(25),
+   NOM_CATEGORIE_EMPLACEMENT     varchar(25),
    primary key (ID_CATEGORIE_EMPLACEMENT)
 );
 
@@ -103,7 +102,7 @@ create table CLIENT
    SEXE                 varchar(25),
    ADRESSE_CLIENT       varchar(100),
    DATE_NAISSANCE       date,
-   TELEPHONE            char(17),
+   TELEPHONE            varchar(14),
    primary key (ID_CLIENT)
 );
 
@@ -204,7 +203,6 @@ create table PERFORMANCE
    ID_BOUTIQUE          int not null,
    DATE_PERFORMANCE     date,
    CHIFFRE_AFFAIRE      decimal(10,2),
-   TAUX_FREQUENTATION   decimal(2,2),
    TAUX_OCCUPATION      decimal(2,2),
    NB_CLIENT            int,
    primary key (ID_PERFORMANCE)
@@ -257,7 +255,6 @@ create table SORTIE_STOCK
 (
    ID_SORTIE            int not null auto_increment,
    ID_PRODUIT           int not null,
-   ID_ACHAT             int not null,
    ID_BOUTIQUE          int not null,
    QUANTITE             int,
    DATE_SORTIE          datetime,
@@ -266,6 +263,9 @@ create table SORTIE_STOCK
 
 alter table ACHAT add constraint FK_EST_EFFECTUE_PAR foreign key (ID_CLIENT)
       references CLIENT (ID_CLIENT) on delete restrict on update restrict;
+
+alter table ACHAT add constraint FK_CONCERNE_SORTIE foreign key (ID_SORTIE)
+      references SORTIE_STOCK (ID_SORTIE) on delete restrict on update restrict;
 
 alter table BOUTIQUE add constraint FK_ASSOCIATION_9 foreign key (ID_EMPLACEMENT)
       references EMPLACEMENT (ID_EMPLACEMENT) on delete restrict on update restrict;
@@ -314,9 +314,6 @@ alter table REDEVANCE add constraint FK_ASSOCIATION_10 foreign key (ID_BOUTIQUE)
 
 alter table SORTIE_STOCK add constraint FK_CONCERNE_CE foreign key (ID_PRODUIT)
       references PRODUIT (ID_PRODUIT) on delete restrict on update restrict;
-
-alter table SORTIE_STOCK add constraint FK_EST_ASSOCIE_A foreign key (ID_ACHAT)
-      references ACHAT (ID_ACHAT) on delete restrict on update restrict;
 
 alter table SORTIE_STOCK add constraint FK_EST_RETIRE foreign key (ID_BOUTIQUE)
       references BOUTIQUE (ID_BOUTIQUE) on delete restrict on update restrict;
