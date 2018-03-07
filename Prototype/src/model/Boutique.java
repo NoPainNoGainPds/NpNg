@@ -6,6 +6,7 @@ import utils.ModelObject;
 import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.CategorieBoutiqueDAO;
 import utils.daoUtils.EmplacementDAO;
+import vue.MyPolygon;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -39,6 +40,10 @@ public class Boutique implements ModelObject {
         this.emplacement = eDAO.find(emplacement);
         CategorieBoutiqueDAO cbDAO = new CategorieBoutiqueDAO();
         this.categorieBoutique = cbDAO.find(categorie);
+    }
+    public MyPolygon getPolygonsView()
+    {
+        return this.emplacement.getPolygonsView();
     }
     public String getNom() {
         return nom;

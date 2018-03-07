@@ -32,14 +32,21 @@ public class Fenetre extends JFrame implements Runnable{
         System.out.println(listBoutique.size());
         this.msgError = new JLabel("");
         this.add(this.msgError,BorderLayout.SOUTH);
-        JPanel panel = new JPanel();
+        /*JPanel panel = new JPanel();
         this.list = new JList<>(listBoutique.toArray(new Boutique[listBoutique.size()]));
 
         JScrollPane scrollPane = new JScrollPane(this.list);
         panel.add(scrollPane);
         //panel.add(list);
-        this.add(panel, BorderLayout.CENTER);
-
+        this.add(panel, BorderLayout.CENTER);*/
+        Map map = new Map();
+        ArrayList<MyPolygon> liste = new ArrayList<>();
+        for(Boutique b: this.listBoutique)
+        {
+            liste.add(b.getPolygonsView());
+        }
+        map.setPolygons(liste);
+        this.add(map,BorderLayout.CENTER);
         JButton btn1 = new JButton("Modifier boutique");
         JButton btn2 = new JButton("Afficher boutique");
         JButton btn3 = new JButton("Ajouter boutique");

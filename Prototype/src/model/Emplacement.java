@@ -3,6 +3,7 @@ package model;
 import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.EmplacementDAO;
+import vue.MyPolygon;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,8 +26,12 @@ public class Emplacement implements ModelObject{
         this.id=id;
         this.cat = cat;
         this.superficie = superficie;
+        this.path = new EmplacementDAO().getPathLocation(this.id);
     }
-
+    public MyPolygon getPolygonsView()
+    {
+        return new MyPolygon(this.path);
+    }
     public int getId() {
         return id;
     }
