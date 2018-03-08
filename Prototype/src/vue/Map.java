@@ -87,8 +87,8 @@ public class Map extends JPanel {
         //System.out.println(x+";"+y);
         for(MyPolygon poly: this.polygons)
         {
-            this.popUpMap.x = x;
-            this.popUpMap.y = y;
+            this.popUpMap.x = x+10;
+            this.popUpMap.y = y+10;
             if(poly.contains(x, y))
             {
                 poly.setSelected(true);

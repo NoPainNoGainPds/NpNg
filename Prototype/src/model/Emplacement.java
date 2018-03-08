@@ -32,6 +32,10 @@ public class Emplacement implements ModelObject{
     {
         return new MyPolygon(this.path);
     }
+    public String getCat()
+    {
+        return this.cat;
+    }
     public int getId() {
         return id;
     }
