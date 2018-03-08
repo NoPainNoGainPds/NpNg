@@ -19,7 +19,7 @@ public class Main{
         {
             ObjectMapper objectMapper = new ObjectMapper();
 
-            Constants.DB = objectMapper.readValue(new File("settings.cfg"),Database.class);
+            Constants.DB = objectMapper.readValue(new File("settings"),Database.class);
             Constants.DB.connect();
         } catch (SQLException e) {
             e.printStackTrace();
