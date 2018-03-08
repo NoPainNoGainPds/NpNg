@@ -43,7 +43,9 @@ public class Boutique implements ModelObject {
     }
     public MyPolygon getPolygonsView()
     {
-        return this.emplacement.getPolygonsView();
+        MyPolygon poly = this.emplacement.getPolygonsView();
+        poly.setBoutique(this);
+        return poly;
     }
     public String getNom() {
         return nom;

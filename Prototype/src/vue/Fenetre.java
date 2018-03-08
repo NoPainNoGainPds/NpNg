@@ -53,10 +53,7 @@ public class Fenetre extends JFrame implements Runnable{
         this.listBoutique = bDAO.findFromReference();
         //--------------------
         //System.out.println(listBoutique.size());
-        //msgError
-        this.msgError = new JLabel("");
-        //this.add(this.msgError,BorderLayout.SOUTH);
-        //-----------------
+
         //add map
         this.map = new Map();
         ArrayList<MyPolygon> liste = new ArrayList<>();
@@ -85,56 +82,11 @@ public class Fenetre extends JFrame implements Runnable{
         gbc.gridwidth = 1;
         gbc.gridheight = 5;
         gbc.anchor = GridBagConstraints.LINE_END;
-        JPanel rpv = new JPanel();
-        rpv.setBackground(Color.GREEN);
+        RightPanelView rpv = new RightPanelView();
+        this.map.setRpv(rpv);
         this.add(rpv,gbc);
         //add button in the frame
-        JButton btn1 = new JButton("Modifier boutique");
-        JButton btn2 = new JButton("Afficher boutique");
-        JButton btn3 = new JButton("Ajouter boutique");
         //controller of the btn1
-        btn1.addActionListener(event ->
-        {
-            Boutique b = this.list.getSelectedValue();
-            //new UpdateBoutique(b);
-            if(b!=null)
-            {
-                new UpdateWindow<>(b);
-                this.msgError.setText("");
-            }else
-            {
-                this.msgError.setText("No boutique selected");
-                this.msgError.setForeground(Color.RED);
-            }
-        });
-        //controller of the btn2
-        btn2.addActionListener(event ->
-        {
-            //System.out.println("afficher");
-            Boutique b = this.list.getSelectedValue();
-            //new UpdateBoutique(b);
-            if(b!=null)
-            {
-                new VueBoutique(b);
-                this.msgError.setText("");
-            }else
-            {
-                this.msgError.setText("No boutique selected");
-                this.msgError.setForeground(Color.RED);
-            }
-        });
-        //controller of the btn3
-        btn3.addActionListener(event ->
-        {
-            Boutique b = new Boutique();
-            this.vueInsert = new InsertBoutique(b,this);
-            javax.swing.SwingUtilities.invokeLater(this.vueInsert);
-        });
-        JPanel panel2 = new JPanel();
-        panel2.add(btn1);
-        panel2.add(btn2);
-        panel2.add(btn3);
-        //this.add(panel2,BorderLayout.EAST);
     }
     @Override
     public void run() {

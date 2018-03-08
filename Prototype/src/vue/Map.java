@@ -14,6 +14,9 @@ public class Map extends JPanel {
     private ArrayList<MyPolygon> polygons;
     private Image img1;
     private MyPolygon clicked = null;
+    private RightPanelView rpv;
+    private PopUpMap popUpMap;
+    private boolean over = false;
     /**
      * constructor of the map
      */
@@ -21,6 +24,7 @@ public class Map extends JPanel {
     {
         this.polygons = new ArrayList<MyPolygon>();
         this.img1 = Toolkit.getDefaultToolkit().getImage("Prototype/src/res/PlanCentreCo.png");
+        this.popUpMap = new PopUpMap();
     }
 
     /**
@@ -69,7 +73,10 @@ public class Map extends JPanel {
             this.clicked=null;
         }
     }
-
+    public void setRpv(RightPanelView rpv)
+    {
+        this.rpv = rpv;
+    }
     /**
      * Say to the map where the user is pointing
      * @param x
@@ -80,23 +87,33 @@ public class Map extends JPanel {
         //System.out.println(x+";"+y);
         for(MyPolygon poly: this.polygons)
         {
+            this.popUpMap.x = x;
+            this.popUpMap.y = y;
             if(poly.contains(x, y))
             {
                 poly.setSelected(true);
                 //System.out.println("IN");
+                this.over = true;
+                this.popUpMap.setBoutique(poly.getBoutique());
+                return;
             }
             else
             {
+                this.over = false;
                 poly.setSelected(false);
             }
         }
     }
 
     /**
-     * Mthode who allow to send Data to another panel
+     * Methode who allow to send Data to another panel
      */
     public void sendData()
     {
+        if(this.clicked!=null && this.rpv!=null)
+        {
+            this.rpv.recieveData(this.clicked.getBoutique());
+        }
         return;
     }
     @Override
@@ -105,11 +122,9 @@ public class Map extends JPanel {
 
 
         Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.WHITE);
-        //g2.fillRect(0, 0, this.getWidth(), this.getHeight());
-        g2.setColor(Color.PINK);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         g2.drawImage(this.img1, 0 , 0,this.getWidth(), this.getHeight(), this);
+        g2.setColor(Color.PINK);
         for(MyPolygon poly: this.polygons)
         {
             //System.out.println("dessin d'un poly");
@@ -130,6 +145,15 @@ public class Map extends JPanel {
                 g2.setColor(Color.PINK);
             }
 
+        }
+        if(this.over)
+        {
+            g2.setColor(new Color(0.2f,0.5f,0.5f,0.95f));
+            g2.fill(this.popUpMap);
+            g2.setColor(Color.BLACK);
+            g2.draw(this.popUpMap);
+            g2.setColor(Color.BLACK);
+            g2.drawString(this.popUpMap.b.toString(),this.popUpMap.x+10,this.popUpMap.y+25);
         }
     }
 }

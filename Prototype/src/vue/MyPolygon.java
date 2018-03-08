@@ -1,5 +1,6 @@
 package vue;
 
+import model.Boutique;
 import utils.Constants;
 
 import java.awt.*;
@@ -9,16 +10,15 @@ import java.util.Arrays;
 public class MyPolygon extends Polygon {
     private boolean selected;
     private int id_emplacement;
-    private int id_boutique;
+    private Boutique boutique;
     private String nom_boutique = "";
     public int[] new_x;
     public int[] new_y;
     private float surface = 0.0f;
     public MyPolygon() {
-        // TODO Auto-generated constructor stub
         this.selected = false;
         this.id_emplacement = -1;
-        this.id_boutique = 0;
+        this.boutique = null;
     }
     public MyPolygon(int[] x,int[] y, int n)
     {
@@ -31,6 +31,10 @@ public class MyPolygon extends Polygon {
         for(Point p : liste) {
             this.addPoint(p.x,p.y);
         }
+    }
+    public void setBoutique(Boutique b)
+    {
+        this.boutique = b;
     }
     public void setnew()
     {
@@ -66,13 +70,9 @@ public class MyPolygon extends Polygon {
     {
         return this.id_emplacement;
     }
-    public void setId_boutique(int id)
+    public Boutique getBoutique()
     {
-        this.id_boutique = id;
-    }
-    public int getId_boutique()
-    {
-        return this.id_boutique;
+        return this.boutique;
     }
     public void setSelected(boolean b)
     {
