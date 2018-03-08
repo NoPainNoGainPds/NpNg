@@ -8,28 +8,96 @@ import java.util.ArrayList;
  *
  */
 public class Map extends JPanel {
+    /**
+     *
+     */
     private ArrayList<MyPolygon> polygons;
     private Image img1;
     private MyPolygon clicked = null;
     /**
-     *
+     * constructor of the map
      */
     public Map()
     {
         this.polygons = new ArrayList<MyPolygon>();
-        this.img1 = Toolkit.getDefaultToolkit().getImage("src/res/PlanCentreCo.png");
+        this.img1 = Toolkit.getDefaultToolkit().getImage("Prototype/src/res/PlanCentreCo.png");
     }
+
+    /**
+     * initiialize all the polygons
+     */
+    public void setNews()
+    {
+        for(MyPolygon poly : this.polygons)
+        {
+            poly.setnew();;
+        }
+    }
+
+    /**
+     * replace all the polygons by the new polygons in param
+     * @param polygons
+     */
     public void setPolygons(ArrayList<MyPolygon> polygons)
     {
         this.polygons = polygons;
         this.repaint();
     }
+    /**
+     * Resize all the sub component with the new size of the map
+     */
     public void refresh()
     {
         for(MyPolygon poly : this.polygons)
         {
             poly.refresh(this.getSize());
         }
+    }
+
+    /**
+     * Say to the map where the usere clicked
+     */
+    public void setClicked()
+    {
+        for(MyPolygon poly: this.polygons)
+        {
+            if(poly.isSelected())
+            {
+                this.clicked = poly;
+                return;
+            }
+            this.clicked=null;
+        }
+    }
+
+    /**
+     * Say to the map where the user is pointing
+     * @param x
+     * @param y
+     */
+    public void setMousePos(int x,int y)
+    {
+        //System.out.println(x+";"+y);
+        for(MyPolygon poly: this.polygons)
+        {
+            if(poly.contains(x, y))
+            {
+                poly.setSelected(true);
+                //System.out.println("IN");
+            }
+            else
+            {
+                poly.setSelected(false);
+            }
+        }
+    }
+
+    /**
+     * Mthode who allow to send Data to another panel
+     */
+    public void sendData()
+    {
+        return;
     }
     @Override
     public void paintComponent(Graphics g)

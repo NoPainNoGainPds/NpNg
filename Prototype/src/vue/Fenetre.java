@@ -3,6 +3,7 @@ package vue;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import controller.MapController;
 import model.Boutique;
 import model.Emplacement;
 import model.Produit;
@@ -21,6 +22,7 @@ public class Fenetre extends JFrame implements Runnable{
     private JList<Boutique> list;
     private JLabel msgError;
     private InsertBoutique vueInsert;
+    private Map map ;
     public Fenetre(String s)
     {
         super(s);
@@ -39,14 +41,17 @@ public class Fenetre extends JFrame implements Runnable{
         panel.add(scrollPane);
         //panel.add(list);
         this.add(panel, BorderLayout.CENTER);*/
-        Map map = new Map();
+        this.map = new Map();
         ArrayList<MyPolygon> liste = new ArrayList<>();
         for(Boutique b: this.listBoutique)
         {
             liste.add(b.getPolygonsView());
         }
-        map.setPolygons(liste);
-        this.add(map,BorderLayout.CENTER);
+        this.map.setPolygons(liste);
+        MapController mapC = new MapController(this.map);
+        this.map.addMouseMotionListener(mapC);
+        this.map.addMouseListener(mapC);
+        this.add(this.map,BorderLayout.CENTER);
         JButton btn1 = new JButton("Modifier boutique");
         JButton btn2 = new JButton("Afficher boutique");
         JButton btn3 = new JButton("Ajouter boutique");
@@ -108,6 +113,8 @@ public class Fenetre extends JFrame implements Runnable{
     @Override
     public void run() {
         this.setVisible(true);
+        this.map.setNews();
+        this.map.refresh();
     }
     public void notifyBoutique()
     {
