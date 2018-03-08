@@ -41,12 +41,22 @@ public class Boutique implements ModelObject {
         CategorieBoutiqueDAO cbDAO = new CategorieBoutiqueDAO();
         this.categorieBoutique = cbDAO.find(categorie);
     }
+
+    /**
+     *
+     * @return polygon of this store
+     */
     public MyPolygon getPolygonsView()
     {
         MyPolygon poly = this.emplacement.getPolygonsView();
         poly.setBoutique(this);
         return poly;
     }
+
+    /**
+     *
+     * @return Name of the store
+     */
     public String getNom() {
         return nom;
     }

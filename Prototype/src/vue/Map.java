@@ -9,13 +9,28 @@ import java.util.ArrayList;
  */
 public class Map extends JPanel {
     /**
-     *
+     * Liste of all polygons who represent a location on the map
      */
     private ArrayList<MyPolygon> polygons;
+    /**
+     *  Background image
+     */
     private Image img1;
+    /**
+     *  Location selected
+     */
     private MyPolygon clicked = null;
+    /**
+     *  Referenc of the right panel
+     */
     private RightPanelView rpv;
+    /**
+     * Object used for popUp effect
+     */
     private PopUpMap popUpMap;
+    /**
+     *  Boolean, true : draw the popup, false don't draw the popup
+     */
     private boolean over = false;
     /**
      * constructor of the map
@@ -40,7 +55,7 @@ public class Map extends JPanel {
 
     /**
      * replace all the polygons by the new polygons in param
-     * @param polygons
+     * @param polygons Arraylist<Polygon> that will be use in map
      */
     public void setPolygons(ArrayList<MyPolygon> polygons)
     {
