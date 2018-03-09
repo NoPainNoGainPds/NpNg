@@ -27,10 +27,10 @@ public class Boutique implements ModelObject {
 
     /**
      * Constructor of Boutique
-     * @param id
-     * @param nom
-     * @param categorie
-     * @param emplacement
+     * @param id id of the store
+     * @param nom name of the store
+     * @param categorie categorie of the store
+     * @param emplacement location of the store
      */
     public Boutique(int id,String nom,int categorie,int emplacement)
     {

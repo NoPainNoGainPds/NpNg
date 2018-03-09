@@ -1,6 +1,7 @@
 package vue;
 
 import model.Boutique;
+import utils.Constants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,13 +25,23 @@ public class RightPanelView extends JPanel {
     private void buildFirstView()
     {
         this.view1 = new JPanel();
-        this.view1.setLayout(new GridLayout(6,1));
+        GridBagLayout gbl = new GridBagLayout();
+        GridBagConstraints gbc = new GridBagConstraints();
+        this.setLayout(gbl);
+        //this.view1.setLayout(new GridLayout(6,1));
+        //add Label Boutique
         this.nomBoutique = new JLabel();
         this.nomBoutique.setPreferredSize(new Dimension(110,30));
+        //---------------
+        //add Label location
         this.nomEmplacement = new JLabel();
+        //----------------
+        //add label Categorie location
         this.categorieEmplacement = new JLabel();
+        //------------------------
 
         JButton btn1 = new JButton("next");
+        btn1.setMaximumSize(new Dimension(Constants.BTN_WIDTH,Constants.BTN_HEIGHT));
         btn1.addActionListener(event ->
         {
             this.change();
