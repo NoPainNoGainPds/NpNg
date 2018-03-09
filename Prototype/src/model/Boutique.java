@@ -20,6 +20,7 @@ public class Boutique implements ModelObject {
     private Emplacement emplacement;
     private ArrayList<Produit> listeProduit;
     private CategorieBoutique categorieBoutique;
+    private String logo;
     public Boutique()
     {
 
@@ -32,7 +33,7 @@ public class Boutique implements ModelObject {
      * @param categorie categorie of the store
      * @param emplacement location of the store
      */
-    public Boutique(int id,String nom,int categorie,int emplacement)
+    public Boutique(int id,String nom,int categorie,int emplacement,String logo)
     {
         this.id = id;
         this.nom = nom;
@@ -63,6 +64,14 @@ public class Boutique implements ModelObject {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public int getId() {

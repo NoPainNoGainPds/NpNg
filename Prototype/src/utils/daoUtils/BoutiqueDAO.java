@@ -131,7 +131,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
             ResultSet res = stmt.executeQuery("SELECT * FROM Boutique WHERE id_boutique ="+id+";");
             if(res.first())
             {
-                Boutique b = new Boutique(res.getInt(1),res.getString(2),res.getInt(3),res.getInt(4));
+                Boutique b = new Boutique(res.getInt(1),res.getString(2),res.getInt(3),res.getInt(4),res.getString(5));
                 //logger.info("SELECT * FROM Boutique WHERE id_boutique ="+id+";");
                 return b;
             }
@@ -152,13 +152,13 @@ public class BoutiqueDAO extends DAO<Boutique> {
         try
         {
             Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement FROM boutique";
+            String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement,url_logo FROM boutique";
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Boutique> listBoutique = new ArrayList<>();
 
             while(res.next())
             {
-                listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement")));
+                listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement"),res.getString("url_logo")));
             }
             logger.info(requete);
             return listBoutique;
@@ -178,13 +178,13 @@ public class BoutiqueDAO extends DAO<Boutique> {
         try
         {
             Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement FROM boutique";
+            String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement,url_logo FROM boutique";
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Boutique> listBoutique = new ArrayList<>();
 
             while(res.next())
             {
-                listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement")));
+                listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement"),res.getString("url_logo")));
             }
             logger.info(requete);
             return listBoutique;
