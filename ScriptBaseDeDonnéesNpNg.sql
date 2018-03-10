@@ -152,6 +152,7 @@ create table ENTREE_STOCK
    ID_ENTREE            int not null auto_increment,
    ID_PRODUIT           int not null,
    ID_BOUTIQUE          int not null,
+   ID_FOURNISSEUR       int not null,
    DATE_ENTREE          datetime,
    QUANTITE             int,
    MONTANT              decimal(10,2),
@@ -214,7 +215,6 @@ create table PERFORMANCE
 create table PRODUIT
 (
    ID_PRODUIT           int not null auto_increment,
-   ID_FOURNISSEUR       int not null,
    ID_CATEGORIE_PRODUIT int not null,
    NOM_PRODUIT          varchar(25),
    COUT_UNITAIRE        decimal(10,2),
@@ -290,6 +290,9 @@ alter table ENTREE_STOCK add constraint FK_CONCERNE foreign key (ID_PRODUIT)
 
 alter table ENTREE_STOCK add constraint FK_EST_AJOUTEE foreign key (ID_BOUTIQUE)
       references BOUTIQUE (ID_BOUTIQUE) on delete restrict on update restrict;
+      
+alter table ENTREE_STOCK add constraint FK_EST_FOURNI foreign key (ID_FOURNISSEUR)
+      references FOURNISSEUR (ID_FOURNISSEUR) on delete restrict on update restrict;
 
 alter table NOEUD_PARCOURS add constraint FK_APPARTIENT_A foreign key (ID_PARCOURS)
       references PARCOURS (ID_PARCOURS) on delete restrict on update restrict;
@@ -305,9 +308,6 @@ alter table PERFORMANCE add constraint FK_AFFICHE foreign key (ID_BOUTIQUE)
 
 alter table PRODUIT add constraint FK_EST_CONTENU foreign key (ID_CATEGORIE_PRODUIT)
       references CATEGORIE_PRODUIT (ID_CATEGORIE_PRODUIT) on delete restrict on update restrict;
-
-alter table PRODUIT add constraint FK_EST_FOURNI foreign key (ID_FOURNISSEUR)
-      references FOURNISSEUR (ID_FOURNISSEUR) on delete restrict on update restrict;
 
 alter table REDEVANCE add constraint FK_ASSOCIATION_10 foreign key (ID_BOUTIQUE)
       references BOUTIQUE (ID_BOUTIQUE) on delete restrict on update restrict;
