@@ -96,12 +96,19 @@ public class RightPanelView extends JPanel {
         //add "NEXT" btn
 
         JButton btn1 = new JButton("performance");
-        btn1.setMaximumSize(new Dimension(Constants.BTN_WIDTH,Constants.BTN_HEIGHT));
+        //btn1.setMaximumSize(new Dimension(Constants.BTN_WIDTH,Constants.BTN_HEIGHT));
         btn1.addActionListener(event ->
         {
             this.next();
         });
+        JButton btn2 = new JButton("See more");
+        btn2.addActionListener(event ->
+        {
+            DetailStore ds = new DetailStore(this.boutique);
+            SwingUtilities.invokeLater(ds);
+        });
         JPanel buttonPanel = new JPanel(new MigLayout("", "[center, grow]"));
+        buttonPanel.add(btn2,"");
         buttonPanel.add(btn1,"");
         this.view1.add(buttonPanel,"dock south");
         //----------------------
