@@ -42,7 +42,7 @@ public class Fenetre extends JFrame implements Runnable{
         gbc.weighty = 0.0;
         gbc.gridwidth = 6;
         gbc.gridheight = 1;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.anchor = GridBagConstraints.NORTH;
         //pour la bar de menu
         this.mb = new JMenuBar();
         populate_menu();

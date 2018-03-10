@@ -37,6 +37,7 @@ public class Boutique implements ModelObject {
     {
         this.id = id;
         this.nom = nom;
+        this.logo = logo;
         EmplacementDAO eDAO = new EmplacementDAO();
         this.emplacement = eDAO.find(emplacement);
         CategorieBoutiqueDAO cbDAO = new CategorieBoutiqueDAO();
@@ -67,7 +68,7 @@ public class Boutique implements ModelObject {
     }
 
     public String getLogo() {
-        return logo;
+        return this.logo;
     }
 
     public void setLogo(String logo) {

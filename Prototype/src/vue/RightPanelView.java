@@ -2,11 +2,17 @@ package vue;
 
 import controller.AnimatedCardLayoutListener;
 import model.Boutique;
+import net.miginfocom.swing.MigLayout;
 import utils.AnimatedCardLayout;
 import utils.Constants;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  *
@@ -55,7 +61,7 @@ public class RightPanelView extends JPanel {
         //build 1st View
         this.buildFirstView();
         this.buildSecondView();
-        this.setPreferredSize(new Dimension(110,Constants.WINDOW_HEIGHT));
+        this.repaint();
     }
 
     /**
@@ -64,60 +70,40 @@ public class RightPanelView extends JPanel {
     private void buildFirstView()
     {
         this.view1 = new JPanel();
-        GridBagLayout gbl = new GridBagLayout();
-        GridBagConstraints gbc = new GridBagConstraints();
-        this.view1.setLayout(gbl);
-        //this.view1.setLayout(new GridLayout(6,1));
+        this.view1.setLayout(new MigLayout("inset 25", "[fill, grow]", "[fill, grow]"));
         //add Label Boutique
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 0.0;
-        gbc.weighty = 0.1;
+
         this.nomBoutique = new JLabel();
-        this.nomBoutique.setPreferredSize(new Dimension(110,30));
-        this.view1.add(this.nomBoutique,gbc);
+        this.view1.add(this.nomBoutique,"cell 0 0 1 1");
         //---------------
         //add logo
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.weightx = 0.0;
-        gbc.weighty = 0.1;
+
         this.img = Toolkit.getDefaultToolkit().getImage("Prototype/src/res/empty-logo.png");
-        this.logo = new ImageComponent();
-        this.logo.setBackground(Color.PINK);
-        //this.logo.setImage(this.img);
-        this.view1.add(this.logo,gbc);
+        this.logo = new ImageComponent(true);
+        this.logo.setImage(this.img);
+        this.view1.add(this.logo,"cell 1 0 2 2, grow");
         //--------------
         //add Label location
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weightx = 0.0;
-        gbc.weighty = 0.2;
+
         this.nomEmplacement = new JLabel();
-        this.nomEmplacement.setPreferredSize(new Dimension(110,30));
-        this.view1.add(this.nomEmplacement,gbc);
+        this.view1.add(this.nomEmplacement,"cell 0 2");
         //----------------
         //add label Categorie location
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.weightx = 0.0;
-        gbc.weighty = 0.2;
+
         this.categorieEmplacement = new JLabel();
-        this.categorieEmplacement.setPreferredSize(new Dimension(110,30));
-        this.view1.add(this.categorieEmplacement,gbc);
+        this.view1.add(this.categorieEmplacement,"cell 0 3");
         //------------------------
         //add "NEXT" btn
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.weightx = 0.0;
-        gbc.weighty = 0.1;
-        JButton btn1 = new JButton("next");
+
+        JButton btn1 = new JButton("performance");
         btn1.setMaximumSize(new Dimension(Constants.BTN_WIDTH,Constants.BTN_HEIGHT));
         btn1.addActionListener(event ->
         {
             this.next();
         });
-        this.view1.add(btn1,gbc);
+        JPanel buttonPanel = new JPanel(new MigLayout("", "[center, grow]"));
+        buttonPanel.add(btn1,"");
+        this.view1.add(buttonPanel,"dock south");
         //----------------------
         //add panel to right main panel
         this.add(this.view1,"view1");
@@ -129,14 +115,18 @@ public class RightPanelView extends JPanel {
     private void buildSecondView()
     {
         this.view2 = new JPanel();
+        this.view2.setLayout(new MigLayout("inset 25", "[fill, grow]", "[fill, grow]"));
         this.view2.setBackground(Color.GREEN);
+        //btn previous
         JButton btnPrevious = new JButton("previous");
         btnPrevious.setMaximumSize(new Dimension(Constants.BTN_WIDTH,Constants.BTN_HEIGHT));
         btnPrevious.addActionListener(event ->
         {
             this.previous();
         });
-        this.view2.add(btnPrevious);
+        JPanel buttonPanel = new JPanel(new MigLayout("", "[center, grow]"));
+        buttonPanel.add(btnPrevious,"");
+        this.view2.add(buttonPanel,"dock south");
         this.add(this.view2,"view2");
     }
 
@@ -147,10 +137,22 @@ public class RightPanelView extends JPanel {
     public void recieveData(Boutique b)
     {
         this.boutique = b;
-        this.nomBoutique.setText(this.boutique.getNom());
-        this.nomEmplacement.setText(this.boutique.getEmplacement().getNom());
-        this.categorieEmplacement.setText(this.boutique.getEmplacement().getCat());
-        this.logo.setImage(Toolkit.getDefaultToolkit().getImage(boutique.getLogo()));
+        this.nomBoutique.setText("Store Name : "+this.boutique.getNom());
+        this.nomEmplacement.setText("Location : "+this.boutique.getEmplacement().getNom());
+        this.categorieEmplacement.setText("Categorie Location : "+this.boutique.getEmplacement().getCat());
+
+        URL url = null;
+        BufferedImage c = null;
+        try {
+            url = new URL(boutique.getLogo());
+            c = ImageIO.read(url);
+            this.logo.setImage(c);
+        } catch (MalformedURLException e) {
+            this.logo.setImage(Toolkit.getDefaultToolkit().getImage(boutique.getLogo()));
+        } catch (IOException e) {
+            this.logo.setImage(Toolkit.getDefaultToolkit().getImage(boutique.getLogo()));
+        }
+
         this.repaint();
         this.cl.show(this,"view1");
     }
