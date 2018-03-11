@@ -74,14 +74,15 @@ public class RightPanelView extends JPanel {
         //add Label Boutique
 
         this.nomBoutique = new JLabel();
-        this.view1.add(this.nomBoutique,"cell 0 0 1 1");
+        this.view1.add(this.nomBoutique,"cell 0 0 1 0");
         //---------------
         //add logo
 
         this.img = Toolkit.getDefaultToolkit().getImage("Prototype/src/res/empty-logo.png");
         this.logo = new ImageComponent(true);
         this.logo.setImage(this.img);
-        this.view1.add(this.logo,"cell 1 0 2 2, grow");
+        this.logo.setMaximumSize(new Dimension(150 ,150));
+        this.view1.add(this.logo,"cell 0 1 2 1, grow");
         //--------------
         //add Label location
 

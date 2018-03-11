@@ -23,18 +23,32 @@ public class ImageComponent extends JPanel implements Serializable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g); //paint background
         if (image != null) { //there is a picture: draw it
-            int height = this.getSize().height;
-            int width = this.getSize().width;
-            if(isSquare)
-            {
-                if(height>width)
-                    height=width;
-                if(width>height)
-                    width=height;
+            int original_width = this.image.getWidth(this);
+            int original_height = this.image.getHeight(this);
+            int bound_width = 150;
+            int bound_height = 150;
+            int new_width = original_width;
+            int new_height = original_height;
+
+            // first check if we need to scale width
+            if (original_width > bound_width) {
+                //scale width to fit
+                new_width = bound_width;
+                //scale height to maintain aspect ratio
+                new_height = (new_width * original_height) / original_width;
             }
+
+            // then check if we need to scale even with the new height
+            if (new_height > bound_height) {
+                //scale height to fit instead
+                new_height = bound_height;
+                //scale width to maintain aspect ratio
+                new_width = (new_height * original_width) / original_height;
+            }
+
             //g.drawImage(image, 0, 0, this); //use image size
-            g.drawImage(image,0,0, width-1, height-1, this);
-            g.drawRect(0,0,width-1,height);
+            g.drawImage(image,0,0, new_width-1, new_height-1, this);
+            g.drawRect(0,0,new_width-1,new_height);
         }
     }
 }
