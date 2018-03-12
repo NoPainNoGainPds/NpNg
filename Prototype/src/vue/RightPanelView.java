@@ -125,7 +125,6 @@ public class RightPanelView extends JPanel {
     {
         this.view2 = new JPanel();
         this.view2.setLayout(new MigLayout("inset 25", "[fill, grow]", "[fill, grow]"));
-        this.view2.setBackground(Color.GREEN);
         //btn previous
         JButton btnPrevious = new JButton("previous");
         btnPrevious.setMaximumSize(new Dimension(Constants.BTN_WIDTH,Constants.BTN_HEIGHT));
