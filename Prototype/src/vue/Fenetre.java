@@ -73,7 +73,6 @@ public class Fenetre extends JFrame implements Runnable{
         gbc.gridwidth = 5;
         gbc.gridheight = 5;
         gbc.anchor = GridBagConstraints.LINE_START;
-        map.setBackground(Color.BLUE);
         this.add(this.map,gbc);
         //this.add(this.map,BorderLayout.CENTER);
         gbc.gridx = 5;
@@ -95,25 +94,50 @@ public class Fenetre extends JFrame implements Runnable{
         this.map.setNews();
         this.map.refresh();
     }
+    private void refresh()
+    {
+        BoutiqueDAO bDAO = new BoutiqueDAO();
+        this.listBoutique = bDAO.findFromReference();
+
+        ArrayList<MyPolygon> liste = new ArrayList<>();
+        for(Boutique b: this.listBoutique)
+        {
+            liste.add(b.getPolygonsView());
+        }
+        this.map.setPolygons(liste);
+        this.revalidate();
+        this.map.setNews();
+        this.map.refresh();
+        this.map.sendData();
+
+    }
     public void populate_menu()
     {
         JMenu filemenu = new JMenu("File");
-        JMenuItem open = new JMenuItem("Ouvrir");
-        JMenuItem save = new JMenuItem("Sauvegarder");
+        JMenuItem open = new JMenuItem("Save as  PDF");
+        JMenuItem save = new JMenuItem("Export as JSon");
         filemenu.add(open);
         filemenu.add(save);
 
         this.mb.add(filemenu);
 
         JMenu editmenu = new JMenu("Edit");
+        JMenuItem refresh = new JMenuItem("Refresh");
+        refresh.addActionListener(event ->
+        {
+            this.refresh();
+            this.repaint();
+            System.out.println("refresh map");
+        });
+        editmenu.add(refresh);
         this.mb.add(editmenu);
 
 
-        JMenu viewmenu = new JMenu("View");
+        JMenu viewmenu = new JMenu("More");
 
-        JMenuItem piano = new JMenuItem("Ouvrir Piano");
+        JMenuItem piano = new JMenuItem("Settings");
         viewmenu.add(piano);
-        JMenuItem rythme = new JMenuItem("Ouvrir rythme");
+        JMenuItem rythme = new JMenuItem("About");
         JMenuItem accueil = new JMenuItem("Accueil");
         viewmenu.add(accueil);
         viewmenu.add(rythme);

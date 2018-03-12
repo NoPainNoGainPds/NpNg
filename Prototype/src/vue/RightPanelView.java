@@ -1,5 +1,6 @@
 package vue;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import controller.AnimatedCardLayoutListener;
 import model.Boutique;
 import net.miginfocom.swing.MigLayout;
@@ -149,17 +150,7 @@ public class RightPanelView extends JPanel {
         this.nomEmplacement.setText("Location : "+this.boutique.getEmplacement().getNom());
         this.categorieEmplacement.setText("Categorie Location : "+this.boutique.getEmplacement().getCat());
 
-        URL url = null;
-        BufferedImage c = null;
-        try {
-            url = new URL(boutique.getLogo());
-            c = ImageIO.read(url);
-            this.logo.setImage(c);
-        } catch (MalformedURLException e) {
-            this.logo.setImage(Toolkit.getDefaultToolkit().getImage(boutique.getLogo()));
-        } catch (IOException e) {
-            this.logo.setImage(Toolkit.getDefaultToolkit().getImage(boutique.getLogo()));
-        }
+        this.logo.setImage(Toolkit.getDefaultToolkit().getImage(boutique.getLogo()));
 
         this.repaint();
         this.cl.show(this,"view1");

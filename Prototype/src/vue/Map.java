@@ -71,6 +71,7 @@ public class Map extends JPanel {
         {
             poly.refresh(this.getSize());
         }
+        this.clicked = null;
     }
 
     /**

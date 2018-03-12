@@ -16,4 +16,5 @@ public class Constants {
     public static final float ECHELLE_MAP = 7.6f;//pour 8 pixel
     public static final int BTN_HEIGHT = 60;
     public static final int BTN_WIDTH = 150;
+    public static final String  DEFAULT_NO_LOGO = "Prototype/src/res/empty-logo.png";
 }

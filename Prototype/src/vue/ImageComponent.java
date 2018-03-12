@@ -29,12 +29,8 @@ public class ImageComponent extends JPanel implements Serializable {
             int bound_height = 150;
             int new_width = original_width;
             int new_height = original_height;
-
-            // first check if we need to scale width
             if (original_width > bound_width) {
-                //scale width to fit
                 new_width = bound_width;
-                //scale height to maintain aspect ratio
                 new_height = (new_width * original_height) / original_width;
             }
 
