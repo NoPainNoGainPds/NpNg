@@ -106,6 +106,6 @@ public class Produit implements ModelObject{
     }
     @Override
     public DAO getDaoClass() {
-        return new ProduitDAO();
+        return new ProduitDAO(null);
     }
 }

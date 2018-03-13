@@ -1,5 +1,6 @@
 package utils.daoUtils;
 
+import controller.Client;
 import model.Fournisseur;
 import org.apache.log4j.Logger;
 import utils.Constants;
@@ -44,7 +45,7 @@ public class FournisseurDAO extends DAO<Fournisseur> {
     }
 
     @Override
-    public ArrayList<Fournisseur> findFromReference() {
+    public ArrayList<Fournisseur> findFromReference(Client c) {
         try
         {
             ArrayList<Fournisseur> list = new ArrayList<>();

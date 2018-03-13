@@ -1,5 +1,6 @@
 package utils.daoUtils;
 
+import controller.Client;
 import model.StockSortie;
 import org.apache.log4j.Logger;
 import utils.Constants;
@@ -42,7 +43,7 @@ public class StockSortieDAO extends DAO<StockSortie> {
         return null;
     }
     @Override
-    public ArrayList<StockSortie> findFromReference() {
+    public ArrayList<StockSortie> findFromReference(Client c) {
         return null;
     }
 }

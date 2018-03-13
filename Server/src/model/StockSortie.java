@@ -67,6 +67,6 @@ public class StockSortie implements ModelObject {
 
     @Override
     public DAO getDaoClass() {
-        return new StockSortieDAO();
+        return new StockSortieDAO(null);
     }
 }

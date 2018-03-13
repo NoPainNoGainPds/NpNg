@@ -1,5 +1,6 @@
 package utils.daoUtils;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import model.Boutique;
 import org.junit.Test;
 import utils.Constants;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.*;
 
 public class BoutiqueDAOTest {
-    private BoutiqueDAO boutiqueDAO = new BoutiqueDAO();
+    private BoutiqueDAO boutiqueDAO = new BoutiqueDAO(Constants.conServ);
 
     @Test
     public void create() {

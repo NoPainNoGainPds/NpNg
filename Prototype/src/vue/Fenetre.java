@@ -8,6 +8,7 @@ import model.Boutique;
 import model.Emplacement;
 import model.Produit;
 import model.StockSortie;
+import utils.ConnectionServer;
 import utils.Constants;
 import utils.MyListModel;
 import utils.daoUtils.BoutiqueDAO;
@@ -49,8 +50,8 @@ public class Fenetre extends JFrame implements Runnable{
         populate_menu();
         this.add(this.mb,gbc);
         //use of DAO
-        ProduitDAO pDAO = new ProduitDAO();
-        BoutiqueDAO bDAO = new BoutiqueDAO();
+        ProduitDAO pDAO = new ProduitDAO(Constants.conServ);
+        BoutiqueDAO bDAO = new BoutiqueDAO(Constants.conServ);
         this.listBoutique = bDAO.findFromReference();
         //--------------------
         //System.out.println(listBoutique.size());
@@ -96,7 +97,7 @@ public class Fenetre extends JFrame implements Runnable{
     }
     private void refresh()
     {
-        BoutiqueDAO bDAO = new BoutiqueDAO();
+        BoutiqueDAO bDAO = new BoutiqueDAO(Constants.conServ);
         this.listBoutique = bDAO.findFromReference();
 
         ArrayList<MyPolygon> liste = new ArrayList<>();

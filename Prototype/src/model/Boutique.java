@@ -38,10 +38,6 @@ public class Boutique implements ModelObject {
         this.id = id;
         this.nom = nom;
         this.logo = logo;
-        EmplacementDAO eDAO = new EmplacementDAO();
-        this.emplacement = eDAO.find(emplacement);
-        CategorieBoutiqueDAO cbDAO = new CategorieBoutiqueDAO();
-        this.categorieBoutique = cbDAO.find(categorie);
     }
 
     /**
@@ -50,9 +46,11 @@ public class Boutique implements ModelObject {
      */
     public MyPolygon getPolygonsView()
     {
+        /*
         MyPolygon poly = this.emplacement.getPolygonsView();
         poly.setBoutique(this);
-        return poly;
+        return poly;*/
+        return null;
     }
 
     /**
@@ -105,7 +103,7 @@ public class Boutique implements ModelObject {
     }
     public DAO getDaoClass()
     {
-        return new BoutiqueDAO();
+        return null;
     }
 
     public CategorieBoutique getCategorieBoutique() {

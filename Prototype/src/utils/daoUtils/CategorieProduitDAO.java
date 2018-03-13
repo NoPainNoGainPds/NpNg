@@ -1,6 +1,8 @@
 package utils.daoUtils;
 import org.apache.log4j.Logger;
 import model.CategorieProduit;
+import utils.ConnectionServer;
+import utils.Constants;
 import utils.DAO;
 
 import java.sql.Connection;
@@ -10,8 +12,8 @@ public class CategorieProduitDAO extends DAO<CategorieProduit>{
 
     //Log after any action in the CRUD here
     private Logger logger = Logger.getLogger(CategorieProduitDAO.class);
-    public CategorieProduitDAO(Connection connection) {
-        super(connection);
+    public CategorieProduitDAO(ConnectionServer connection) {
+        super(Constants.conServ);
     }
 
     @Override

@@ -1,14 +1,20 @@
 package controller;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import model.Boutique;
 import utils.daoUtils.*;
 
+import java.io.*;
 import java.net.Socket;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public class Client extends Thread {
     private Socket skt;
     private Connection database;
     private boolean running = true;
+    private ObjectMapper mapper;
     //create DAO with Database connexion
     private BoutiqueDAO bDAO;
     private CategorieBoutiqueDAO cbDAO;
@@ -17,6 +23,9 @@ public class Client extends Thread {
     private FournisseurDAO fDAO;
     private ProduitDAO pDAO;
     private StockSortieDAO ssDAO;
+
+    private BufferedInputStream reader = null;
+    private PrintWriter writer = null;
     public Client(Socket skt, Connection sql)
     {
         this.skt = skt;
@@ -32,17 +41,62 @@ public class Client extends Thread {
     @Override
     public void run()
     {
-        while(this.running)
-        {
-            //recuperation des info
-            //System.out.println("running");
-            try
-            {
-
-            }catch(Exception e)
-            {
-
+        try {
+            this.reader = new BufferedInputStream(this.skt.getInputStream());
+            this.writer = new PrintWriter(this.skt.getOutputStream());
+            this.mapper = new ObjectMapper();
+            while (this.running) {
+                //recuperation des info
+                //System.out.println("running");
+                if (this.skt.isClosed())
+                    this.running = false;
+                    String str = read();
+                    System.out.println(str);
+                    switch(str)
+                    {
+                        case  "Store:all":
+                            sendAllStore();
+                            break;
+                        default : System.out.println("not comparable");
+                    }
             }
+        }catch(IOException e)
+        {
+            e.printStackTrace();
         }
+    }
+    public EmplacementDAO geteDAO()
+    {
+        return this.eDAO;
+    }
+    public CategorieBoutiqueDAO getCbDAO() {
+        return cbDAO;
+    }
+
+    private void sendAllStore()
+    {
+        try {
+            ArrayList<Boutique> objReturn = this.bDAO.findFromReference(this);
+            for(Boutique b : objReturn)
+            {
+                this.mapper.writeValue(System.out,b);
+                this.mapper.writeValue(this.writer,b);
+                System.out.println(b);
+            }
+            this.writer.flush();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    private String read() throws IOException{
+        String response = "";
+        int stream;
+        byte[] b = new byte[4096];
+        stream = this.reader.read(b);
+        response = new String(b, 0, stream);
+        return response;
     }
 }

@@ -1,5 +1,6 @@
 package utils.daoUtils;
 
+import controller.Client;
 import model.CategorieBoutique;
 import org.apache.log4j.Logger;
 import utils.Constants;
@@ -93,7 +94,7 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
      * @return A list of the store gategories.
      */
     @Override
-    public ArrayList<CategorieBoutique> findFromReference() {
+    public ArrayList<CategorieBoutique> findFromReference(Client c) {
         try
         {
             Statement stmt =  this.connection.createStatement();

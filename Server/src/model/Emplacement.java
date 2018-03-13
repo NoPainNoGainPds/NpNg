@@ -1,5 +1,6 @@
 package model;
 
+import controller.Client;
 import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.EmplacementDAO;
@@ -19,7 +20,7 @@ public class Emplacement{
         this.nom = "fictif";
         this.id = -1;
     }
-    public Emplacement(String nom,int id,int superficie, String cat)
+    public Emplacement(String nom, int id, int superficie, String cat)
     {
         this.nom = nom;
         this.id=id;
@@ -50,12 +51,27 @@ public class Emplacement{
         return reference;
     }
 
+    public int getSuperficie()
+    {
+        return  this.superficie;
+    }
+    public void setSuperficie(int superficie)
+    {
+        this.superficie = superficie;
+    }
+    public void setPath(ArrayList<Point> list)
+    {
+        this.path = path;
+    }
     public void setReference(Boutique reference) {
         this.reference = reference;
     }
     public String toString()
     {
-        return ""+this.id+" ; "+this.nom+"";
+        return "Id :"+this.id+" ;" +
+                " Nom :"+this.nom+";" +
+                " Superficie  : "+this.superficie+"; " +
+                "cat : "+this.cat+"; ";
     }
 
 }

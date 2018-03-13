@@ -1,6 +1,7 @@
 package utils.daoUtils;
 
 import model.Boutique;
+import controller.Client;
 import org.apache.log4j.Logger;
 import utils.Constants;
 import utils.DAO;
@@ -39,14 +40,6 @@ public class BoutiqueDAO extends DAO<Boutique> {
             int idEmplacement = -1;
             int catBoutique = -1;
             String nom = "";
-            if(obj.getEmplacement()!=null)
-                idEmplacement = obj.getEmplacement().getId();
-            else
-                return false;
-            if(obj.getCategorieBoutique()!=null)
-                catBoutique = obj.getCategorieBoutique().getId();
-            else
-                return false;
             if(obj.getNom() != null || obj.getNom()!="")
                 nom = obj.getNom();
             else
@@ -92,30 +85,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     @Override
     public boolean update(Boutique obj) {
-        try
-        {
-            int idEmplacement = -1;
-            if(obj.getEmplacement()!=null)
-                idEmplacement = obj.getEmplacement().getId();
-            else
-                return false;
-            String requete = "UPDATE boutique SET nom_boutique=\""+obj.getNom()+"\" ,id_categorie_boutique="+obj.getCategorieBoutique().getId()+" WHERE id_boutique = "+obj.getId()+";";
-            Statement stmt = this.connection.createStatement();
-            stmt.executeUpdate(requete);
-            if(obj.getEmplacement()!=null) {
-                idEmplacement = obj.getEmplacement().getId();
-                String requete2 = "REPLACE INTO boutique (id_emplacement,id_boutique) VALUES ("+ idEmplacement + "," + obj.getId() + ") ";
-                Statement stmt2 = this.connection.createStatement();
-                stmt2.executeQuery(requete2);
-            }
-            logger.info(requete);
-            return true;
-        }catch(SQLException e)
-        {
-            //e.printStackTrace();
-            logger.error("SQLException");
-            return false;
-        }
+       return false;
     }
 
     /**
@@ -131,9 +101,9 @@ public class BoutiqueDAO extends DAO<Boutique> {
             ResultSet res = stmt.executeQuery("SELECT * FROM Boutique WHERE id_boutique ="+id+";");
             if(res.first())
             {
-                Boutique b = new Boutique(res.getInt(1),res.getString(2),res.getInt(3),res.getInt(4),res.getString(5));
+                //Boutique b = new Boutique(res.getInt(1),res.getString(2),res.getInt(3),res.getInt(4),res.getString(5));
                 //logger.info("SELECT * FROM Boutique WHERE id_boutique ="+id+";");
-                return b;
+                //return b;
             }
         } catch (SQLException e) {
             //e.printStackTrace();
@@ -158,7 +128,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
 
             while(res.next())
             {
-                listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement"),res.getString("url_logo")));
+                //listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement"),res.getString("url_logo")));
             }
             logger.info(requete);
             return listBoutique;
@@ -174,7 +144,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
      * @return A list of te stores.
      */
     @Override
-    public ArrayList<Boutique> findFromReference() {
+    public ArrayList<Boutique> findFromReference(Client c) {
         try
         {
             Statement stmt =  this.connection.createStatement();
@@ -184,13 +154,12 @@ public class BoutiqueDAO extends DAO<Boutique> {
 
             while(res.next())
             {
-                listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement"),res.getString("url_logo")));
+                listBoutique.add(new Boutique(c,res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement"),res.getString("url_logo")));
             }
-            logger.info(requete);
+            stmt.close();
             return listBoutique;
         } catch (SQLException e) {
-            //e.printStackTrace();
-            logger.error("SQLException");
+            e.printStackTrace();
         }
         return null;
     }

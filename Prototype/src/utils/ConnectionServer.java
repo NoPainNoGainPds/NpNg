@@ -1,18 +1,27 @@
 package utils;
 
-import java.io.IOException;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 
 public class ConnectionServer {
     private Socket server;
+    private PrintWriter writer = null;
+    private BufferedInputStream reader = null;
+    private ObjectMapper mapper;
     public ConnectionServer()
     {
         try {
 
             this.server = new Socket(Constants.host, Constants.port);
-
+            this.writer = new PrintWriter(this.server.getOutputStream());
+            this.reader = new BufferedInputStream(this.server.getInputStream());
+            this.mapper = new ObjectMapper();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -22,10 +31,31 @@ public class ConnectionServer {
     }
     public void send(Object tosend)
     {
-
+        if(this.writer!=null)
+        {
+            this.writer.print(tosend);
+            this.writer.flush();
+        }
     }
-    public Object recieve()
+    public Object recieve(Class className)
     {
+        try{
+            //System.out.println(read());
+            Object obj = this.mapper.readValue(read(),className);
+            return obj;
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
         return null;
+    }
+    private String read() throws IOException{
+        String response = "";
+        int stream;
+        byte[] b = new byte[4096];
+        stream = this.reader.read(b);
+        if(stream!=-1) {
+            response = new String(b, 0, stream);
+            return response;
+        }else return "";
     }
 }

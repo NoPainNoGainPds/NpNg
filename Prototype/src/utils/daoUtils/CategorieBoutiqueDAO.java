@@ -25,7 +25,7 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
      * Constructor.
      */
     public CategorieBoutiqueDAO() {
-        super(Constants.DB.getConnection());
+        super(Constants.conServ);
     }
 
     /**
@@ -65,21 +65,7 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
      */
     @Override
     public CategorieBoutique find(int id) {
-        try
-        {
-            Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT id_categorie_boutique,nom_categorie_boutique FROM categorie_boutique where id_categorie_boutique="+id;
-            ResultSet res = stmt.executeQuery(requete);
-            ArrayList<CategorieBoutique> listBoutique = new ArrayList<>();
 
-            if(res.first())
-            {
-               return new CategorieBoutique(res.getString(2),res.getInt(1));
-            }
-            logger.info(requete);
-        } catch (SQLException e) {
-            logger.error("SQLException");
-        }
         return null;
     }
 
@@ -94,22 +80,7 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
      */
     @Override
     public ArrayList<CategorieBoutique> findFromReference() {
-        try
-        {
-            Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT id_categorie_boutique,nom_categorie_boutique FROM categorie_boutique";
-            ResultSet res = stmt.executeQuery(requete);
-            ArrayList<CategorieBoutique> listBoutique = new ArrayList<>();
 
-            while(res.next())
-            {
-                listBoutique.add(new CategorieBoutique(res.getString(2),res.getInt(1)));
-            }
-            logger.info(requete);
-            return listBoutique;
-        } catch (SQLException e) {
-            logger.error("SQLException");
-        }
         return null;
     }
 }

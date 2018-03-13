@@ -3,6 +3,7 @@ import org.apache.log4j.Logger;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import model.Boutique;
 import model.Produit;
+import utils.ConnectionServer;
 import utils.Constants;
 import utils.DAO;
 
@@ -22,8 +23,8 @@ public class BoutiqueDAO extends DAO<Boutique> {
     /**
      * Constructor.
      */
-    public BoutiqueDAO() {
-        super(Constants.conServ);
+    public BoutiqueDAO(ConnectionServer con) {
+        super(con);
     }
 
     /**
@@ -82,6 +83,28 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     @Override
     public ArrayList<Boutique> findFromReference() {
+        try
+        {
+            //envoie du message au serv
+            String str = "Store:all";
+            this.connection.send(str);
+            ArrayList<Boutique> liste = new ArrayList<>();
+            boolean recieved = false;
+            while(!recieved)
+            {
+                Boutique b = (Boutique)this.connection.recieve(Boutique.class);
+                if(b!=null) {
+                    liste.add(b);
+                }else
+                {
+                    recieved = true;
+                }
+            }
+            return liste;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return null;
     }
 

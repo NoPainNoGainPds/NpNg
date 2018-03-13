@@ -2,6 +2,7 @@ package utils.daoUtils;
 import org.apache.log4j.Logger;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import model.Fournisseur;
+import utils.ConnectionServer;
 import utils.Constants;
 import utils.DAO;
 
@@ -15,7 +16,7 @@ public class FournisseurDAO extends DAO<Fournisseur> {
 
     //Log after any action in the CRUD
     private Logger logger = Logger.getLogger(FournisseurDAO.class);
-    public FournisseurDAO(Connection connection) {
+    public FournisseurDAO(ConnectionServer connection) {
         super(connection);
     }
 

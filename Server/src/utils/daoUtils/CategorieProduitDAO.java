@@ -1,5 +1,6 @@
 package utils.daoUtils;
 
+import controller.Client;
 import model.CategorieProduit;
 import org.apache.log4j.Logger;
 import utils.DAO;
@@ -41,7 +42,7 @@ public class CategorieProduitDAO extends DAO<CategorieProduit>{
     }
 
     @Override
-    public ArrayList<CategorieProduit> findFromReference() {
+    public ArrayList<CategorieProduit> findFromReference(Client c) {
         return null;
     }
 }

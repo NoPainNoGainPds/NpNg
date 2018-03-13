@@ -24,7 +24,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
      */
     public EmplacementDAO()
     {
-        super(Constants.DB.getConnection());
+        super(Constants.conServ);
     }
 
     /**

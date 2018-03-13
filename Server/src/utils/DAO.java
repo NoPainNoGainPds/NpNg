@@ -1,5 +1,7 @@
 package utils;
 
+import controller.Client;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -58,5 +60,5 @@ public abstract class DAO<T> {
      * @return ArrayList<T>
      */
     public abstract ArrayList<T> findFromReference(int id);
-    public abstract ArrayList<T> findFromReference();
+    public abstract ArrayList<T> findFromReference(Client c);
 }

@@ -1,5 +1,6 @@
 package utils.daoUtils;
 
+import controller.Client;
 import model.Emplacement;
 import org.apache.log4j.Logger;
 import utils.Constants;
@@ -114,7 +115,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
      * @return a list of the locations.
      */
     @Override
-    public ArrayList<Emplacement> findFromReference() {
+    public ArrayList<Emplacement> findFromReference(Client c) {
         try
         {
             String requete = "SELECT id_emplacement,nom_emplacement,superficie,position,nom_categorie_emplacement FROM emplacement " +

@@ -1,9 +1,7 @@
 package controller;
 
 
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
+
 import utils.ConnectionServer;
 import utils.Constants;
 import utils.Database;

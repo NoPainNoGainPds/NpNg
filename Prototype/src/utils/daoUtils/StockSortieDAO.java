@@ -12,7 +12,7 @@ public class StockSortieDAO extends DAO<StockSortie> {
     private Logger logger = Logger.getLogger(StockSortieDAO.class);
     public StockSortieDAO()
     {
-        super(Constants.DB.getConnection());
+        super(Constants.conServ);
     }
 
     @Override

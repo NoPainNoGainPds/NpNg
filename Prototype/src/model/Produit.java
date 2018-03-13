@@ -1,5 +1,6 @@
 package model;
 
+import utils.Constants;
 import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.ProduitDAO;
@@ -106,6 +107,6 @@ public class Produit implements ModelObject{
     }
     @Override
     public DAO getDaoClass() {
-        return new ProduitDAO();
+        return new ProduitDAO(Constants.conServ);
     }
 }

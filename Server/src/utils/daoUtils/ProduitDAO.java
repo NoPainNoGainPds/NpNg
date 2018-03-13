@@ -1,5 +1,6 @@
 package utils.daoUtils;
 
+import controller.Client;
 import model.Produit;
 import org.apache.log4j.Logger;
 import utils.Constants;
@@ -158,7 +159,7 @@ public class ProduitDAO extends DAO<Produit> {
      * Get all the products from the database.
      * @return A list of the products.
      */
-    public ArrayList<Produit> findFromReference()
+    public ArrayList<Produit> findFromReference(Client c)
     {
         try
         {

@@ -1,11 +1,11 @@
 package vue;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationConfig;
 import model.Boutique;
 import model.Produit;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
 import utils.Constants;
 import utils.MyListModel;
 import utils.daoUtils.ProduitDAO;
@@ -28,7 +28,7 @@ public class VueBoutique extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.msgError = new JLabel();
         //Recover the products list.
-        ProduitDAO pDao = new ProduitDAO();
+        ProduitDAO pDao = new ProduitDAO(Constants.conServ);
         ArrayList<Produit> listProduit = pDao.findFromReference(boutique.getId());
         if(listProduit==null)
         {
@@ -40,7 +40,7 @@ public class VueBoutique extends JFrame {
         {
             try{
                 ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS,false);
+
                 Object[] article = listProduit.toArray();
                 objectMapper.writeValue(new File("articles.json") , article);
             } catch (JsonGenerationException e) {

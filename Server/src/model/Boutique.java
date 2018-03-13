@@ -1,5 +1,6 @@
 package model;
 
+import controller.Client;
 import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.BoutiqueDAO;
@@ -14,9 +15,9 @@ import java.util.ArrayList;
 public class Boutique {
     private String nom;
     private int id;
-    private int emplacement;
+    private Emplacement emplacement;
     private ArrayList<Produit> listeProduit;
-    private int categorieBoutique;
+    private CategorieBoutique categorieBoutique;
     private String logo;
     public Boutique()
     {
@@ -30,13 +31,14 @@ public class Boutique {
      * @param categorie categorie of the store
      * @param emplacement location of the store
      */
-    public Boutique(int id,String nom,int categorie,int emplacement,String logo)
+    public Boutique(Client c, int id, String nom, int categorie, int emplacement, String logo)
     {
         this.id = id;
         this.nom = nom;
         this.logo = logo;
-        this.emplacement = emplacement;
-        this.categorieBoutique = categorie;
+        this.emplacement = c.geteDAO().find(emplacement);
+        this.emplacement.setPath(c.geteDAO().getPathLocation(emplacement));
+        this.categorieBoutique = c.getCbDAO().find(categorie);
     }
 
     /**
@@ -67,11 +69,11 @@ public class Boutique {
         this.id = id;
     }
 
-    public int getEmplacement() {
+    public Emplacement getEmplacement() {
         return emplacement;
     }
 
-    public void setEmplacement(int emplacement) {
+    public void setEmplacement(Emplacement emplacement) {
         this.emplacement = emplacement;
     }
 
@@ -88,11 +90,11 @@ public class Boutique {
         return "Boutique:"+this.nom+"; Emplacement :"+this.emplacement+" Cat :"+this.categorieBoutique;
     }
 
-    public int getCategorieBoutique() {
+    public CategorieBoutique getCategorieBoutique() {
         return categorieBoutique;
     }
 
-    public void setCategorieBoutique(int categorieBoutique) {
+    public void setCategorieBoutique(CategorieBoutique categorieBoutique) {
         this.categorieBoutique = categorieBoutique;
     }
 }

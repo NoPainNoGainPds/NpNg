@@ -55,6 +55,25 @@ public class Emplacement implements ModelObject{
     public Boutique getReference() {
         return reference;
     }
+    public void setCat(String cat)
+    {
+        this.cat = cat;
+    }
+    public int getSuperficie()
+    {
+        return  this.superficie;
+    }
+    public void setSuperficie(int superficie)
+    {
+        this.superficie = superficie;
+    }
+    public void setPath(ArrayList<Point> list)
+    {
+        this.path = path;
+    }
+    public ArrayList<Point> getPath() {
+        return this.path;
+    }
 
     public void setReference(Boutique reference) {
         this.reference = reference;

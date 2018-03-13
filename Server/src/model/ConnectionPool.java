@@ -16,7 +16,7 @@ public class ConnectionPool implements Pool {
 		Connection connection;
 		try {
 			connection = this.db.getConnection();
-			connectionList.add(null);
+			connectionList.add(connection);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
