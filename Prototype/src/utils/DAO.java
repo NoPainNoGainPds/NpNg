@@ -1,12 +1,13 @@
 package utils;
 
 import java.lang.reflect.Array;
+import java.net.Socket;
 import java.sql.Connection;
 import java.util.ArrayList;
 
 public abstract class DAO<T> {
-    protected Connection connection;
-    public DAO(Connection connection)
+    protected ConnectionServer connection;
+    public DAO(ConnectionServer connection)
     {
         this.connection = connection;
     }

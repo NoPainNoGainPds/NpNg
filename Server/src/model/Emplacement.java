@@ -3,7 +3,6 @@ package model;
 import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.EmplacementDAO;
-import vue.MyPolygon;
 
 import java.awt.*;
 import java.util.ArrayList;
