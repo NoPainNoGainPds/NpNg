@@ -1,6 +1,7 @@
 package utils;
 
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 
@@ -41,21 +42,19 @@ public class ConnectionServer {
     {
         try{
             //System.out.println(read());
-            Object obj = this.mapper.readValue(read(),className);
+            Object obj = this.mapper.readValue(this.reader,className);
             return obj;
         }catch(IOException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
     private String read() throws IOException{
         String response = "";
         int stream;
         byte[] b = new byte[4096];
         stream = this.reader.read(b);
-        if(stream!=-1) {
-            response = new String(b, 0, stream);
-            return response;
-        }else return "";
+        response = new String(b, 0, stream);
+        return response;
     }
 }

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class which represents a store. It contains the methods which access the database.
@@ -88,18 +89,22 @@ public class BoutiqueDAO extends DAO<Boutique> {
             //envoie du message au serv
             String str = "Store:all";
             this.connection.send(str);
-            ArrayList<Boutique> liste = new ArrayList<>();
+            System.out.println("demande effectuée");
+
             boolean recieved = false;
+            ArrayList<Boutique> liste = new ArrayList<>();
             while(!recieved)
             {
                 Boutique b = (Boutique)this.connection.recieve(Boutique.class);
-                if(b!=null) {
+                if(b!=null)
+                {
                     liste.add(b);
                 }else
                 {
                     recieved = true;
                 }
             }
+            System.out.println("données recus ");
             return liste;
         }catch(Exception e)
         {

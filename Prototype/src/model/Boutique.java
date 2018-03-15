@@ -46,11 +46,10 @@ public class Boutique implements ModelObject {
      */
     public MyPolygon getPolygonsView()
     {
-        /*
+
         MyPolygon poly = this.emplacement.getPolygonsView();
         poly.setBoutique(this);
-        return poly;*/
-        return null;
+        return poly;
     }
 
     /**

@@ -69,7 +69,7 @@ public class Emplacement implements ModelObject{
     }
     public void setPath(ArrayList<Point> list)
     {
-        this.path = path;
+        this.path = list;
     }
     public ArrayList<Point> getPath() {
         return this.path;

@@ -25,7 +25,7 @@ public class Client extends Thread {
     private StockSortieDAO ssDAO;
 
     private BufferedInputStream reader = null;
-    private PrintWriter writer = null;
+    private BufferedOutputStream writer = null;
     public Client(Socket skt, Connection sql)
     {
         this.skt = skt;
@@ -43,12 +43,12 @@ public class Client extends Thread {
     {
         try {
             this.reader = new BufferedInputStream(this.skt.getInputStream());
-            this.writer = new PrintWriter(this.skt.getOutputStream());
+            this.writer = new BufferedOutputStream(this.skt.getOutputStream());
             this.mapper = new ObjectMapper();
             while (this.running) {
                 //recuperation des info
                 //System.out.println("running");
-                if (this.skt.isClosed())
+                if (!this.skt.isClosed())
                     this.running = false;
                     String str = read();
                     System.out.println(str);
@@ -77,13 +77,12 @@ public class Client extends Thread {
     {
         try {
             ArrayList<Boutique> objReturn = this.bDAO.findFromReference(this);
+            System.out.println(objReturn.size());
             for(Boutique b : objReturn)
             {
-                this.mapper.writeValue(System.out,b);
                 this.mapper.writeValue(this.writer,b);
-                System.out.println(b);
+                System.out.println("write : "+b);
             }
-            this.writer.flush();
         } catch (JsonMappingException e) {
             e.printStackTrace();
         } catch(IOException e)

@@ -151,7 +151,6 @@ public class BoutiqueDAO extends DAO<Boutique> {
             String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement,url_logo FROM boutique";
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Boutique> listBoutique = new ArrayList<>();
-
             while(res.next())
             {
                 listBoutique.add(new Boutique(c,res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement"),res.getString("url_logo")));

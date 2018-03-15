@@ -61,8 +61,13 @@ public class Emplacement{
     }
     public void setPath(ArrayList<Point> list)
     {
-        this.path = path;
+        this.path = list;
     }
+
+    public ArrayList<Point> getPath() {
+        return path;
+    }
+
     public void setReference(Boutique reference) {
         this.reference = reference;
     }
