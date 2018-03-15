@@ -1,4 +1,5 @@
 package utils.daoUtils;
+import model.Client;
 import org.apache.log4j.Logger;
 import model.Produit;
 import utils.ConnectionServer;
@@ -79,13 +80,28 @@ public class ProduitDAO extends DAO<Produit> {
     @Override
     public ArrayList<Produit> findFromReference(int id)
     {
-
-        return null;
+        ArrayList<Produit> liste = new ArrayList<>();
+        this.connection.send("{\"name\" : \"Product\",\"id\":"+id+"}");
+        boolean recieved = false;
+        while(!recieved)
+        {
+            Object[] p = (Object[])this.connection.recieve(Produit.class);
+            for(int i =0 ;i< p.length;i++) {
+                Produit p2 = (Produit) p[i];
+                if (p2 != null) {
+                    liste.add(p2);
+                } else {
+                    recieved = true;
+                }
+            }
+        }
+        return liste;
     }
     /**
      * Get all the products from the database.
      * @return A list of the products.
      */
+    @Override
     public ArrayList<Produit> findFromReference()
     {
 

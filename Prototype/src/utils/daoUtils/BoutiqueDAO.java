@@ -87,15 +87,13 @@ public class BoutiqueDAO extends DAO<Boutique> {
         try
         {
             //envoie du message au serv
-            String str = "Store:all";
+            String str = "{\"name\":\"Store\",\"id\":-1}";
             this.connection.send(str);
-            System.out.println("demande effectuée");
 
             ArrayList<Boutique> liste = new ArrayList<>();
             boolean recieved = false;
             while(!recieved)
             {
-                System.out.println("demende");
                 Object[] b = (Object[])this.connection.recieve(Boutique.class);
                 for(int i =0 ;i< b.length;i++) {
                     Boutique b2 = (Boutique)b[i];
@@ -103,11 +101,9 @@ public class BoutiqueDAO extends DAO<Boutique> {
                         liste.add(b2);
                     } else {
                         recieved = true;
-                        System.out.println("fin");
                     }
                 }
             }
-            System.out.println("données recus ");
             return liste;
         }catch(Exception e)
         {

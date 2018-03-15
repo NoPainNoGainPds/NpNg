@@ -4,7 +4,7 @@ import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.ProduitDAO;
 
-public class Produit implements ModelObject{
+public class Produit{
     private int quantite;
     private int id;
     private float poid,longueur,largeur;
@@ -103,9 +103,5 @@ public class Produit implements ModelObject{
     public String toString()
     {
         return ""+this.nom+" qty :"+this.quantite+"";
-    }
-    @Override
-    public DAO getDaoClass() {
-        return new ProduitDAO(null);
     }
 }

@@ -50,6 +50,7 @@ public class ConnectionServer {
                 if(!s.equals("null")) {
                     Object obj = this.mapper.readValue(s2[i], className);
                     objToreturn[i] = obj;
+                    System.out.println(obj);
                 }else
                 {
                     objToreturn[i] = null;

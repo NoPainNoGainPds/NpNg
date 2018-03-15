@@ -3,6 +3,8 @@ package controller;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Boutique;
+import model.InputFromClient;
+import model.Produit;
 import utils.daoUtils.*;
 
 import java.io.*;
@@ -48,17 +50,31 @@ public class Client extends Thread {
             while (this.running) {
                 //recuperation des info
                 //System.out.println("running");
-                if (!this.skt.isClosed())
-                    this.running = false;
+                if (!this.skt.isClosed()) {
                     String str = read();
-                    System.out.println(str);
+                    InputFromClient inputFromClient = this.mapper.readValue(str, InputFromClient.class);
+                    switch(inputFromClient.getName())
+                    {
+                        case "Store" :
+                            sendAllStore();
+                            break;
+                        case "Product" :
+                            sendProducts(inputFromClient.getId());
+                            break;
+                        default: System.out.println("Not Comparable");
+                    }
+                    /*
                     switch(str)
                     {
                         case  "Store:all":
                             sendAllStore();
                             break;
-                        default : System.out.println("not comparable");
-                    }
+                        default : sendProducts(str);
+                    }*/
+                }else
+                {
+                    this.running = false;
+                }
             }
         }catch(IOException e)
         {
@@ -93,6 +109,29 @@ public class Client extends Thread {
         } catch(IOException e)
         {
             e.printStackTrace();
+        }
+    }
+    private void sendProducts(int id)
+    {
+        if(id!=-1)
+        {
+            try {
+                ArrayList<Produit> liste = this.pDAO.findFromReference(id);
+                for (Produit p : liste) {
+                    String send = "";
+                    send = this.mapper.writeValueAsString(p);
+                    this.writer.write(send.getBytes(), 0, send.length());
+                    this.writer.write("#".getBytes());
+                    this.writer.flush();
+                }
+                this.writer.write("null".getBytes());
+                this.writer.flush();
+            }catch (JsonMappingException e) {
+                e.printStackTrace();
+            } catch(IOException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
     private String read() throws IOException{
