@@ -80,9 +80,14 @@ public class Client extends Thread {
             System.out.println(objReturn.size());
             for(Boutique b : objReturn)
             {
-                this.mapper.writeValue(this.writer,b);
-                System.out.println("write : "+b);
+                String s = "";
+                s =this.mapper.writeValueAsString(b);
+                this.writer.write(s.getBytes(),0,s.length());
+                this.writer.write("#".getBytes());
+                this.writer.flush();
             }
+            this.writer.write("null".getBytes());
+            this.writer.flush();
         } catch (JsonMappingException e) {
             e.printStackTrace();
         } catch(IOException e)

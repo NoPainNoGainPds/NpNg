@@ -38,13 +38,25 @@ public class ConnectionServer {
             this.writer.flush();
         }
     }
-    public Object recieve(Class className)
+    public Object[] recieve(Class className)
     {
         try{
             //System.out.println(read());
-            Object obj = this.mapper.readValue(this.reader,className);
-            return obj;
-        }catch(IOException e) {
+            String s = read();
+            String[] s2 = s.split("#");
+            Object[] objToreturn = new Object[s2.length];
+            for(int i=0;i< s2.length;i++)
+            {
+                if(!s.equals("null")) {
+                    Object obj = this.mapper.readValue(s2[i], className);
+                    objToreturn[i] = obj;
+                }else
+                {
+                    objToreturn[i] = null;
+                }
+            }
+            return objToreturn;
+            }catch(IOException e) {
             e.printStackTrace();
             return null;
         }

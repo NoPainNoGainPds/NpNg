@@ -91,17 +91,20 @@ public class BoutiqueDAO extends DAO<Boutique> {
             this.connection.send(str);
             System.out.println("demande effectuée");
 
-            boolean recieved = false;
             ArrayList<Boutique> liste = new ArrayList<>();
+            boolean recieved = false;
             while(!recieved)
             {
-                Boutique b = (Boutique)this.connection.recieve(Boutique.class);
-                if(b!=null)
-                {
-                    liste.add(b);
-                }else
-                {
-                    recieved = true;
+                System.out.println("demende");
+                Object[] b = (Object[])this.connection.recieve(Boutique.class);
+                for(int i =0 ;i< b.length;i++) {
+                    Boutique b2 = (Boutique)b[i];
+                    if (b2 != null) {
+                        liste.add(b2);
+                    } else {
+                        recieved = true;
+                        System.out.println("fin");
+                    }
                 }
             }
             System.out.println("données recus ");

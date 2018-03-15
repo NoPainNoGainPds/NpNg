@@ -71,9 +71,12 @@ public class Map extends JPanel {
         {
             poly.refresh(this.getSize());
         }
+        //this.clicked = null;
+    }
+    public void setClickedDefault()
+    {
         this.clicked = null;
     }
-
     /**
      * Say to the map where the usere clicked
      */
@@ -135,8 +138,6 @@ public class Map extends JPanel {
     @Override
     public void paintComponent(Graphics g)
     {
-
-
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         g2.drawImage(this.img1, 0 , 0,this.getWidth(), this.getHeight(), this);
@@ -153,7 +154,7 @@ public class Map extends JPanel {
                 g2.drawPolygon(poly);
                 g2.setColor(Color.PINK);
             }
-            if(poly==this.clicked)
+            if(poly.equals(this.clicked))
             {
                 g2.setColor(Color.ORANGE);
                 g2.fillPolygon(poly);
