@@ -1,5 +1,7 @@
 package controller;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Boutique;
@@ -7,6 +9,8 @@ import model.Produit;
 import utils.daoUtils.*;
 
 import java.io.BufferedOutputStream;
+import java.io.DataOutput;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -31,6 +35,7 @@ public class Sender {
         this.pDAO = new ProduitDAO(database);
         this.ssDAO = new StockSortieDAO(database);
         this.mapper = mapper;
+        this.mapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
         this.writer = writer;
     }
     public void sendAllStore()
@@ -40,13 +45,12 @@ public class Sender {
             System.out.println(objReturn.size());
             for(Boutique b : objReturn)
             {
-                String s = "";
-                s =this.mapper.writeValueAsString(b);
-                this.writer.write(s.getBytes(),0,s.length());
-                this.writer.write("#".getBytes());
+                System.out.println("boutique");
+                this.mapper.writeValue(this.writer,b);
+                this.writer.write("\n".getBytes());
                 this.writer.flush();
             }
-            this.writer.write("null".getBytes());
+            this.writer.write("null\n".getBytes());
             this.writer.flush();
         } catch (JsonMappingException e) {
             e.printStackTrace();
@@ -65,8 +69,6 @@ public class Sender {
                     String send = "";
                     send = this.mapper.writeValueAsString(p);
                     this.writer.write(send.getBytes(), 0, send.length());
-                    this.writer.write("#".getBytes());
-                    this.writer.flush();
                 }
                 this.writer.write("null".getBytes());
                 this.writer.flush();
@@ -85,10 +87,7 @@ public class Sender {
                 Integer[] liste = this.bDAO.findWhoSale(productName);
                 for(int i = 0;i<liste.length;i++) {
                     String send = "";
-                    send = this.mapper.writeValueAsString(liste[i]);
-                    this.writer.write(send.getBytes());
-                    this.writer.write("#".getBytes());
-                    this.writer.flush();
+                    this.mapper.writeValue(this.writer,liste[i]);
                 }
                 this.writer.write("null".getBytes());
                 this.writer.flush();

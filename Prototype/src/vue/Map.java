@@ -90,6 +90,7 @@ public class Map extends JPanel {
             if(poly.isSelected())
             {
                 this.clicked = poly;
+                System.out.println(poly);
                 return;
             }
             this.clicked=null;

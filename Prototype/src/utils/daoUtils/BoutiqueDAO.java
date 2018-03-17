@@ -119,14 +119,13 @@ public class BoutiqueDAO extends DAO<Boutique> {
             boolean recieved = false;
             while(!recieved)
             {
-                Object[] b = (Object[])this.connection.recieve(Boutique.class);
-                for(int i =0 ;i< b.length;i++) {
-                    Boutique b2 = (Boutique)b[i];
-                    if (b2 != null) {
-                        liste.add(b2);
-                    } else {
-                        recieved = true;
-                    }
+                System.out.println("recieve");
+                Object b = (Object)this.connection.recieve(Boutique.class);
+                if (b != null) {
+                    Boutique b2 = (Boutique) b;
+                    liste.add(b2);
+                } else {
+                    recieved = true;
                 }
             }
             return liste;

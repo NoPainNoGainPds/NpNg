@@ -28,7 +28,7 @@ public class Client extends Thread {
 
     private Sender sender;
 
-    private BufferedInputStream reader = null;
+    private DataInputStream reader = null;
     private BufferedOutputStream writer = null;
     public Client(Socket skt, Connection sql)
     {
@@ -46,7 +46,7 @@ public class Client extends Thread {
     public void run()
     {
         try {
-            this.reader = new BufferedInputStream(this.skt.getInputStream());
+            this.reader = new DataInputStream(this.skt.getInputStream());
             this.writer = new BufferedOutputStream(this.skt.getOutputStream());
             this.mapper = new ObjectMapper();
             this.sender = new Sender(this.database,this.mapper,this.writer,this);

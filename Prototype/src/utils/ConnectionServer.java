@@ -3,6 +3,7 @@ package utils;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 
 import java.io.*;
@@ -13,7 +14,7 @@ import java.sql.Connection;
 public class ConnectionServer {
     private Socket server;
     private PrintWriter writer = null;
-    private BufferedInputStream reader = null;
+    private DataInputStream reader = null;
     private ObjectMapper mapper;
     public ConnectionServer()
     {
@@ -21,8 +22,9 @@ public class ConnectionServer {
 
             this.server = new Socket(Constants.host, Constants.port);
             this.writer = new PrintWriter(this.server.getOutputStream());
-            this.reader = new BufferedInputStream(this.server.getInputStream());
+            this.reader = new DataInputStream(this.server.getInputStream());
             this.mapper = new ObjectMapper();
+            this.mapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -44,25 +46,13 @@ public class ConnectionServer {
      * @param className
      * @return
      */
-    public Object[] recieve(Class className)
+    public Object recieve(Class className)
     {
+        ObjectReader jSonreader = this.mapper.readerFor(className).without(JsonParser.Feature.AUTO_CLOSE_SOURCE);
         try{
-            //System.out.println(read());
-            String s = read();
-            String[] s2 = s.split("#");
-            Object[] objToreturn = new Object[s2.length];
-            for(int i=0;i< s2.length;i++)
-            {
-                if(!s.equals("null")) {
-                    Object obj = this.mapper.readValue(s2[i], className);
-                    objToreturn[i] = obj;
-                    //System.out.println(obj);
-                }else
-                {
-                    objToreturn[i] = null;
-                }
-            }
-            return objToreturn;
+            System.out.println("read here");
+                Object obj = jSonreader.readValue(this.reader.readLine());
+                return obj;
             }catch(IOException e) {
             e.printStackTrace();
             return null;
@@ -71,7 +61,7 @@ public class ConnectionServer {
     private String read() throws IOException{
         String response = "";
         int stream;
-        byte[] b = new byte[4096];
+        byte[] b = new byte[4096*2];
         stream = this.reader.read(b);
         response = new String(b, 0, stream);
         return response;
