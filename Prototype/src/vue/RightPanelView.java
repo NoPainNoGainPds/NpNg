@@ -75,6 +75,7 @@ public class RightPanelView extends JPanel {
         //add Label Boutique
 
         this.nomBoutique = new JLabel();
+        this.nomBoutique.setMaximumSize(new Dimension(150 ,25));
         this.view1.add(this.nomBoutique,"cell 0 0 1 0");
         //---------------
         //add logo
