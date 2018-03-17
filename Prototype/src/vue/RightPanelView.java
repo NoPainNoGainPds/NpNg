@@ -60,6 +60,9 @@ public class RightPanelView extends JPanel {
         this.cl = new AnimatedCardLayout();
         this.setLayout(this.cl);
         //build 1st View
+        this.setSize(new Dimension(150 ,25));
+        this.setMaximumSize(new Dimension(150 ,25));
+        this.setPreferredSize(new Dimension(150 ,25));
         this.buildFirstView();
         this.buildSecondView();
         this.repaint();
@@ -75,7 +78,7 @@ public class RightPanelView extends JPanel {
         //add Label Boutique
 
         this.nomBoutique = new JLabel();
-        this.nomBoutique.setMaximumSize(new Dimension(150 ,25));
+        //this.nomBoutique.setMaximumSize(new Dimension(150 ,25));
         this.view1.add(this.nomBoutique,"cell 0 0 1 0");
         //---------------
         //add logo
@@ -107,12 +110,20 @@ public class RightPanelView extends JPanel {
         JButton btn2 = new JButton("See more");
         btn2.addActionListener(event ->
         {
-            DetailStore ds = new DetailStore(this.boutique);
-            SwingUtilities.invokeLater(ds);
+            if(this.boutique!=null)
+            {
+                DetailStore ds = new DetailStore(this.boutique);
+                SwingUtilities.invokeLater(ds);
+            }else
+            {
+                JOptionPane.showMessageDialog(null, "alert", "alert", JOptionPane.ERROR_MESSAGE);
+            }
         });
         JPanel buttonPanel = new JPanel(new MigLayout("", "[center, grow]"));
         buttonPanel.add(btn2,"");
         buttonPanel.add(btn1,"");
+        btn1.setBorder(new TextBubbleBorder(Color.GRAY.darker(),2,4,0));
+        btn2.setBorder(new TextBubbleBorder(Color.GRAY.darker(),2,4,0));
         this.view1.add(buttonPanel,"dock south");
         //----------------------
         //add panel to right main panel
@@ -165,18 +176,22 @@ public class RightPanelView extends JPanel {
         Component next = this.cl.getNextComponent(this);
         Rectangle b = current.getBounds();
         next.setVisible(true);
-        AnimatedCardLayoutListener animLayoutList = new AnimatedCardLayoutListener(10,current,next,true,this.cl,this);
+        AnimatedCardLayoutListener animLayoutList = new AnimatedCardLayoutListener(15,current,next,true,this.cl,this);
         Timer timer = new Timer(20,animLayoutList);
         animLayoutList.timer = timer;
         timer.start();
     }
+
+    /**
+     *
+     */
     public void previous()
     {
         Component current = this.cl.getCurrentComponent(this);
         Component previous = this.cl.getPreviousComponent(this);
         Rectangle b = current.getBounds();
         previous.setVisible(true);
-        AnimatedCardLayoutListener animLayoutList = new AnimatedCardLayoutListener(10,current,previous,false,this.cl,this);
+        AnimatedCardLayoutListener animLayoutList = new AnimatedCardLayoutListener(15,current,previous,false,this.cl,this);
         Timer timer = new Timer(20,animLayoutList);
         animLayoutList.timer = timer;
         timer.start();

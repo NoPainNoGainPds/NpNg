@@ -86,14 +86,11 @@ public class ProduitDAO extends DAO<Produit> {
         boolean recieved = false;
         while(!recieved)
         {
-            Object[] p = (Object[])this.connection.recieve(Produit.class);
-            for(int i =0 ;i< p.length;i++) {
-                Produit p2 = (Produit) p[i];
-                if (p2 != null) {
-                    liste.add(p2);
-                } else {
-                    recieved = true;
-                }
+            Object p = (Object)this.connection.recieve(Produit.class);
+            if (p != null) {
+                liste.add((Produit) p);
+            } else {
+                recieved = true;
             }
         }
         return liste;

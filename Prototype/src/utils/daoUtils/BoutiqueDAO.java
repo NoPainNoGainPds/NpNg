@@ -88,13 +88,15 @@ public class BoutiqueDAO extends DAO<Boutique> {
             boolean recieved = false;
             while(!recieved)
             {
-                Object[] list2 = (Object[])this.connection.recieve(Integer.class);
-                for(int i = 0;i<list2.length;i++)
+                Object val = (Object)this.connection.recieve(Integer.class);
+                System.out.println(val);
+                if(val!=null)
                 {
-                    Integer integer = (Integer)list2[i];
-                    list.add(integer);
+                    list.add((Integer)val);
+                }else
+                {
+                    recieved = true;
                 }
-                recieved = true;
             }
             return list.toArray(new Integer[list.size()]);
         }catch(Exception e)
@@ -119,7 +121,6 @@ public class BoutiqueDAO extends DAO<Boutique> {
             boolean recieved = false;
             while(!recieved)
             {
-                System.out.println("recieve");
                 Object b = (Object)this.connection.recieve(Boutique.class);
                 if (b != null) {
                     Boutique b2 = (Boutique) b;

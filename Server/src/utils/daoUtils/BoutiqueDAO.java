@@ -175,8 +175,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
             ArrayList<Integer> returnArray = new ArrayList<>();
             while(res.next())
             {
-                returnArray.add(res.getInt("id_boutique"));
-                System.out.println(res.getInt("id_boutique"));
+                returnArray.add(new Integer(res.getInt("id_boutique")));
             }
             return returnArray.toArray(new Integer[returnArray.size()]);
         }catch (SQLException e) {

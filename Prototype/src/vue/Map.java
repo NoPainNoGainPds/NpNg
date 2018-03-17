@@ -11,6 +11,9 @@ import java.util.Arrays;
  *
  */
 public class Map extends JPanel {
+    private Color REDGRAY = Color.decode("#8D3956");
+    private Color GREENBLUEGRAY = Color.decode("#61AB99");
+    private Color SELECTEDCOLOR = Color.decode("#FF804C");
     /**
      * Liste of all polygons who represent a location on the map
      */
@@ -90,7 +93,6 @@ public class Map extends JPanel {
             if(poly.isSelected())
             {
                 this.clicked = poly;
-                System.out.println(poly);
                 return;
             }
             this.clicked=null;
@@ -98,7 +100,6 @@ public class Map extends JPanel {
     }
     public void setSearch(Integer[] liste)
     {
-        System.out.println(liste.toString());
         for(MyPolygon mp : this.polygons)
         {
             if(Arrays.asList(liste).contains(new Integer(mp.getBoutique().getId())))
@@ -159,7 +160,7 @@ public class Map extends JPanel {
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         g2.drawImage(this.img1, 0 , 0,this.getWidth(), this.getHeight(), this);
-        g2.setColor(Color.PINK);
+        g2.setColor(this.REDGRAY);
         for(MyPolygon poly: this.polygons)
         {
             //System.out.println("dessin d'un poly");
@@ -170,21 +171,21 @@ public class Map extends JPanel {
             {
                 g2.fillPolygon(poly);
                 g2.drawPolygon(poly);
-                g2.setColor(Color.PINK);
+                g2.setColor(this.REDGRAY);
             }
             if(poly.isSearched())
             {
-                g2.setColor(Color.CYAN);
+                g2.setColor(this.GREENBLUEGRAY);
                 g2.fillPolygon(poly);
                 g2.drawPolygon(poly);
-                g2.setColor(Color.PINK);
+                g2.setColor(this.REDGRAY);
             }
             if(poly.equals(this.clicked))
             {
-                g2.setColor(Color.ORANGE);
+                g2.setColor(this.SELECTEDCOLOR);
                 g2.fillPolygon(poly);
                 g2.drawPolygon(poly);
-                g2.setColor(Color.PINK);
+                g2.setColor(this.REDGRAY);
             }
 
         }

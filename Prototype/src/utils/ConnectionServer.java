@@ -50,7 +50,6 @@ public class ConnectionServer {
     {
         ObjectReader jSonreader = this.mapper.readerFor(className).without(JsonParser.Feature.AUTO_CLOSE_SOURCE);
         try{
-            System.out.println("read here");
                 Object obj = jSonreader.readValue(this.reader.readLine());
                 return obj;
             }catch(IOException e) {

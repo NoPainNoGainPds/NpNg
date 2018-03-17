@@ -66,11 +66,11 @@ public class Sender {
             try {
                 ArrayList<Produit> liste = this.pDAO.findFromReference(id);
                 for (Produit p : liste) {
-                    String send = "";
-                    send = this.mapper.writeValueAsString(p);
-                    this.writer.write(send.getBytes(), 0, send.length());
+                    this.mapper.writeValue(this.writer,p);
+                    this.writer.write("\n".getBytes());
+                    this.writer.flush();
                 }
-                this.writer.write("null".getBytes());
+                this.writer.write("null\n".getBytes());
                 this.writer.flush();
             }catch (JsonMappingException e) {
                 e.printStackTrace();
@@ -86,10 +86,16 @@ public class Sender {
             if (!productName.equals("")) {
                 Integer[] liste = this.bDAO.findWhoSale(productName);
                 for(int i = 0;i<liste.length;i++) {
-                    String send = "";
                     this.mapper.writeValue(this.writer,liste[i]);
+                    this.writer.write("\n".getBytes());
+                    this.writer.flush();
                 }
-                this.writer.write("null".getBytes());
+                this.writer.write("null\n".getBytes());
+                this.writer.flush();
+            }
+            else
+            {
+                this.writer.write("null\n".getBytes());
                 this.writer.flush();
             }
         }catch(JsonMappingException e)

@@ -107,6 +107,10 @@ public class Fenetre extends JFrame implements Runnable{
         this.map.sendData();
 
     }
+
+    /**
+     * Methode for populate JMenu
+     */
     public void populate_menu()
     {
         JMenu filemenu = new JMenu("File");
@@ -141,8 +145,12 @@ public class Fenetre extends JFrame implements Runnable{
         this.mb.add(viewmenu);
 
         this.searchTextField = new JTextField("  ",45);
+        this.searchTextField.setBorder(new TextBubbleBorder(Color.GRAY.darker(),2,4,0));
+        this.searchTextField.addActionListener(event ->
+                this.notifyBoutique());
         this.mb.add(this.searchTextField);
         this.searchButton = new JButton(new ImageIcon("Prototype/src/res/search-icon-large.png"));
+        this.searchButton.setBorder(new TextBubbleBorder(Color.GRAY.darker(),2,4,0));
         this.searchButton.addActionListener(event ->
             this.notifyBoutique());
         this.mb.add(this.searchButton);
