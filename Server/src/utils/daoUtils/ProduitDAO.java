@@ -159,7 +159,7 @@ public class ProduitDAO extends DAO<Produit> {
      * Get all the products from the database.
      * @return A list of the products.
      */
-    public ArrayList<Produit> findFromReference(Client c)
+    public ArrayList<Produit> findFromReference()
     {
         try
         {

@@ -26,13 +26,15 @@ public class Client extends Thread {
     private ProduitDAO pDAO;
     private StockSortieDAO ssDAO;
 
+    private Sender sender;
+
     private BufferedInputStream reader = null;
     private BufferedOutputStream writer = null;
     public Client(Socket skt, Connection sql)
     {
         this.skt = skt;
         this.database = sql;
-        this.bDAO = new BoutiqueDAO(this.database);
+        this.bDAO = new BoutiqueDAO(this.database,this);
         this.cbDAO = new CategorieBoutiqueDAO(this.database);
         this.cpDAO = new CategorieProduitDAO(this.database);
         this.eDAO = new EmplacementDAO(this.database);
@@ -47,6 +49,7 @@ public class Client extends Thread {
             this.reader = new BufferedInputStream(this.skt.getInputStream());
             this.writer = new BufferedOutputStream(this.skt.getOutputStream());
             this.mapper = new ObjectMapper();
+            this.sender = new Sender(this.database,this.mapper,this.writer,this);
             while (this.running) {
                 //recuperation des info
                 //System.out.println("running");
@@ -56,10 +59,13 @@ public class Client extends Thread {
                     switch(inputFromClient.getName())
                     {
                         case "Store" :
-                            sendAllStore();
+                            if(inputFromClient.getId()==-1)
+                                sender.sendAllStore();
+                            else if(inputFromClient.getId()==-2)
+                                sender.sendStoreWhoSale(inputFromClient.getRef());
                             break;
                         case "Product" :
-                            sendProducts(inputFromClient.getId());
+                            sender.sendProducts(inputFromClient.getId());
                             break;
                         default: System.out.println("Not Comparable");
                     }
@@ -89,51 +95,7 @@ public class Client extends Thread {
         return cbDAO;
     }
 
-    private void sendAllStore()
-    {
-        try {
-            ArrayList<Boutique> objReturn = this.bDAO.findFromReference(this);
-            System.out.println(objReturn.size());
-            for(Boutique b : objReturn)
-            {
-                String s = "";
-                s =this.mapper.writeValueAsString(b);
-                this.writer.write(s.getBytes(),0,s.length());
-                this.writer.write("#".getBytes());
-                this.writer.flush();
-            }
-            this.writer.write("null".getBytes());
-            this.writer.flush();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-    private void sendProducts(int id)
-    {
-        if(id!=-1)
-        {
-            try {
-                ArrayList<Produit> liste = this.pDAO.findFromReference(id);
-                for (Produit p : liste) {
-                    String send = "";
-                    send = this.mapper.writeValueAsString(p);
-                    this.writer.write(send.getBytes(), 0, send.length());
-                    this.writer.write("#".getBytes());
-                    this.writer.flush();
-                }
-                this.writer.write("null".getBytes());
-                this.writer.flush();
-            }catch (JsonMappingException e) {
-                e.printStackTrace();
-            } catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
+
     private String read() throws IOException{
         String response = "";
         int stream;

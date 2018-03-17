@@ -21,11 +21,14 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     private Logger logger = Logger.getLogger(BoutiqueDAO.class);
 
+    private Client client;
+
     /**
      * Constructor.
      */
-    public BoutiqueDAO(Connection con) {
+    public BoutiqueDAO(Connection con,Client client) {
         super(con);
+        this.client = client;
     }
 
     /**
@@ -144,7 +147,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
      * @return A list of te stores.
      */
     @Override
-    public ArrayList<Boutique> findFromReference(Client c) {
+    public ArrayList<Boutique> findFromReference() {
         try
         {
             Statement stmt =  this.connection.createStatement();
@@ -153,7 +156,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
             ArrayList<Boutique> listBoutique = new ArrayList<>();
             while(res.next())
             {
-                listBoutique.add(new Boutique(c,res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement"),res.getString("url_logo")));
+                listBoutique.add(new Boutique(this.client,res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement"),res.getString("url_logo")));
             }
             stmt.close();
             return listBoutique;
@@ -162,7 +165,25 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
         return null;
     }
-
+    public Integer[]  findWhoSale(String productName)
+    {
+        try
+        {
+            Statement stmt =  this.connection.createStatement();
+            String requete = "SELECT id_boutique FROM entree_stock es JOIN produit p ON es.id_produit = p.id_produit WHERE p.nom_produit like  '%"+productName+"%'; ";
+            ResultSet res = stmt.executeQuery(requete);
+            ArrayList<Integer> returnArray = new ArrayList<>();
+            while(res.next())
+            {
+                returnArray.add(res.getInt("id_boutique"));
+                System.out.println(res.getInt("id_boutique"));
+            }
+            return returnArray.toArray(new Integer[returnArray.size()]);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     /**
      * Count the number of stores in the database
      * @return The number of stores

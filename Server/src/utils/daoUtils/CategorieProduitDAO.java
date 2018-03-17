@@ -42,7 +42,7 @@ public class CategorieProduitDAO extends DAO<CategorieProduit>{
     }
 
     @Override
-    public ArrayList<CategorieProduit> findFromReference(Client c) {
+    public ArrayList<CategorieProduit> findFromReference() {
         return null;
     }
 }

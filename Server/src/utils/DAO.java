@@ -60,5 +60,5 @@ public abstract class DAO<T> {
      * @return ArrayList<T>
      */
     public abstract ArrayList<T> findFromReference(int id);
-    public abstract ArrayList<T> findFromReference(Client c);
+    public abstract ArrayList<T> findFromReference();
 }

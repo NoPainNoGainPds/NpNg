@@ -1,21 +1,14 @@
 package vue;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 import controller.MapController;
 import model.Boutique;
-import model.Emplacement;
-import model.Produit;
-import model.StockSortie;
-import utils.ConnectionServer;
 import utils.Constants;
-import utils.MyListModel;
 import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.ProduitDAO;
 
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Fenetre extends JFrame implements Runnable{
@@ -25,6 +18,8 @@ public class Fenetre extends JFrame implements Runnable{
     private InsertBoutique vueInsert;
     private Map map ;
     private JMenuBar mb;
+    private JButton searchButton;
+    private JTextField searchTextField;
     public Fenetre(String s)
     {
         super(s);
@@ -143,17 +138,23 @@ public class Fenetre extends JFrame implements Runnable{
         viewmenu.add(accueil);
         viewmenu.add(rythme);
         viewmenu.addSeparator();
-        //viewmenu.add(color);
         this.mb.add(viewmenu);
+
+        this.searchTextField = new JTextField("  ",45);
+        this.mb.add(this.searchTextField);
+        this.searchButton = new JButton(new ImageIcon("Prototype/src/res/search-icon-large.png"));
+        this.searchButton.addActionListener(event ->
+            this.notifyBoutique());
+        this.mb.add(this.searchButton);
     }
+
+    /**
+     * Method how searsh in base where a product can be find ans show it on the map
+     */
     public void notifyBoutique()
     {
-        Boutique b = this.vueInsert.getBoutique();
-        if(b!=null)
-        {
-            this.listBoutique.add(b);
-            this.list.setListData(this.listBoutique.toArray(new Boutique[listBoutique.size()]));
-            this.repaint();
-        }
+        BoutiqueDAO boutiqueDAO = new BoutiqueDAO(Constants.conServ);
+        Integer[] list = boutiqueDAO.findWhoSale(this.searchTextField.getText());
+        this.map.setSearch(list);
     }
 }

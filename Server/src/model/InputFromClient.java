@@ -3,6 +3,7 @@ package model;
 public class InputFromClient {
     private String name;
     private int id;
+    private String ref;
     public InputFromClient()
     {
     }
@@ -20,5 +21,13 @@ public class InputFromClient {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getRef() {
+        return ref;
+    }
+
+    public void setRef(String ref) {
+        this.ref = ref;
     }
 }

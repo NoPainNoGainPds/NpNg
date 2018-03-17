@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 public class MyPolygon extends Polygon {
     private boolean selected;
+    private boolean searched;
     private int id_emplacement;
     private Boutique boutique;
     private String nom_boutique = "";
@@ -17,6 +18,7 @@ public class MyPolygon extends Polygon {
     private float surface = 0.0f;
     public MyPolygon() {
         this.selected = false;
+        this.searched = false;
         this.id_emplacement = -1;
         this.boutique = null;
     }
@@ -41,6 +43,14 @@ public class MyPolygon extends Polygon {
         //System.out.println("setnew");
         this.new_x = Arrays.copyOf(this.xpoints,this.npoints);
         this.new_y = Arrays.copyOf(this.ypoints,this.npoints);
+    }
+    public void setSearch(boolean b)
+    {
+        this.searched = b;
+    }
+    public boolean isSearched()
+    {
+        return this.searched;
     }
     public void refresh(Dimension mapSize)
     {

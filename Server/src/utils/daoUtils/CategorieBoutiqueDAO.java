@@ -94,7 +94,7 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
      * @return A list of the store gategories.
      */
     @Override
-    public ArrayList<CategorieBoutique> findFromReference(Client c) {
+    public ArrayList<CategorieBoutique> findFromReference() {
         try
         {
             Statement stmt =  this.connection.createStatement();

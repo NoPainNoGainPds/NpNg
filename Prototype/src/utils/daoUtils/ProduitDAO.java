@@ -1,4 +1,5 @@
 package utils.daoUtils;
+import model.Boutique;
 import model.Client;
 import org.apache.log4j.Logger;
 import model.Produit;

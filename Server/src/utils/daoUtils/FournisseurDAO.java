@@ -45,7 +45,7 @@ public class FournisseurDAO extends DAO<Fournisseur> {
     }
 
     @Override
-    public ArrayList<Fournisseur> findFromReference(Client c) {
+    public ArrayList<Fournisseur> findFromReference() {
         try
         {
             ArrayList<Fournisseur> list = new ArrayList<>();

@@ -1,8 +1,11 @@
 package vue;
 
+import model.Boutique;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -92,6 +95,21 @@ public class Map extends JPanel {
             this.clicked=null;
         }
     }
+    public void setSearch(Integer[] liste)
+    {
+        System.out.println(liste.toString());
+        for(MyPolygon mp : this.polygons)
+        {
+            if(Arrays.asList(liste).contains(new Integer(mp.getBoutique().getId())))
+            {
+                mp.setSearch(true);
+            }else
+            {
+                mp.setSearch(false);
+            }
+        }
+        this.repaint();
+    }
     public void setRpv(RightPanelView rpv)
     {
         this.rpv = rpv;
@@ -111,7 +129,6 @@ public class Map extends JPanel {
             if(poly.contains(x, y))
             {
                 poly.setSelected(true);
-                //System.out.println("IN");
                 this.over = true;
                 this.popUpMap.setBoutique(poly.getBoutique());
                 return;
@@ -150,6 +167,13 @@ public class Map extends JPanel {
                 g2.drawPolygon(poly);
             else
             {
+                g2.fillPolygon(poly);
+                g2.drawPolygon(poly);
+                g2.setColor(Color.PINK);
+            }
+            if(poly.isSearched())
+            {
+                g2.setColor(Color.CYAN);
                 g2.fillPolygon(poly);
                 g2.drawPolygon(poly);
                 g2.setColor(Color.PINK);

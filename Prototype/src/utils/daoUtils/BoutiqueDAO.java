@@ -77,7 +77,32 @@ public class BoutiqueDAO extends DAO<Boutique> {
     public ArrayList<Boutique> findFromReference(int id) {
         return null;
     }
-
+    public Integer[] findWhoSale(String productName)
+    {
+        try
+        {
+            //envoie du message au serv
+            String str = "{\"name\":\"Store\",\"id\":-2,\"ref\":\""+productName+"\"}";
+            this.connection.send(str);
+            ArrayList<Integer> list = new ArrayList<>();
+            boolean recieved = false;
+            while(!recieved)
+            {
+                Object[] list2 = (Object[])this.connection.recieve(Integer.class);
+                for(int i = 0;i<list2.length;i++)
+                {
+                    Integer integer = (Integer)list2[i];
+                    list.add(integer);
+                }
+                recieved = true;
+            }
+            return list.toArray(new Integer[list.size()]);
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
     /**
      * get all the stores from the database.
      * @return A list of te stores.

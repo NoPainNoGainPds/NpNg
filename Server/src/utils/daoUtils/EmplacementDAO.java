@@ -115,7 +115,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
      * @return a list of the locations.
      */
     @Override
-    public ArrayList<Emplacement> findFromReference(Client c) {
+    public ArrayList<Emplacement> findFromReference() {
         try
         {
             String requete = "SELECT id_emplacement,nom_emplacement,superficie,position,nom_categorie_emplacement FROM emplacement " +
