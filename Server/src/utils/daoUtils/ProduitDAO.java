@@ -120,32 +120,25 @@ public class ProduitDAO extends DAO<Produit> {
         try
         {
             Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT es.id_produit,produit.nom_produit, (select sum(quantite) from entree_stock es2 where es2.id_produit = es.id_produit)-(select sum(quantite) " +
+            String requete = "SELECT es.id_produit,produit.nom_produit, produit.cout_unitaire, produit.codebarre, produit.largeur, produit.longueur, produit.poids,(select sum(quantite) from entree_stock es2 where es2.id_produit = es.id_produit)-(select sum(quantite) " +
                     "from sortie_stock ss where ss.id_produit = es.id_produit) as quantite FROM entree_stock es " +
                     "JOIN produit ON es.id_produit = produit.id_produit " +
                     "JOIN sortie_stock ss ON es.id_produit = ss.id_produit WHERE es.id_boutique = "+id+" GROUP BY es.id_produit " +
-                    "UNION SELECT es.id_produit,produit.nom_produit, es.quantite " +
+                    "UNION SELECT es.id_produit,produit.nom_produit, produit.cout_unitaire, produit.codebarre, produit.largeur, produit.longueur, produit.poids, es.quantite " +
                     "FROM entree_stock es JOIN produit ON es.id_produit = produit.id_produit " +
                     "WHERE es.id_boutique = "+id+" " +
                     "AND es.id_produit not in (SELECT id_produit from sortie_stock )";
-            /*String requete = "SELECT es.id_produit,produit.nom_produit, (select sum(quantite) from entree_stock es2 where es2.id_produit = es.id_produit)-(select sum(quantite) from sortie_stock ss where ss.id_produit = es.id_produit) as quantite "
-                    + "FROM entree_stock es "
-                    + "JOIN produit ON es.id_produit = produit.id_produit "
-                    + "JOIN sortie_stock ss ON es.id_produit = ss.id_produit "
-                    + "WHERE es.id_boutique ="+id+" GROUP BY es.id_produit "
-                    + "UNION SELECT es.id_produit,produit.nom_produit, es.quantite "
-                    + "FROM entree_stock es "
-                    + "JOIN produit ON es.id_produit = produit.id_produit "
-                    + "WHERE es.id_boutique = "+id+" "
-                    + "AND es.id_produit not in ("
-                    + "		SELECT id_produit from sortie_stock"
-                    + "		);";*/
+
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Produit> listProduit = new ArrayList<>();
 
             while(res.next())
             {
-                listProduit.add(new Produit(res.getInt("id_produit"),res.getString("nom_produit"),res.getInt("quantite")));
+                Produit p = new Produit(res.getInt("id_produit"),res.getString("nom_produit"),res.getInt("quantite"));
+                p.setPoid(res.getFloat("poids"));
+                p.setLargeur(res.getFloat("largeur"));
+                p.setLongueur(res.getFloat("longueur"));
+                listProduit.add(p);
             }
             logger.info(requete);
             return listProduit;
