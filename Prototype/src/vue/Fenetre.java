@@ -1,19 +1,14 @@
 package vue;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
+import controller.MapController;
 import model.Boutique;
-import model.Emplacement;
-import model.Produit;
-import model.StockSortie;
 import utils.Constants;
-import utils.MyListModel;
 import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.ProduitDAO;
 
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Fenetre extends JFrame implements Runnable{
@@ -21,121 +16,153 @@ public class Fenetre extends JFrame implements Runnable{
     private JList<Boutique> list;
     private JLabel msgError;
     private InsertBoutique vueInsert;
+    private Map map ;
+    private JMenuBar mb;
+    private JButton searchButton;
+    private JTextField searchTextField;
     public Fenetre(String s)
     {
         super(s);
+
         this.setSize(Constants.WIDTH*3,Constants.HEIGHT*2);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ProduitDAO pDAO = new ProduitDAO();
-        BoutiqueDAO bDAO = new BoutiqueDAO();
+        //Layout gridbagconstraint
+        GridBagLayout gbl = new GridBagLayout();
+        this.setLayout(gbl);
+        GridBagConstraints gbc = new GridBagConstraints();
+        //-----------
+        //gbc for menu
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 6.0;
+        gbc.weighty = 0.0;
+        gbc.gridwidth = 6;
+        gbc.gridheight = 1;
+        gbc.anchor = GridBagConstraints.NORTH;
+        //pour la bar de menu
+        this.mb = new JMenuBar();
+        populate_menu();
+        this.add(this.mb,gbc);
+        //use of DAO
+        ProduitDAO pDAO = new ProduitDAO(Constants.conServ);
+        BoutiqueDAO bDAO = new BoutiqueDAO(Constants.conServ);
         this.listBoutique = bDAO.findFromReference();
-        System.out.println(listBoutique.size());
-        this.msgError = new JLabel("");
-        this.add(this.msgError,BorderLayout.SOUTH);
-        JPanel panel = new JPanel();
-        this.list = new JList<>(listBoutique.toArray(new Boutique[listBoutique.size()]));
+        //--------------------
+        //System.out.println(listBoutique.size());
 
-        JScrollPane scrollPane = new JScrollPane(this.list);
-        panel.add(scrollPane);
-        //panel.add(list);
-        this.add(panel, BorderLayout.CENTER);
-
-        JButton btn1 = new JButton("Modifier boutique");
-        JButton btn2 = new JButton("Afficher boutique");
-        JButton btn3 = new JButton("Ajouter boutique");
-        JButton btn4 = new JButton("Supprimer boutique");
-        btn1.addActionListener(event ->
+        //add map
+        this.map = new Map();
+        ArrayList<MyPolygon> liste = new ArrayList<>();
+        for(Boutique b: this.listBoutique)
         {
-            Boutique b = this.list.getSelectedValue();
-            //new UpdateBoutique(b);
-            if(b!=null)
-            {
-                new UpdateWindow<>(b);
-                this.msgError.setText("");
-            }else
-            {
-                this.msgError.setText("No boutique selected");
-                this.msgError.setForeground(Color.RED);
-            }
-        });
-        btn2.addActionListener(event ->
-        {
-            //System.out.println("afficher");
-            Boutique b = this.list.getSelectedValue();
-            //new UpdateBoutique(b);
-            if(b!=null)
-            {
-                new VueBoutique(b);
-                this.msgError.setText("");
-            }else
-            {
-                this.msgError.setText("No boutique selected");
-                this.msgError.setForeground(Color.RED);
-            }
-        });
-        btn3.addActionListener(event ->
-        {
-            Boutique b = new Boutique();
-            this.vueInsert = new InsertBoutique(b,this);
-            javax.swing.SwingUtilities.invokeLater(this.vueInsert);
-        });
-        btn4.addActionListener(event ->
-        {
-            Boutique b = this.list.getSelectedValue();
-            //new UpdateBoutique(b);
-            //test
-            if(b!=null)
-            {
-                if(!bDAO.delete(b))
-                {
-                    this.msgError.setText("error");
-                    this.msgError.setForeground(Color.RED);
-                }else
-                {
-                    this.msgError.setText("");
-                    this.listBoutique.remove(b);
-                    this.list.setListData(this.listBoutique.toArray(new Boutique[listBoutique.size()]));
-                    this.repaint();
-                }
-            }else
-            {
-                this.msgError.setText("No boutique selected");
-                this.msgError.setForeground(Color.RED);
-            }
-        });
-        JPanel panel2 = new JPanel();
-        panel2.add(btn1);
-        panel2.add(btn2);
-        panel2.add(btn3);
-        panel2.add(btn4);
-        this.add(panel2,BorderLayout.EAST);
-        /*for(Boutique b : listBoutique)
-        {
-            b.setListeProduit(pDAO.findFromReference(b.getId()));
+            liste.add(b.getPolygonsView());
         }
-        //affichage
-        for(Boutique b : listBoutique)
-        {
-            //System.out.println(b);
-            for(Produit p : b.getListeProduit())
-            {
-                //System.out.println(p);
-            }
-        }*/
-        //new UpdateWindow<StockSortie>(new StockSortie());
+        this.map.setPolygons(liste);
+        MapController mapC = new MapController(this.map);
+        this.map.addMouseMotionListener(mapC);
+        this.map.addMouseListener(mapC);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 5.0;
+        gbc.weighty = 1.0;
+        gbc.gridwidth = 5;
+        gbc.gridheight = 5;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        this.add(this.map,gbc);
+        //this.add(this.map,BorderLayout.CENTER);
+        gbc.gridx = 5;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.5;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 5;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        RightPanelView rpv = new RightPanelView();
+        this.map.setRpv(rpv);
+        this.add(rpv,gbc);
+        //add button in the frame
+        //controller of the btn1
     }
     @Override
     public void run() {
         this.setVisible(true);
+        this.map.setNews();
+        this.map.refresh();
     }
+    private void refresh()
+    {
+        BoutiqueDAO bDAO = new BoutiqueDAO(Constants.conServ);
+        this.listBoutique = bDAO.findFromReference();
+
+        ArrayList<MyPolygon> liste = new ArrayList<>();
+        for(Boutique b: this.listBoutique)
+        {
+            liste.add(b.getPolygonsView());
+        }
+        this.map.setPolygons(liste);
+        this.revalidate();
+        this.map.setNews();
+        this.map.refresh();
+        this.map.sendData();
+
+    }
+
+    /**
+     * Methode for populate JMenu
+     */
+    public void populate_menu()
+    {
+        JMenu filemenu = new JMenu("File");
+        JMenuItem open = new JMenuItem("Save as  PDF");
+        JMenuItem save = new JMenuItem("Export as JSon");
+        filemenu.add(open);
+        filemenu.add(save);
+
+        this.mb.add(filemenu);
+
+        JMenu editmenu = new JMenu("Edit");
+        JMenuItem refresh = new JMenuItem("Refresh");
+        refresh.addActionListener(event ->
+        {
+            this.refresh();
+            this.repaint();
+            System.out.println("refresh map");
+        });
+        editmenu.add(refresh);
+        this.mb.add(editmenu);
+
+
+        JMenu viewmenu = new JMenu("More");
+
+        JMenuItem piano = new JMenuItem("Settings");
+        viewmenu.add(piano);
+        JMenuItem rythme = new JMenuItem("About");
+        JMenuItem accueil = new JMenuItem("Accueil");
+        viewmenu.add(accueil);
+        viewmenu.add(rythme);
+        viewmenu.addSeparator();
+        this.mb.add(viewmenu);
+
+        this.searchTextField = new JTextField("  ",45);
+        this.searchTextField.setBorder(new TextBubbleBorder(Color.GRAY.darker(),2,4,0));
+        this.searchTextField.addActionListener(event ->
+                this.notifyBoutique());
+        this.mb.add(this.searchTextField);
+        this.searchButton = new JButton(new ImageIcon("Prototype/src/res/search-icon-large.png"));
+        this.searchButton.setBorder(new TextBubbleBorder(Color.GRAY.darker(),2,4,0));
+        this.searchButton.addActionListener(event ->
+            this.notifyBoutique());
+        this.mb.add(this.searchButton);
+    }
+
+    /**
+     * Method how searsh in base where a product can be find ans show it on the map
+     */
     public void notifyBoutique()
     {
-        Boutique b = this.vueInsert.getBoutique();
-        if(b!=null)
-        {
-            this.listBoutique.add(b);
-            this.list.setListData(this.listBoutique.toArray(new Boutique[listBoutique.size()]));
-            this.repaint();
-        }
+        BoutiqueDAO boutiqueDAO = new BoutiqueDAO(Constants.conServ);
+        Integer[] list = boutiqueDAO.findWhoSale(this.searchTextField.getText());
+        this.map.setSearch(list);
     }
 }

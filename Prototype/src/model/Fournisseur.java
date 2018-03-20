@@ -8,6 +8,6 @@ import utils.daoUtils.FournisseurDAO;
 public class Fournisseur implements ModelObject {
     @Override
     public DAO getDaoClass() {
-        return new FournisseurDAO(Constants.DB.getConnection());
+        return new FournisseurDAO(Constants.conServ);
     }
 }

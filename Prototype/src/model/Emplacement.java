@@ -3,6 +3,7 @@ package model;
 import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.EmplacementDAO;
+import vue.MyPolygon;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,8 +26,16 @@ public class Emplacement implements ModelObject{
         this.id=id;
         this.cat = cat;
         this.superficie = superficie;
+        this.path = new EmplacementDAO().getPathLocation(this.id);
     }
-
+    public MyPolygon getPolygonsView()
+    {
+        return new MyPolygon(this.path);
+    }
+    public String getCat()
+    {
+        return this.cat;
+    }
     public int getId() {
         return id;
     }
@@ -45,6 +54,25 @@ public class Emplacement implements ModelObject{
 
     public Boutique getReference() {
         return reference;
+    }
+    public void setCat(String cat)
+    {
+        this.cat = cat;
+    }
+    public int getSuperficie()
+    {
+        return  this.superficie;
+    }
+    public void setSuperficie(int superficie)
+    {
+        this.superficie = superficie;
+    }
+    public void setPath(ArrayList<Point> list)
+    {
+        this.path = list;
+    }
+    public ArrayList<Point> getPath() {
+        return this.path;
     }
 
     public void setReference(Boutique reference) {

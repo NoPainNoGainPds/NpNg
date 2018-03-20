@@ -1,14 +1,14 @@
-package utils.TestsDAO;
+package utils.daoUtils;
 
 import model.Produit;
 import org.junit.Test;
-import utils.daoUtils.ProduitDAO;
+import utils.Constants;
 
 import static org.junit.Assert.*;
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProduitDAOTest {
-    private ProduitDAO produitDAO = new ProduitDAO();
+    private ProduitDAO produitDAO = new ProduitDAO(Constants.conServ);
 
     @Test
     public void find() {

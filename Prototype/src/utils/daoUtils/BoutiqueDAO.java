@@ -3,6 +3,7 @@ import org.apache.log4j.Logger;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import model.Boutique;
 import model.Produit;
+import utils.ConnectionServer;
 import utils.Constants;
 import utils.DAO;
 
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class which represents a store. It contains the methods which access the database.
@@ -18,14 +20,12 @@ public class BoutiqueDAO extends DAO<Boutique> {
     /**
      * A logger. Use to have a trace of what happen during the execution.
      */
-    private Logger logger = Logger.getLogger(BoutiqueDAO.class);
-
 
     /**
      * Constructor.
      */
-    public BoutiqueDAO() {
-        super(Constants.DB.getConnection());
+    public BoutiqueDAO(ConnectionServer con) {
+        super(con);
     }
 
     /**
@@ -35,33 +35,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     @Override
     public boolean create(Boutique obj) {
-        try
-        {
-            int idEmplacement = -1;
-            int catBoutique = -1;
-            String nom = "";
-            if(obj.getEmplacement()!=null)
-                idEmplacement = obj.getEmplacement().getId();
-            else
-                return false;
-            if(obj.getCategorieBoutique()!=null)
-                catBoutique = obj.getCategorieBoutique().getId();
-            else
-                return false;
-            if(obj.getNom() != null || obj.getNom()!="")
-                nom = obj.getNom();
-            else
-                return false;
-            String requete = "INSERT INTO boutique (nom_boutique,id_categorie_boutique,id_emplacement) VALUES (\""+nom+"\","+catBoutique+","+idEmplacement+")";
-            Statement stmt = Constants.DB.getConnection().createStatement();
-            logger.info(requete);
-            return (stmt.executeUpdate(requete)>0) ? true : false;
-        }catch(SQLException e)
-        {
-           // e.printStackTrace();
-            logger.error(e.toString());
-            return false;
-        }
+        return false;
     }
 
     /**
@@ -71,19 +45,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     @Override
     public boolean delete(Boutique obj) {
-        try
-        {
-            String requete = "DELETE FROM Boutique where id_boutique="+obj.getId()+";";
-            Statement stmt = Constants.DB.getConnection().createStatement();
-            stmt.executeUpdate(requete);
-            logger.info(requete);
-            return true;
-        }catch(SQLException e)
-        {
-           // e.printStackTrace();
-            logger.error(e.toString());
-            return false;
-        }
+        return false;
     }
 
     /**
@@ -93,24 +55,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     @Override
     public boolean update(Boutique obj) {
-        try
-        {
-            int idEmplacement = -1;
-            if((obj.getEmplacement()!=null) && (obj.getCategorieBoutique()!=null))
-                idEmplacement = obj.getEmplacement().getId();
-            else
-                return false;
-            String requete = "UPDATE boutique SET nom_boutique=\""+obj.getNom()+"\" ,id_categorie_boutique="+obj.getCategorieBoutique().getId()+", id_emplacement="+obj.getEmplacement().getId()+" WHERE id_boutique = "+obj.getId()+";";
-            Statement stmt = Constants.DB.getConnection().createStatement();
-            stmt.executeUpdate(requete);
-            logger.info(requete);
-            return true;
-        }catch(SQLException e)
-        {
-            //e.printStackTrace();
-            logger.error(e.toString());
-            return false;
-        }
+        return false;
     }
 
     /**
@@ -120,20 +65,6 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     @Override
     public Boutique find(int id) {
-        try
-        {
-            Statement stmt =  this.connection.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM Boutique WHERE id_boutique ="+id+";");
-            if(res.first())
-            {
-                Boutique b = new Boutique(res.getInt(1),res.getString(2),res.getInt(3),res.getInt(4));
-                logger.info("SELECT * FROM Boutique WHERE id_boutique ="+id+";");
-                return b;
-            }
-        } catch (SQLException e) {
-            //e.printStackTrace();
-            logger.error(e.toString());
-        }
         return null;
     }
 
@@ -144,26 +75,36 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     @Override
     public ArrayList<Boutique> findFromReference(int id) {
+        return null;
+    }
+    public Integer[] findWhoSale(String productName)
+    {
         try
         {
-            Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement FROM boutique";
-            ResultSet res = stmt.executeQuery(requete);
-            ArrayList<Boutique> listBoutique = new ArrayList<>();
-
-            while(res.next())
+            //envoie du message au serv
+            String str = "{\"name\":\"Store\",\"id\":-2,\"ref\":\""+productName+"\"}";
+            this.connection.send(str);
+            ArrayList<Integer> list = new ArrayList<>();
+            boolean recieved = false;
+            while(!recieved)
             {
-                listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement")));
+                Object val = (Object)this.connection.recieve(Integer.class);
+                System.out.println(val);
+                if(val!=null)
+                {
+                    list.add((Integer)val);
+                }else
+                {
+                    recieved = true;
+                }
             }
-            logger.info(requete);
-            return listBoutique;
-        } catch (SQLException e) {
-            //e.printStackTrace();
-            logger.error(e.toString());
+            return list.toArray(new Integer[list.size()]);
+        }catch(Exception e)
+        {
+            e.printStackTrace();
         }
         return null;
     }
-
     /**
      * get all the stores from the database.
      * @return A list of te stores.
@@ -172,20 +113,26 @@ public class BoutiqueDAO extends DAO<Boutique> {
     public ArrayList<Boutique> findFromReference() {
         try
         {
-            Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement FROM boutique";
-            ResultSet res = stmt.executeQuery(requete);
-            ArrayList<Boutique> listBoutique = new ArrayList<>();
+            //envoie du message au serv
+            String str = "{\"name\":\"Store\",\"id\":-1}";
+            this.connection.send(str);
 
-            while(res.next())
+            ArrayList<Boutique> liste = new ArrayList<>();
+            boolean recieved = false;
+            while(!recieved)
             {
-                listBoutique.add(new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),res.getInt("id_emplacement")));
+                Object b = (Object)this.connection.recieve(Boutique.class);
+                if (b != null) {
+                    Boutique b2 = (Boutique) b;
+                    liste.add(b2);
+                } else {
+                    recieved = true;
+                }
             }
-            logger.info(requete);
-            return listBoutique;
-        } catch (SQLException e) {
-            //e.printStackTrace();
-            logger.error(e.toString());
+            return liste;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
         }
         return null;
     }
@@ -195,18 +142,6 @@ public class BoutiqueDAO extends DAO<Boutique> {
      * @return The number of stores
      */
     public int getNbBoutiques() {
-        int nb_boutiques = 0;
-        try {
-            Statement stmt = this.connection.createStatement();
-            String requete = "SELECT id_boutique FROM boutique";
-            ResultSet res = stmt.executeQuery(requete);
-            while(res.next()) {
-                nb_boutiques++;
-            }
-            logger.info(requete);
-        } catch(SQLException e) {
-            logger.error(e.toString());
-        }
-        return nb_boutiques;
+        return 0;
     }
 }

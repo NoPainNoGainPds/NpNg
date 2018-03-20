@@ -4,6 +4,7 @@ import model.Emplacement;
 import utils.Constants;
 import utils.DAO;
 
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,7 +24,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
      */
     public EmplacementDAO()
     {
-        super(Constants.DB.getConnection());
+        super(Constants.conServ);
     }
 
     /**
@@ -128,6 +129,27 @@ public class EmplacementDAO extends DAO<Emplacement> {
             return list;
         }catch (SQLException e) {
             logger.error(e.toString());
+            return null;
+        }
+    }
+    public ArrayList<Point> getPathLocation(int idLocation)
+    {
+        try
+        {
+            String query = "Select coord_x,coord_y from coordonnees_emplacement where id_emplacement ="+idLocation+";";
+            ArrayList<Point> liste = new ArrayList<>();
+            Statement stmt = Constants.DB.getConnection().createStatement();
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next())
+            {
+                int x = res.getInt(1);
+                int y= res.getInt(2);
+                liste.add(new Point(x,y));
+            }
+            return liste;
+        }catch(SQLException e)
+        {
+            logger.error(e);
             return null;
         }
     }

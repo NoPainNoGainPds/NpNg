@@ -1,5 +1,6 @@
 package model;
 
+import utils.Constants;
 import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.ProduitDAO;
@@ -7,7 +8,7 @@ import utils.daoUtils.ProduitDAO;
 public class Produit implements ModelObject{
     private int quantite;
     private int id;
-    private float poid,longueur,largeur;
+    private float poids,longueur,largeur;
     private String nom;
     private Fournisseur fournisseur;
     private StockEntree stckEntree;
@@ -76,12 +77,12 @@ public class Produit implements ModelObject{
         return fournisseur;
     }
 
-    public float getPoid() {
-        return poid;
+    public float getPoids() {
+        return poids;
     }
 
-    public void setPoid(float poid) {
-        this.poid = poid;
+    public void setPoids(float poids) {
+        this.poids = poids;
     }
 
     public float getLongueur() {
@@ -106,6 +107,6 @@ public class Produit implements ModelObject{
     }
     @Override
     public DAO getDaoClass() {
-        return new ProduitDAO();
+        return new ProduitDAO(Constants.conServ);
     }
 }

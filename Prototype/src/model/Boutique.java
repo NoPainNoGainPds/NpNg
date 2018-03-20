@@ -6,9 +6,9 @@ import utils.ModelObject;
 import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.CategorieBoutiqueDAO;
 import utils.daoUtils.EmplacementDAO;
+import vue.MyPolygon;
 
 import java.lang.reflect.Array;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +20,7 @@ public class Boutique implements ModelObject {
     private Emplacement emplacement;
     private ArrayList<Produit> listeProduit;
     private CategorieBoutique categorieBoutique;
+    private String logo;
     public Boutique()
     {
 
@@ -27,26 +28,48 @@ public class Boutique implements ModelObject {
 
     /**
      * Constructor of Boutique
-     * @param id
-     * @param nom
-     * @param categorie
-     * @param emplacement
+     * @param id id of the store
+     * @param nom name of the store
+     * @param categorie categorie of the store
+     * @param emplacement location of the store
      */
-    public Boutique(int id,String nom,int categorie,int emplacement)
+    public Boutique(int id,String nom,int categorie,int emplacement,String logo)
     {
         this.id = id;
         this.nom = nom;
-        EmplacementDAO eDAO = new EmplacementDAO();
-        this.emplacement = eDAO.find(emplacement);
-        CategorieBoutiqueDAO cbDAO = new CategorieBoutiqueDAO();
-        this.categorieBoutique = cbDAO.find(categorie);
+        this.logo = logo;
     }
+
+    /**
+     *
+     * @return polygon of this store
+     */
+    public MyPolygon getPolygonsView()
+    {
+
+        MyPolygon poly = this.emplacement.getPolygonsView();
+        poly.setBoutique(this);
+        return poly;
+    }
+
+    /**
+     *
+     * @return Name of the store
+     */
     public String getNom() {
         return nom;
     }
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getLogo() {
+        return this.logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public int getId() {
@@ -77,8 +100,9 @@ public class Boutique implements ModelObject {
     {
         return "Boutique:"+this.nom+"; Emplacement :"+this.emplacement+" Cat :"+this.categorieBoutique;
     }
-    public DAO getDaoClass() {
-        return new BoutiqueDAO();
+    public DAO getDaoClass()
+    {
+        return null;
     }
 
     public CategorieBoutique getCategorieBoutique() {
