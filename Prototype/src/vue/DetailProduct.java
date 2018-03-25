@@ -28,7 +28,7 @@ import utils.MyListModel;
 
 import utils.daoUtils.StockSortieDAO;
 
-public class DetailProduct extends JFrame implements Runnable {
+public class    DetailProduct extends JFrame implements Runnable {
     private Boutique store;
     private Image img;
     private ImageComponent logo;
