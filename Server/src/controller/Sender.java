@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Boutique;
-import model.InputFromClient;
-import model.Produit;
-import model.StockSortie;
+import model.*;
 import utils.daoUtils.*;
 
 import java.io.BufferedOutputStream;
@@ -27,6 +24,7 @@ public class Sender {
     private FournisseurDAO fDAO;
     private ProduitDAO pDAO;
     private StockSortieDAO ssDAO;
+    private StockEntreeDAO esDAO;
     public Sender(Connection database, ObjectMapper mapper,BufferedOutputStream writer,Client client)
     {
         this.bDAO = new BoutiqueDAO(database,client);
@@ -36,6 +34,7 @@ public class Sender {
         this.fDAO = new FournisseurDAO(database);
         this.pDAO = new ProduitDAO(database);
         this.ssDAO = new StockSortieDAO(database);
+        this.esDAO = new StockEntreeDAO(database);
         this.mapper = mapper;
         this.mapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
         this.writer = writer;
@@ -113,6 +112,34 @@ public class Sender {
         try {
             if (!inputFromClient.getRef().equals("")) {
                 ArrayList<StockSortie> liste = this.ssDAO.findFromReference(inputFromClient.getId(),Integer.parseInt(inputFromClient.getRef()));
+                for(int i = 0;i<liste.size();i++) {
+                    this.mapper.writeValue(this.writer,liste.get(i));
+                    this.writer.write("\n".getBytes());
+                    this.writer.flush();
+                }
+                this.writer.write("null\n".getBytes());
+                this.writer.flush();
+            }
+            else
+            {
+                this.writer.write("null\n".getBytes());
+                this.writer.flush();
+            }
+        }catch(JsonMappingException e)
+        {
+            e.printStackTrace();
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void sendEntreeStock(InputFromClient inputFromClient)
+    {
+        try {
+            if (!inputFromClient.getRef().equals("")) {
+                ArrayList<StockEntree> liste = this.esDAO.findFromReference(inputFromClient.getId(),Integer.parseInt(inputFromClient.getRef()));
                 for(int i = 0;i<liste.size();i++) {
                     this.mapper.writeValue(this.writer,liste.get(i));
                     this.writer.write("\n".getBytes());

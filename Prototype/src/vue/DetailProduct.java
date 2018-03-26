@@ -13,13 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
-import javax.swing.ButtonGroup;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
+import javax.swing.*;
+
+import javafx.scene.control.RadioButton;
 import model.Boutique;
 import model.Produit;
 import model.StockEntree;
@@ -27,6 +23,7 @@ import model.StockSortie;
 import net.miginfocom.swing.MigLayout;
 import utils.MyListModel;
 
+import utils.daoUtils.StockEntreeDAO;
 import utils.daoUtils.StockSortieDAO;
 
 public class    DetailProduct extends JFrame implements Runnable {
@@ -118,27 +115,29 @@ public class    DetailProduct extends JFrame implements Runnable {
         }
         public void actionPerformed(ActionEvent e) {
              try {
-               /*if (e.getSource()=="rb1"){
-                    StockEntreeDAO entree = new StockEntreeDAO();
-                    list = entree.findFromReference(product.getId(), store.getId());
-                    MyListModel<StockEntree> listModel = new MyListModel(list);
-                    JList<StockEntree> jlist = new JList(listModel);
-                    jlist.setFixedCellWidth(90);
 
-                    jlist.setListData(list.toArray(new StockEntree[list.size()]));
-                    j.setViewportView(jlist);
+               if (e.getActionCommand()=="Achats") {
+                   StockEntreeDAO entree = new StockEntreeDAO();
+                   ArrayList<StockEntree> list1=new ArrayList<>();
+                   list1 = entree.findFromReference(product.getId(), store.getId());
+                   MyListModel<StockEntree> listModel1 = new MyListModel(list1);
+                   JList<StockEntree> jlist1 = new JList(listModel1);
+                   jlist1.setFixedCellWidth(90);
 
-                } else if(e.getSource()=="rb2"){*/
+                   jlist1.setListData(list1.toArray(new StockEntree[list1.size()]));
+                   j.setViewportView(jlist1);
+
+               } else if(e.getActionCommand()=="Ventes"){
                     StockSortieDAO sortie = new StockSortieDAO();
-                    ArrayList<StockSortie> list1=new ArrayList<>();
-                    list1 = sortie.findFromReference(product.getId(), store.getId());
-                    MyListModel<StockSortie> listModel = new MyListModel(list);
-                    JList<StockSortie> jlist = new JList(listModel);
-                    jlist.setFixedCellWidth(90);
+                    ArrayList<StockSortie> list2=new ArrayList<>();
+                    list2 = sortie.findFromReference(product.getId(), store.getId());
+                    MyListModel<StockSortie> listModel2 = new MyListModel(list2);
+                    JList<StockSortie> jlist2 = new JList(listModel2);
+                    jlist2.setFixedCellWidth(90);
 
-                    jlist.setListData(list1.toArray(new StockSortie[list.size()]));
-                    j.setViewportView(jlist);
-                //}
+                    jlist2.setListData(list2.toArray(new StockSortie[list2.size()]));
+                    j.setViewportView(jlist2);
+                }
 
             } catch (Exception e1) {
                 e1.printStackTrace();

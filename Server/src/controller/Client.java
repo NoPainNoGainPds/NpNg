@@ -70,6 +70,9 @@ public class Client extends Thread {
                         case "StockSortie" :
                             sender.sendSortieStock(inputFromClient);
                             break;
+                        case "StockEntree" :
+                            sender.sendEntreeStock(inputFromClient);
+                            break;
                         default: System.out.println("Not Comparable");
                     }
                     /*

@@ -45,7 +45,23 @@ public class StockEntreeDAO extends DAO<StockEntree>{
         public ArrayList<StockEntree> findFromReference() {
             return null;
         }
-    }
 
-
+        public ArrayList<StockEntree> findFromReference(int id_produit, int id_boutique){
+            ArrayList<StockEntree> liste = new ArrayList<>();
+            this.connection.send("{\"name\" : \"StockEntree\",\"id\":"+id_produit+", \"ref\":"+id_boutique+"}");
+            boolean recieved = false;
+            while(!recieved)
+            {
+                Object p = (Object)this.connection.recieve(StockEntree.class);
+                if (p != null) {
+                    liste.add((StockEntree) p);
+                } else {
+                    recieved = true;
+                }
+            }
+            return liste;
+        }
 }
+
+
+

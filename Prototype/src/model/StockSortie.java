@@ -65,6 +65,11 @@ public class StockSortie implements ModelObject {
         this.date = date;
     }
 
+
+    public String toString()
+    {
+        return ""+this.id_produit.getNom()+" qty :"+this.quantite+", date :"+this.date;
+    }
     @Override
     public DAO getDaoClass() {
         return new StockSortieDAO();
