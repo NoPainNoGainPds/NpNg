@@ -14,8 +14,8 @@ public class Main{
     public static void main(String[] args)
     {
         Constants.conServ = new ConnectionServer();
-        FenetreStock fen = new FenetreStock();
+        Fenetre fen = new Fenetre("Npng");
         fen.setVisible(true);
-        //javax.swing.SwingUtilities.invokeLater(fen);
+        javax.swing.SwingUtilities.invokeLater(fen);
     }
 }

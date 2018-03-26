@@ -6,7 +6,7 @@ import utils.daoUtils.StockSortieDAO;
 
 import java.util.Date;
 
-public class StockSortie implements ModelObject {
+public class StockSortie  {
     private int idsortie_stock;
     private int id_boutique;
     private Produit id_produit;
@@ -65,8 +65,4 @@ public class StockSortie implements ModelObject {
         this.date = date;
     }
 
-    @Override
-    public DAO getDaoClass() {
-        return new StockSortieDAO(null);
-    }
 }

@@ -45,7 +45,7 @@ public class StockSortie implements ModelObject {
         return id_produit;
     }
 
-    public void setProduitRef(Produit id_produit) {
+    public void setProduit(Produit id_produit) {
         this.id_produit = id_produit;
     }
 

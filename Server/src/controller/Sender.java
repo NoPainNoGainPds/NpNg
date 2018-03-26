@@ -5,7 +5,9 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Boutique;
+import model.InputFromClient;
 import model.Produit;
+import model.StockSortie;
 import utils.daoUtils.*;
 
 import java.io.BufferedOutputStream;
@@ -87,6 +89,32 @@ public class Sender {
                 Integer[] liste = this.bDAO.findWhoSale(productName);
                 for(int i = 0;i<liste.length;i++) {
                     this.mapper.writeValue(this.writer,liste[i]);
+                    this.writer.write("\n".getBytes());
+                    this.writer.flush();
+                }
+                this.writer.write("null\n".getBytes());
+                this.writer.flush();
+            }
+            else
+            {
+                this.writer.write("null\n".getBytes());
+                this.writer.flush();
+            }
+        }catch(JsonMappingException e)
+        {
+            e.printStackTrace();
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void sendSortieStock(InputFromClient inputFromClient)
+    {
+        try {
+            if (!inputFromClient.getRef().equals("")) {
+                ArrayList<StockSortie> liste = this.ssDAO.findFromReference(inputFromClient.getId(),Integer.parseInt(inputFromClient.getRef()));
+                for(int i = 0;i<liste.size();i++) {
+                    this.mapper.writeValue(this.writer,liste.get(i));
                     this.writer.write("\n".getBytes());
                     this.writer.flush();
                 }
