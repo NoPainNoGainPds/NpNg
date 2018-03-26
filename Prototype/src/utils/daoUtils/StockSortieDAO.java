@@ -1,4 +1,5 @@
 package utils.daoUtils;
+import model.Produit;
 import org.apache.log4j.Logger;
 import model.StockSortie;
 import utils.Constants;
@@ -42,5 +43,21 @@ public class StockSortieDAO extends DAO<StockSortie> {
     @Override
     public ArrayList<StockSortie> findFromReference() {
         return null;
+    }
+
+    public ArrayList<StockSortie> findFromReference(int id_produit, int id_boutique){
+        ArrayList<StockSortie> liste = new ArrayList<>();
+        this.connection.send("{\"name\" : \"StockSortie\",\"id\":"+id_produit+", \"ref\":"+id_boutique+"}");
+        boolean recieved = false;
+        while(!recieved)
+        {
+            Object p = (Object)this.connection.recieve(StockSortie.class);
+            if (p != null) {
+                liste.add((StockSortie) p);
+            } else {
+                recieved = true;
+            }
+        }
+        return liste;
     }
 }

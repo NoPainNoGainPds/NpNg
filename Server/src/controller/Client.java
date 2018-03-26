@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Client extends Thread {
     private Socket skt;
     private Connection database;
+    private Server server;
     private boolean running = true;
     private ObjectMapper mapper;
     //create DAO with Database connexion
@@ -30,9 +31,10 @@ public class Client extends Thread {
 
     private DataInputStream reader = null;
     private BufferedOutputStream writer = null;
-    public Client(Socket skt, Connection sql)
+    public Client(Socket skt, Connection sql,Server server)
     {
         this.skt = skt;
+        this.server = server;
         this.database = sql;
         this.bDAO = new BoutiqueDAO(this.database,this);
         this.cbDAO = new CategorieBoutiqueDAO(this.database);
@@ -58,14 +60,23 @@ public class Client extends Thread {
                     InputFromClient inputFromClient = this.mapper.readValue(str, InputFromClient.class);
                     switch(inputFromClient.getName())
                     {
-                        case "Store" :
-                            if(inputFromClient.getId()==-1)
-                                sender.sendAllStore();
-                            else if(inputFromClient.getId()==-2)
-                                sender.sendStoreWhoSale(inputFromClient.getRef());
-                            break;
+                        case "Store" ://exemple ici je sais que je vais utiliser le DAO Boutique
+                        if(inputFromClient.getId()==-1)
+                            sender.sendAllStore();//et la je renvoi le liste de toutes le boutiques
+                        else if(inputFromClient.getId()==-2)
+                            sender.sendStoreWhoSale(inputFromClient.getRef());
+                        break;
                         case "Product" :
                             sender.sendProducts(inputFromClient.getId());
+                            break;
+                        case "StockSortie" :
+                            sender.sendSortieStock(inputFromClient);
+                            break;
+                        case "StockEntree" :
+                            sender.sendEntreeStock(inputFromClient);
+                            break;
+                        case "UPDATE" :
+                            sender.sendAllStore();
                             break;
                         default: System.out.println("Not Comparable");
                     }
@@ -80,6 +91,8 @@ public class Client extends Thread {
                 }else
                 {
                     this.running = false;
+                    this.server.releaseConnection(this.database);
+                    this.database = null;
                 }
             }
         }catch(IOException e)

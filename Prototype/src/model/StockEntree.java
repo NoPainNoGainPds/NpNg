@@ -1,4 +1,85 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package model;
 
-public class StockEntree {
+import java.util.Date;
+import utils.DAO;
+import utils.ModelObject;
+import utils.daoUtils.StockEntreeDAO;
+
+public class StockEntree implements ModelObject {
+    private int identree_stock;
+    private int id_boutique;
+    private Produit id_produit;
+    private int quantite;
+    private int montant;
+    private Date date;
+
+    public StockEntree() {
+    }
+
+    public StockEntree(int identree_stock, int id_boutique, Produit id_produit, int quantite, int montant, Date date) {
+        this.identree_stock = identree_stock;
+        this.id_boutique = id_boutique;
+        this.id_produit = id_produit;
+        this.quantite = quantite;
+        this.montant = montant;
+        this.date = date;
+    }
+
+
+    public int getIdentree_stock() {
+        return this.identree_stock;
+    }
+
+    public void setIdentree_stock(int identree_stock) {
+        this.identree_stock = identree_stock;
+    }
+
+    public int getId_boutique() {
+        return this.id_boutique;
+    }
+
+    public void setId_boutique(int id_boutique) {
+        this.id_boutique = id_boutique;
+    }
+
+    public Produit getProduit() {
+        return this.id_produit;
+    }
+
+    public void setProduit(Produit id_produit) {
+        this.id_produit = id_produit;
+    }
+
+    public int getQuantite() {
+        return this.quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getMontant() {return this.montant;}
+
+    public void setMontant() {this.montant=montant;}
+
+    public String toString() {
+        return "qty :"+this.quantite + ", montant : " + this.montant + " " + this.date;
+    }
+
+    public DAO getDaoClass() {
+        return new StockEntreeDAO();
+    }
 }

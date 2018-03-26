@@ -73,7 +73,7 @@ public class ProduitDAO extends DAO<Produit> {
         {
             Statement stmt = this.connection.createStatement();
             String requete = "UPDATE Produit SET nom_produit=\""+obj.getNom()+"\""+
-                    " ,poids="+obj.getPoid()+",longueur="+obj.getLongueur()+",largeur="+obj.getLargeur()+" " +
+                    " ,poids="+obj.getPoids()+",longueur="+obj.getLongueur()+",largeur="+obj.getLargeur()+" " +
                     "where id_produit = "+obj.getId()+";";
             stmt.executeUpdate(requete);
             logger.info(requete);
@@ -135,7 +135,7 @@ public class ProduitDAO extends DAO<Produit> {
             while(res.next())
             {
                 Produit p = new Produit(res.getInt("id_produit"),res.getString("nom_produit"),res.getInt("quantite"));
-                p.setPoid(res.getFloat("poids"));
+                p.setPoids(res.getFloat("poids"));
                 p.setLargeur(res.getFloat("largeur"));
                 p.setLongueur(res.getFloat("longueur"));
                 listProduit.add(p);

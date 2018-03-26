@@ -1,11 +1,8 @@
 package controller;
 
 
-
-import utils.ConnectionServer;
-import utils.Constants;
-import utils.Database;
-import vue.Fenetre;
+import utils.*;
+import vue.*;
 
 import javax.swing.*;
 import java.io.File;
@@ -17,7 +14,8 @@ public class Main{
     public static void main(String[] args)
     {
         Constants.conServ = new ConnectionServer();
-        Fenetre fen = new Fenetre("Prototype Lois");
+        Fenetre fen = new Fenetre("Npng");
+        fen.setVisible(true);
         javax.swing.SwingUtilities.invokeLater(fen);
     }
 }

@@ -7,7 +7,7 @@ import utils.daoUtils.ProduitDAO;
 public class Produit{
     private int quantite;
     private int id;
-    private float poid,longueur,largeur;
+    private float poids,longueur,largeur;
     private String nom;
     private Fournisseur fournisseur;
     private StockEntree stckEntree;
@@ -76,12 +76,12 @@ public class Produit{
         return fournisseur;
     }
 
-    public float getPoid() {
-        return poid;
+    public float getPoids() {
+        return poids;
     }
 
-    public void setPoid(float poid) {
-        this.poid = poid;
+    public void setPoids(float poid) {
+        this.poids = poids;
     }
 
     public float getLongueur() {
