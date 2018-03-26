@@ -56,7 +56,7 @@ public class Server {
             }
         }
     }
-    public void releasConnection(Connection con)
+    public void releaseConnection(Connection con)
     {
         this.listeCo.returnConnectionToPool(con);
     }

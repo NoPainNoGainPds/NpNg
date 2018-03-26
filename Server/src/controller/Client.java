@@ -61,11 +61,11 @@ public class Client extends Thread {
                     switch(inputFromClient.getName())
                     {
                         case "Store" ://exemple ici je sais que je vais utiliser le DAO Boutique
-                            if(inputFromClient.getId()==-1)
-                                sender.sendAllStore();//et la je renvoi le liste de toutes le boutiques
-                            else if(inputFromClient.getId()==-2)
-                                sender.sendStoreWhoSale(inputFromClient.getRef());
-                            break;
+                        if(inputFromClient.getId()==-1)
+                            sender.sendAllStore();//et la je renvoi le liste de toutes le boutiques
+                        else if(inputFromClient.getId()==-2)
+                            sender.sendStoreWhoSale(inputFromClient.getRef());
+                        break;
                         case "Product" :
                             sender.sendProducts(inputFromClient.getId());
                             break;
@@ -74,6 +74,9 @@ public class Client extends Thread {
                             break;
                         case "StockEntree" :
                             sender.sendEntreeStock(inputFromClient);
+                            break;
+                        case "UPDATE" :
+                            sender.sendAllStore();
                             break;
                         default: System.out.println("Not Comparable");
                     }
@@ -88,7 +91,7 @@ public class Client extends Thread {
                 }else
                 {
                     this.running = false;
-                    this.server.releasConnection(this.database);
+                    this.server.releaseConnection(this.database);
                     this.database = null;
                 }
             }
