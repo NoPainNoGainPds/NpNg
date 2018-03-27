@@ -52,6 +52,11 @@ public class DetailStore extends JFrame implements Runnable {
     private JLabel msgError;
 
     /**
+     * Logo of the store
+     */
+    private ImageComponent logo;
+
+    /**
      * Constructor
      * @param store the store
      */

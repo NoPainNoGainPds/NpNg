@@ -13,18 +13,49 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-public class InsertBoutique extends JFrame implements Runnable{
+/**
+ * Represents the view to insert a store
+ */
+public class InsertBoutique extends JFrame implements Runnable
+    /**
+     * The store
+     */
     private Boutique b;
+        /**
+         * TextLabel to enter the location
+         */
     private TextLabel<JComboBox<Emplacement>> emplacement;
+        /**
+         * TextLabel to enter the category
+         */
     private TextLabel<JComboBox<CategorieBoutique>> cat;
+        /**
+         * TextLabel to enter the store's name
+         */
     private TextLabel<JTextField> nomboutique;
+    /**
+     * Error message if needed
+     */
     private JLabel msgErreur ;
+        /**
+         * Boolean to know if it's  been saved
+         */
     private boolean saved = false;
 
+        /**
+         * to get the saved attribute
+         * @return the attribute
+         */
     public boolean saved()
     {
         return this.saved;
     }
+
+        /**
+         * Constructor
+         * @param b the store
+         * @param f the frame
+         */
     public InsertBoutique(Boutique b,Fenetre f)
     {
         this.b = b;
@@ -70,6 +101,10 @@ public class InsertBoutique extends JFrame implements Runnable{
 
     }
 
+        /**
+         * to get the store
+         * @return the store
+         */
     public Boutique getBoutique() {
         if(saved)
             return b;
@@ -77,6 +112,10 @@ public class InsertBoutique extends JFrame implements Runnable{
             return null;
     }
 
+        /**
+         * to create the form
+         * @return the panel
+         */
     private JPanel setForm()
     {
         JPanel panel = new JPanel();
@@ -113,6 +152,9 @@ public class InsertBoutique extends JFrame implements Runnable{
         return panel;
     }
 
+        /**
+         * The run method
+         */
     @Override
     public void run() {
         this.setVisible(true);

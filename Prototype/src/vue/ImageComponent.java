@@ -6,24 +6,53 @@ import javax.swing.*;
 import java.io.*;
 
 /**
- * Represents
+ * Represents a component of an image
  */
 public class ImageComponent extends JPanel implements Serializable {
+    /**
+     * The image
+     */
     Image image = null;
     private boolean isSquare;
+
+    /**
+     * Constructor
+     * @param image the image
+     * @param isSquare the boolean
+     */
     public ImageComponent(Image image,boolean isSquare) {
         this.image = image;
         this.isSquare = isSquare;
     }
+
+    /**
+     * Constructor
+     * @param isSquare the boolean
+     */
     public ImageComponent(boolean isSquare) {
         this.isSquare = isSquare;
     }
+
+    /**
+     * To set the image
+     * @param image the image
+     */
     public void setImage(Image image){
         this.image = image;
     }
-    public Image getImage(Image image){
+
+    /**
+     * to get the image
+     * @return the image
+     */
+    public Image getImage(){
         return image;
     }
+
+    /**
+     * paintComponent method to draw
+     * @param g the graphics element
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g); //paint background
         if (image != null) { //there is a picture: draw it

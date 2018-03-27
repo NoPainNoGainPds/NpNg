@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *
+ *Represents the map
  */
 public class Map extends JPanel {
     private Color REDGRAY = Color.decode("#8D3956");
@@ -27,7 +27,7 @@ public class Map extends JPanel {
      */
     private MyPolygon clicked = null;
     /**
-     *  Referenc of the right panel
+     *  Reference of the right panel
      */
     private RightPanelView rpv;
     /**
@@ -49,7 +49,7 @@ public class Map extends JPanel {
     }
 
     /**
-     * initiialize all the polygons
+     * initialize all the polygons
      */
     public void setNews()
     {
@@ -61,7 +61,7 @@ public class Map extends JPanel {
 
     /**
      * replace all the polygons by the new polygons in param
-     * @param polygons Arraylist<Polygon> that will be use in map
+     * @param polygons Arraylist<Polygon> that will be used in map
      */
     public void setPolygons(ArrayList<MyPolygon> polygons)
     {
@@ -84,7 +84,7 @@ public class Map extends JPanel {
         this.clicked = null;
     }
     /**
-     * Say to the map where the usere clicked
+     * Say to the map where the user clicked
      */
     public void setClicked()
     {
