@@ -17,12 +17,23 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Class (who represente a window) which allows to change all fields of a business object and save that in the DB
+ * Class (which represent a window) which allows to change all fields of a business object and save that in the DB
  * @param <T>
  */
 public class UpdateWindow<T extends ModelObject> extends JFrame {
+    /**
+     *
+     */
     private T update;
+    /**
+     * List of fields
+     */
     private ArrayList<TextLabel> fields;
+
+    /**
+     * Constructor
+     * @param update
+     */
     public UpdateWindow(T update)
     {
         this.update = update;

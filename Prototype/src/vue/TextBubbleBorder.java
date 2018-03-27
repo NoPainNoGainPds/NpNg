@@ -5,16 +5,46 @@ import java.awt.geom.*;
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 
+/**
+ * Represents the class to c
+ */
 class TextBubbleBorder extends AbstractBorder {
 
+    /**
+     * The text Color
+     */
     private Color color;
+    /**
+     *
+     */
     private int thickness = 4;
+    /**
+     *
+     */
     private int radii = 8;
+    /**
+     *Pointer Size
+     */
     private int pointerSize = 7;
+    /**
+     *
+     */
     private Insets insets = null;
+    /**
+     *
+     */
     private BasicStroke stroke = null;
+    /**
+     *
+     */
     private int strokePad;
+    /**
+     *
+     */
     private int pointerPad = 4;
+    /**
+     *
+     */
     RenderingHints hints;
 
     TextBubbleBorder(

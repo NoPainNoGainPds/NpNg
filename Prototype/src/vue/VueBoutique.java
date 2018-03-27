@@ -16,10 +16,28 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents the view to show a store
+ */
+
 public class VueBoutique extends JFrame {
+    /**
+     * The store
+     */
     private Boutique boutique;
+    /**
+     * List of products
+     */
     private JList<Produit> jlistProduit;
+    /**
+     * Error if he needed
+     */
     private JLabel msgError;
+
+    /**
+     * Constructor
+     * @param boutique
+     */
     public VueBoutique(Boutique boutique)
     {
         super("Boutique");
