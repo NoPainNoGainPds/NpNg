@@ -16,9 +16,9 @@ public abstract class DAO<T> {
 
     /**
 
-     * Méthode pour effacer
+     * Method to delete
 
-     * @param obj
+     * @param obj object to delete
 
      * @return boolean
 
@@ -29,9 +29,9 @@ public abstract class DAO<T> {
 
     /**
 
-     * Méthode de mise à jour
+     * Update method
 
-     * @param obj
+     * @param obj object to update
 
      * @return boolean
 
@@ -42,9 +42,9 @@ public abstract class DAO<T> {
 
     /**
 
-     * Méthode de recherche des informations
+     * Search method
 
-     * @param id
+     * @param id id of the object to search
 
      * @return T
 
@@ -53,8 +53,8 @@ public abstract class DAO<T> {
     public abstract T find(int id);
 
     /**
-     * Methode de recherche de toute la table
-     * grace a une cle etrangere.
+     * Search method in all the tables
+     * thanks to a foreign key
      *
      * @param id
      * @return ArrayList<T>

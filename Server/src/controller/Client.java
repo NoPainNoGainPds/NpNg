@@ -13,27 +13,78 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 /**
- *
+ * Represents a client
  */
 public class Client extends Thread {
+    /**
+     * The socket
+     */
     private Socket skt;
-    private Connection database;
+    /**
+     * the connection
+     */
+
+    /**
+     * the server
+     */
     private Server server;
+    /**
+     * If the server is running
+     */
     private boolean running = true;
+    /**
+     * The object mapper
+     */
     private ObjectMapper mapper;
     //create DAO with Database connexion
+    /**
+     * To access the store with database
+     */
     private BoutiqueDAO bDAO;
+    /**
+     * to access the store category with database
+     */
     private CategorieBoutiqueDAO cbDAO;
+    /**
+     * to access the product category with database
+     */
     private CategorieProduitDAO cpDAO;
+    /**
+     * to access the location with database
+     */
     private EmplacementDAO eDAO;
+    /**
+     * to access the provider with database
+     */
     private FournisseurDAO fDAO;
+    /**
+     * to access the product with database
+     */
     private ProduitDAO pDAO;
+    /**
+     * to access the storage with database
+     */
     private StockSortieDAO ssDAO;
-
+    /**
+     * the sender
+     */
     private Sender sender;
 
+    /**
+     * to read the input stream
+     */
     private DataInputStream reader = null;
+    /**
+     * the output stream
+     */
     private BufferedOutputStream writer = null;
+
+    /**
+     * Constructor
+     * @param skt thge socket
+     * @param sql the connection
+     * @param server the server
+     */
     public Client(Socket skt, Connection sql,Server server)
     {
         this.skt = skt;
@@ -47,6 +98,10 @@ public class Client extends Thread {
         this.pDAO = new ProduitDAO(this.database);
         this.ssDAO = new StockSortieDAO(this.database);
     }
+
+    /**
+     * The run method
+     */
     @Override
     public void run()
     {
@@ -103,15 +158,29 @@ public class Client extends Thread {
             e.printStackTrace();
         }
     }
+
+    /**
+     * to get the location
+     * @return location
+     */
     public EmplacementDAO geteDAO()
     {
         return this.eDAO;
     }
+
+    /**
+     * to get the store category
+     * @return the category
+     */
     public CategorieBoutiqueDAO getCbDAO() {
         return cbDAO;
     }
 
-
+    /**
+     * to read from the server
+     * @return what have been read
+     * @throws IOException
+     */
     private String read() throws IOException{
         String response = "";
         int stream;
