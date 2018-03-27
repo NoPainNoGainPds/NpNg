@@ -11,15 +11,43 @@ import utils.daoUtils.ProduitDAO;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Represents the frame
+ */
 public class Fenetre extends JFrame implements Runnable{
+    /**
+     * list of the stores
+     */
     private ArrayList<Boutique> listBoutique;
+    /**
+     * Jlist of the stores
+     */
     private JList<Boutique> list;
+    /**
+     * Error if needed
+     */
     private JLabel msgError;
-    private InsertBoutique vueInsert;
+    /**
+     * The map
+     */
     private Map map ;
+    /**
+     * The menu bar
+     */
     private JMenuBar mb;
+    /**
+     * The search button
+     */
     private JButton searchButton;
+    /**
+     * Textfield for searching
+     */
     private JTextField searchTextField;
+
+    /**
+     * Constructor
+     * @param s Name of the frame
+     */
     public Fenetre(String s)
     {
         super(s);
@@ -84,12 +112,20 @@ public class Fenetre extends JFrame implements Runnable{
         //add button in the frame
         //controller of the btn1
     }
+
+    /**
+     * Run method
+     */
     @Override
     public void run() {
         this.setVisible(true);
         this.map.setNews();
         this.map.refresh();
     }
+
+    /**
+     * To refresh the frame
+     */
     private void refresh()
     {
         BoutiqueDAO bDAO = new BoutiqueDAO(Constants.conServ);
@@ -109,7 +145,7 @@ public class Fenetre extends JFrame implements Runnable{
     }
 
     /**
-     * Methode for populate JMenu
+     * Method for populating JMenu
      */
     public void populate_menu()
     {
@@ -157,7 +193,7 @@ public class Fenetre extends JFrame implements Runnable{
     }
 
     /**
-     * Method how searsh in base where a product can be find ans show it on the map
+     * Method which search in database where a product can be find and show it on the map
      */
     public void notifyBoutique()
     {

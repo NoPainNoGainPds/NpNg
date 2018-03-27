@@ -26,13 +26,35 @@ import utils.Constants;
 import utils.MyListModel;
 import utils.daoUtils.ProduitDAO;
 
+/**
+ * Represents the view which include store details
+ */
 public class DetailStore extends JFrame implements Runnable {
+    /**
+     * The store
+     */
     private Boutique store;
+    /**
+     * Image of the store
+     */
     private Image img;
-    private ImageComponent logo;
+    /**
+     * Logo of the store
+     */
+
+    /**
+     * Name of the store
+     */
     private JLabel nomBoutique;
+    /**
+     * Error if needed
+     */
     private JLabel msgError;
 
+    /**
+     * Constructor
+     * @param store the store
+     */
     public DetailStore(Boutique store) {
         super("Detail Store");
         this.setSize(new Dimension(500, 520));
@@ -69,6 +91,9 @@ public class DetailStore extends JFrame implements Runnable {
         });
     }
 
+    /**
+     * Run method
+     */
     public void run() {
         this.setVisible(true);
     }

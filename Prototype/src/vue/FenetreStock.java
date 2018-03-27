@@ -10,8 +10,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.*;
 
+/**
+ * Represents the view of the storage
+ */
 public class FenetreStock extends JFrame{
-
+    /**
+     * Constructor
+     */
     public FenetreStock(){
             this.setTitle("Fenetre");
             this.setSize(1200, 500);

@@ -79,7 +79,7 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
             }
             logger.info(requete);
         } catch (SQLException e) {
-            logger.error("SQLException");
+            logger.error(e.toString());
         }
         return null;
     }
@@ -109,7 +109,7 @@ public class CategorieBoutiqueDAO extends DAO<CategorieBoutique> {
             logger.info(requete);
             return listBoutique;
         } catch (SQLException e) {
-            logger.error("SQLException");
+            logger.error(e.toString());
         }
         return null;
     }

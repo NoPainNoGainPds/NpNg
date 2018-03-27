@@ -57,7 +57,7 @@ public class FournisseurDAO extends DAO<Fournisseur> {
             logger.info("SELECT * FROM FOURNISSEUR");
         }catch(SQLException e)
         {
-            logger.error("SQLException");
+            logger.error(e.toString());
         }
         return null;
     }

@@ -26,21 +26,65 @@ import utils.MyListModel;
 import utils.daoUtils.StockEntreeDAO;
 import utils.daoUtils.StockSortieDAO;
 
+/**
+ * Represents the view which include product's details
+ */
 public class    DetailProduct extends JFrame implements Runnable {
+    /**
+     * The store
+     */
     private Boutique store;
+    /**
+     * Image of the product
+     */
     private Image img;
+    /**
+     * Logo of the product
+     */
     private ImageComponent logo;
+    /**
+     * Name of the product
+     */
     private JLabel nomProduit;
+    /**
+     * Id of the product
+     */
     private JLabel idProduit;
+    /**
+     * Weight of the product
+     */
     private JLabel poids;
+    /**
+     * Lenght of the product
+     */
     private JLabel longueur;
+    /**
+     * Width of the product
+     */
     private JLabel largeur;
+    /**
+     * Category of the product
+     */
     private JLabel categorie;
+    /**
+     * Error message if needed
+     */
     private JLabel msgError;
     ArrayList<String> list=new ArrayList<>();
+    /**
+     * List for scroll pane
+     */
     JList<String> jlist=new JList<>();
+    /**
+     * Scroll pane for the products
+     */
     JScrollPane j=new JScrollPane(jlist);
 
+    /**
+     * Constructor
+     * @param store The store
+     * @param product The product to detail
+     */
     public DetailProduct(Boutique store, Produit product) {
         super("Detail Product");
         this.setSize(new Dimension(500, 420));
@@ -99,20 +143,33 @@ public class    DetailProduct extends JFrame implements Runnable {
         this.add(panel);
     }
 
-
-
+    /**
+     * Used to display the view
+     */
     public class Afficher extends JPanel implements ActionListener{
         Boutique store;
         Produit product;
         JScrollPane j;
         JPanel p;
 
+        /**
+         * The contructor
+         * @param b The store
+         * @param produit The product
+         * @param j The scroll pane
+         * @param p The panel
+         */
         public Afficher(Boutique b, Produit produit,JScrollPane j, JPanel p){
             this.store=b;
             this.product=produit;
             this.j=j;
             this.p=p;
         }
+
+        /**
+         * Actions to do
+         * @param e the event
+         */
         public void actionPerformed(ActionEvent e) {
              try {
 
@@ -150,7 +207,9 @@ public class    DetailProduct extends JFrame implements Runnable {
 
     }
 
-
+    /**
+     * Run method
+     */
     public void run() {
         this.setVisible(true);
     }

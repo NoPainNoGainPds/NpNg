@@ -52,12 +52,12 @@ public class ProduitDAO extends DAO<Produit> {
             String requete = "DELETE FROM produit where id_produit="+obj.getId()+";";
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(requete);
-
+            logger.info(requete);
             return true;
         }catch(SQLException e)
         {
             e.printStackTrace();
-            //logger.error("SQLException");
+            logger.error(e.toString());
             return false;
         }
     }
@@ -80,7 +80,7 @@ public class ProduitDAO extends DAO<Produit> {
             return true;
         }catch (SQLException e)
         {
-            logger.error("SQLException");
+            logger.error(e.toString());
             return false;
         }
     }
@@ -104,7 +104,7 @@ public class ProduitDAO extends DAO<Produit> {
             }
             logger.info("SELECT * FROM PRODUIT WHERE id_produit ="+id+";");
         } catch (SQLException e) {
-            logger.error("SQLException");
+            logger.error(e.toString());
         }
         return null;
     }
@@ -144,7 +144,7 @@ public class ProduitDAO extends DAO<Produit> {
             return listProduit;
         } catch (SQLException e) {
             e.printStackTrace();
-            logger.error("SQLException");
+            logger.error(e.toString());
         }
         return null;
     }
@@ -168,7 +168,7 @@ public class ProduitDAO extends DAO<Produit> {
             logger.info(requete);
             return listProduit;
         } catch (SQLException e) {
-            logger.error("SQLException");
+            logger.error(e.toString());
         }
         return null;
     }

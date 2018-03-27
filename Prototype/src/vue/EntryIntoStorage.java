@@ -7,29 +7,64 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
+/**
+ * Represents the view which include the entry to a storage
+ */
 public class EntryIntoStorage extends JPanel{
+    /**
+     * Name of the product
+     */
+    private JLabel nomProduitLabel;
+    /**
+     * Textfield to enter name of the store
+     */
+    private TextLabel <JTextField> nomDeLaBoutique;
+    /**
+     * Textfield to enter the date
+     */
+    private TextLabel <JTextField> dateEntreeStock;
+    /**
+     * Textfield to enter the quantity
+     */
+    private TextLabel <JTextField> quantite;
+    /**
+     * Textfield to enter the amount
+     */
+    private TextLabel <JTextField> montant;
+    /**
+     * Textfield to enter the provider
+     */
+    private TextLabel <JTextField> fournisseur;
+    /**
+     * Textfield to enter unitary cost
+     */
+    private TextLabel <JTextField> coutUnitaire;
 
+    /**
+     * product's picture
+     */
+    private ImageComponent PhotoProduit;
+    /**
+     * Image
+     */
+    private Image img;
 
-        private JLabel nomProduitLabel;
-        private TextLabel <JTextField> nomDeLaBoutique;
-        private TextLabel <JTextField> dateEntreeStock;
-        private TextLabel <JTextField> quantite;
-        private TextLabel <JTextField> montant;
-        private TextLabel <JTextField> fournisseur;
-        private TextLabel <JTextField> coutUnitaire;
+    /**
+     * Valdation button
+     */
+    private JButton validerBoutton;
 
-
-        private ImageComponent PhotoProduit;
-        private Image img;
-
-
-        private JButton validerBoutton;
-
-        public EntryIntoStorage(){
+    /**
+     * Constructor
+     */
+    public EntryIntoStorage(){
             this.View();
         }
 
-        public void View(){
+    /**
+     * Method to show the view
+     */
+    public void View(){
 
             this.setLayout(new MigLayout("inset 0 20 20 20 ", "[fill, grow]", "[fill, grow]"));
 

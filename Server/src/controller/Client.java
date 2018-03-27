@@ -12,6 +12,9 @@ import java.net.Socket;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Client extends Thread {
     private Socket skt;
     private Connection database;
