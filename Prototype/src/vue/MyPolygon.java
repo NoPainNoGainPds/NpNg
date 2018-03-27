@@ -7,6 +7,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Represents the view to create a Polygon for the map
+ */
 public class MyPolygon extends Polygon {
     private boolean selected;
     private boolean searched;

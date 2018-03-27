@@ -8,8 +8,19 @@ import utils.daoUtils.EmplacementDAO;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * Represents the view to update a store
+ */
 public class UpdateBoutique extends JFrame {
+    /**
+     * The Store
+     */
     private Boutique b;
+
+    /**
+     * Constructor
+     * @param b the store
+     */
     public UpdateBoutique(Boutique b)
     {
         this.b = b;
@@ -19,6 +30,11 @@ public class UpdateBoutique extends JFrame {
         this.setVisible(true);
 
     }
+
+    /**
+     * to create the form
+     * @return the panel
+     */
     private JPanel setForm()
     {
         JPanel panel = new JPanel();
