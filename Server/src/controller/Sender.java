@@ -14,17 +14,58 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+/**
+ * Represents the sender
+ */
 public class Sender {
+    /**
+     * The output stream
+     */
     private BufferedOutputStream writer;
+    /**
+     * The object mapper
+     */
     private ObjectMapper mapper;
+    /**
+     * The store
+     */
     private BoutiqueDAO bDAO;
+    /**
+     * The store category
+     */
     private CategorieBoutiqueDAO cbDAO;
+    /**
+     * The product category
+     */
     private CategorieProduitDAO cpDAO;
+    /**
+     * The location
+     */
     private EmplacementDAO eDAO;
+    /**
+     * The provider
+     */
     private FournisseurDAO fDAO;
+    /**
+     * The product
+     */
     private ProduitDAO pDAO;
+    /**
+     * The output storage
+     */
     private StockSortieDAO ssDAO;
+    /**
+     * The input storage
+     */
     private StockEntreeDAO esDAO;
+
+    /**
+     * Constructor
+     * @param database the connection to the database
+     * @param mapper the object mapper
+     * @param writer the output stream
+     * @param client the client
+     */
     public Sender(Connection database, ObjectMapper mapper,BufferedOutputStream writer,Client client)
     {
         this.bDAO = new BoutiqueDAO(database,client);
@@ -39,6 +80,10 @@ public class Sender {
         this.mapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
         this.writer = writer;
     }
+
+    /**
+     * Method to send all the store which are in the database
+     */
     public void sendAllStore()
     {
         try {
@@ -60,6 +105,11 @@ public class Sender {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Method to send the products if id is not equal to -1
+     * @param id the id
+     */
     public void sendProducts(int id)
     {
         if(id!=-1)
@@ -81,6 +131,11 @@ public class Sender {
             }
         }
     }
+
+    /**
+     * Method to send the stores which sell the product productName
+     * @param productName name of the product
+     */
     public void sendStoreWhoSale(String productName)
     {
         try {
@@ -107,6 +162,11 @@ public class Sender {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Method to send what is getting out from storages
+     * @param inputFromClient what the client wants
+     */
     public void sendSortieStock(InputFromClient inputFromClient)
     {
         try {
@@ -134,7 +194,10 @@ public class Sender {
         }
     }
 
-
+    /**
+     * Method to send what is entering storage
+     * @param inputFromClient the input from the client
+     */
     public void sendEntreeStock(InputFromClient inputFromClient)
     {
         try {

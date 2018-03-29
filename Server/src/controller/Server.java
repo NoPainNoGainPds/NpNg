@@ -12,11 +12,30 @@ import java.net.Socket;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+/**
+ * Represents the server
+ */
 public class Server {
+    /**
+     * The connection pool
+     */
     private ConnectionPool listeCo;
+    /**
+     * list of the connected clients
+     */
     private ArrayList<Client> arraySock;
+    /**
+     * The socket server
+     */
     private ServerSocket serverSocket;
-    private int nbConnecté;
+    /**
+     * Number of connected clients
+     */
+    private int nbConnect;
+
+    /**
+     * Constructor
+     */
     public Server()
     {
         Database db = null;
@@ -30,13 +49,17 @@ public class Server {
             //liste de tous les clients
             this.arraySock = new ArrayList<>();
 
-            this.nbConnecté = 0;
+            this.nbConnect = 0;
             int i = 0;
         }catch(IOException e)
         {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Method to start the server
+     */
     public void start()
     {
         while(true)
@@ -46,7 +69,7 @@ public class Server {
                 if (skt != null) {
                     Client sktClient = new Client(skt, this.listeCo.getConnectionFromPool(),this);//creation du client ici
                     arraySock.add(sktClient);
-                    this.nbConnecté += 1;
+                    this.nbConnect += 1;
                     Thread t = new Thread(sktClient);
                     t.start();
                 }
@@ -56,6 +79,11 @@ public class Server {
             }
         }
     }
+
+    /**
+     * Method to release a connection
+     * @param con the connection to release
+     */
     public void releaseConnection(Connection con)
     {
         this.listeCo.returnConnectionToPool(con);

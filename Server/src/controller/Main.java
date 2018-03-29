@@ -15,6 +15,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Main class, to launch the server
+ */
 public class Main {
     public static void main(String[] args) {
         Database db = null;

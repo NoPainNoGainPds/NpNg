@@ -2,6 +2,7 @@ package controller;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import db.Database;
 import model.Boutique;
 import model.InputFromClient;
 import model.Produit;
@@ -23,7 +24,7 @@ public class Client extends Thread {
     /**
      * the connection
      */
-
+    private Connection database;
     /**
      * the server
      */
