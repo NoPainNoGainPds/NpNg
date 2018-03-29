@@ -41,7 +41,7 @@ public class DetailStore extends JFrame implements Runnable {
     /**
      * Logo of the store
      */
-
+    private ImageComponent logo;
     /**
      * Name of the store
      */
@@ -50,11 +50,6 @@ public class DetailStore extends JFrame implements Runnable {
      * Error if needed
      */
     private JLabel msgError;
-
-    /**
-     * Logo of the store
-     */
-    private ImageComponent logo;
 
     /**
      * Constructor
