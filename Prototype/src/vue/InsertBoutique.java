@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Represents the view to insert a store
  */
-public class InsertBoutique extends JFrame implements Runnable
+public class InsertBoutique extends JFrame implements Runnable {
     /**
      * The store
      */

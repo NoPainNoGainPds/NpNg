@@ -23,8 +23,8 @@ public class FenetreStock extends JFrame{
             this.setLocationRelativeTo(null);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            EntryIntoStorage ESVpan = new EntryIntoStorage();
-            this.add(ESVpan);
+            CreateProduct CPpan = new CreateProduct();
+            this.add(CPpan);
 
             //this.setVisible(true);
     }
