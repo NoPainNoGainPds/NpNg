@@ -91,7 +91,6 @@ public class Sender {
             System.out.println(objReturn.size());
             for(Boutique b : objReturn)
             {
-                System.out.println("boutique");
                 this.mapper.writeValue(this.writer,b);
                 this.writer.write("\n".getBytes());
                 this.writer.flush();

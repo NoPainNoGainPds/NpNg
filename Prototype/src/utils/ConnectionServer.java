@@ -16,6 +16,7 @@ public class ConnectionServer {
     private PrintWriter writer = null;
     private DataInputStream reader = null;
     private ObjectMapper mapper;
+    private boolean isconnected = false;
     public ConnectionServer()
     {
         try {
@@ -25,6 +26,7 @@ public class ConnectionServer {
             this.reader = new DataInputStream(this.server.getInputStream());
             this.mapper = new ObjectMapper();
             this.mapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
+            this.isconnected = true;
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -64,5 +66,9 @@ public class ConnectionServer {
         stream = this.reader.read(b);
         response = new String(b, 0, stream);
         return response;
+    }
+    public boolean isIsconnected()
+    {
+        return this.isconnected;
     }
 }

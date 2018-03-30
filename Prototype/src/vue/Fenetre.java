@@ -180,7 +180,7 @@ public class Fenetre extends JFrame implements Runnable{
         viewmenu.addSeparator();
         this.mb.add(viewmenu);
 
-        this.searchTextField = new JTextField("  ",45);
+        this.searchTextField = new JTextField("",45);
         this.searchTextField.setBorder(new TextBubbleBorder(Color.GRAY.darker(),2,4,0));
         this.searchTextField.addActionListener(event ->
                 this.notifyBoutique());

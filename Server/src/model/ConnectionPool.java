@@ -71,6 +71,7 @@ public class ConnectionPool implements Pool {
 	 * @param connection the connection to return to the pool
 	 */
 	public synchronized void returnConnectionToPool(Connection connection) {
+		System.out.println("return connection");
 		connectionList.add(connection);
 	}
 

@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/Prototype/src/utils/daoUtils/ProduitDAO.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/Prototype/src/vue/UpdateWindow.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/Server/src/controller/Main.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/Server/src/db/Database.java" charset="ISO-8859-1" />
   </component>
 </project>

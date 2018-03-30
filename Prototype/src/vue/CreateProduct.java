@@ -1,6 +1,10 @@
 package vue;
 
+import model.Produit;
 import net.miginfocom.swing.MigLayout;
+import utils.Constants;
+import utils.daoUtils.ProduitDAO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
@@ -34,14 +38,17 @@ public class CreateProduct extends JPanel{
     private TextLabel <JTextField> poids;
     private JTextField poidsTextField;
 
+    private ProduitDAO pDAO;
+
 
     private JButton validerBoutton;
 
     public CreateProduct(){
-        this.View();
+        this.view();
+        this.pDAO = new ProduitDAO(Constants.conServ);
     }
 
-    public void View (){
+    private void view (){
 
         this.setLayout(new MigLayout("inset 20 ", "[fill, grow]", "[fill, grow]"));
 
@@ -97,9 +104,15 @@ public class CreateProduct extends JPanel{
         JPanel Buttonpan = new JPanel(new MigLayout("", "[center, grow]"));
         Buttonpan.add(validerBoutton);
         this.add(Buttonpan, "dock south");
+    }
+    private void controler()
+    {
+        this.validerBoutton.addActionListener(event ->
+        {
+            //recuperation de toutes les données pour creer un produit
+            Produit pToSend = new Produit(this.nomDuProduit.field.getText(),0);//ici on fait un debut de produit pour le remplire avec les autre données par la suite
 
-
-
+        });
     }
 
 
