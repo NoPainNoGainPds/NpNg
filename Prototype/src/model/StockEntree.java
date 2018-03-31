@@ -145,7 +145,7 @@ public class StockEntree implements ModelObject {
      * @return the display
      */
     public String toString() {
-        return "qty :"+this.quantite + ", montant : " + this.montant + " " + this.date;
+        return "QTE:"+this.quantite + "   MONTANT:" + this.montant + "   DATE:" + this.date;
     }
 
     /**

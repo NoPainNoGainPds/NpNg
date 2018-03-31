@@ -13,7 +13,7 @@ import java.net.*;
 /**
  * Represents the view of the storage
  */
-public class FenetreStock extends JFrame{
+public class FenetreStock extends JFrame implements Runnable {
     /**
      * Constructor
      */
@@ -21,7 +21,7 @@ public class FenetreStock extends JFrame{
             this.setTitle("Fenetre");
             this.setSize(1200, 500);
             this.setLocationRelativeTo(null);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             //OutputStorage CSpan = new OutputStorage();
             CreateProduct CPpan = new CreateProduct();
@@ -37,4 +37,10 @@ public class FenetreStock extends JFrame{
     }
 
 
+    /**
+     * Run method
+     */
+    public void run() {
+        this.setVisible(true);
+    }
 }

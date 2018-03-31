@@ -115,11 +115,11 @@ public class CreateProduct extends JPanel{
             pToSend.setLongueur(Float.parseFloat(this.longueurTextField.getText()));
             pToSend.setPoids(Float.parseFloat(this.poidsTextField.getText()));
 
-            pToSend.setCost(Float.parseFloat(this.coutUnitaireTextField.getText())); //float pour un prix
+            pToSend.setCout(Float.parseFloat(this.coutUnitaireTextField.getText())); //float pour un prix
             pToSend.setQuantite(Integer.parseInt(this.quantiteTextField.getText()));
             //pToSend.setNomdelaboutique(this.nomDeLaBoutiqueTextField.getText());
 
-            pToSend.setBarCode(this.codeBarreTextField.getText());
+            pToSend.setCodeBarre(Integer.parseInt(this.codeBarreTextField.getText()));
             //pToSend.setCatProd(this.categorieBox.getSelectedItem());
         });
     }

@@ -17,13 +17,17 @@ public class Produit{
      */
     private int id;
     /**
-     * weight, length, width of the product
+     * weight, length, width and cost of the product
      */
-    private float poids,longueur,largeur;
+    private float poids,longueur,largeur, cout;
     /**
      * name of the product
      */
     private String nom;
+    /**
+     * barcode of the product
+     */
+    private int codebarre;
     /**
      * provider of the product
      */
@@ -179,9 +183,9 @@ public class Produit{
 
     /**
      * set the product weight
-     * @param poid the new weight
+     * @param poids the new weight
      */
-    public void setPoids(float poid) {
+    public void setPoids(float poids) {
         this.poids = poids;
     }
 
@@ -217,10 +221,45 @@ public class Produit{
         this.largeur = largeur;
     }
 
+
+    /**
+     * get the product cost
+     * @return the cost
+     */
+    public float getCout() {
+        return cout;
+    }
+
+    /**
+     * set the product length
+     * @param cout the new cost
+     */
+    public void setCout(float cout) {
+        this.cout = cout;
+    }
+
+
+    /**
+     * get the product barcode
+     * @return the barcode
+     */
+    public float getCodeBarre() {
+        return codebarre;
+    }
+
+    /**
+     * set the product barcode
+     * @param codebarre the new barcode
+     */
+    public void setCodeBarre(int codebarre) {
+        this.codebarre = codebarre;
+    }
+
     /**
      * method to display the product
      * @return the display
      */
+
     public String toString()
     {
         return ""+this.nom+" qty :"+this.quantite+"";

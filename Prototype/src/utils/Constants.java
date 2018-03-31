@@ -17,8 +17,8 @@ public class Constants {
     public static final int BTN_HEIGHT = 60;
     public static final int BTN_WIDTH = 150;
     public static final String  DEFAULT_NO_LOGO = "Prototype/src/res/empty-logo.png";
-    public static  final String host = "172.16.0.8";
-    //public static  final String host = "localhost";
+    //public static  final String host = "172.16.0.8";
+    public static  final String host = "localhost";
     public static final int port = 2013;
     public static  ConnectionServer conServ;
 }

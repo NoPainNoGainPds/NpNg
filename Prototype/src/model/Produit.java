@@ -19,11 +19,15 @@ public class Produit implements ModelObject{
     /**
      * weight, length, width and cost of the product
      */
-    private float poids,longueur,largeur, cost;
+    private float poids,longueur,largeur,cout;
     /**
-     * name and barre code of the product
+     * name of the product
      */
-    private String nom, barCode;
+    private String nom;
+    /**
+     * bar code of the product
+     */
+    private int codebarre;
     /**
      * provider of the product
      */
@@ -196,14 +200,28 @@ public class Produit implements ModelObject{
         this.largeur = largeur;
     }
 
+    /**
+     * get the product cost
+     * @return the cost
+     */
+    public float getCout(){return this.cout;}
 
-    public float getCost(){return this.cost;}
+    /**
+     * set the product length
+     * @param cout the new cost
+     */
+    public void setCout(Float cout){this.cout = cout;}
 
-    public void setCost(Float cost){this.cost = cost;}
-
-    public String getBarCode(){return this.barCode;}
-
-    public void setBarCode(String barCode){this.barCode = barCode;}
+    /**
+     * get the product barcode
+     * @return the barcode
+     */
+    public int getCodeBarre(){return this.codebarre;}
+    /**
+     * set the product barcode
+     * @param codebarre the new barcode
+     */
+    public void setCodeBarre(int codebarre){this.codebarre = codebarre;}
 
     /**
      * method to display the product
@@ -211,7 +229,7 @@ public class Produit implements ModelObject{
      */
     public String toString()
     {
-        return ""+this.nom+" qty :"+this.quantite+"";
+        return "NOM:"+this.nom+"  QUANTITE:"+this.quantite+"";
     }
 
     /**

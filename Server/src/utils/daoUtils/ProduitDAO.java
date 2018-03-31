@@ -120,14 +120,13 @@ public class ProduitDAO extends DAO<Produit> {
         try
         {
             Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT es.id_produit,produit.nom_produit, produit.cout_unitaire, produit.codebarre, produit.largeur, produit.longueur, produit.poids,(select sum(quantite) from entree_stock es2 where es2.id_produit = es.id_produit)-(select sum(quantite) " +
-                    "from sortie_stock ss where ss.id_produit = es.id_produit) as quantite FROM entree_stock es " +
-                    "JOIN produit ON es.id_produit = produit.id_produit " +
-                    "JOIN sortie_stock ss ON es.id_produit = ss.id_produit WHERE es.id_boutique = "+id+" GROUP BY es.id_produit " +
-                    "UNION SELECT es.id_produit,produit.nom_produit, produit.cout_unitaire, produit.codebarre, produit.largeur, produit.longueur, produit.poids, es.quantite " +
-                    "FROM entree_stock es JOIN produit ON es.id_produit = produit.id_produit " +
-                    "WHERE es.id_boutique = "+id+" " +
-                    "AND es.id_produit not in (SELECT id_produit from sortie_stock )";
+            String requete = "Select es.id_produit, p.nom_produit, p.cout_unitaire, p.codebarre, p.largeur, p.longueur, p.poids, \n" +
+                    "IFNULL ((select sum(es2.quantite) from entree_stock es2 where es2.id_produit = es.id_produit and es2.id_boutique="+id+")-\n" +
+                    "(select sum(ss.quantite) from sortie_stock ss where ss.id_produit = es.id_produit and ss.id_boutique="+id+"),  " +
+                    "(select sum(es2.quantite) from entree_stock es2 where es2.id_produit = es.id_produit and es2.id_boutique="+id+")) as quantite\n" +
+                    "\n" +
+                    "FROM entree_stock es, produit p\n" +
+                    "where es.id_produit=p.id_produit and es.id_boutique="+id+" GROUP BY es.id_produit";
 
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Produit> listProduit = new ArrayList<>();
@@ -138,6 +137,8 @@ public class ProduitDAO extends DAO<Produit> {
                 p.setPoids(res.getFloat("poids"));
                 p.setLargeur(res.getFloat("largeur"));
                 p.setLongueur(res.getFloat("longueur"));
+                p.setCout(res.getFloat("cout_unitaire"));
+                p.setCodeBarre(res.getInt("codebarre"));
                 listProduit.add(p);
             }
             logger.info(requete);

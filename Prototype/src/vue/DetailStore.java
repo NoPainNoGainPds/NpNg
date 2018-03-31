@@ -89,6 +89,10 @@ public class DetailStore extends JFrame implements Runnable {
             DetailProduct ds = new DetailProduct(this.store, jlist.getSelectedValue());
             SwingUtilities.invokeLater(ds);
         });
+        btn4.addActionListener((event) -> {
+            FenetreStock fs = new FenetreStock();
+            SwingUtilities.invokeLater(fs);
+        });
     }
 
     /**

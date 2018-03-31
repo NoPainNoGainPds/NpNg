@@ -53,6 +53,10 @@ public class    DetailProduct extends JFrame implements Runnable {
     /**
      * Weight of the product
      */
+    private JLabel cout;
+    /**
+     * Cost of the product
+     */
     private JLabel poids;
     /**
      * Lenght of the product
@@ -65,7 +69,11 @@ public class    DetailProduct extends JFrame implements Runnable {
     /**
      * Category of the product
      */
-    private JLabel categorie;
+    private JLabel quantite;
+    /**
+     * Bar code of the product
+     */
+    private JLabel codebarre;
     /**
      * Error message if needed
      */
@@ -109,7 +117,9 @@ public class    DetailProduct extends JFrame implements Runnable {
         group.add(rb2);
         rb1.addActionListener(new Afficher(store, product, j, panel));
         rb2.addActionListener(new Afficher(store, product, j, panel));
-        panel.add(j,"cell 2 2 2 4");
+
+
+        panel.add(j,"cell 2 2 2 6");
         /*rb1.addActionListener((event) -> {
             StockEntreeDAO entree = new StockEntreeDAO();
             ArrayList<StockEntree> listentree = entree.findFromReference(product.getId(), store.getId());
@@ -132,19 +142,23 @@ public class    DetailProduct extends JFrame implements Runnable {
             panel.repaint();
             panel.revalidate();
         });*/
+        this.cout = new JLabel("Cout unitaire: " + String.valueOf(product.getCout()));
+        panel.add(this.cout, "cell 0 2");
         this.poids = new JLabel("Poids: " + String.valueOf(product.getPoids()));
-        panel.add(this.poids, "cell 0 2");
+        panel.add(this.poids, "cell 0 3");
         this.longueur = new JLabel("Longueur: " + String.valueOf(product.getLongueur()));
-        panel.add(this.longueur, "cell 0 3");
+        panel.add(this.longueur, "cell 0 4");
         this.largeur = new JLabel("Largeur: " + String.valueOf(product.getLargeur()));
-        panel.add(this.largeur, "cell 0 4");
-        this.categorie = new JLabel("Categorie: " + String.valueOf(product.getQuantite()));
-        panel.add(this.categorie, "cell 0 5");
+        panel.add(this.largeur, "cell 0 5");
+        this.quantite = new JLabel("Quantite actuelle: " + String.valueOf(product.getQuantite()));
+        panel.add(this.quantite, "cell 0 6");
+        this.codebarre = new JLabel("Code barre: " + String.valueOf(product.getCodeBarre()));
+        panel.add(this.codebarre, "cell 0 7");
         this.add(panel);
     }
 
     /**
-     * Used to display the view
+     * Used to display the JScrollPane
      */
     public class Afficher extends JPanel implements ActionListener{
         Boutique store;
