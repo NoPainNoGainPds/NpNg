@@ -1,6 +1,8 @@
 package vue;
 
 import com.toedter.calendar.JTextFieldDateEditor;
+import model.Boutique;
+import model.StockEntree;
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.*;
@@ -18,27 +20,33 @@ public class EntryIntoStorage extends JPanel{
     /**
      * Textfield to enter name of the store
      */
-    private TextLabel <JTextField> nomDeLaBoutique;
+    private TextLabel <JComboBox<Boutique>> nomDeLaBoutique;
+    private JComboBox<Boutique> nomDeLaBoutiqueBox;
     /**
      * Textfield to enter the date
      */
     private TextLabel <JTextField> dateEntreeStock;
+    private JTextField dateEntreeStockTextField;
     /**
      * Textfield to enter the quantity
      */
     private TextLabel <JTextField> quantite;
+    private JTextField quantiteTextField;
     /**
      * Textfield to enter the amount
      */
     private TextLabel <JTextField> montant;
+    private JTextField montantTextField;
     /**
      * Textfield to enter the provider
      */
     private TextLabel <JTextField> fournisseur;
+    private JTextField fournisseurTextField;
     /**
      * Textfield to enter unitary cost
      */
     private TextLabel <JTextField> coutUnitaire;
+    private JTextField coutUnitaireTextField;
 
     /**
      * product's picture
@@ -81,25 +89,35 @@ public class EntryIntoStorage extends JPanel{
             nomProduitLabel = new JLabel("Nom du produit");
             logopan.add(nomProduitLabel, "cell 1 0 1 1");
 
-
-            nomDeLaBoutique = new TextLabel (new JTextField(20), new JLabel("Nom de la boutique"));
+            nomDeLaBoutiqueBox = new JComboBox<Boutique>();
+            nomDeLaBoutiqueBox.setPreferredSize(new Dimension(250,50));
+            nomDeLaBoutique = new TextLabel (nomDeLaBoutiqueBox, new JLabel("Nom de la boutique"));
             this.add(nomDeLaBoutique, "cell 0 2 1 1");
 
-            dateEntreeStock = new TextLabel(new JTextField(20), new JLabel("Date entree du stock"));
+            dateEntreeStockTextField = new JTextField(20);
+            dateEntreeStockTextField.setPreferredSize(new Dimension(300,50));
+            dateEntreeStock = new TextLabel(dateEntreeStockTextField, new JLabel("Date entree du stock"));
             this.add(dateEntreeStock, "cell 2 2 1 1");
 
-            quantite = new TextLabel(new JTextField(20), new JLabel("Quantite"));
+            quantiteTextField = new JTextField(20);
+            quantiteTextField.setPreferredSize(new Dimension(300,50));
+            quantite = new TextLabel(quantiteTextField, new JLabel("Quantite"));
             this.add(quantite, "cell 4 2 1 1");
 
-
-            montant = new TextLabel(new JTextField(20), new JLabel("Montant"));
+            montantTextField = new JTextField(20);
+            montantTextField.setPreferredSize(new Dimension(300,50));
+            montant = new TextLabel(montantTextField, new JLabel("Montant"));
             this.add(montant, "cell 0 4 1 1");
 
+            /*fournisseurTextField = new JTextField(20);
+            fournisseurTextField.setPreferredSize(new Dimension(300,50));
             fournisseur = new TextLabel(new JTextField(20), new JLabel("Fournisseur"));
-            this.add(fournisseur, "cell 2 4 1 1");
+            this.add(fournisseur, "cell 2 4 1 1");*/
 
+            /*coutUnitaireTextField = new JTextField(20);
+            coutUnitaireTextField.setPreferredSize(new Dimension(300,50));
             coutUnitaire = new TextLabel(new JTextField(20), new JLabel("Cout Unitaire"));
-            this.add(coutUnitaire, "cell 4 4 1 1");
+            this.add(coutUnitaire, "cell 4 4 1 1");*/
 
 
             validerBoutton = new JButton("Valider");
@@ -107,7 +125,17 @@ public class EntryIntoStorage extends JPanel{
             JPanel Buttonpan = new JPanel(new MigLayout("", "[center, grow]"));
             Buttonpan.add(validerBoutton);
             this.add(Buttonpan, "dock south");
+        }
 
+        private void controler(){
+            this.validerBoutton.addActionListener(event ->{
+                StockEntree stToSend = new StockEntree();
 
+                //stToSend.setId_boutique();) probleme demande Id et pas nom
+                stToSend.setQuantite(Integer.parseInt(this.quantiteTextField.getText()));
+                //stToSend.setDate(); comment on fait les dates ?
+                stToSend.setMontant(Integer.parseInt(this.montantTextField.getText()));
+
+            });
         }
     }

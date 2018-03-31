@@ -1,5 +1,6 @@
 package vue;
 
+import model.CategorieProduit;
 import model.Produit;
 import net.miginfocom.swing.MigLayout;
 import utils.Constants;
@@ -14,8 +15,8 @@ public class CreateProduct extends JPanel{
     private TextLabel <JTextField> nomDuProduit;
     private JTextField nomDuProduitTextField;
 
-    private TextLabel <JComboBox<String>> categorie;
-    private JComboBox<String> categorieBox;
+    private TextLabel <JComboBox<CategorieProduit>> categorie;
+    private JComboBox<CategorieProduit> categorieBox;
 
     private TextLabel <JTextField> codeBarre;
     private JTextField codeBarreTextField;
@@ -57,15 +58,15 @@ public class CreateProduct extends JPanel{
         nomDuProduit = new TextLabel (nomDuProduitTextField, new JLabel("Nom du Produit"));
         this.add(nomDuProduit, "cell 0 1 1 1");
 
-        categorieBox = new JComboBox<String>();
+        categorieBox = new JComboBox<CategorieProduit>();
         categorieBox.setPreferredSize(new Dimension(250,50));
         categorie = new TextLabel(categorieBox, new JLabel("Categorie"));
-        this.add(categorie, "cell 4 1 1 1");
+        this.add(categorie, "cell 2 1 1 1");
 
         codeBarreTextField = new JTextField(20);
         codeBarreTextField.setPreferredSize(new Dimension(300,50));
         codeBarre = new TextLabel(codeBarreTextField, new JLabel("Code Barre"));
-        this.add(codeBarre, "cell 0 3 1 1");
+        this.add(codeBarre, "cell 4 1 1 1");
 
 
         /*nomDeLaBoutiqueTextField = new JTextField(20);
@@ -76,12 +77,12 @@ public class CreateProduct extends JPanel{
         quantiteTextField = new JTextField(20);
         quantiteTextField.setPreferredSize(new Dimension(300,50));
         quantite = new TextLabel(quantiteTextField, new JLabel("Quantite"));
-        this.add(quantite, "cell 2 3 1 1");
+        this.add(quantite, "cell 0 3 1 1");
 
         coutUnitaireTextField = new JTextField(20);
         coutUnitaireTextField.setPreferredSize(new Dimension(300,50));
         coutUnitaire = new TextLabel(coutUnitaireTextField, new JLabel("Cout Unitaire"));
-        this.add(coutUnitaire, "cell 4 3 1 1");
+        this.add(coutUnitaire, "cell 2 3 1 1");
 
         largeurTextField = new JTextField(20);
         largeurTextField.setPreferredSize(new Dimension(300,50));

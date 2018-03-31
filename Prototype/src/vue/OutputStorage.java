@@ -1,5 +1,6 @@
 package vue;
 
+import model.Boutique;
 import model.StockSortie;
 import net.miginfocom.swing.MigLayout;
 import utils.Constants;
@@ -13,8 +14,8 @@ public class OutputStorage extends JPanel{
 
     private JLabel nomProduitLabel;
 
-    private TextLabel <JTextField> nomDeLaBoutique;
-    private JTextField nomDeLaBoutiqueTextField;
+    private TextLabel <JComboBox<Boutique>> nomDeLaBoutique;
+    private JComboBox<Boutique> nomDeLaBoutiqueBox;
 
     private TextLabel <JTextField> dateSortieStock;
     private JTextField dateSortieStockTextField;
@@ -62,9 +63,9 @@ public class OutputStorage extends JPanel{
         logopan.add(nomProduitLabel, "cell 1 0 1 1");
 
 
-        nomDeLaBoutiqueTextField = new JTextField(20);
-        nomDeLaBoutiqueTextField.setPreferredSize(new Dimension(300,50));
-        nomDeLaBoutique = new TextLabel (nomDeLaBoutiqueTextField, new JLabel("Nom de la boutique"));
+        nomDeLaBoutiqueBox = new JComboBox<Boutique>();
+        nomDeLaBoutiqueBox.setPreferredSize(new Dimension(300,50));
+        nomDeLaBoutique = new TextLabel (nomDeLaBoutiqueBox, new JLabel("Nom de la boutique"));
         this.add(nomDeLaBoutique, "cell 0 2 1 1");
 
         dateSortieStockTextField = new JTextField(20);
@@ -78,20 +79,20 @@ public class OutputStorage extends JPanel{
         this.add(quantite, "cell 4 2 1 1");
 
 
-        montantTextField = new JTextField(20);
+        /*montantTextField = new JTextField(20);
         montantTextField.setPreferredSize(new Dimension(300,50));
         montant = new TextLabel(montantTextField, new JLabel("Montant"));
-        this.add(montant, "cell 0 4 1 1");
+        this.add(montant, "cell 0 4 1 1");*/
 
-        clientTextField = new JTextField(20);
+        /*clientTextField = new JTextField(20);
         clientTextField.setPreferredSize(new Dimension(300,50));
         client = new TextLabel(clientTextField, new JLabel("Fournisseur"));
-        this.add(client, "cell 2 4 1 1");
+        this.add(client, "cell 0 4 1 1");*/
 
-        coutUnitaireTextField = new JTextField(20);
+        /*coutUnitaireTextField = new JTextField(20);
         coutUnitaireTextField.setPreferredSize(new Dimension(300,50));
         coutUnitaire = new TextLabel(coutUnitaireTextField, new JLabel("Cout Unitaire"));
-        this.add(coutUnitaire, "cell 4 4 1 1");
+        this.add(coutUnitaire, "cell 4 4 1 1");*/
 
 
         validerBoutton = new JButton("Valider");
