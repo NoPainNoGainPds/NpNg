@@ -1,4 +1,6 @@
 package utils.daoUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Boutique;
 import model.Client;
 import org.apache.log4j.Logger;
@@ -39,7 +41,19 @@ public class ProduitDAO extends DAO<Produit> {
      */
     @Override
     public boolean create(Produit obj) {
-        return false;
+        boolean response;
+        String str = "{\"name\" : \"newProduct\",\"id\":0}";
+        this.connection.send(str);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            str = mapper.writeValueAsString(obj);
+            this.connection.send(str);
+            Object rep =this.connection.recieve(Boolean.class);
+        }catch(JsonProcessingException e)
+        {
+            e.printStackTrace();
+        }
+        return false;//a changer
     }
 
     /**

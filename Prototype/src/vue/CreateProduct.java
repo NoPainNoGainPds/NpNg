@@ -50,7 +50,7 @@ public class CreateProduct extends JPanel{
 
     private void view (){
 
-        this.setLayout(new MigLayout("inset 20 ", "[fill, grow]", "[fill, grow]"));
+        this.setLayout(new MigLayout("inset 30 ", "[fill, grow]", "[fill, grow]"));
 
         nomDuProduitTextField = new JTextField(20);
         nomDuProduitTextField.setPreferredSize(new Dimension(300,50));
@@ -111,7 +111,16 @@ public class CreateProduct extends JPanel{
         {
             //recuperation de toutes les données pour creer un produit
             Produit pToSend = new Produit(this.nomDuProduit.field.getText(),0);//ici on fait un debut de produit pour le remplire avec les autre données par la suite
+            pToSend.setLargeur(Float.parseFloat(this.largeurTextField.getText()));
+            pToSend.setLongueur(Float.parseFloat(this.longueurTextField.getText()));
+            pToSend.setPoids(Float.parseFloat(this.poidsTextField.getText()));
 
+            pToSend.setCost(Float.parseFloat(this.coutUnitaireTextField.getText())); //float pour un prix
+            pToSend.setQuantite(Integer.parseInt(this.quantiteTextField.getText()));
+            //pToSend.setNomdelaboutique(this.nomDeLaBoutiqueTextField.getText());
+
+            pToSend.setBarcode(this.codeBarreTextField.getText());
+            // on fait aussi get text pour un Jcombo box ?
         });
     }
 

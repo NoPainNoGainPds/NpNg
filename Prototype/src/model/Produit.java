@@ -8,12 +8,13 @@ import utils.daoUtils.ProduitDAO;
 public class Produit implements ModelObject{
     private int quantite;
     private int id;
-    private float poids,longueur,largeur;
-    private String nom;
+    private float poids,longueur,largeur,cost;
+    private String nom, barcode;
     private Fournisseur fournisseur;
     private StockEntree stckEntree;
     private StockSortie stckSortie;
     private CategorieProduit catProd;
+
     public Produit()
     {
 
@@ -99,6 +100,24 @@ public class Produit implements ModelObject{
 
     public void setLargeur(float largeur) {
         this.largeur = largeur;
+    }
+
+    public float getCost() {
+        return cost;
+    }
+
+    public void setCost(float cost) {
+        this.cost = cost;
+    }
+
+    public void setBarcode(String barcode)
+    {
+        this.barcode = barcode;
+    }
+
+    public String getBarCode()
+    {
+        return this.barcode;
     }
 
     public String toString()
