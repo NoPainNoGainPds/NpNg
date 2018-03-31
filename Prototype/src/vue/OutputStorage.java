@@ -10,25 +10,46 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
+/**
+ *
+ */
 public class OutputStorage extends JPanel{
 
     private JLabel nomProduitLabel;
 
+    /**
+     * Name of the product
+     */
     private TextLabel <JComboBox<Boutique>> nomDeLaBoutique;
     private JComboBox<Boutique> nomDeLaBoutiqueBox;
 
+    /**
+     * Release Date
+     */
     private TextLabel <JTextField> dateSortieStock;
     private JTextField dateSortieStockTextField;
 
+    /**
+     * The Quantity
+     */
     private TextLabel <JTextField> quantite;
     private JTextField quantiteTextField;
 
+    /**
+     * Amount
+     */
     private TextLabel <JTextField> montant;
     private JTextField montantTextField;
 
+    /**
+     * The Client
+     */
     private TextLabel <JTextField> client;
     private JTextField clientTextField;
 
+    /**
+     * Cost Per Unit
+     */
     private TextLabel <JTextField> coutUnitaire;
     private JTextField coutUnitaireTextField;
 
@@ -40,11 +61,17 @@ public class OutputStorage extends JPanel{
 
     private JButton validerBoutton;
 
+    /**
+     * Constructor
+     */
     public OutputStorage(){
         this.View();
         this.ssDAO = new StockSortieDAO();
     }
 
+    /**
+     *
+     */
     public void View(){
 
         this.setLayout(new MigLayout("inset 0 5 5 5", "[fill, grow]", "[fill, grow]"));

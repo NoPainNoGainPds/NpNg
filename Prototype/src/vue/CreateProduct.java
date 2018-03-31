@@ -10,44 +10,80 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
+/**
+ *  Represents the view which create product's details
+ */
+
 public class CreateProduct extends JPanel{
 
+    /**
+     * Name of the product
+     */
     private TextLabel <JTextField> nomDuProduit;
     private JTextField nomDuProduitTextField;
 
+    /**
+     * Product category's
+     */
     private TextLabel <JComboBox<CategorieProduit>> categorie;
     private JComboBox<CategorieProduit> categorieBox;
 
+    /**
+     * Barcode
+     */
     private TextLabel <JTextField> codeBarre;
     private JTextField codeBarreTextField;
 
+    /**
+     * Shop name's
+     */
     private TextLabel <JTextField> nomDeLaBoutique;
     private JTextField nomDeLaBoutiqueTextField;
 
+    /**
+     * The Quantity
+     */
     private TextLabel <JTextField> quantite;
     private JTextField quantiteTextField;
 
+    /**
+     * Cost Per Unit
+     */
     private TextLabel <JTextField> coutUnitaire;
     private JTextField coutUnitaireTextField;
 
+    /**
+     * The Width
+     */
     private TextLabel <JTextField> largeur;
     private JTextField largeurTextField;
 
+    /**
+     * The Length
+     */
     private TextLabel <JTextField> longueur;
     private JTextField longueurTextField;
-
+    /**
+     * The Weight
+     */
     private TextLabel <JTextField> poids;
     private JTextField poidsTextField;
 
     private ProduitDAO pDAO;
 
-
+    /**
+     * Submit
+     */
     private JButton validerBoutton;
 
+    /**
+     * Constructor
+     */
     public CreateProduct(){
         this.view();
         this.pDAO = new ProduitDAO(Constants.conServ);
     }
+
 
     private void view (){
 
@@ -106,6 +142,8 @@ public class CreateProduct extends JPanel{
         Buttonpan.add(validerBoutton);
         this.add(Buttonpan, "dock south");
     }
+
+
     private void controler()
     {
         this.validerBoutton.addActionListener(event ->
