@@ -162,7 +162,7 @@ public class Produit{
     }
 
     /**
-     * get the prduct provider
+     * get the product provider
      * @return the provider
      */
     public Fournisseur getFournisseur() {
