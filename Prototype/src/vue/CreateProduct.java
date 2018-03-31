@@ -60,18 +60,18 @@ public class CreateProduct extends JPanel{
         categorieBox = new JComboBox<String>();
         categorieBox.setPreferredSize(new Dimension(250,50));
         categorie = new TextLabel(categorieBox, new JLabel("Categorie"));
-        this.add(categorie, "cell 2 1 1 1");
+        this.add(categorie, "cell 4 1 1 1");
 
         codeBarreTextField = new JTextField(20);
         codeBarreTextField.setPreferredSize(new Dimension(300,50));
         codeBarre = new TextLabel(codeBarreTextField, new JLabel("Code Barre"));
-        this.add(codeBarre, "cell 4 1 1 1");
+        this.add(codeBarre, "cell 0 3 1 1");
 
 
-        nomDeLaBoutiqueTextField = new JTextField(20);
+        /*nomDeLaBoutiqueTextField = new JTextField(20);
         nomDeLaBoutiqueTextField.setPreferredSize(new Dimension(300,50));
         nomDeLaBoutique = new TextLabel(nomDeLaBoutiqueTextField, new JLabel("Nom de la Boutique"));
-        this.add(nomDeLaBoutique, "cell 0 3 1 1");
+        this.add(nomDeLaBoutique, "cell 0 3 1 1");*/
 
         quantiteTextField = new JTextField(20);
         quantiteTextField.setPreferredSize(new Dimension(300,50));
@@ -119,8 +119,8 @@ public class CreateProduct extends JPanel{
             pToSend.setQuantite(Integer.parseInt(this.quantiteTextField.getText()));
             //pToSend.setNomdelaboutique(this.nomDeLaBoutiqueTextField.getText());
 
-            pToSend.setBarcode(this.codeBarreTextField.getText());
-            // on fait aussi get text pour un Jcombo box ?
+            pToSend.setBarCode(this.codeBarreTextField.getText());
+            //pToSend.setCatProd(this.categorieBox.getSelectedItem());
         });
     }
 

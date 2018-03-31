@@ -17,13 +17,13 @@ public class Produit implements ModelObject{
      */
     private int id;
     /**
-     * weight, length, width of the product
+     * weight, length, width and cost of the product
      */
-    private float poids,longueur,largeur;
+    private float poids,longueur,largeur, cost;
     /**
-     * name of the product
+     * name and barre code of the product
      */
-    private String nom;
+    private String nom, barCode;
     /**
      * provider of the product
      */
@@ -195,6 +195,16 @@ public class Produit implements ModelObject{
     public void setLargeur(float largeur) {
         this.largeur = largeur;
     }
+
+
+    public float getCost(){return this.cost;}
+
+    public void setCost(Float cost){this.cost = cost;}
+
+    public String getBarCode(){return this.barCode;}
+
+    public void setBarCode(String barCode){this.barCode = barCode;}
+
     /**
      * method to display the product
      * @return the display

@@ -1,4 +1,7 @@
 package utils.daoUtils;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Produit;
 import org.apache.log4j.Logger;
 import model.StockSortie;
@@ -18,6 +21,17 @@ public class StockSortieDAO extends DAO<StockSortie> {
 
     @Override
     public boolean create(StockSortie obj) {
+        boolean response;
+        String str = "{\"name\" : \"newOutputStorage\",\"id\" : 0}";
+        this.connection.send(str);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            str = mapper.writeValueAsString(obj);
+            this.connection.send(str);
+            Object rep = this.connection.recieve(Boolean.class);
+        }catch(JsonProcessingException e){
+            e.printStackTrace();
+        }
         return false;
     }
 

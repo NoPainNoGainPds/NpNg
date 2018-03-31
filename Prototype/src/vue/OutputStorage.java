@@ -105,9 +105,10 @@ public class OutputStorage extends JPanel{
         this.validerBoutton.addActionListener(event ->
         {
             StockSortie ssToSend = new StockSortie();
-            //ssToSend.setDate(...);
+            //ssToSend.setDate(...);  Comment on fait la date lol
             //ssToSend.setId_boutique();  Erreur pcq on recupere un nom et pas l'id
             ssToSend.setQuantite(Integer.parseInt(this.quantiteTextField.getText()));
+
 
         });
     }
