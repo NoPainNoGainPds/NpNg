@@ -15,7 +15,7 @@ public class Map extends JPanel {
     private Color GREENBLUEGRAY = Color.decode("#61AB99");
     private Color SELECTEDCOLOR = Color.decode("#FF804C");
     /**
-     * Liste of all polygons who represent a location on the map
+     * List of all polygons which represent a location on the map
      */
     private ArrayList<MyPolygon> polygons;
     /**
