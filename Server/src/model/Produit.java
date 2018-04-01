@@ -243,7 +243,7 @@ public class Produit{
      * get the product barcode
      * @return the barcode
      */
-    public float getCodeBarre() {
+    public int getCodeBarre() {
         return codebarre;
     }
 

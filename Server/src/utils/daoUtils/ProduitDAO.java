@@ -39,8 +39,14 @@ public class ProduitDAO extends DAO<Produit> {
     public boolean create(Produit obj) {
         try
         {
-            obj.
-            String requete = "INSERT INTO produit (nom_produit,cout_unitaire,quantite,codebarre,largeur,longueur,poids) VALUES ";
+            String name = obj.getNom();
+            String cost = Float.toString(obj.getCout());
+            String qty = Integer.toString(obj.getQuantite());
+            String barCode = Integer.toString(obj.getCodeBarre());
+            String width = Float.toString(obj.getLargeur());
+            String length = Float.toString(obj.getLongueur());
+            String weight = Float.toString(obj.getPoids());
+            String requete = "INSERT INTO produit (nom_produit,cout_unitaire,quantite,codebarre,largeur,longueur,poids) VALUES ('"+name+"',"+cost+","+qty+","+barCode+","+width+","+length+","+weight+");";
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(requete);
             logger.info(requete);
