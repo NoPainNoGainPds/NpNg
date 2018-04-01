@@ -137,6 +137,9 @@ public class Client extends Thread {
                         case "UPDATE" :
                             sender.sendAllStore();
                             break;
+                        case "newProduct" :
+                            sender.insertProduct(this.mapper.readValue(read(),Produit.class));
+                            break;
                         default: System.out.println("Not Comparable");
                     }
                     /*

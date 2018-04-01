@@ -223,4 +223,21 @@ public class Sender {
             e.printStackTrace();
         }
     }
+    /**
+     * Methode to insert product from client
+     * @param product the product to insert
+     */
+    public void insertProduct(Produit product)
+    {
+        try {
+            Boolean b = this.pDAO.create(product);
+            this.mapper.writeValue(this.writer, b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+            System.out.println("creation produit");
+        }catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

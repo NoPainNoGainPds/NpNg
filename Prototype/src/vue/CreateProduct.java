@@ -82,6 +82,7 @@ public class CreateProduct extends JPanel{
     public CreateProduct(){
         this.view();
         this.pDAO = new ProduitDAO(Constants.conServ);
+        this.controler();
     }
 
 
@@ -148,6 +149,44 @@ public class CreateProduct extends JPanel{
     {
         this.validerBoutton.addActionListener(event ->
         {
+            int valide = 0;
+            //verification des input
+            if(this.nomDuProduit.field.getText().equals(""))
+            {
+                this.nomDuProduit.field.setBackground(Color.RED);
+                valide++;
+            }
+            if(this.largeurTextField.getText().equals(""))
+            {
+                this.largeurTextField.setBackground(Color.RED);
+                valide++;
+            }
+            if(this.longueurTextField.getText().equals(""))
+            {
+                this.longueurTextField.setBackground(Color.RED);
+                valide++;
+            }
+            if(this.poidsTextField.getText().equals(""))
+            {
+                this.poidsTextField.setBackground(Color.RED);
+                valide++;
+            }
+            if(this.coutUnitaireTextField.getText().equals(""))
+            {
+                this.coutUnitaireTextField.setBackground(Color.RED);
+                valide++;
+            }
+            if(this.quantiteTextField.getText().equals(""))
+            {
+                this.quantiteTextField.setBackground(Color.RED);
+                valide++;
+            }
+            if(this.codeBarreTextField.getText().equals(""))
+            {
+                this.codeBarreTextField.setBackground(Color.RED);
+                valide++;
+            }
+            if(valide==0){
             //recuperation de toutes les données pour creer un produit
             Produit pToSend = new Produit(this.nomDuProduit.field.getText(),0);//ici on fait un debut de produit pour le remplire avec les autre données par la suite
             pToSend.setLargeur(Float.parseFloat(this.largeurTextField.getText()));
@@ -160,6 +199,9 @@ public class CreateProduct extends JPanel{
 
             pToSend.setCodeBarre(Integer.parseInt(this.codeBarreTextField.getText()));
             //pToSend.setCatProd(this.categorieBox.getSelectedItem());
+
+                this.pDAO.create(pToSend);
+            }
         });
     }
 

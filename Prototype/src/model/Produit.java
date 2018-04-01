@@ -7,7 +7,7 @@ import utils.daoUtils.ProduitDAO;
 /**
  * Represents a product
  */
-public class Produit implements ModelObject{
+public class Produit{
     /**
      * Quantity of the product
      */
@@ -232,12 +232,4 @@ public class Produit implements ModelObject{
         return "NOM:"+this.nom+"  QUANTITE:"+this.quantite+"";
     }
 
-    /**
-     * get the ProduitDAO object
-     * @return the DAO
-     */
-    @Override
-    public DAO getDaoClass() {
-        return new ProduitDAO(Constants.conServ);
-    }
 }

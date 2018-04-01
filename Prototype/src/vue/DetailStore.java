@@ -90,7 +90,7 @@ public class DetailStore extends JFrame implements Runnable {
             SwingUtilities.invokeLater(ds);
         });
         btn4.addActionListener((event) -> {
-            FenetreStock fs = new FenetreStock();
+            FenetreStock fs = new FenetreStock(3);
             SwingUtilities.invokeLater(fs);
         });
     }

@@ -17,20 +17,26 @@ public class FenetreStock extends JFrame implements Runnable {
     /**
      * Constructor
      */
-    public FenetreStock(){
+    public FenetreStock(int type){
             this.setTitle("Fenetre");
             this.setSize(1200, 500);
             this.setLocationRelativeTo(null);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            OutputStorage CSpan = new OutputStorage();
-            //EntryIntoStorage EISpan = new EntryIntoStorage();
-            //CreateProduct CPpan = new CreateProduct();
-            this.add(CSpan);
-            //this.add(EISpan);
-            //this.add(CPpan);
-
-            //this.setVisible(true);
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            switch(type)
+            {
+                case 1:
+                    OutputStorage pan = new OutputStorage();
+                    this.add(pan);
+                    break;
+                case 2:
+                    EntryIntoStorage pan2 = new EntryIntoStorage();
+                    this.add(pan2);
+                    break;
+                case 3:
+                    CreateProduct pan3 = new CreateProduct();
+                    this.add(pan3);
+                    break;
+            }
     }
 
 

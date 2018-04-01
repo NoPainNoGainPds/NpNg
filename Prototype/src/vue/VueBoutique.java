@@ -117,7 +117,7 @@ public class VueBoutique extends JFrame {
         });
         modif.addActionListener(event ->
         {
-            new UpdateWindow<>(jlistProduit.getSelectedValue());
+            //new UpdateWindow<>(jlistProduit.getSelectedValue());
         });
         return panel;
         //this.add(panel,BorderLayout.WEST);

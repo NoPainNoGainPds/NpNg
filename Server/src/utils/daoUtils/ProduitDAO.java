@@ -37,7 +37,20 @@ public class ProduitDAO extends DAO<Produit> {
      */
     @Override
     public boolean create(Produit obj) {
-        return false;
+        try
+        {
+            obj.
+            String requete = "INSERT INTO produit (nom_produit,cout_unitaire,quantite,codebarre,largeur,longueur,poids) VALUES ";
+            Statement stmt = this.connection.createStatement();
+            stmt.executeUpdate(requete);
+            logger.info(requete);
+            return true;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            logger.error(e.toString());
+            return false;
+        }
     }
 
     /**
