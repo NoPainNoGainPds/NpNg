@@ -36,6 +36,10 @@ public class Emplacement{
      * Path of the location
      */
     private ArrayList<Point> path;
+    /**
+     * If the location is assigned to a store or not
+     */
+    private boolean assigned;
 
     /**
      * Constructor
@@ -59,6 +63,7 @@ public class Emplacement{
         this.id=id;
         this.cat = cat;
         this.superficie = superficie;
+        assigned = false;
     }
 
     /**
@@ -151,6 +156,22 @@ public class Emplacement{
      */
     public void setReference(Boutique reference) {
         this.reference = reference;
+    }
+
+    /**
+     * Set the assigned value of the location
+     * @param bool true or false
+     */
+    public void setAssigned(boolean bool) {
+        assigned = bool;
+    }
+
+    /**
+     * Get the assigned value of the location
+     * @return true if the location is assigned, false else
+     */
+    public boolean getAssigned() {
+        return assigned;
     }
 
     /**

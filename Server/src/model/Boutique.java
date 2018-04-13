@@ -19,6 +19,7 @@ public class Boutique {
     private ArrayList<Produit> listeProduit;
     private CategorieBoutique categorieBoutique;
     private String logo;
+    private boolean located;
     public Boutique()
     {
 
@@ -39,6 +40,7 @@ public class Boutique {
         this.emplacement = c.geteDAO().find(emplacement);
         this.emplacement.setPath(c.geteDAO().getPathLocation(emplacement));
         this.categorieBoutique = c.getCbDAO().find(categorie);
+        located = false;
     }
 
     /**
@@ -96,5 +98,11 @@ public class Boutique {
 
     public void setCategorieBoutique(CategorieBoutique categorieBoutique) {
         this.categorieBoutique = categorieBoutique;
+    }
+    public void setLocated(boolean bool) {
+        located = bool;
+    }
+    public boolean getLocated() {
+        return located;
     }
 }

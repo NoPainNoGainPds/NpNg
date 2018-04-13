@@ -5,7 +5,7 @@ import model.Emplacement;
 
 public class MarkedLocation implements Comparable{
     /**
-     * The location
+     * The location linked to to marked location
      */
     private Emplacement location;
     /**

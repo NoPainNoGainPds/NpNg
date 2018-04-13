@@ -115,6 +115,8 @@ public class Algorithm {
          */
         for(int i = 0 ; i < max ; i++) {
             markedStoreList.get(i).getStore().setEmplacement(markedLocationList.get(i).getLocation());
+            markedStoreList.get(i).getStore().setLocated(true);
+            markedLocationList.get(i).getLocation().setAssigned(true);
         }
     }
 }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class MarkedStore implements Comparable{
     /**
-     * The store
+     * The store linked to the marked store
      */
     private Boutique store;
     /**
