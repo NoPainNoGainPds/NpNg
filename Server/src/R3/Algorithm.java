@@ -67,7 +67,7 @@ public class Algorithm {
             /*
             Then create a MarkedStore with the mark and add it to the list to sort
              */
-            MarkedStore ms = new MarkedStore(null, storeList.get(i).getId(), storeList.get(i).getNom(), storeList.get(i).getCategorieBoutique().getId(), storeList.get(i).getEmplacement().getId(),storeList.get(i).getLogo(), storeList.get(i), mark);
+            MarkedStore ms = new MarkedStore(storeList.get(i), mark);
             markedStoreList.add(ms);
         }
 
@@ -82,7 +82,7 @@ public class Algorithm {
             /*
             Then create a MarkedLocation with the mark and add it to the list to sort
              */
-            MarkedLocation ml = new MarkedLocation(locationList.get(i).getNom(), locationList.get(i).getId(), locationList.get(i).getSuperficie(), locationList.get(i).getCat(), mark, locationList.get(i));
+            MarkedLocation ml = new MarkedLocation(mark, locationList.get(i));
             markedLocationList.add(ml);
         }
         /*
@@ -114,7 +114,7 @@ public class Algorithm {
         The better location is assigned to the better store
          */
         for(int i = 0 ; i < max ; i++) {
-            markedStoreList.get(i).setLocation(markedLocationList.get(i).getLocation());
+            markedStoreList.get(i).getStore().setEmplacement(markedLocationList.get(i).getLocation());
         }
     }
 }
