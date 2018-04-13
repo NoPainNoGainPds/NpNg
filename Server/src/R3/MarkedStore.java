@@ -47,14 +47,27 @@ public class MarkedStore implements Comparable{
         this.mark = mark;
     }
 
+    /**
+     * Get the store linked to the marked store
+     * @return the store
+     */
     public Boutique getStore() {
         return store;
     }
 
+    /**
+     * Set the store linked to the marked store
+     * @param store the new store
+     */
     public void setStore(Boutique store) {
         this.store = store;
     }
 
+    /**
+     * Method to compare two stores by their mark
+     * @param o the store to compare to this
+     * @return
+     */
     @Override
     public int compareTo(Object o) {
         MarkedStore ms = (MarkedStore) o;

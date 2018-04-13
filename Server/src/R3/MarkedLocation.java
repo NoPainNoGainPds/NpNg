@@ -40,7 +40,7 @@ public class MarkedLocation implements Comparable{
         this.mark = mark;
     }
     /**
-     * Get the location
+     * Get the location linked to the marked location
      * @return the location
      */
     public Emplacement getLocation() {
@@ -48,13 +48,18 @@ public class MarkedLocation implements Comparable{
     }
 
     /**
-     * Set the location
+     * Set the location linked to the marked location
      * @param location the new location
      */
     public void setLocation(Emplacement location) {
         this.location = location;
     }
 
+    /**
+     * Method to compare two locations by their mark
+     * @param o the location to compare to this
+     * @return
+     */
     @Override
     public int compareTo(Object o) {
         MarkedLocation ml = (MarkedLocation) o;
