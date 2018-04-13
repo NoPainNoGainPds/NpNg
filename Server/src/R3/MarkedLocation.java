@@ -6,7 +6,7 @@ import model.Emplacement;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MarkedLocation {
+public class MarkedLocation implements Comparable{
     /**
      * Location id
      */
@@ -204,5 +204,11 @@ public class MarkedLocation {
                 " Superficie  : "+this.area+"; " +
                 "cat : "+this.category+"; " +
                 "mark : "+this.mark+";";
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        MarkedLocation ml = (MarkedLocation) o;
+        return ((Integer) this.mark).compareTo((Integer) ml.getMark());
     }
 }

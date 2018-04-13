@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Represents a store with a mark
  */
-public class MarkedStore {
+public class MarkedStore implements Comparable{
     /**
      * Name of the store
      */
@@ -177,5 +177,11 @@ public class MarkedStore {
      */
     public void setMark(int mark) {
         this.mark = mark;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        MarkedStore ms = (MarkedStore) o;
+        return ((Integer) this.mark).compareTo((Integer) ms.getMark());
     }
 }
