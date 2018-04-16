@@ -159,4 +159,19 @@ public class EmplacementDAO extends DAO<Emplacement> {
             return null;
         }
     }
+
+    /**
+     * Method to unassign a location
+     * @param location the location to unassign
+     */
+    public void unassign(Emplacement location) {
+        try {
+            String query = "update Emplacement set assigned=false where id_emplacement="+location.getId()+";";
+            Statement stmt = this.connection.createStatement();
+            stmt.executeUpdate(query);
+        } catch(SQLException e) {
+            logger.error(e.toString());
+        }
+    }
+
 }

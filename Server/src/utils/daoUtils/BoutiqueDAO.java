@@ -88,7 +88,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     @Override
     public boolean update(Boutique obj) {
-       return false;
+        return false;
     }
 
     /**
@@ -206,5 +206,19 @@ public class BoutiqueDAO extends DAO<Boutique> {
             logger.error(e.toString());
         }
         return nb_boutiques;
+    }
+
+    /**
+     * Method to unlocate a store
+     * @param store the store to unlocate
+     */
+    public void unlocate(Boutique store) {
+        try {
+            String query = "update Boutique set located=false where id_boutique="+store.getId()+";";
+            Statement stmt = this.connection.createStatement();
+            stmt.executeUpdate(query);
+        } catch(SQLException e) {
+            logger.error(e.toString());
+        }
     }
 }

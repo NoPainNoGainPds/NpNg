@@ -1,6 +1,5 @@
 package R3;
 
-import controller.Client;
 import model.Boutique;
 import model.Emplacement;
 import utils.daoUtils.BoutiqueDAO;
@@ -101,7 +100,7 @@ public class Algorithm {
          */
         sortLists();
         /*
-        If there are less locations, take the number of locations for size, else the number of stores
+        If there are less locations, take the number of locations for size, else, the number of stores
          */
         int max;
         if(markedLocationList.size() <= markedStoreList.size()) {
@@ -117,6 +116,46 @@ public class Algorithm {
             markedStoreList.get(i).getStore().setEmplacement(markedLocationList.get(i).getLocation());
             markedStoreList.get(i).getStore().setLocated(true);
             markedLocationList.get(i).getLocation().setAssigned(true);
+        }
+    }
+
+    /**
+     * Method to create max locations in the database
+     * @param max the number of locations to create
+     */
+    public void createLocations(int max) {
+        for(int i = 0 ; i < max ; i++) {
+            Emplacement location = new Emplacement();
+            eDAO.create(location);
+        }
+    }
+
+    /**
+     * Method to create max stores in the database
+     * @param max the number of stores to create
+     */
+    public void createStores(int max) {
+        for(int i = 0 ; i < max ; i++) {
+            Boutique store = new Boutique();
+            bDAO.create(store);
+        }
+    }
+
+    /**
+     * Method to unassign all the locations in the database
+     */
+    public void unassignAllLocations() {
+        for(Emplacement location : locationList) {
+            eDAO.unassign(location);
+        }
+    }
+
+    /**
+     * Method to unlocate all the stores in the database
+     */
+    public void unlocateAllStores() {
+        for(Boutique store : storeList) {
+            bDAO.unlocate(store);
         }
     }
 }
