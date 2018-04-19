@@ -1,10 +1,16 @@
 package R3;
 
+import db.Database;
 import model.Boutique;
 import model.Emplacement;
+import org.apache.log4j.Logger;
 import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.EmplacementDAO;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -36,9 +42,14 @@ public class Algorithm {
      * used to get all the stores
      */
     private BoutiqueDAO bDAO;
+    /**
+     * A logger. Use to have a trace of what happen during the execution.
+     */
+    Logger logger;
 
     /**
      * Constructor
+     *
      * @param eDAO the location DAO
      * @param bDAO the store DAO
      */
@@ -49,13 +60,20 @@ public class Algorithm {
         this.bDAO = bDAO;
         storeList = bDAO.findFromReference();
         markedStoreList = new ArrayList<MarkedStore>();
+        logger = Logger.getLogger(Algorithm.class);
     }
 
     /**
      * Method to sort the store and the location lists thanks to the criteria
      */
     public void sortLists() {
-        for(int i = 0 ; i < storeList.size() ; i++) {
+        /*
+        Get the array with the criteria's values
+         */
+        int[] storeCriteria = getStoreCriteria();
+        int[] locationCriteria = getLocationCriteria();
+
+        for (int i = 0; i < storeList.size(); i++) {
             /*
             Mark starts to 0 and is increased thanks to criteria
              */
@@ -63,6 +81,7 @@ public class Algorithm {
             /*
             Begin the algorithm by modifying the mark
              */
+
             /*
             Then create a MarkedStore with the mark and add it to the list to sort
              */
@@ -70,7 +89,7 @@ public class Algorithm {
             markedStoreList.add(ms);
         }
 
-        for(int i = 0 ; i < locationList.size() ; i++) {
+        for (int i = 0; i < locationList.size(); i++) {
             /*
             Mark starts to 0 and is increased thanks to criteria
              */
@@ -103,16 +122,15 @@ public class Algorithm {
         If there are less locations, take the number of locations for size, else, the number of stores
          */
         int max;
-        if(markedLocationList.size() <= markedStoreList.size()) {
+        if (markedLocationList.size() <= markedStoreList.size()) {
             max = markedLocationList.size();
-        }
-        else {
+        } else {
             max = markedStoreList.size();
         }
         /*
         The better location is assigned to the better store
          */
-        for(int i = 0 ; i < max ; i++) {
+        for (int i = 0; i < max; i++) {
             markedStoreList.get(i).getStore().setEmplacement(markedLocationList.get(i).getLocation());
             markedStoreList.get(i).getStore().setLocated(true);
             markedLocationList.get(i).getLocation().setAssigned(true);
@@ -121,10 +139,11 @@ public class Algorithm {
 
     /**
      * Method to create max locations in the database
+     *
      * @param max the number of locations to create
      */
     public void createLocations(int max) {
-        for(int i = 0 ; i < max ; i++) {
+        for (int i = 0; i < max; i++) {
             Emplacement location = new Emplacement();
             eDAO.create(location);
         }
@@ -132,10 +151,11 @@ public class Algorithm {
 
     /**
      * Method to create max stores in the database
+     *
      * @param max the number of stores to create
      */
     public void createStores(int max) {
-        for(int i = 0 ; i < max ; i++) {
+        for (int i = 0; i < max; i++) {
             Boutique store = new Boutique();
             bDAO.create(store);
         }
@@ -145,7 +165,7 @@ public class Algorithm {
      * Method to unassign all the locations in the database
      */
     public void unassignAllLocations() {
-        for(Emplacement location : locationList) {
+        for (Emplacement location : locationList) {
             eDAO.unassign(location);
         }
     }
@@ -154,8 +174,65 @@ public class Algorithm {
      * Method to unlocate all the stores in the database
      */
     public void unlocateAllStores() {
-        for(Boutique store : storeList) {
+        for (Boutique store : storeList) {
             bDAO.unlocate(store);
         }
     }
+
+    /**
+     * Method to get an array with the stores' criteria's values
+     * @return the array of criteria's values
+     */
+    public int[] getStoreCriteria() {
+        int[] criteriaArray = new int[3];
+        Database db = new Database();
+        try {
+            Connection connection = db.getConnection();
+            Statement stmt = connection.createStatement();
+            String query = "select * from store_criteria";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                criteriaArray[0] = rs.getInt("area");
+                criteriaArray[1] = rs.getInt("store_category");
+                criteriaArray[2] = rs.getInt("attendance_rate");
+                return criteriaArray;
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+            logger.info(query);
+        } catch (SQLException e) {
+            logger.error(e.toString());
+        }
+        return null;
+    }
+
+    /**
+     * Method to get an array with the locations' criteria's values
+     * @return the array of criteria's values
+     */
+    public int[] getLocationCriteria() {
+        int[] criteriaArray = new int[2];
+        Database db = new Database();
+        try {
+            Connection connection = db.getConnection();
+            Statement stmt = connection.createStatement();
+            String query = "select * from location_criteria";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                criteriaArray[0] = rs.getInt("area");
+                criteriaArray[1] = rs.getInt("location_category");
+                return criteriaArray;
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+            logger.info(query);
+        } catch (SQLException e) {
+            logger.error(e.toString());
+        }
+        return null;
+    }
+
 }
+
