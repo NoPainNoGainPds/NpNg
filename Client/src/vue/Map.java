@@ -44,7 +44,7 @@ public class Map extends JPanel {
     public Map()
     {
         this.polygons = new ArrayList<MyPolygon>();
-        this.img1 = Toolkit.getDefaultToolkit().getImage("Prototype/src/res/PlanCentreCo.png");
+        this.img1 = Toolkit.getDefaultToolkit().getImage("Client/src/res/PlanCentreCo.png");
         this.popUpMap = new PopUpMap();
     }
 

@@ -58,6 +58,9 @@ public class Fenetre extends JFrame implements Runnable{
         GridBagLayout gbl = new GridBagLayout();
         this.setLayout(gbl);
         GridBagConstraints gbc = new GridBagConstraints();
+
+        //JTabedPane
+        JTabbedPane jtp = new JTabbedPane(JTabbedPane.LEFT);
         //-----------
         //gbc for menu
         gbc.fill = GridBagConstraints.BOTH;
@@ -97,7 +100,10 @@ public class Fenetre extends JFrame implements Runnable{
         gbc.gridwidth = 5;
         gbc.gridheight = 5;
         gbc.anchor = GridBagConstraints.LINE_START;
-        this.add(this.map,gbc);
+        //ajout tabbedpane
+        jtp.addTab("MAP",null,this.map,"Show map of Stores");
+        this.add(jtp,gbc);
+        //this.add(this.map,gbc);
         //this.add(this.map,BorderLayout.CENTER);
         gbc.gridx = 5;
         gbc.gridy = 1;
@@ -111,6 +117,7 @@ public class Fenetre extends JFrame implements Runnable{
         this.add(rpv,gbc);
         //add button in the frame
         //controller of the btn1
+
     }
 
     /**
@@ -185,7 +192,7 @@ public class Fenetre extends JFrame implements Runnable{
         this.searchTextField.addActionListener(event ->
                 this.notifyBoutique());
         this.mb.add(this.searchTextField);
-        this.searchButton = new JButton(new ImageIcon("Prototype/src/res/search-icon-large.png"));
+        this.searchButton = new JButton(new ImageIcon("Client/src/res/search-icon-large.png"));
         this.searchButton.setBorder(new TextBubbleBorder(Color.GRAY.darker(),2,4,0));
         this.searchButton.addActionListener(event ->
             this.notifyBoutique());

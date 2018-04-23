@@ -63,7 +63,7 @@ public class Emplacement{
         this.id=id;
         this.cat = cat;
         this.superficie = superficie;
-        assigned = false;
+        this.assigned = false;
     }
 
     /**

@@ -36,6 +36,11 @@ public class Emplacement implements ModelObject{
      * Path of the location
      */
     private ArrayList<Point> path;
+
+    /**
+     *
+     */
+    private boolean assigned;
     /**
      * Constructor
      */
@@ -58,6 +63,7 @@ public class Emplacement implements ModelObject{
         this.cat = cat;
         this.superficie = superficie;
         this.path = new EmplacementDAO().getPathLocation(this.id);
+        this.assigned = false;
     }
 
     /**
@@ -168,6 +174,21 @@ public class Emplacement implements ModelObject{
         return ""+this.id+" ; "+this.nom+"";
     }
 
+    /**
+     * Set the assigned value of the location
+     * @param bool true or false
+     */
+    public void setAssigned(boolean bool) {
+        assigned = bool;
+    }
+
+    /**
+     * Get the assigned value of the location
+     * @return true if the location is assigned, false else
+     */
+    public boolean getAssigned() {
+        return assigned;
+    }
     /**
      * get the EmplacementDAO object
      * @return the DAO

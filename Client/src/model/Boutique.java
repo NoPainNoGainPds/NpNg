@@ -21,6 +21,7 @@ public class Boutique implements ModelObject {
     private ArrayList<Produit> listeProduit;
     private CategorieBoutique categorieBoutique;
     private String logo;
+    private boolean located;
     public Boutique()
     {
 
@@ -111,5 +112,11 @@ public class Boutique implements ModelObject {
 
     public void setCategorieBoutiqueRef(CategorieBoutique categorieBoutique) {
         this.categorieBoutique = categorieBoutique;
+    }
+    public void setLocated(boolean bool) {
+        located = bool;
+    }
+    public boolean getLocated() {
+        return located;
     }
 }
