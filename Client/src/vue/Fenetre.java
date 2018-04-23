@@ -118,6 +118,8 @@ public class Fenetre extends JFrame implements Runnable{
         //add button in the frame
         //controller of the btn1
 
+        //ajout de la vue des profils
+
     }
 
     /**
