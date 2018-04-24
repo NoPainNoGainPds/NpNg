@@ -102,6 +102,7 @@ public class Fenetre extends JFrame implements Runnable{
         gbc.anchor = GridBagConstraints.LINE_START;
         //ajout tabbedpane
         jtp.addTab("MAP",null,this.map,"Show map of Stores");
+        jtp.addTab("Profils",null,new ManageProfil(),"Show all profils and manage");
         this.add(jtp,gbc);
         //this.add(this.map,gbc);
         //this.add(this.map,BorderLayout.CENTER);
