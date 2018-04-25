@@ -1,5 +1,14 @@
 package model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Client {
     private int id;
     private String nom,prenom,sexe,addr,mail,phone,birthdate,card;
@@ -82,7 +91,20 @@ public class Client {
      */
     public int Age()
     {
-
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+            Date date = formatter.parse(this.birthdate);
+            LocalDate now = LocalDate.now();
+            LocalDate birthday = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+// using period
+            Period period = Period.between(birthday, now);
+            int age =  period.getYears();
+            return age;
+            }catch(ParseException e)
+        {
+            e.printStackTrace();
+            return -1;
+        }
     }
     public String toString(){
         return ""+this.prenom+""+this.nom+""+this.Age()+";"+this.mail;

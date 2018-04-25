@@ -2,6 +2,7 @@ package vue;
 
 import model.Boutique;
 import model.Emplacement;
+import utils.ConnectionServer;
 import utils.Constants;
 import utils.daoUtils.EmplacementDAO;
 

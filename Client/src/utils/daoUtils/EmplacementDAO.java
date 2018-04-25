@@ -1,6 +1,7 @@
 package utils.daoUtils;
 import org.apache.log4j.Logger;
 import model.Emplacement;
+import utils.ConnectionServer;
 import utils.Constants;
 import utils.DAO;
 
@@ -64,22 +65,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
      */
     @Override
     public Emplacement find(int id) {
-        try
-        {
-            String requete = "SELECT id_emplacement,nom_emplacement,superficie,position,nom_categorie_emplacement FROM emplacement " +
-                    "join categorie_emplacement on categorie_emplacement.id_categorie_emplacement=emplacement.id_categorie_emplacement" +
-                    " where emplacement.id_emplacement = "+id+";";
-            Statement stmt = Constants.DB.getConnection().createStatement();
-            ResultSet res = stmt.executeQuery(requete);
-            if(res.first())
-            {
-                logger.info(requete);
-                return new Emplacement(res.getString("nom_emplacement"),id,res.getInt("superficie"),res.getString("nom_categorie_emplacement"));
-            }
-        }catch(SQLException e)
-        {
-            logger.error(e.toString());
-        }
+
         return null;
     }
 
@@ -90,22 +76,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
      */
     @Override
     public ArrayList<Emplacement> findFromReference(int id) {
-        try
-        {
-            String requete = "SELECT id_emplacement,categorie_emplacement.nom_categorie_emplacement FROM emplacement join categorie_emplacement ON emplacement.id_emplacement = categorie_emplacement.id_emplacement where id_boutique ="+id;
-            Statement stmt = Constants.DB.getConnection().createStatement();
-            ResultSet res = stmt.executeQuery(requete);
-            ArrayList<Emplacement> list = new ArrayList<>();
-            while(res.next())
-            {
-                list.add(new Emplacement(res.getString("nom_emplacement"),res.getInt("id_emplacement"),res.getInt("superficie"),res.getString("nom_categorie_emplacement")));
-            }
-            logger.info(requete);
-            return list;
-        }catch (SQLException e) {
-            logger.error(e.toString());
-            return null;
-        }
+        return null;
     }
     /**
      * Get all the locations from the database.
@@ -113,44 +84,10 @@ public class EmplacementDAO extends DAO<Emplacement> {
      */
     @Override
     public ArrayList<Emplacement> findFromReference() {
-        try
-        {
-            String requete = "SELECT id_emplacement,nom_emplacement,superficie,position,nom_categorie_emplacement FROM emplacement " +
-                    "join categorie_emplacement on categorie_emplacement.id_categorie_emplacement=emplacement.id_categorie_emplacement" +
-                    " ;";
-            Statement stmt = Constants.DB.getConnection().createStatement();
-            ResultSet res = stmt.executeQuery(requete);
-            ArrayList<Emplacement> list = new ArrayList<>();
-            while(res.next())
-            {
-                list.add(new Emplacement(res.getString("nom_emplacement"),res.getInt("id_emplacement"),res.getInt("superficie"),res.getString("nom_categorie_emplacement")));
-            }
-            logger.info(requete);
-            return list;
-        }catch (SQLException e) {
-            logger.error(e.toString());
-            return null;
-        }
+        return null;
     }
     public ArrayList<Point> getPathLocation(int idLocation)
     {
-        try
-        {
-            String query = "Select coord_x,coord_y from coordonnees_emplacement where id_emplacement ="+idLocation+";";
-            ArrayList<Point> liste = new ArrayList<>();
-            Statement stmt = Constants.DB.getConnection().createStatement();
-            ResultSet res = stmt.executeQuery(query);
-            while(res.next())
-            {
-                int x = res.getInt(1);
-                int y= res.getInt(2);
-                liste.add(new Point(x,y));
-            }
-            return liste;
-        }catch(SQLException e)
-        {
-            logger.error(e);
-            return null;
-        }
+        return null;
     }
 }
