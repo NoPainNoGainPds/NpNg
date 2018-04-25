@@ -107,6 +107,6 @@ public class Client {
         }
     }
     public String toString(){
-        return ""+this.prenom+""+this.nom+""+this.Age()+";"+this.mail;
+        return ""+this.prenom+","+this.nom+",Age :"+this.Age()+";"+this.mail;
     }
 }

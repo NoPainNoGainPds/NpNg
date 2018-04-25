@@ -71,4 +71,9 @@ public class InputFromClient {
     public void setRef(String ref) {
         this.ref = ref;
     }
+
+    public String toString()
+    {
+        return this.name+";"+this.id;
+    }
 }

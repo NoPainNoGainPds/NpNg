@@ -66,6 +66,11 @@ public class Client extends Thread {
      * to access the storage with database
      */
     private StockSortieDAO ssDAO;
+
+    /**
+     * to access the client with database
+     */
+    private ClientDAO cDAO;
     /**
      * the sender
      */
@@ -98,6 +103,7 @@ public class Client extends Thread {
         this.fDAO = new FournisseurDAO(this.database);
         this.pDAO = new ProduitDAO(this.database);
         this.ssDAO = new StockSortieDAO(this.database);
+        this.cDAO = new ClientDAO(this.database);
     }
 
     /**
@@ -117,6 +123,7 @@ public class Client extends Thread {
                 if (!this.skt.isClosed()) {
                     String str = read();
                     InputFromClient inputFromClient = this.mapper.readValue(str, InputFromClient.class);
+                    System.out.println(inputFromClient);
                     switch(inputFromClient.getName())
                     {
                         case "Store" ://exemple ici je sais que je vais utiliser le DAO Boutique
@@ -139,6 +146,9 @@ public class Client extends Thread {
                             break;
                         case "newProduct" :
                             sender.insertProduct(this.mapper.readValue(read(),Produit.class));
+                            break;
+                        case "Client" :
+                            sender.sendClient(inputFromClient.getId());
                             break;
                         default: System.out.println("Not Comparable");
                     }
@@ -178,6 +188,10 @@ public class Client extends Thread {
      */
     public CategorieBoutiqueDAO getCbDAO() {
         return cbDAO;
+    }
+
+    public ClientDAO getcDAO() {
+        return cDAO;
     }
 
     /**

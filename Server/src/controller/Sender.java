@@ -58,6 +58,10 @@ public class Sender {
      * The input storage
      */
     private StockEntreeDAO esDAO;
+    /**
+     * The Client
+     */
+    private ClientDAO cDAO;
 
     /**
      * Constructor
@@ -76,6 +80,7 @@ public class Sender {
         this.pDAO = new ProduitDAO(database);
         this.ssDAO = new StockSortieDAO(database);
         this.esDAO = new StockEntreeDAO(database);
+        this.cDAO = client.getcDAO();
         this.mapper = mapper;
         this.mapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
         this.writer = writer;
@@ -116,6 +121,28 @@ public class Sender {
             try {
                 ArrayList<Produit> liste = this.pDAO.findFromReference(id);
                 for (Produit p : liste) {
+                    this.mapper.writeValue(this.writer,p);
+                    this.writer.write("\n".getBytes());
+                    this.writer.flush();
+                }
+                this.writer.write("null\n".getBytes());
+                this.writer.flush();
+            }catch (JsonMappingException e) {
+                e.printStackTrace();
+            } catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void sendClient(int id)
+    {
+        if(id==-1)
+        {
+            try {
+                ArrayList<ClientModel> liste = this.cDAO.findFromReference();
+                for (ClientModel p : liste) {
                     this.mapper.writeValue(this.writer,p);
                     this.writer.write("\n".getBytes());
                     this.writer.flush();

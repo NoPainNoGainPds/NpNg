@@ -10,7 +10,18 @@ import java.util.Date;
 public class ClientModel {
     private int id;
     private String nom,prenom,sexe,addr,mail,phone,birthdate,card;
-
+    public ClientModel(int id,String nom,String prenom,String sexe,String addr,String mail,String phone,String birthdate,String card)
+    {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sexe = sexe;
+        this.addr = addr;
+        this.mail = mail;
+        this.phone = phone;
+        this.birthdate = birthdate;
+        this.card = card;
+    }
     public int getId() {
         return id;
     }
