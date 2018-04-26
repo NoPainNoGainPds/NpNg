@@ -36,6 +36,10 @@ public class ClientDAO extends DAO<Client> {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public ArrayList<Client> findFromReference() {
         try {
@@ -58,6 +62,37 @@ public class ClientDAO extends DAO<Client> {
         }catch(Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean delAllProfil()
+    {
+        try
+        {
+            String str ="{\"name\":\"UpdateProfil\",\"id\":-1}";
+            this.connection.send(str);
+            return true;
+        }catch(Exception e)
+        {
+            return false;
+        }
+    }
+    /**
+     *
+     */
+    public boolean AttrProf()
+    {
+        try{
+            String str = "{\"name\":\"UpdateProfil\",\"id\":1}";
+            this.connection.send(str);
+            return true;
+        }catch(Exception e)
+        {
+            return false;
         }
     }
 }

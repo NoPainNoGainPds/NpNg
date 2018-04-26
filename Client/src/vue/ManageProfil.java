@@ -2,6 +2,7 @@ package vue;
 
 import model.Client;
 import model.Profil;
+import net.miginfocom.swing.MigLayout;
 import utils.Constants;
 import utils.daoUtils.ClientDAO;
 
@@ -14,14 +15,18 @@ import java.util.ArrayList;
 public class ManageProfil extends JPanel{
     private ArrayList<Profil> liste;
     private ArrayList<Client> listeClient;
+    private ClientDAO cDao;
+    private Image imgProf;
     public ManageProfil(){
         this.setLayout(new BorderLayout());
-        ClientDAO cDao = new ClientDAO(Constants.conServ);
+        this.cDao = new ClientDAO(Constants.conServ);
         System.out.println("demande client");
-        this.listeClient = cDao.findFromReference();
+        this.listeClient = this.cDao.findFromReference();
         System.out.println("ici client");
         JList<Client> listeClient = new JList<Client>(this.listeClient.toArray(new Client[0]));
         JScrollPane pane = new JScrollPane(listeClient);
+        //ajout panneau des actions
+        this.add(getActionPane(), BorderLayout.NORTH);
         this.add(pane, BorderLayout.WEST);
 
         listeClient.addListSelectionListener((ListSelectionEvent listSelectionEvent) ->
@@ -30,7 +35,31 @@ public class ManageProfil extends JPanel{
                 Client c = listeClient.getSelectedValue();
             }
         );
-
+        this.add(getClientPane(),BorderLayout.CENTER);
     }
+    private JPanel getActionPane()
+    {
+        JPanel panel = new JPanel();
+        JButton btn1 = new JButton("Attribuer Profils");
+        JButton btn2 = new JButton("Supprimer profils");
+        JButton btn3 = new JButton("autre JSP pour le moment");
 
+        btn1.addActionListener(e -> this.cDao.AttrProf());
+        btn2.addActionListener(e -> this.cDao.delAllProfil());
+
+        panel.add(btn1);
+        panel.add(btn2);
+        panel.add(btn3);
+
+        return panel;
+    }
+    private JPanel getClientPane(){
+        JPanel panel = new JPanel();
+        panel.setLayout(new MigLayout());
+        this.imgProf = Toolkit.getDefaultToolkit().getImage("Client/src/res/Profil.png");
+        ImageComponent iconProfil = new ImageComponent(this.imgProf,false);
+        iconProfil.setSize(200,200);
+        panel.add(iconProfil,"");
+        return panel;
+    }
 }
