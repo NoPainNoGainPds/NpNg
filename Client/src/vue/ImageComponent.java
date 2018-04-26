@@ -13,6 +13,8 @@ public class ImageComponent extends JPanel implements Serializable {
      * The image
      */
     Image image = null;
+    private int bound_width = 150;
+    private int bound_height = 150;
     private boolean isSquare;
 
     /**
@@ -49,6 +51,11 @@ public class ImageComponent extends JPanel implements Serializable {
         return image;
     }
 
+    public void setImageDimention(int w, int h)
+    {
+        this.bound_height = h;
+        this.bound_width = w;
+    }
     /**
      * paintComponent method to draw
      * @param g the graphics element
@@ -58,8 +65,6 @@ public class ImageComponent extends JPanel implements Serializable {
         if (image != null) { //there is a picture: draw it
             int original_width = this.image.getWidth(this);
             int original_height = this.image.getHeight(this);
-            int bound_width = 150;
-            int bound_height = 150;
             int new_width = original_width;
             int new_height = original_height;
             if (original_width > bound_width) {

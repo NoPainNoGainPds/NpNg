@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class ManageProfil extends JPanel{
     private ArrayList<Profil> liste;
     private ArrayList<Client> listeClient;
+    private ClientView clientView;
     private ClientDAO cDao;
     private Image imgProf;
     public ManageProfil(){
@@ -33,9 +34,11 @@ public class ManageProfil extends JPanel{
             {
                 //au clique, afficher les achats du client.
                 Client c = listeClient.getSelectedValue();
+                this.clientView.setClient(c);
             }
         );
-        this.add(getClientPane(),BorderLayout.CENTER);
+        this.clientView = new ClientView();
+        this.add(this.clientView,BorderLayout.CENTER);
     }
     private JPanel getActionPane()
     {
@@ -51,15 +54,6 @@ public class ManageProfil extends JPanel{
         panel.add(btn2);
         panel.add(btn3);
 
-        return panel;
-    }
-    private JPanel getClientPane(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new MigLayout());
-        this.imgProf = Toolkit.getDefaultToolkit().getImage("Client/src/res/Profil.png");
-        ImageComponent iconProfil = new ImageComponent(this.imgProf,false);
-        iconProfil.setSize(200,200);
-        panel.add(iconProfil,"");
         return panel;
     }
 }
