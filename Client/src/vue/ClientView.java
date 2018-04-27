@@ -14,7 +14,7 @@ public class ClientView extends JPanel {
     public ClientView()
     {
         super();
-        this.setLayout(new MigLayout("fill, wrap"));
+        this.setLayout(new MigLayout("wrap","[grow]","[][grow]"));
         this.nom = new JLabel("Nom :");
         this.prenom = new JLabel("Prenom :");
         this.age = new JLabel("Age :");
@@ -27,7 +27,7 @@ public class ClientView extends JPanel {
         this.iconProfil.setImageDimention(75,75);
         this.add(this.iconProfil,"cell 0 0");
         this.add(this.nom,"cell 1 0");
-        this.add(this.prenom);
+        this.add(this.prenom,"cell 2 0");
         this.add(this.age);
         this.add(this.mail);
         this.add(this.telephone);

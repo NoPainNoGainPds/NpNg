@@ -1,13 +1,11 @@
 package utils.daoUtils;
 
 import model.ClientModel;
+import model.Purchase;
 import utils.Constants;
 import utils.DAO;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ClientDAO extends DAO<ClientModel> {
@@ -58,5 +56,37 @@ public class ClientDAO extends DAO<ClientModel> {
             e.printStackTrace();
         }
         return null;
+    }
+    public boolean delAllProfil()
+    {
+        try
+        {
+            Statement stmt = this.connection.createStatement();
+            String requete ="";
+            ResultSet res = stmt.executeQuery(requete);
+            stmt.close();
+            return true;
+        }catch(Exception e)
+        {
+            return false;
+        }
+    }
+    /**
+     *
+     */
+    public boolean attrProf()
+    {
+        PurchaseDAO pDAO = new PurchaseDAO(this.connection);
+        ArrayList<ClientModel> liste = this.findFromReference();
+        //for every clients
+        for(ClientModel client : liste)
+        {
+            ArrayList<Purchase> purchases = pDAO.findFromReference(client.getId());
+            for(Purchase p : purchases)
+            {
+                System.out.println(p);
+            }
+        }
+        return false;
     }
 }

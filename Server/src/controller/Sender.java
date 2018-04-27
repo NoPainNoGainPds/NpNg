@@ -267,4 +267,23 @@ public class Sender {
             e.printStackTrace();
         }
     }
+    public void updateProfil(int id)
+    {
+        try{
+            Boolean b = false;
+            if(id==-1)
+            {
+                b = this.cDAO.delAllProfil();
+            }else if (id==1)
+            {
+                b = this.cDAO.attrProf();
+            }
+            this.mapper.writeValue(this.writer,b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

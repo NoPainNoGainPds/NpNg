@@ -123,7 +123,6 @@ public class Client extends Thread {
                 if (!this.skt.isClosed()) {
                     String str = read();
                     InputFromClient inputFromClient = this.mapper.readValue(str, InputFromClient.class);
-                    System.out.println(inputFromClient);
                     switch(inputFromClient.getName())
                     {
                         case "Store" ://exemple ici je sais que je vais utiliser le DAO Boutique
@@ -149,6 +148,9 @@ public class Client extends Thread {
                             break;
                         case "Client" :
                             sender.sendClient(inputFromClient.getId());
+                            break;
+                        case "UpdateProfil" :
+                            sender.updateProfil(inputFromClient.getId());
                             break;
                         default: System.out.println("Not Comparable");
                     }
