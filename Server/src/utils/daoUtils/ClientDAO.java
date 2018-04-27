@@ -81,10 +81,32 @@ public class ClientDAO extends DAO<ClientModel> {
         //for every clients
         for(ClientModel client : liste)
         {
+            int nb_sport =0,nb_mobi = 0,nb_tech = 0,nb_alim = 0,nb_educ = 0;
             ArrayList<Purchase> purchases = pDAO.findFromReference(client.getId());
             for(Purchase p : purchases)
             {
                 System.out.println(p);
+                switch(p.getId_categorie_Boutique())
+                {
+                    case Constants.CAT_SPORT :
+                        nb_sport++;
+                        break;
+                    case Constants.CAT_MOBILIER:
+                        nb_mobi++;
+                        break;
+                    case Constants.CAT_ALIMENTAIRE:
+                        nb_alim++;
+                        break;
+                    case Constants.CAT_EDUCATION:
+                        nb_educ++;
+                        break;
+                    case Constants.CAT_TECH:
+                        nb_tech++;
+                        break;
+                }
+                //calcul de pourcentage
+                int tot = nb_alim+nb_educ+nb_mobi+nb_sport+nb_tech;
+
             }
         }
         return false;

@@ -75,7 +75,8 @@ public class ClientDAO extends DAO<Client> {
         {
             String str ="{\"name\":\"UpdateProfil\",\"id\":-1}";
             this.connection.send(str);
-            return true;
+            Boolean b = (Boolean)this.connection.recieve(Boolean.class);
+            return b;
         }catch(Exception e)
         {
             return false;
@@ -89,7 +90,8 @@ public class ClientDAO extends DAO<Client> {
         try{
             String str = "{\"name\":\"UpdateProfil\",\"id\":1}";
             this.connection.send(str);
-            return true;
+            Boolean b = (Boolean)this.connection.recieve(Boolean.class);
+            return b;
         }catch(Exception e)
         {
             return false;
