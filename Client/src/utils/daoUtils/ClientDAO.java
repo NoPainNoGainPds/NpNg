@@ -51,7 +51,7 @@ public class ClientDAO extends DAO<Client> {
             {
                 Object b = (Object)this.connection.recieve(Client.class);
                 if (b != null) {
-                    System.out.println("recu!!!!!");
+                    //System.out.println("recu!!!!!");
                     Client b2 = (Client) b;
                     liste.add(b2);
                 } else {

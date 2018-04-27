@@ -8,4 +8,5 @@ public class Constants {
     public static final int CAT_TECH= 3;
     public static final int CAT_ALIMENTAIRE = 4;
     public static final int CAT_EDUCATION = 5;
+    public static final int CAT_MODE = 6;
 }

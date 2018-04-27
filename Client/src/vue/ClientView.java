@@ -24,10 +24,10 @@ public class ClientView extends JPanel {
         this.img = Toolkit.getDefaultToolkit().getImage("Client/src/res/Profil.png");
         this.iconProfil = new ImageComponent(this.img,true);
         this.iconProfil.setMinimumSize(new Dimension(75,75));
-        this.iconProfil.setImageDimention(75,75);
+        this.iconProfil.setImageDimention(75,74);
         this.add(this.iconProfil,"cell 0 0");
         this.add(this.nom,"cell 1 0");
-        this.add(this.prenom,"cell 2 0");
+        this.add(this.prenom,"");
         this.add(this.age);
         this.add(this.mail);
         this.add(this.telephone);
