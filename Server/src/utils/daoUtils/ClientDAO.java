@@ -81,11 +81,11 @@ public class ClientDAO extends DAO<ClientModel> {
         //for every clients
         for(ClientModel client : liste)
         {
-            int nb_sport =0,nb_mobi = 0,nb_tech = 0,nb_alim = 0,nb_educ = 0,nb_mode=0;
             ArrayList<Purchase> purchases = pDAO.findFromReference(client.getId());
+            int nb_sport =0,nb_mobi = 0,nb_tech = 0,nb_alim = 0,nb_educ = 0,nb_mode=0,none=0;
             for(Purchase p : purchases)
             {
-                System.out.println(p);
+
                 switch(p.getId_categorie_Boutique())
                 {
                     case Constants.CAT_SPORT :
@@ -106,10 +106,20 @@ public class ClientDAO extends DAO<ClientModel> {
                     case Constants.CAT_MODE:
                         nb_mode++;
                         break;
-                    default:break;
+                    default:
+                        none++;
+                        break;
                 }
                 //calcul de pourcentage
                 int tot = nb_alim+nb_educ+nb_mobi+nb_sport+nb_tech+nb_mode;
+                System.out.println("Client :"+client.getNom());
+                System.out.println("None : "+ none);
+                System.out.println("Sport :"+((nb_sport/tot)*100)+"%");
+                System.out.println("mobilier :"+((nb_mobi/tot)*100)+"%");
+                System.out.println("alimentaire :"+((nb_alim/tot)*100)+"%");
+                System.out.println("Tech :"+((nb_tech/tot)*100)+"%");
+                System.out.println("Mode :"+((nb_mode/tot)*100)+"%");
+
 
             }
         }

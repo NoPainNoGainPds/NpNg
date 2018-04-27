@@ -37,7 +37,7 @@ public class PurchaseDAO extends DAO<Purchase> {
     @Override
     public ArrayList<Purchase> findFromReference(int id) {
         try{
-            String requete = "SELECT achat.id_Achat,b.id_categorie_boutique,achat.id_client,achat.id_produit from achat JOIN sortie_stock ss ON ss.id_sortie = achat.id_sortie_stock JOIN boutique b on b.id_boutique = ss.id_boutique WHERE achat.id_client ="+id+";";
+            String requete = "SELECT id_Achat,b.id_categorie_boutique,achat.id_client,ss.id_produit from achat JOIN sortie_stock ss ON ss.id_sortie = achat.id_sortie_stock JOIN boutique b on b.id_boutique = ss.id_boutique WHERE achat.id_client ="+id+";";
             Statement stmt = this.connection.createStatement();
             ResultSet res = stmt.executeQuery(requete);
             ArrayList<Purchase> list = new ArrayList<>();
