@@ -58,9 +58,9 @@ public class RedevanceDAO extends DAO<Redevance> {
         return liste;
     }
 
-    public ArrayList<Redevance> findFromReference(int id_redevance, int id_boutique){
+    public ArrayList<Redevance> findFromReference(int annee, int mois){
         ArrayList<Redevance> liste = new ArrayList<>();
-        this.connection.send("{\"name\" : \"Redevance\",\"id\":"+id_redevance+", \"ref\":"+id_boutique+"}");
+        this.connection.send("{\"name\" : \"Redevance\",\"id\":"+annee+", \"ref\":"+mois+"}");
         boolean recieved = false;
         while(!recieved)
         {

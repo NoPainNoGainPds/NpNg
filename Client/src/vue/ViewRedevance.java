@@ -36,35 +36,56 @@ public class ViewRedevance extends JPanel{
     JScrollPane j=new JScrollPane(jlist);
 
     public ViewRedevance() {
-        this.setSize(new Dimension(500, 420));
+        //this.setSize(new Dimension(500, 420));
         JPanel panel = new JPanel();
+        panel.setLayout(new MigLayout("inset 5", "[fill, grow]", "[fill, grow]"));
         this.Mot = new JLabel("Redevances de toutes les boutiques" );
 
 
 
-        RedevanceDAO redevance = new RedevanceDAO();
-        ArrayList<Redevance> list1=new ArrayList<>();
-        list1 = redevance.findFromReference();
-        MyListModel<Redevance> listModel1 = new MyListModel(list1);
-        JList<Redevance> jlist1 = new JList(listModel1);
-        jlist1.setFixedCellWidth(90);
 
-        jlist1.setListData(list1.toArray(new Redevance[list1.size()]));
-        j.setViewportView(jlist1);
         j.setPreferredSize(new Dimension(300, 200));
 
         JYearChooser monannee= new JYearChooser();
         JMonthChooser monmois= new JMonthChooser();
         JButton valid= new JButton("Valider");
         valid.addActionListener((event) -> {
-            System.out.println(monannee.getYear()+" "+monmois.getMonth());
-                });
 
-        panel.add(monannee);
-        panel.add(monmois);
-        panel.add(valid);
-        panel.add(this.Mot);
-        panel.add(j, BorderLayout.WEST);
+                    try {
+
+                       /* RedevanceDAO redevance = new RedevanceDAO();
+                        ArrayList<Redevance> list1=new ArrayList<>();
+                        list1 = redevance.findFromReference();
+                        MyListModel<Redevance> listModel1 = new MyListModel(list1);
+                        JList<Redevance> jlist1 = new JList(listModel1);
+                        jlist1.setFixedCellWidth(90);
+
+                        jlist1.setListData(list1.toArray(new Redevance[list1.size()]));
+                        j.setViewportView(jlist1);*/
+
+                        System.out.println(monannee.getYear()+" "+monmois.getMonth());
+
+                        RedevanceDAO redevance = new RedevanceDAO();
+                        ArrayList<Redevance> list1=new ArrayList<>();
+                        list1 = redevance.findFromReference(monannee.getYear(),monmois.getMonth());
+                        MyListModel<Redevance> listModel1 = new MyListModel(list1);
+                        JList<Redevance> jlist1 = new JList(listModel1);
+                        jlist1.setFixedCellWidth(90);
+
+                        jlist1.setListData(list1.toArray(new Redevance[list1.size()]));
+                        j.setViewportView(jlist1);
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                    panel.repaint();
+                    panel.revalidate();
+                });
+        panel.add(this.Mot, "cell 0 0");
+        panel.add(monannee, "cell 0 1");
+        panel.add(monmois, "cell 1 1");
+        panel.add(valid, "cell 2 1");
+
+        panel.add(j, "cell 0 2 10 2, split 2");
         this.add(panel);
 
 

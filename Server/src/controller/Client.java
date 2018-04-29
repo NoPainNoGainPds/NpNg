@@ -159,7 +159,9 @@ public class Client extends Thread {
                             sender.updateProfil(inputFromClient.getId());
                             break;
                         case "Redevance" :
+                            if(inputFromClient.getId()==-1)
                             sender.sendAllfees();
+                            else sender.sendFee(inputFromClient);
                             break;
                         default: System.out.println("Not Comparable");
                     }

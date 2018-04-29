@@ -312,4 +312,31 @@ public class Sender {
             e.printStackTrace();
         }
     }
+
+    public void sendFee(InputFromClient inputFromClient)
+    {
+        try {
+            if (!inputFromClient.getRef().equals("")) {
+                ArrayList<Redevance> liste = this.rDAO.findFromReference(inputFromClient.getId(),Integer.parseInt(inputFromClient.getRef()));
+                for(int i = 0;i<liste.size();i++) {
+                    this.mapper.writeValue(this.writer,liste.get(i));
+                    this.writer.write("\n".getBytes());
+                    this.writer.flush();
+                }
+                this.writer.write("null\n".getBytes());
+                this.writer.flush();
+            }
+            else
+            {
+                this.writer.write("null\n".getBytes());
+                this.writer.flush();
+            }
+        }catch(JsonMappingException e)
+        {
+            e.printStackTrace();
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
