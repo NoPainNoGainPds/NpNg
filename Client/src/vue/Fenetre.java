@@ -103,6 +103,7 @@ public class Fenetre extends JFrame implements Runnable{
         //ajout tabbedpane
         jtp.addTab("MAP",null,this.map,"Show map of Stores");
         jtp.addTab("Profils",null,new ManageProfil(),"Show all profils and manage");
+        jtp.addTab("Redevance",null,new ViewRedevance(),"Show all fees");
         this.add(jtp,gbc);
         //this.add(this.map,gbc);
         //this.add(this.map,BorderLayout.CENTER);
@@ -161,6 +162,11 @@ public class Fenetre extends JFrame implements Runnable{
     {
         JMenu filemenu = new JMenu("File");
         JMenuItem open = new JMenuItem("Save as  PDF");
+       /* open.addActionListener(event ->
+        {
+            ViewRedevance vr = new ViewRedevance();
+            SwingUtilities.invokeLater(vr);
+        });*/
         JMenuItem save = new JMenuItem("Export as JSon");
         filemenu.add(open);
         filemenu.add(save);

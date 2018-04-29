@@ -71,6 +71,11 @@ public class Client extends Thread {
      * to access the client with database
      */
     private ClientDAO cDAO;
+
+    /**
+     * to access the fee with database
+     */
+    private RedevanceDAO rDAO;
     /**
      * the sender
      */
@@ -104,6 +109,7 @@ public class Client extends Thread {
         this.pDAO = new ProduitDAO(this.database);
         this.ssDAO = new StockSortieDAO(this.database);
         this.cDAO = new ClientDAO(this.database);
+        this.rDAO = new RedevanceDAO(this.database);
     }
 
     /**
@@ -127,7 +133,7 @@ public class Client extends Thread {
                     {
                         case "Store" ://exemple ici je sais que je vais utiliser le DAO Boutique
                         if(inputFromClient.getId()==-1)
-                            sender.sendAllStore();//et la je renvoi le liste de toutes le boutiques
+                            sender.sendAllStore();//et la je renvoie le liste de toutes le boutiques
                         else if(inputFromClient.getId()==-2)
                             sender.sendStoreWhoSale(inputFromClient.getRef());
                         break;
@@ -151,6 +157,9 @@ public class Client extends Thread {
                             break;
                         case "UpdateProfil" :
                             sender.updateProfil(inputFromClient.getId());
+                            break;
+                        case "Redevance" :
+                            sender.sendAllfees();
                             break;
                         default: System.out.println("Not Comparable");
                     }

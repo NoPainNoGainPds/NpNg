@@ -62,6 +62,10 @@ public class Sender {
      * The Client
      */
     private ClientDAO cDAO;
+    /**
+     * The fee
+     */
+    private RedevanceDAO rDAO;
 
     /**
      * Constructor
@@ -80,6 +84,7 @@ public class Sender {
         this.pDAO = new ProduitDAO(database);
         this.ssDAO = new StockSortieDAO(database);
         this.esDAO = new StockEntreeDAO(database);
+        this.rDAO = new RedevanceDAO(database);
         this.cDAO = client.getcDAO();
         this.mapper = mapper;
         this.mapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
@@ -282,6 +287,27 @@ public class Sender {
             this.writer.write("\n".getBytes());
             this.writer.flush();
         }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendAllfees()
+    {
+        try {
+            ArrayList<Redevance> objReturn = this.rDAO.findFromReference();
+            System.out.println(objReturn.size());
+            for(Redevance r : objReturn)
+            {
+                this.mapper.writeValue(this.writer,r);
+                this.writer.write("\n".getBytes());
+                this.writer.flush();
+            }
+            this.writer.write("null\n".getBytes());
+            this.writer.flush();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch(IOException e)
         {
             e.printStackTrace();
         }
