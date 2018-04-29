@@ -24,6 +24,6 @@ public class Parcours {
 
     public String toString()
     {
-        return "nom :"+this.nameParcours;
+        return "Le nom du parcours type est :"+this.nameParcours;
     }
 }
