@@ -110,19 +110,40 @@ public class ClientDAO extends DAO<ClientModel> {
                         none++;
                         break;
                 }
-                //calcul de pourcentage
-                int tot = nb_alim+nb_educ+nb_mobi+nb_sport+nb_tech+nb_mode;
-                System.out.println("Client :"+client.getNom());
-                System.out.println("None : "+ none);
-                System.out.println("Sport :"+((nb_sport/tot)*100)+"%");
-                System.out.println("mobilier :"+((nb_mobi/tot)*100)+"%");
-                System.out.println("alimentaire :"+((nb_alim/tot)*100)+"%");
-                System.out.println("Tech :"+((nb_tech/tot)*100)+"%");
-                System.out.println("Mode :"+((nb_mode/tot)*100)+"%");
-
-
             }
+            int tot = nb_alim+nb_educ+nb_mobi+nb_sport+nb_tech+nb_mode;
+            float[] array = new float[Constants.MAX_CAT_CLIENT];
+            array[0] = (nb_sport/tot)*100;
+            array[1] = (nb_mobi/tot)*100;
+            array[2] = (nb_tech/tot)*100;
+            array[3] = (nb_alim/tot)*100;
+            array[4] = (nb_educ/tot)*100;
+            array[5] = (nb_mode/tot)*100;
+            chooseProfil(client, array);
         }
         return false;
+    }
+    private void chooseProfil(ClientModel client, float[] array)
+    {
+        for(int i=0;i<array.length;i++)
+        {
+            if(array[i]>25.0)
+            {
+                //pas de plus
+            }
+            if(array[i]>50.0)
+            {
+                //1 +
+            }
+            if(array[i]>75.0)
+            {
+                //2+
+            }
+            if(array[i]>95.0)
+            {
+                //3+
+            }
+        }
+
     }
 }

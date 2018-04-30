@@ -2,6 +2,7 @@ package utils;
 
 public class Constants {
     public static final String DRIVER_NAME ="org.mariadb.jdbc.Driver";
+    public static final int MAX_CAT_CLIENT = 6;
     public static final int PORT =  2013;
     public static final int CAT_SPORT = 1;
     public static final int CAT_MOBILIER = 2;
