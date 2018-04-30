@@ -1,26 +1,39 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Parcours {
     private String nameParcours;
-    private String IdParcours;
+    private String idParcours;
+    private ArrayList<Boutique> listeEmplacement;
+    private int timeParcours;
 
 
     public String getName() {
         return nameParcours;
     }
 
-    public void setName(String name) {
+    public void setName(String nameParcours) {
         this.nameParcours = nameParcours;
     }
 
     public String getId() {
-        return IdParcours;
+        return idParcours;
     }
 
     public void setId(String IdParcours) {
-        IdParcours = IdParcours;
+        idParcours = idParcours;
     }
 
+    public  ArrayList<Boutique> getList(){ return listeEmplacement; }
+
+    public String getTime() {
+        return nameParcours;
+    }
+
+    public void setTime(int timeParcours) {
+        this.timeParcours = timeParcours;
+    }
 
     public String toString()
     {

@@ -104,6 +104,7 @@ public class Fenetre extends JFrame implements Runnable{
         jtp.addTab("MAP",null,this.map,"Show map of Stores");
         jtp.addTab("Profils",null,new ManageProfil(),"Show all profils and manage");
         jtp.addTab("Redevance",null,new ViewRedevance(),"Show all fees");
+        jtp.addTab("Parcours",null,new ManageParcours(),"Show all parcours");
         this.add(jtp,gbc);
         //this.add(this.map,gbc);
         //this.add(this.map,BorderLayout.CENTER);
@@ -217,4 +218,5 @@ public class Fenetre extends JFrame implements Runnable{
         Integer[] list = boutiqueDAO.findWhoSale(this.searchTextField.getText());
         this.map.setSearch(list);
     }
+
 }
