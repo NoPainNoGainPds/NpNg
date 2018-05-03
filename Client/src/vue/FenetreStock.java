@@ -18,7 +18,7 @@ public class FenetreStock extends JFrame implements Runnable {
      * Constructor
      */
     public FenetreStock(int type){
-            this.setTitle("Fenetre");
+            this.setTitle("Ajout d'un produit");
             this.setSize(1200, 500);
             this.setLocationRelativeTo(null);
             this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

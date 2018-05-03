@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
 /**
  * Class which represents the algorithm to use to assign a location to a store
  */
