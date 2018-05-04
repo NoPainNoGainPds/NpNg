@@ -13,14 +13,23 @@ public class AlgorithmView extends JPanel {
 
     public AlgorithmView(Algorithm algo) {
         JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+        panel.setLayout(new BoxLayout(panel,BoxLayout.PAGE_AXIS));
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBorder(BorderFactory.createTitledBorder("Launching"));
+        JPanel beforeLaunchPanel = new JPanel();
+        beforeLaunchPanel.setBorder(BorderFactory.createTitledBorder("Before lauching the algorithm"));
+        JPanel afterLaunchPanel = new JPanel();
+        afterLaunchPanel.setBorder(BorderFactory.createTitledBorder("After launching the algorithm "));
         launchAlgoButton = new JButton("Launch Assignation Algorithm");
         launchAlgoButton.addActionListener((event) -> {
             logger.info("Launching assignation algorithm");
             System.out.println("Launching assignation algorithm...");
             algo.assignLocationsToStores();
         });
-        panel.add(launchAlgoButton);
+        buttonPanel.add(launchAlgoButton);
+        panel.add(buttonPanel);
+        panel.add(beforeLaunchPanel);
+        panel.add(afterLaunchPanel);
         this.add(panel);
     }
 
