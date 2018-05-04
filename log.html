@@ -8078,3 +8078,112 @@ Log session start time Mon Mar 19 17:48:46 CET 2018<br>
 <td title="utils.daoUtils.ProduitDAO category">utils.daoUtils.ProduitDAO</td>
 <td title="Message">SELECT es.id_produit,produit.nom_produit, (select sum(quantite) from entree_stock es2 where es2.id_produit = es.id_produit)-(select sum(quantite) from sortie_stock ss where ss.id_produit = es.id_produit) as quantite FROM entree_stock es JOIN produit ON es.id_produit = produit.id_produit JOIN sortie_stock ss ON es.id_produit = ss.id_produit WHERE es.id_boutique = 8 GROUP BY es.id_produit UNION SELECT es.id_produit,produit.nom_produit, es.quantite FROM entree_stock es JOIN produit ON es.id_produit = produit.id_produit WHERE es.id_boutique = 8 AND es.id_produit not in (SELECT id_produit from sortie_stock )</td>
 </tr>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Log4J Log Messages</title>
+<style type="text/css">
+<!--
+body, table {font-family: arial,sans-serif; font-size: x-small;}
+th {background: #336699; color: #FFFFFF; text-align: left;}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" topmargin="6" leftmargin="6">
+<hr size="1" noshade>
+Log session start time Fri May 04 11:46:53 CEST 2018<br>
+<br>
+<table cellspacing="0" cellpadding="4" border="1" bordercolor="#224466" width="100%">
+<tr>
+<th>Time</th>
+<th>Thread</th>
+<th>Level</th>
+<th>Category</th>
+<th>Message</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td title="AWT-EventQueue-0 thread">AWT-EventQueue-0</td>
+<td title="Level">INFO</td>
+<td title="R3.AlgorithmView category">R3.AlgorithmView</td>
+<td title="Message">Populating database</td>
+</tr>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Log4J Log Messages</title>
+<style type="text/css">
+<!--
+body, table {font-family: arial,sans-serif; font-size: x-small;}
+th {background: #336699; color: #FFFFFF; text-align: left;}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" topmargin="6" leftmargin="6">
+<hr size="1" noshade>
+Log session start time Fri May 04 11:48:57 CEST 2018<br>
+<br>
+<table cellspacing="0" cellpadding="4" border="1" bordercolor="#224466" width="100%">
+<tr>
+<th>Time</th>
+<th>Thread</th>
+<th>Level</th>
+<th>Category</th>
+<th>Message</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td title="AWT-EventQueue-0 thread">AWT-EventQueue-0</td>
+<td title="Level">INFO</td>
+<td title="R3.AlgorithmView category">R3.AlgorithmView</td>
+<td title="Message">Populating database</td>
+</tr>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Log4J Log Messages</title>
+<style type="text/css">
+<!--
+body, table {font-family: arial,sans-serif; font-size: x-small;}
+th {background: #336699; color: #FFFFFF; text-align: left;}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" topmargin="6" leftmargin="6">
+<hr size="1" noshade>
+Log session start time Fri May 04 11:56:39 CEST 2018<br>
+<br>
+<table cellspacing="0" cellpadding="4" border="1" bordercolor="#224466" width="100%">
+<tr>
+<th>Time</th>
+<th>Thread</th>
+<th>Level</th>
+<th>Category</th>
+<th>Message</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td title="AWT-EventQueue-0 thread">AWT-EventQueue-0</td>
+<td title="Level">INFO</td>
+<td title="R3.AlgorithmView category">R3.AlgorithmView</td>
+<td title="Message">Populating database</td>
+</tr>
+
+<tr>
+<td>5772</td>
+<td title="AWT-EventQueue-0 thread">AWT-EventQueue-0</td>
+<td title="Level">INFO</td>
+<td title="R3.AlgorithmView category">R3.AlgorithmView</td>
+<td title="Message">Populating database</td>
+</tr>
+
+<tr>
+<td>7933</td>
+<td title="AWT-EventQueue-0 thread">AWT-EventQueue-0</td>
+<td title="Level">INFO</td>
+<td title="R3.AlgorithmView category">R3.AlgorithmView</td>
+<td title="Message">Populating database</td>
+</tr>

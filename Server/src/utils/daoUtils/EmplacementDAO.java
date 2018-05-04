@@ -169,6 +169,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
             String query = "update Emplacement set assigned=false where id_emplacement="+location.getId()+";";
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(query);
+            logger.info(query);
         } catch(SQLException e) {
             logger.error(e.toString());
         }

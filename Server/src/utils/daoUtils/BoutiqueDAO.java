@@ -217,6 +217,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
             String query = "update Boutique set located=false where id_boutique="+store.getId()+";";
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(query);
+            logger.info(query);
         } catch(SQLException e) {
             logger.error(e.toString());
         }
