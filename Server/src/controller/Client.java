@@ -158,6 +158,9 @@ public class Client extends Thread {
                         case "UpdateProfil" :
                             sender.updateProfil(inputFromClient.getId());
                             break;
+                        case "GetProfil" :
+                            sender.sendProfilClient(inputFromClient.getId());
+                            break;
                         case "Redevance" :
                             if(inputFromClient.getId()==-1)
                             sender.sendAllfees();

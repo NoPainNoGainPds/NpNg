@@ -71,6 +71,7 @@ public class ClientDAO extends DAO<ClientModel> {
             return false;
         }
     }
+
     /**
      *
      */
@@ -83,9 +84,10 @@ public class ClientDAO extends DAO<ClientModel> {
         {
             ArrayList<Purchase> purchases = pDAO.findFromReference(client.getId());
             int nb_sport =0,nb_mobi = 0,nb_tech = 0,nb_alim = 0,nb_educ = 0,nb_mode=0,none=0;
+            System.out.println("CLient : "+client+" : nb Achat : "+purchases.size());
             for(Purchase p : purchases)
             {
-
+                System.out.println(p);
                 switch(p.getId_categorie_Boutique())
                 {
                     case Constants.CAT_SPORT :
@@ -110,40 +112,76 @@ public class ClientDAO extends DAO<ClientModel> {
                         none++;
                         break;
                 }
+
+                //calcul de pourcentage
             }
-            int tot = nb_alim+nb_educ+nb_mobi+nb_sport+nb_tech+nb_mode;
-            float[] array = new float[Constants.MAX_CAT_CLIENT];
-            array[0] = (nb_sport/tot)*100;
-            array[1] = (nb_mobi/tot)*100;
-            array[2] = (nb_tech/tot)*100;
-            array[3] = (nb_alim/tot)*100;
-            array[4] = (nb_educ/tot)*100;
-            array[5] = (nb_mode/tot)*100;
-            chooseProfil(client, array);
+            float tot = nb_sport+nb_alim+nb_educ+nb_mobi+nb_mode+nb_tech+none;
+            if(tot!=0) {
+                float[] array = new float[6];
+                array[0]= ((float)nb_sport / tot) * 100f;
+                array[1] = ((float)nb_mobi / tot) * 100f;
+                array[2] = ((float)nb_tech / tot) * 100f;
+                array[3] = ((float)nb_alim / tot) * 100f;
+                array[4] = ((float)nb_educ / tot) * 100f;
+                array[5] = ((float)nb_mode/tot)*100f;
+                iAprofils(array,client);
+            }
         }
         return false;
     }
-    private void chooseProfil(ClientModel client, float[] array)
+    /**
+     * Methode that chossing all profils for the  client
+     * @param array
+     * @param client
+     */
+    private void iAprofils(float[] array,ClientModel client)
     {
+        int prof = 0;
+        try {
+            String req1 = "Delete from client_profil_client where id_client ="+client.getId()+";";
+            Statement stmt = this.connection.createStatement();
+            stmt.executeUpdate(req1);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         for(int i=0;i<array.length;i++)
         {
-            if(array[i]>25.0)
+            float value = array[i];
+            prof = i;
+            if(value <10.0f)
             {
-                //pas de plus
+                prof=-1;
             }
-            if(array[i]>50.0)
+            else if(value < 25.0f)
             {
-                //1 +
+                //pas vraiment le profil
+                prof = prof;
             }
-            if(array[i]>75.0)
+            else if(value >= 25.0f)
             {
-                //2+
+                //achete souvent
+                prof+=100;
+            }else if(value > 50.0f)
+            {
+                //aime beaucoup
+                prof+=200;
+            }else if(value > 75.0f)
+            {
+                //Profil++
+                prof+=300;
             }
-            if(array[i]>95.0)
-            {
-                //3+
+            if(prof!=-1) {
+
+                String req = "INSERT INTO client_profil_client  (id_client,id_profil) values(" + client.getId() + "," + prof + ");";
+                try {
+                    Statement stmt = this.connection.createStatement();
+                    stmt.executeUpdate(req);
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
     }
 }

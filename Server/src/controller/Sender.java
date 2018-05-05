@@ -66,6 +66,10 @@ public class Sender {
      * The fee
      */
     private RedevanceDAO rDAO;
+    /**
+     *
+     */
+    private ProfilDAO profDAO;
 
     /**
      * Constructor
@@ -86,6 +90,7 @@ public class Sender {
         this.esDAO = new StockEntreeDAO(database);
         this.rDAO = new RedevanceDAO(database);
         this.cDAO = client.getcDAO();
+        this.profDAO = new ProfilDAO(database);
         this.mapper = mapper;
         this.mapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
         this.writer = writer;
@@ -291,7 +296,26 @@ public class Sender {
             e.printStackTrace();
         }
     }
-
+    public void sendProfilClient(int id)
+    {
+        try
+        {
+            ArrayList<String> liste = this.profDAO.getProfilFromClient(id);
+            for(String r : liste)
+            {
+                this.mapper.writeValue(this.writer,r);
+                this.writer.write("\n".getBytes());
+                this.writer.flush();
+            }
+            this.writer.write("null\n".getBytes());
+            this.writer.flush();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
     public void sendAllfees()
     {
         try {

@@ -5,6 +5,7 @@ import model.Profil;
 import net.miginfocom.swing.MigLayout;
 import utils.Constants;
 import utils.daoUtils.ClientDAO;
+import utils.daoUtils.ProfilDAO;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -17,10 +18,12 @@ public class ManageProfil extends JPanel{
     private ArrayList<Client> listeClient;
     private ClientView clientView;
     private ClientDAO cDao;
+    private ProfilDAO profDAO;
     private Image imgProf;
     public ManageProfil(){
         this.setLayout(new BorderLayout());
         this.cDao = new ClientDAO(Constants.conServ);
+        this.profDAO = new ProfilDAO(Constants.conServ);
         System.out.println("demande client");
         this.listeClient = this.cDao.findFromReference();
         System.out.println("ici client");
@@ -37,7 +40,7 @@ public class ManageProfil extends JPanel{
                 this.clientView.setClient(c);
             }
         );
-        this.clientView = new ClientView();
+        this.clientView = new ClientView(profDAO);
         this.add(this.clientView,BorderLayout.CENTER);
     }
     private JPanel getActionPane()
