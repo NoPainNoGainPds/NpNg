@@ -3,7 +3,6 @@ package vue;
 import javax.swing.*;
 
 import R3.Algorithm;
-import R3.AlgorithmView;
 import controller.MapController;
 import model.Boutique;
 import utils.ConnectionServer;
@@ -11,7 +10,6 @@ import utils.Constants;
 import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.EmplacementDAO;
 import utils.daoUtils.ProduitDAO;
-import controller.Server;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -110,7 +108,7 @@ public class Fenetre extends JFrame implements Runnable{
         jtp.addTab("Profils",null,new ManageProfil(),"Show all profils and manage");
         jtp.addTab("Redevance",null,new ViewRedevance(),"Show all fees");
         jtp.addTab("Parcours",null,new ManageParcours(),"Show all parcours");
-        jtp.addTab("AssignationAlgo",null,new AlgorithmView(new Algorithm(new EmplacementDAO(), new BoutiqueDAO(new ConnectionServer()))));
+        jtp.addTab("AssignationAlgo",null,new vue.AlgorithmView(new Algorithm(new EmplacementDAO(),new BoutiqueDAO(new ConnectionServer()))));
         this.add(jtp,gbc);
         //this.add(this.map,gbc);
         //this.add(this.map,BorderLayout.CENTER);

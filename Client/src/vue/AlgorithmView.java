@@ -1,15 +1,13 @@
-package R3;
+package vue;
 
+import R3.Algorithm;
 import org.apache.log4j.Logger;
-import utils.daoUtils.BoutiqueDAO;
-import utils.daoUtils.EmplacementDAO;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class AlgorithmView extends JPanel {
     private JButton launchAlgoButton;
-    Logger logger = Logger.getLogger(AlgorithmView.class);
+    Logger logger = Logger.getLogger(this.getClass());
 
     public AlgorithmView(Algorithm algo) {
         JPanel panel = new JPanel();
