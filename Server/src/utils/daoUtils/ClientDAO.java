@@ -148,7 +148,7 @@ public class ClientDAO extends DAO<ClientModel> {
         for(int i=0;i<array.length;i++)
         {
             float value = array[i];
-            prof = i;
+            prof = i+1;
             if(value <10.0f)
             {
                 prof=-1;
@@ -158,11 +158,11 @@ public class ClientDAO extends DAO<ClientModel> {
                 //pas vraiment le profil
                 prof = prof;
             }
-            else if(value >= 25.0f)
+            else if(value >= 25.0f && value < 50.0f)
             {
                 //achete souvent
                 prof+=100;
-            }else if(value > 50.0f)
+            }else if(value >= 50.0f && value < 75.0f)
             {
                 //aime beaucoup
                 prof+=200;
