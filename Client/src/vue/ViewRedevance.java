@@ -12,7 +12,10 @@ import utils.MyListModel;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class ViewRedevance extends JPanel{
@@ -40,30 +43,49 @@ public class ViewRedevance extends JPanel{
 
         JButton btn = new JButton("Calculer les redevances");
         btn.addActionListener((event) -> {
-                AlgorithmFee algo=new AlgorithmFee();
-                algo.assignFeeToStore();
+               // AlgorithmFee algo=new AlgorithmFee();
+               // algo.assignFeeToStore();
 
         });
         panel.add(btn);
+
+        Calendar calendar = Calendar.getInstance();
+        Date auj=calendar.getTime();
+        SimpleDateFormat formatmois = new SimpleDateFormat("MM");
+        SimpleDateFormat formatannee = new SimpleDateFormat("yyyy");
+
+        JYearChooser monannee= new JYearChooser();
+        JMonthChooser monmois= new JMonthChooser();
+
+        RedevanceDAO rDAO = new RedevanceDAO();
+        ArrayList<Redevance> list2;
+        list2 = rDAO.findFromReference(monannee.getYear(),monmois.getMonth());
+        MyListModel<Redevance> listModel2 = new MyListModel(list2);
+        JList<Redevance> jlist2 = new JList(listModel2);
+        jlist2.setFixedCellWidth(90);
+System.out.println(list2.size());
+        jlist2.setListData(list2.toArray(new Redevance[list2.size()]));
+        jlist=jlist2;
+        j.setViewportView(jlist2);
+        panel.repaint();
+        panel.revalidate();
 
 
 
         j.setPreferredSize(new Dimension(300, 200));
 
-        JYearChooser monannee= new JYearChooser();
-        JMonthChooser monmois= new JMonthChooser();
+
         JButton valid= new JButton("Valider");
         valid.addActionListener((event) -> {
 
                     try {
 
-                        RedevanceDAO rDAO = new RedevanceDAO();
+
                         ArrayList<Redevance> list1;
                         list1 = rDAO.findFromReference(monannee.getYear(),monmois.getMonth());
                         MyListModel<Redevance> listModel1 = new MyListModel(list1);
                         JList<Redevance> jlist1 = new JList(listModel1);
                         jlist1.setFixedCellWidth(90);
-
                         jlist1.setListData(list1.toArray(new Redevance[list1.size()]));
                         j.setViewportView(jlist1);
                         jlist=jlist1;

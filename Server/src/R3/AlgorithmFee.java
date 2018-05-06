@@ -46,7 +46,7 @@ public class AlgorithmFee {
      */
     public void assignFeeToStore() {
 
-        listeBoutique=findWhoPay();
+        listeBoutique=bDAO.findWhoPay();
         for (int i=0; i<listeBoutique.size(); i++) {
             Boutique b = listeBoutique.get(i);
 
@@ -67,6 +67,7 @@ public class AlgorithmFee {
 
             Date auj=calendar.getTime();
             SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-01");
+
             System.out.println(formater.format(auj));
 
             red=(s*c)*(1-s/10000);
