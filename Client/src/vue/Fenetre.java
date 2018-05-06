@@ -3,6 +3,7 @@ package vue;
 import javax.swing.*;
 
 import R3.Algorithm;
+import R3.AlgorithmFee;
 import controller.MapController;
 import model.Boutique;
 import utils.ConnectionServer;
@@ -10,6 +11,7 @@ import utils.Constants;
 import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.EmplacementDAO;
 import utils.daoUtils.ProduitDAO;
+import utils.daoUtils.RedevanceDAO;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -167,11 +169,11 @@ public class Fenetre extends JFrame implements Runnable{
     {
         JMenu filemenu = new JMenu("File");
         JMenuItem open = new JMenuItem("Save as  PDF");
-       /* open.addActionListener(event ->
+        open.addActionListener(event ->
         {
-            ViewRedevance vr = new ViewRedevance();
-            SwingUtilities.invokeLater(vr);
-        });*/
+//            ViewRedevance vr = new ViewRedevance();
+//            SwingUtilities.invokeLater(vr);
+        });
         JMenuItem save = new JMenuItem("Export as JSon");
         filemenu.add(open);
         filemenu.add(save);

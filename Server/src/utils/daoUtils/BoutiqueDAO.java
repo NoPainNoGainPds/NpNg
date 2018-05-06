@@ -2,6 +2,7 @@ package utils.daoUtils;
 
 import model.Boutique;
 import controller.Client;
+import model.Emplacement;
 import org.apache.log4j.Logger;
 import utils.Constants;
 import utils.DAO;
@@ -31,6 +32,9 @@ public class BoutiqueDAO extends DAO<Boutique> {
         this.client = client;
     }
 
+    public BoutiqueDAO(Connection con) {
+        super(con);
+    }
     /**
      * Add a new store in the database.
      * @param obj The store to add.
@@ -222,4 +226,27 @@ public class BoutiqueDAO extends DAO<Boutique> {
             logger.error(e.toString());
         }
     }
+
+    public ArrayList<Boutique> findWhoPay() {
+        try {
+            Statement stmt = this.connection.createStatement();
+            String requete =  "select b.id_boutique, e.nom_emplacement, e.id_emplacement, e.superficie, c.nom_categorie_emplacement from boutique b, emplacement e, categorie_emplacement c where b.id_emplacement=e.id_emplacement and e.id_categorie_emplacement=c.id_categorie_emplacement and b.id_emplacement != -1";
+
+            ResultSet res = stmt.executeQuery(requete);
+            ArrayList list = new ArrayList();
+
+            while(res.next()) {
+                list.add(new Boutique (res.getInt("id_boutique"), new Emplacement(res.getString("nom_emplacement"), res.getInt("id_emplacement"), res.getInt("superficie"), res.getString("nom_categorie_emplacement"))));
+
+            }
+
+            this.logger.info(requete);
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            this.logger.error("SQLException");
+            return null;
+        }
+    }
+
 }

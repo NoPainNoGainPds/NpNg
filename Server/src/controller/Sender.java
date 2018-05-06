@@ -363,4 +363,40 @@ public class Sender {
             e.printStackTrace();
         }
     }
+
+    public void sendStoreWhoPay()
+    {
+        try {
+            ArrayList<Boutique> objReturn = this.bDAO.findWhoPay();
+            System.out.println(objReturn.size());
+            for(Boutique b : objReturn)
+            {
+                this.mapper.writeValue(this.writer,b);
+                this.writer.write("\n".getBytes());
+                this.writer.flush();
+            }
+            this.writer.write("null\n".getBytes());
+            this.writer.flush();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertFee(Redevance fee)
+    {
+        try {
+            Boolean b = this.rDAO.create(fee);
+            this.mapper.writeValue(this.writer, b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+            System.out.println("creation redevance");
+        }catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 }

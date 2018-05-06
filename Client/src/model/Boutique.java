@@ -41,6 +41,14 @@ public class Boutique implements ModelObject {
         this.logo = logo;
     }
 
+    public Boutique(int id, String nom, int categorie, Emplacement emplacement, String logo)
+    {
+        this.id = id;
+        this.nom = nom;
+        this.logo = logo;
+        this.emplacement=emplacement;
+        located = false;
+    }
     /**
      *
      * @return polygon of this store
@@ -84,6 +92,7 @@ public class Boutique implements ModelObject {
     public Emplacement getEmplacement() {
         return emplacement;
     }
+    public void setEmplacement(Emplacement emplacement) { this.emplacement=emplacement;}
 
     public void setEmplacementRef(Emplacement emplacement) {
         this.emplacement = emplacement;

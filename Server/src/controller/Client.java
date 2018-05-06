@@ -6,6 +6,7 @@ import db.Database;
 import model.Boutique;
 import model.InputFromClient;
 import model.Produit;
+import model.Redevance;
 import utils.daoUtils.*;
 
 import java.io.*;
@@ -136,6 +137,8 @@ public class Client extends Thread {
                             sender.sendAllStore();//et la je renvoie le liste de toutes le boutiques
                         else if(inputFromClient.getId()==-2)
                             sender.sendStoreWhoSale(inputFromClient.getRef());
+                        else if(inputFromClient.getId()==-3)
+                            sender.sendStoreWhoPay();
                         break;
                         case "Product" :
                             sender.sendProducts(inputFromClient.getId());
@@ -165,6 +168,9 @@ public class Client extends Thread {
                             if(inputFromClient.getId()==-1)
                             sender.sendAllfees();
                             else sender.sendFee(inputFromClient);
+                            break;
+                        case "newFee" :
+                            sender.insertFee(this.mapper.readValue(read(), Redevance.class));
                             break;
                         default: System.out.println("Not Comparable");
                     }

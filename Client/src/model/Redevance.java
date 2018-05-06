@@ -17,11 +17,12 @@ public class Redevance implements ModelObject {
     /**
      * id of the store
      */
-    private int id_boutique;
+    private Boutique id_boutique;
+    private String nom_boutique;
     /**
      * amount
      */
-    private int montant_redevance;
+    private float montant_redevance;
     /**
      * date of the payment
      */
@@ -38,11 +39,12 @@ public class Redevance implements ModelObject {
      * @param date_redevance date
      * @param montant_redevance amount
      */
-    public Redevance(int id_redevance, int id_boutique, Date date_redevance, int montant_redevance) {
+    public Redevance(int id_redevance, Boutique id_boutique, Date date_redevance, float montant_redevance) {
         this.id_redevance = id_redevance;
         this.id_boutique = id_boutique;
         this.date_redevance = date_redevance;
         this.montant_redevance = montant_redevance;
+        this.nom_boutique = id_boutique.getNom();
     }
 
     /**
@@ -63,15 +65,22 @@ public class Redevance implements ModelObject {
      * get the store id
      * @return the store id
      */
-    public int getId_boutique() {
+    public Boutique getId_boutique() {
         return this.id_boutique;
     }
     /**
      * set the store id
      * @param id_boutique the new store id
      */
-    public void setId_boutique(int id_boutique) {
+    public void setId_boutique(Boutique id_boutique) {
         this.id_boutique = id_boutique;
+    }
+    public String getNom_boutique() {
+        return this.nom_boutique;
+    }
+
+    public void setNom_boutique(String nom_boutique) {
+        this.nom_boutique = nom_boutique;
     }
     /**
      * get the date
@@ -91,14 +100,14 @@ public class Redevance implements ModelObject {
      * get the fee
      * @return the fee
      */
-    public int getMontant_redevance() {
+    public float getMontant_redevance() {
         return this.montant_redevance;
     }
     /**
      * set the fee
      * @param montant_redevance the new fee
      */
-    public void setMontant_redevance(int montant_redevance) {
+    public void setMontant_redevance(float montant_redevance) {
         this.montant_redevance = montant_redevance;
     }
 
@@ -107,7 +116,7 @@ public class Redevance implements ModelObject {
      * @return the display
      */
     public String toString() {
-        return "Boutique:"+this.id_boutique + "   MONTANT:" + this.montant_redevance + "   DATE:" + this.date_redevance;
+        return "Boutique: "+this.nom_boutique + "   MONTANT:" + this.montant_redevance+"euros";
     }
 
     /**

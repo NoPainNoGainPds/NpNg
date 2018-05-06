@@ -1,5 +1,8 @@
 package utils.daoUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import model.Produit;
 import model.Redevance;
 import org.apache.log4j.Logger;
 import utils.Constants;
@@ -19,8 +22,22 @@ public class RedevanceDAO extends DAO<Redevance> {
 
     @Override
     public boolean create(Redevance obj) {
-        return false;
+        boolean response;
+        String str = "{\"name\" : \"newFee\",\"id\":0}";
+        this.connection.send(str);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            str = mapper.writeValueAsString(obj);
+            this.connection.send(str);
+            Object rep =this.connection.recieve(Boolean.class);
+        }catch(JsonProcessingException e)
+        {
+            e.printStackTrace();
+        }
+        return false;//a changer
     }
+
+
 
     @Override
     public boolean delete(Redevance obj) {
@@ -73,6 +90,8 @@ public class RedevanceDAO extends DAO<Redevance> {
         }
         return liste;
     }
+
+
 }
 
 

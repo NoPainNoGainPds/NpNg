@@ -17,6 +17,10 @@ import java.util.List;
  * Class which represents a store. It contains the methods which access the database.
  */
 public class BoutiqueDAO extends DAO<Boutique> {
+    public BoutiqueDAO()
+    {
+        super(Constants.conServ);
+    }
     /**
      * A logger. Use to have a trace of what happen during the execution.
      */
@@ -115,6 +119,34 @@ public class BoutiqueDAO extends DAO<Boutique> {
         {
             //envoie du message au serv
             String str = "{\"name\":\"Store\",\"id\":-1}";
+            this.connection.send(str);
+
+            ArrayList<Boutique> liste = new ArrayList<>();
+            boolean recieved = false;
+            while(!recieved)
+            {
+                Object b = (Object)this.connection.recieve(Boutique.class);
+                if (b != null) {
+                    Boutique b2 = (Boutique) b;
+                    liste.add(b2);
+                } else {
+                    recieved = true;
+                }
+            }
+            return liste;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public ArrayList<Boutique> findWhoPay() {
+        try
+        {
+            //envoie du message au serv
+            String str = "{\"name\":\"Store\",\"id\":-3}";
             this.connection.send(str);
 
             ArrayList<Boutique> liste = new ArrayList<>();

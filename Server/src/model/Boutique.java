@@ -43,6 +43,23 @@ public class Boutique {
         located = false;
     }
 
+    public Boutique(int id, String nom, int categorie, Emplacement emplacement, String logo)
+    {
+        this.id = id;
+        this.nom = nom;
+        this.logo = logo;
+        this.emplacement=emplacement;
+        located = false;
+    }
+
+    public Boutique(int id, Emplacement emplacement)
+    {
+        this.id = id;
+        this.emplacement = emplacement;
+
+    }
+
+
     /**
      *
      * @return Name of the store
