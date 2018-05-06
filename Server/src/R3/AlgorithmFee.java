@@ -34,8 +34,9 @@ public class AlgorithmFee {
 
     Logger logger;
 
-    public AlgorithmFee() {
-
+    public AlgorithmFee(BoutiqueDAO bDAO,RedevanceDAO rDAO) {
+        this.bDAO = bDAO;
+        this.rDAO = rDAO;
         logger = Logger.getLogger(Algorithm.class);
     }
 

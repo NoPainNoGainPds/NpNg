@@ -184,6 +184,7 @@ public class Algorithm {
      * Method to get an array with the stores' criteria's values
      * @return the array of criteria's values
      */
+    @Deprecated
     public int[] getStoreCriteria() {
         int[] criteriaArray = new int[3];
         Database db = new Database();
@@ -211,7 +212,9 @@ public class Algorithm {
     /**
      * Method to get an array with the locations' criteria's values
      * @return the array of criteria's values
+     *
      */
+    @Deprecated
     public int[] getLocationCriteria() {
         int[] criteriaArray = new int[2];
         Database db = new Database();

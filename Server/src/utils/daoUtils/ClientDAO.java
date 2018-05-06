@@ -62,7 +62,7 @@ public class ClientDAO extends DAO<ClientModel> {
         try
         {
             Statement stmt = this.connection.createStatement();
-            String requete ="";
+            String requete ="TRUNCATE client_profil_client;";
             ResultSet res = stmt.executeQuery(requete);
             stmt.close();
             return true;

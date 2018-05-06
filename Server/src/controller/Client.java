@@ -164,13 +164,16 @@ public class Client extends Thread {
                         case "GetProfil" :
                             sender.sendProfilClient(inputFromClient.getId());
                             break;
+                        case "DellProfil" :
+                            sender.dellAllProfil();
+                            break;
                         case "Redevance" :
                             if(inputFromClient.getId()==-1)
                             sender.sendAllfees();
                             else sender.sendFee(inputFromClient);
                             break;
                         case "newFee" :
-                            sender.insertFee(this.mapper.readValue(read(), Redevance.class));
+                            sender.insertFee(inputFromClient);
                             break;
                         default: System.out.println("Not Comparable");
                     }

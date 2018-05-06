@@ -35,4 +35,16 @@ public class ProfilDAO {
             return null;
         }
     }
+    public boolean dellAllProfil()
+    {
+        try{
+            String str = "{\"name\":\"DellProfil\",\"id\":"+0+"}\n";
+            this.conServ.send(str);
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

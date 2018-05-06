@@ -385,8 +385,9 @@ public class Sender {
         }
     }
 
-    public void insertFee(Redevance fee)
+    public void insertFee(InputFromClient valeurici)
     {
+        Redevance fee = null;
         try {
             Boolean b = this.rDAO.create(fee);
             this.mapper.writeValue(this.writer, b);
@@ -397,6 +398,9 @@ public class Sender {
         {
             e.printStackTrace();
         }
+    }
+    public void dellAllProfil(){
+        this.cDAO.delAllProfil();
     }
 
 }
