@@ -174,6 +174,8 @@ public class Client extends Thread {
                         case "Redevance" :
                             if(inputFromClient.getId()==-1)
                             sender.sendAllfees();
+                            else if(inputFromClient.getId()==-2)
+                                sender.calculFee();
                             else sender.sendFee(inputFromClient);
                             break;
                         case "newFee" :

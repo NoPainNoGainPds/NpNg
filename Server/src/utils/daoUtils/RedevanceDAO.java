@@ -32,11 +32,11 @@ public class RedevanceDAO extends DAO<Redevance> {
         try
         {
             String montant = Float.toString(obj.getMontant_redevance());
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String date = dateFormat.format(obj.getDate_redevance());
             String id_boutique = Integer.toString(obj.getId_boutique().getId());
-            System.out.println(montant+" "+date+" "+id_boutique);
-            String requete = "INSERT INTO redevance (montant_redevance,date_redevance, id_boutique) VALUES ('\"+montant+\"','\"+date+\"','\"+id_boutique+\"');";
+            //System.out.println(montant+" "+date+" "+id_boutique);
+            String requete = "INSERT INTO redevance (montant_redevance,date_redevance, id_boutique) VALUES ('"+montant+"','"+date+"','"+id_boutique+"');";
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(requete);
             logger.info(requete);

@@ -1,5 +1,6 @@
 package controller;
 
+import R3.AlgorithmFee;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -404,6 +405,10 @@ public class Sender {
     }
     public void dellAllProfil(){
         this.cDAO.delAllProfil();
+    }
+    public void calculFee() {
+        AlgorithmFee alg = new AlgorithmFee(this.bDAO,this.rDAO);
+        alg.assignFeeToStore();
     }
 
 }

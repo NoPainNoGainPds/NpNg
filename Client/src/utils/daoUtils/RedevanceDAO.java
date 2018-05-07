@@ -90,7 +90,10 @@ public class RedevanceDAO extends DAO<Redevance> {
         }
         return liste;
     }
-
+    public void calculFee()
+    {
+        this.connection.send("{\"name\" : \"Redevance\",\"id\":"+(-2)+", \"ref\":"+(-1)+"}");
+    }
 
 }
 

@@ -5,6 +5,7 @@ import com.toedter.calendar.*;
 import model.Boutique;
 import model.Redevance;
 import net.miginfocom.swing.MigLayout;
+import utils.Constants;
 import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.RedevanceDAO;
 import utils.MyListModel;
@@ -21,6 +22,7 @@ import java.util.Date;
 public class ViewRedevance extends JPanel{
     private ArrayList<Boutique> listeBoutique;
     private BoutiqueDAO bDAO=new BoutiqueDAO();
+    RedevanceDAO rDAO = new RedevanceDAO();
     /**
      * Weight of the product
      */
@@ -43,27 +45,22 @@ public class ViewRedevance extends JPanel{
 
         JButton btn = new JButton("Calculer les redevances");
         btn.addActionListener((event) -> {
-               // AlgorithmFee algo=new AlgorithmFee();
-               // algo.assignFeeToStore();
+
+               rDAO.calculFee();
 
         });
         panel.add(btn);
-
-        Calendar calendar = Calendar.getInstance();
-        Date auj=calendar.getTime();
-        SimpleDateFormat formatmois = new SimpleDateFormat("MM");
-        SimpleDateFormat formatannee = new SimpleDateFormat("yyyy");
+        ;
 
         JYearChooser monannee= new JYearChooser();
         JMonthChooser monmois= new JMonthChooser();
 
-        RedevanceDAO rDAO = new RedevanceDAO();
         ArrayList<Redevance> list2;
         list2 = rDAO.findFromReference(monannee.getYear(),monmois.getMonth());
         MyListModel<Redevance> listModel2 = new MyListModel(list2);
         JList<Redevance> jlist2 = new JList(listModel2);
         jlist2.setFixedCellWidth(90);
-System.out.println(list2.size());
+
         jlist2.setListData(list2.toArray(new Redevance[list2.size()]));
         jlist=jlist2;
         j.setViewportView(jlist2);

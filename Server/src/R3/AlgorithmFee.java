@@ -46,7 +46,7 @@ public class AlgorithmFee {
      */
     public void assignFeeToStore() {
 
-        listeBoutique=bDAO.findWhoPay();
+        listeBoutique=this.bDAO.findWhoPay();
         for (int i=0; i<listeBoutique.size(); i++) {
             Boutique b = listeBoutique.get(i);
 
@@ -71,9 +71,9 @@ public class AlgorithmFee {
             System.out.println(formater.format(auj));
 
             red=(s*c)*(1-s/10000);
-          //  Redevance r=new Redevance(0,b.getId(),auj,red);
+            Redevance r=new Redevance(0,b,auj,red);
 
-            //rDAO.create(r);
+            this.rDAO.create(r);
             System.out.println("ok");
 
         }
