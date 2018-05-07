@@ -84,10 +84,10 @@ public class ClientDAO extends DAO<ClientModel> {
         {
             ArrayList<Purchase> purchases = pDAO.findFromReference(client.getId());
             int nb_sport =0,nb_mobi = 0,nb_tech = 0,nb_alim = 0,nb_educ = 0,nb_mode=0,none=0;
-            System.out.println("CLient : "+client+" : nb Achat : "+purchases.size());
+            //System.out.println("CLient : "+client+" : nb Achat : "+purchases.size());
             for(Purchase p : purchases)
             {
-                System.out.println(p);
+                //System.out.println(p);
                 switch(p.getId_categorie_Boutique())
                 {
                     case Constants.CAT_SPORT :

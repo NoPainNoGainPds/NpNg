@@ -65,17 +65,17 @@ public class OutputStorage extends JPanel{
 
 
         nomDeLaBoutiqueBox = new JComboBox<Boutique>();
-        nomDeLaBoutiqueBox.setPreferredSize(new Dimension(300,50));
+        nomDeLaBoutiqueBox.setPreferredSize(new Dimension(250,50));
         nomDeLaBoutique = new TextLabel (nomDeLaBoutiqueBox, new JLabel("Nom de la boutique"));
         this.add(nomDeLaBoutique, "cell 0 2 1 1");
 
         dateSortieStockTextField = new JTextField(20);
-        dateSortieStockTextField.setPreferredSize(new Dimension(300,50));
+        dateSortieStockTextField.setPreferredSize(new Dimension(250,50));
         dateSortieStock = new TextLabel(dateSortieStockTextField, new JLabel("Date Achat"));
         this.add(dateSortieStock, "cell 2 2 1 1");
 
         quantiteTextField = new JTextField(20);
-        quantiteTextField.setPreferredSize(new Dimension(300,50));
+        quantiteTextField.setPreferredSize(new Dimension(250,50));
         quantite = new TextLabel(quantiteTextField, new JLabel("Quantite"));
         this.add(quantite, "cell 4 2 1 1");
 

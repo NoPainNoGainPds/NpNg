@@ -83,7 +83,7 @@ public class RightPanelView extends JPanel {
         //---------------
         //add logo
 
-        this.img = Toolkit.getDefaultToolkit().getImage("Prototype/src/res/empty-logo.png");
+        this.img = Toolkit.getDefaultToolkit().getImage("Client/src/res/empty-logo.png");
         this.logo = new ImageComponent(true);
         this.logo.setImage(this.img);
         this.logo.setMaximumSize(new Dimension(150 ,150));
@@ -161,7 +161,10 @@ public class RightPanelView extends JPanel {
         this.nomEmplacement.setText("Location : "+this.boutique.getEmplacement().getNom());
         this.categorieEmplacement.setText("Categorie Location : "+this.boutique.getEmplacement().getCat());
 
-        this.logo.setImage(Toolkit.getDefaultToolkit().getImage(boutique.getLogo()));
+        String logo2 = boutique.getLogo();
+        if(logo2==null)
+            logo2 = "Client/src/res/empty-logo.png";
+        this.logo.setImage(Toolkit.getDefaultToolkit().getImage(logo2));
 
         this.repaint();
         this.cl.show(this,"view1");

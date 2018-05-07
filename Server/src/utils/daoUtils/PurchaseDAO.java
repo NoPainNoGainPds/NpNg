@@ -1,8 +1,11 @@
 package utils.daoUtils;
 
+import model.ClientModel;
+import model.Produit;
 import model.Purchase;
 import utils.DAO;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +27,54 @@ public class PurchaseDAO extends DAO<Purchase> {
         return false;
     }
 
+    public boolean truncate()
+    {
+        try{
+            String str = "TRUNCATE achat;";
+            Statement stmt = this.connection.createStatement();
+            stmt.executeUpdate(str);
+            stmt.close();
+            return true;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * lfunction who generate purchases for all clients
+     */
+    public void generatePurchase()
+    {
+
+        try {
+            ArrayList<ClientModel> listeClient = new ClientDAO(this.connection).findFromReference();
+            ArrayList<Produit> listeProduit = new ProduitDAO(this.connection).findFromReference();
+            for (ClientModel c : listeClient) {
+                //for every client generate some random purchase
+                int nbPurchase = (int)Math.random()*20;
+                for(int i=0;i<nbPurchase;i++)
+                {
+                    //add the product to the client
+                    int rndProduct = (int)(Math.random()*listeProduit.size())+1;
+                    String str = "";
+                    //creation de la sortie de stock
+                    Statement stmt = this.connection.createStatement();
+                    stmt.executeUpdate(str);
+                    str = "";
+                    //insertion du
+                    stmt.close();
+
+                }
+
+            }
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+            return;
+        }
+    }
     @Override
     public boolean update(Purchase obj) {
         return false;
