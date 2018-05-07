@@ -71,6 +71,8 @@ public class Sender {
      */
     private ProfilDAO profDAO;
 
+    private BonLivraisonDAO blDAO;
+
     /**
      * Constructor
      * @param database the connection to the database
@@ -89,6 +91,7 @@ public class Sender {
         this.ssDAO = new StockSortieDAO(database);
         this.esDAO = new StockEntreeDAO(database);
         this.rDAO = new RedevanceDAO(database);
+        this.blDAO = new BonLivraisonDAO(database);
         this.cDAO = client.getcDAO();
         this.profDAO = new ProfilDAO(database);
         this.mapper = mapper;

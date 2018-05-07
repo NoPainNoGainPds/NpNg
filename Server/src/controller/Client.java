@@ -77,6 +77,9 @@ public class Client extends Thread {
      * to access the fee with database
      */
     private RedevanceDAO rDAO;
+
+    private BonLivraisonDAO blDAO;
+
     /**
      * the sender
      */
@@ -111,6 +114,7 @@ public class Client extends Thread {
         this.ssDAO = new StockSortieDAO(this.database);
         this.cDAO = new ClientDAO(this.database);
         this.rDAO = new RedevanceDAO(this.database);
+        this.blDAO = new BonLivraisonDAO(this.database);
     }
 
     /**

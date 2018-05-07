@@ -62,14 +62,14 @@ public class RedevanceDAO extends DAO<Redevance> {
     public ArrayList<Redevance> findFromReference() {
         ArrayList<Redevance> liste = new ArrayList<>();
         this.connection.send("{\"name\" : \"Redevance\",\"id\":-1}");
-        boolean recieved = false;
-        while(!recieved)
+        boolean received = false;
+        while(!received)
         {
             Object p = (Object)this.connection.recieve(Redevance.class);
             if (p != null) {
                 liste.add((Redevance) p);
             } else {
-                recieved = true;
+                received = true;
             }
         }
         return liste;
