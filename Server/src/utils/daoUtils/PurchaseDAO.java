@@ -45,7 +45,7 @@ public class PurchaseDAO extends DAO<Purchase> {
     /**
      * lfunction who generate purchases for all clients
      */
-    public void generatePurchase()
+    public boolean generatePurchase()
     {
 
         try {
@@ -55,6 +55,7 @@ public class PurchaseDAO extends DAO<Purchase> {
             for (ClientModel c : listeClient) {
                 //for every client generate some random purchase
                 int nbPurchase = (int)Math.random()*20;
+                System.out.println(c+" nbPurchase : "+nbPurchase);
                 for(int i=0;i<nbPurchase;i++)
                 {
                     max_sortieStock ++;
@@ -70,12 +71,12 @@ public class PurchaseDAO extends DAO<Purchase> {
                     stmt.executeUpdate(str);
                     stmt.close();
                 }
-
             }
+            return true;
         }catch (SQLException e)
         {
             e.printStackTrace();
-            return;
+            return false;
         }
     }
     @Override

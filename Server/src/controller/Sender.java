@@ -409,9 +409,16 @@ public class Sender {
     public void dellAllProfil(){
         this.cDAO.delAllProfil();
     }
-    public void attPurchase()
-    {
-        this.purchaseDAO.generatePurchase();
+    public void attPurchase() {
+        try {
+            Boolean b =this.purchaseDAO.generatePurchase();
+            this.mapper.writeValue(this.writer,b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
     public void calculFee() {
         AlgorithmFee alg = new AlgorithmFee(this.bDAO,this.rDAO);
