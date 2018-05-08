@@ -54,7 +54,7 @@ public class PurchaseDAO extends DAO<Purchase> {
             int max_sortieStock = new StockSortieDAO(this.connection).getMaxId();
             for (ClientModel c : listeClient) {
                 //for every client generate some random purchase
-                int nbPurchase = ThreadLocalRandom.current().nextInt(0 20+1);
+                int nbPurchase = ThreadLocalRandom.current().nextInt(0,20+1);
                 System.out.println(c+" nbPurchase : "+nbPurchase);
                 for(int i=0;i<nbPurchase;i++)
                 {
