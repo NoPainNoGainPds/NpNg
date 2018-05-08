@@ -49,6 +49,9 @@ public class PurchaseDAO extends DAO<Purchase> {
     {
 
         try {
+            Statement stmt = this.connection.createStatement();
+            stmt.executeUpdate("TRUNCATE achat;");
+            stmt.executeUpdate("TRUNCATE sortie_stock");
             ArrayList<ClientModel> listeClient = new ClientDAO(this.connection).findFromReference();
             ArrayList<Produit> listeProduit = new ProduitDAO(this.connection).findFromReference();
             int max_sortieStock = new StockSortieDAO(this.connection).getMaxId();
@@ -64,14 +67,13 @@ public class PurchaseDAO extends DAO<Purchase> {
                     //creation de la sortie de stock
                     int id_boutique = ThreadLocalRandom.current().nextInt(0, 20 + 1);
                     String str = "INSERT INTO `sortie_stock`(`id_sortie`, `quantite`, `date_sortie`, `id_produit`, `id_boutique`) VALUES ("+max_sortieStock+","+1+","+"NOW()"+","+rndProduct+","+id_boutique+")";
-                    Statement stmt = this.connection.createStatement();
                     stmt.executeUpdate(str);
                     str = "INSERT INTO `achat`(`id_sortie_stock`, `id_client`) VALUES ("+max_sortieStock+","+c.getId()+");";
                     //insertion du clietn->sotrieStock
                     stmt.executeUpdate(str);
-                    stmt.close();
                 }
             }
+            stmt.close();
             return true;
         }catch (SQLException e)
         {

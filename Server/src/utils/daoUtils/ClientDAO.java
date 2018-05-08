@@ -137,51 +137,46 @@ public class ClientDAO extends DAO<ClientModel> {
     private void iAprofils(float[] array,ClientModel client)
     {
         int prof = 0;
+        Statement stmt = null;
         try {
             String req1 = "Delete from client_profil_client where id_client ="+client.getId()+";";
-            Statement stmt = this.connection.createStatement();
+            stmt = this.connection.createStatement();
             stmt.executeUpdate(req1);
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         for(int i=0;i<array.length;i++)
         {
-            float value = array[i];
-            prof = i+1;
-            if(value <10.0f)
-            {
-                prof=-1;
-            }
-            else if(value < 25.0f)
-            {
-                //pas vraiment le profil
-                prof = prof;
-            }
-            else if(value >= 25.0f && value < 50.0f)
-            {
-                //achete souvent
-                prof+=100;
-            }else if(value >= 50.0f && value < 75.0f)
-            {
-                //aime beaucoup
-                prof+=200;
-            }else if(value > 75.0f)
-            {
-                //Profil++
-                prof+=300;
-            }
-            if(prof!=-1) {
+                float value = array[i];
+                prof = i+1;
+                if(value <10.0f)
+                {
+                    prof=-1;
+                }
+                else if(value < 25.0f)
+                {
+                    //pas vraiment le profil
+                    prof = prof;
+                }
+                else if(value >= 25.0f && value < 50.0f)
+                {
+                    //achete souvent
+                    prof+=100;
+                }else if(value >= 50.0f && value < 75.0f)
+                {
+                    //aime beaucoup
+                    prof+=200;
+                }else if(value > 75.0f)
+                {
+                    //Profil++
+                    prof+=300;
+                }
+                if(prof!=-1) {
 
-                String req = "INSERT INTO client_profil_client  (id_client,id_profil) values(" + client.getId() + "," + prof + ");";
-                try {
-                    Statement stmt = this.connection.createStatement();
+                    String req = "INSERT INTO client_profil_client  (id_client,id_profil) values(" + client.getId() + "," + prof + ");";
                     stmt.executeUpdate(req);
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
