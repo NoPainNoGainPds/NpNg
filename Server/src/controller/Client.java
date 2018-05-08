@@ -171,6 +171,9 @@ public class Client extends Thread {
                         case "DellProfil" :
                             sender.dellAllProfil();
                             break;
+                        case "AttPurchase" :
+                            sender.attPurchase();
+                            break;
                         case "Redevance" :
                             if(inputFromClient.getId()==-1)
                             sender.sendAllfees();

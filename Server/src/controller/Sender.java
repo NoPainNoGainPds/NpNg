@@ -74,6 +74,8 @@ public class Sender {
 
     private BonLivraisonDAO blDAO;
 
+    private PurchaseDAO purchaseDAO;
+
     /**
      * Constructor
      * @param database the connection to the database
@@ -95,6 +97,7 @@ public class Sender {
         this.blDAO = new BonLivraisonDAO(database);
         this.cDAO = client.getcDAO();
         this.profDAO = new ProfilDAO(database);
+        this.purchaseDAO = new PurchaseDAO(database);
         this.mapper = mapper;
         this.mapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
         this.writer = writer;
@@ -405,6 +408,10 @@ public class Sender {
     }
     public void dellAllProfil(){
         this.cDAO.delAllProfil();
+    }
+    public void attPurchase()
+    {
+        this.purchaseDAO.generatePurchase();
     }
     public void calculFee() {
         AlgorithmFee alg = new AlgorithmFee(this.bDAO,this.rDAO);
