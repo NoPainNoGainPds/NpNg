@@ -25,9 +25,10 @@ public class ViewDeliveryNote extends JPanel {
 
 
     public ViewDeliveryNote(){
+
         this.setLayout(new BorderLayout());
+
         JPanel panBouton = new JPanel();
-        panBouton.setLayout(new MigLayout("inset 5","[fill, grow]", "[fill, grow]" ));
         JButton boutonEntreeStock = new JButton ("Entree Stock");
 
         JButton boutonSortieStock = new JButton ("Sortie Stock");
@@ -55,15 +56,16 @@ public class ViewDeliveryNote extends JPanel {
         dateEntreeStock = new TextLabel(dateEntreeStockTextField, new JLabel("Date entree du stock"));
         panEntreeStock.add(dateEntreeStock, "cell 2 2 1 1");
 */
-//        EntryIntoStorage EIS = new EntryIntoStorage();
-//        panInfo.add(EIS);
+
+        //EntryIntoStorage EIS = new EntryIntoStorage();
+        //panInfo.add(EIS);
 
         OutputStorage OS = new OutputStorage();
         panInfo.add(OS);
 
 
-        this.add(panInfo, BorderLayout.SOUTH);
         this.add(panBouton, BorderLayout.NORTH);
+        this.add(panInfo, BorderLayout.SOUTH);
 
 
     }
