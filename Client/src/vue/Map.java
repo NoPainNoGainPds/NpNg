@@ -43,6 +43,7 @@ public class Map extends JPanel {
      */
     public Map()
     {
+
         this.polygons = new ArrayList<MyPolygon>();
         this.img1 = Toolkit.getDefaultToolkit().getImage("Client/src/res/PlanCentreCo.png");
         this.popUpMap = new PopUpMap();
@@ -199,4 +200,5 @@ public class Map extends JPanel {
             g2.drawString(this.popUpMap.b.toString(),this.popUpMap.x+10,this.popUpMap.y+25);
         }
     }
+
 }
