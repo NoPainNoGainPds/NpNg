@@ -46,6 +46,10 @@ public class Redevance {
         this.nom_boutique = id_boutique.getNom();
     }
 
+    public Redevance(int id_redevance) {
+        this.id_redevance = id_redevance;
+    }
+
     /**
      * get the fee id
      * @return the id

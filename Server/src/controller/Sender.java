@@ -406,6 +406,29 @@ public class Sender {
             e.printStackTrace();
         }
     }
+
+
+    public boolean deleteFee(Redevance red)
+    {
+        try {
+
+                boolean b = this.rDAO.delete(red);
+
+                    this.mapper.writeValue(this.writer,b);
+                    this.writer.write("\n".getBytes());
+                    this.writer.flush();
+                    return true;
+        }catch(JsonMappingException e)
+        {
+            e.printStackTrace();
+            return false;
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public void dellAllProfil(){
         this.cDAO.delAllProfil();
     }

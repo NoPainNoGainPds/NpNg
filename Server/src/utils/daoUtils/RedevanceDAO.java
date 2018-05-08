@@ -51,8 +51,19 @@ public class RedevanceDAO extends DAO<Redevance> {
 
     @Override
     public boolean delete(Redevance obj) {
-
-        return false;
+        try
+        {
+            String requete = "delete from redevance where id_redevance="+obj.getid_Redevance()+";";
+            Statement stmt = this.connection.createStatement();
+            stmt.executeUpdate(requete);
+            logger.info(requete);
+            return true;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            logger.error(e.toString());
+            return false;
+        }
     }
 
     @Override
@@ -116,6 +127,31 @@ public class RedevanceDAO extends DAO<Redevance> {
         }
     }
 
+
+    public boolean findFeeAssigned(int id_boutique) {
+        try {
+            Statement stmt = this.connection.createStatement();
+            String requete =  "select id_redevance from redevance where MONTH(date_redevance)=MONTH(NOW()) and YEAR(date_redevance)=YEAR(NOW()) and id_boutique="+id_boutique+"";
+
+            ResultSet res = stmt.executeQuery(requete);
+            ArrayList listRedevance = new ArrayList();
+            while(res.next()) {
+                listRedevance.add(res.getInt("id_redevance"));
+
+            }
+
+            this.logger.info(requete);
+            if (listRedevance.isEmpty()){
+                return true;
+            }else{return false;}
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            this.logger.error("SQLException");
+            return false;
+        }
+    }
 
 
 }

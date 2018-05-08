@@ -39,6 +39,10 @@ public class Redevance implements ModelObject {
      * @param date_redevance date
      * @param montant_redevance amount
      */
+
+
+
+
     public Redevance(int id_redevance, Boutique id_boutique, Date date_redevance, float montant_redevance) {
         this.id_redevance = id_redevance;
         this.id_boutique = id_boutique;
@@ -47,6 +51,10 @@ public class Redevance implements ModelObject {
         this.nom_boutique = id_boutique.getNom();
     }
 
+
+    public Redevance(int id_redevance) {
+        this.id_redevance = id_redevance;
+    }
     /**
      * get the fee id
      * @return the id

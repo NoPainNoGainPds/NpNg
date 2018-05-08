@@ -184,6 +184,9 @@ public class Client extends Thread {
                         case "newFee" :
                             sender.insertFee(inputFromClient);
                             break;
+                        case "deleteFee" :
+                            sender.deleteFee(new Redevance(inputFromClient.getId()));
+                            break;
                         default: System.out.println("Not Comparable");
                     }
                     /*
@@ -227,6 +230,7 @@ public class Client extends Thread {
     public ClientDAO getcDAO() {
         return cDAO;
     }
+
 
     /**
      * to read from the server

@@ -28,6 +28,7 @@ import java.util.Date;
  */
 public class AlgorithmFee {
     private ArrayList<Boutique> listeBoutique;
+    private ArrayList<Redevance> listeRedevance;
     private BoutiqueDAO bDAO;
     private RedevanceDAO rDAO;
 
@@ -49,60 +50,52 @@ public class AlgorithmFee {
         listeBoutique=this.bDAO.findWhoPay();
         for (int i=0; i<listeBoutique.size(); i++) {
             Boutique b = listeBoutique.get(i);
+            System.out.println (this.rDAO.findFeeAssigned(b.getId()));
+        if (this.rDAO.findFeeAssigned(b.getId())){
 
-            float red=0;
-            int s=b.getEmplacement().getSuperficie();
-            float c=0;
-            switch (b.getEmplacement().getCat()){
-                case "*": c=70; break;
-                case "A": c=62.5F; break;
-                case "B": c=55; break;
-                case "C": c=47.5F; break;
-                case "D": c=40; break;
-                default: c=40;
-            }
+                float red = 0;
+                int s = b.getEmplacement().getSuperficie();
+                float c = 0;
+                switch (b.getEmplacement().getCat()) {
+                    case "*":
+                        c = 70;
+                        break;
+                    case "A":
+                        c = 62.5F;
+                        break;
+                    case "B":
+                        c = 55;
+                        break;
+                    case "C":
+                        c = 47.5F;
+                        break;
+                    case "D":
+                        c = 40;
+                        break;
+                    default:
+                        c = 40;
+                }
 
-            Calendar calendar = Calendar.getInstance();
+                Calendar calendar = Calendar.getInstance();
 
 
-            Date auj=calendar.getTime();
-            SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-01");
+                Date auj = calendar.getTime();
+                SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-01");
 
-            System.out.println(formater.format(auj));
+                System.out.println(formater.format(auj));
 
-            red=(s*c)*(1-s/10000);
-            Redevance r=new Redevance(0,b,auj,red);
+                red = (s * c) * (1 - s / 10000);
+                Redevance r = new Redevance(0, b, auj, red);
 
-            this.rDAO.create(r);
-            System.out.println("ok");
+                this.rDAO.create(r);
+                System.out.println("ok");
+
+            }else{ System.out.println("deja assigne");}
+
+
 
         }
     }
 
-    public ArrayList<Boutique> findWhoPay() {
-
-        Database db = new Database();
-
-
-        try {
-        Connection connection = db.getConnection();
-        Statement stmt = connection.createStatement();
-        String requete =  "select b.id_boutique, e.nom_emplacement, e.id_emplacement, e.superficie, c.nom_categorie_emplacement from boutique b, emplacement e, categorie_emplacement c where b.id_emplacement=e.id_emplacement and e.id_categorie_emplacement=c.id_categorie_emplacement and b.id_emplacement != -1";
-
-        ResultSet res = stmt.executeQuery(requete);
-            ArrayList list = new ArrayList();
-        while (res.next()) {
-            list.add(new Boutique (res.getInt("id_boutique"), new Emplacement(res.getString("nom_emplacement"), res.getInt("id_emplacement"), res.getInt("superficie"), res.getString("nom_categorie_emplacement"))));
-
-        }
-        res.close();
-        stmt.close();
-        connection.close();
-        logger.info(requete);
-    } catch (SQLException e) {
-        logger.error(e.toString());
-    }
-        return null;
-}
 
 }

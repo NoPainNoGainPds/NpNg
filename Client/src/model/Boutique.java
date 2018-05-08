@@ -41,7 +41,7 @@ public class Boutique implements ModelObject {
         this.logo = logo;
     }
 
-    public Boutique(int id, String nom, int categorie, Emplacement emplacement, String logo)
+    public Boutique(int id, String nom, CategorieBoutique categorie, Emplacement emplacement, String logo)
     {
         this.id = id;
         this.nom = nom;

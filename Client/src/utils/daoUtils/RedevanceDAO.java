@@ -41,7 +41,19 @@ public class RedevanceDAO extends DAO<Redevance> {
 
     @Override
     public boolean delete(Redevance obj) {
-        return false;
+        boolean response;
+        String str = "{\"name\" : \"deleteFee\",\"id\":"+obj.getid_Redevance()+"}";
+        this.connection.send(str);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            str = mapper.writeValueAsString(obj);
+            this.connection.send(str);
+            Object rep =this.connection.recieve(Boolean.class);
+        }catch(JsonProcessingException e)
+        {
+            e.printStackTrace();
+        }
+        return false;//a changer
     }
 
     @Override
