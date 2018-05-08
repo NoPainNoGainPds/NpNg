@@ -5,12 +5,12 @@ import model.Produit;
 import model.Purchase;
 import utils.DAO;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class PurchaseDAO extends DAO<Purchase> {
     public PurchaseDAO(Connection con)
@@ -54,15 +54,15 @@ public class PurchaseDAO extends DAO<Purchase> {
             int max_sortieStock = new StockSortieDAO(this.connection).getMaxId();
             for (ClientModel c : listeClient) {
                 //for every client generate some random purchase
-                int nbPurchase = (int)Math.random()*20;
+                int nbPurchase = ThreadLocalRandom.current().nextInt(0 20+1);
                 System.out.println(c+" nbPurchase : "+nbPurchase);
                 for(int i=0;i<nbPurchase;i++)
                 {
                     max_sortieStock ++;
                     //add the product to the client
-                    int rndProduct = (int)(Math.random()*listeProduit.size())+1;
+                    int rndProduct = ThreadLocalRandom.current().nextInt(0, listeProduit.size() + 1);
                     //creation de la sortie de stock
-                    int id_boutique = (int)(Math.random()*20)+1;
+                    int id_boutique = ThreadLocalRandom.current().nextInt(0, 20 + 1);
                     String str = "INSERT INTO `sortie_stock`(`id_sortie`, `quantite`, `date_sortie`, `id_produit`, `id_boutique`) VALUES ("+max_sortieStock+","+1+","+"NOW()"+","+rndProduct+","+id_boutique+")";
                     Statement stmt = this.connection.createStatement();
                     stmt.executeUpdate(str);
