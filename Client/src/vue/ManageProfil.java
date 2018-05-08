@@ -52,6 +52,7 @@ public class ManageProfil extends JPanel{
 
         btn1.addActionListener(e -> this.cDao.AttrProf());
         btn2.addActionListener(e -> this.cDao.delAllProfil());
+        btn3.addActionListener(e-> this.cDao.attPurchase());
 
         panel.add(btn1);
         panel.add(btn2);

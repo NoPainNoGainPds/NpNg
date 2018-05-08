@@ -97,4 +97,17 @@ public class ClientDAO extends DAO<Client> {
             return false;
         }
     }
+    public boolean attPurchase()
+    {
+        try{
+            String str = "{\"name\":\"AttPurchase\",\"id\":1}";
+            this.connection.send(str);
+            Boolean b = (Boolean)this.connection.recieve(Boolean.class);
+            return b;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

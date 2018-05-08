@@ -51,21 +51,24 @@ public class PurchaseDAO extends DAO<Purchase> {
         try {
             ArrayList<ClientModel> listeClient = new ClientDAO(this.connection).findFromReference();
             ArrayList<Produit> listeProduit = new ProduitDAO(this.connection).findFromReference();
+            int max_sortieStock = new StockSortieDAO(this.connection).getMaxId();
             for (ClientModel c : listeClient) {
                 //for every client generate some random purchase
                 int nbPurchase = (int)Math.random()*20;
                 for(int i=0;i<nbPurchase;i++)
                 {
+                    max_sortieStock ++;
                     //add the product to the client
                     int rndProduct = (int)(Math.random()*listeProduit.size())+1;
-                    String str = "";
                     //creation de la sortie de stock
+                    int id_boutique = (int)(Math.random()*20)+1;
+                    String str = "INSERT INTO `sortie_stock`(`id_sortie`, `quantite`, `date_sortie`, `id_produit`, `id_boutique`) VALUES ("+max_sortieStock+","+1+","+"NOW()"+","+rndProduct+","+id_boutique+")";
                     Statement stmt = this.connection.createStatement();
                     stmt.executeUpdate(str);
-                    str = "";
-                    //insertion du
+                    str = "INSERT INTO `achat`(`id_sortie_stock`, `id_client`) VALUES ("+max_sortieStock+","+c.getId()+");";
+                    //insertion du clietn->sotrieStock
+                    stmt.executeUpdate(str);
                     stmt.close();
-
                 }
 
             }

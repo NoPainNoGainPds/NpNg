@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import utils.Constants;
 import utils.DAO;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,6 +50,24 @@ public class StockSortieDAO extends DAO<StockSortie> {
     @Override
     public ArrayList<StockSortie> findFromReference() {
         return null;
+    }
+
+    public int getMaxId() {
+        try {
+            Statement stmt = this.connection.createStatement();
+            String requete = "Select MAX(id_sortie) FROM sortie_stock;";
+            ResultSet res = stmt.executeQuery(requete);
+            int result = -1;
+            while(res.next())
+            {
+                result = res.getInt(1);
+            }
+            return result;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     public ArrayList<StockSortie> findFromReference(int id_produit, int id_boutique) {
