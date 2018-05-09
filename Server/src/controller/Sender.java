@@ -411,18 +411,14 @@ public class Sender {
     public boolean deleteFee(Redevance red)
     {
         try {
+            Boolean b = this.rDAO.delete(red);
+            this.mapper.writeValue(this.writer, b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+            System.out.println("suppression redevance");
+            return true;
 
-                boolean b = this.rDAO.delete(red);
-
-                    this.mapper.writeValue(this.writer,b);
-                    this.writer.write("\n".getBytes());
-                    this.writer.flush();
-                    return true;
-        }catch(JsonMappingException e)
-        {
-            e.printStackTrace();
-            return false;
-        }catch(IOException e)
+        }catch (IOException e)
         {
             e.printStackTrace();
             return false;

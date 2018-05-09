@@ -37,9 +37,9 @@ public class ClientView extends JPanel {
         this.add(this.telephone);
         this.add(this.adrs);
         this.add(this.profils);
-        ColorCube3D cc3d = new ColorCube3D();
-        cc3d.setMinimumSize(new Dimension(45,45));
-        this.add(cc3d);
+        //ColorCube3D cc3d = new ColorCube3D();
+        //cc3d.setMinimumSize(new Dimension(45,45));
+        //this.add(cc3d);
     }
     public void setClient(Client c)
     {
