@@ -27,13 +27,15 @@ public class ViewDeliveryNote extends JPanel {
     public ViewDeliveryNote(){
 
         this.setLayout(new BorderLayout());
-
+        CardLayout cl = new CardLayout();
         JPanel panBouton = new JPanel();
+        JPanel panInfo = new JPanel();
         JButton boutonEntreeStock = new JButton ("Entree Stock");
-
+        boutonEntreeStock.addActionListener(event -> cl.show(panInfo,"P0"));
         JButton boutonSortieStock = new JButton ("Sortie Stock");
-
+        boutonSortieStock.addActionListener(event -> cl.show(panInfo,"P1"));
         JButton boutonAffichageStock = new JButton ("Affichage Stock");
+        boutonAffichageStock.addActionListener(event -> cl.show(panInfo,"P2"));
 
         panBouton.add(boutonEntreeStock);
         panBouton.add(boutonSortieStock);
@@ -41,10 +43,10 @@ public class ViewDeliveryNote extends JPanel {
 
 
 
-        JPanel panInfo = new JPanel();
-        panInfo.setLayout(new CardLayout());
 
-/*        JPanel panEntreeStock = new JPanel();
+        panInfo.setLayout(cl);
+
+        JPanel panEntreeStock = new JPanel();
 
         nomDeLaBoutiqueBox = new JComboBox<Boutique>();
         nomDeLaBoutiqueBox.setPreferredSize(new Dimension(250,50));
@@ -55,13 +57,13 @@ public class ViewDeliveryNote extends JPanel {
         dateEntreeStockTextField.setPreferredSize(new Dimension(300,50));
         dateEntreeStock = new TextLabel(dateEntreeStockTextField, new JLabel("Date entree du stock"));
         panEntreeStock.add(dateEntreeStock, "cell 2 2 1 1");
-*/
 
-        //EntryIntoStorage EIS = new EntryIntoStorage();
-        //panInfo.add(EIS);
+        panInfo.add(panEntreeStock,"P0");
+        EntryIntoStorage EIS = new EntryIntoStorage();
+        panInfo.add(EIS,"P1");
 
         OutputStorage OS = new OutputStorage();
-        panInfo.add(OS);
+        panInfo.add(OS,"P2");
 
 
         this.add(panBouton, BorderLayout.NORTH);
