@@ -2,7 +2,9 @@ package vue;
 
 import model.Boutique;
 import model.StockSortie;
+import model.CauseSortieStock;
 import net.miginfocom.swing.MigLayout;
+import sun.awt.CausedFocusEvent;
 import utils.Constants;
 import utils.daoUtils.StockSortieDAO;
 
@@ -15,14 +17,8 @@ import java.util.*;
  */
 public class OutputStorage extends JPanel{
 
-    private TextLabel<JTextField> nomProduit;
-    private JTextField nomProduitTextField;
-
-    private TextLabel<JTextField> idProduit;
-    private JTextField idProduitTextField;
-
-    //private TextLabel<JComboBox<Cause>>  cause;
-    //private JComboBox<Cause> causeBox;
+    private TextLabel<JComboBox<CauseSortieStock>>  cause;
+    private JComboBox<CauseSortieStock> causeBox;
 
     /**
      * Name of the product
@@ -36,17 +32,16 @@ public class OutputStorage extends JPanel{
     private TextLabel <JTextField> dateSortieStock;
     private JTextField dateSortieStockTextField;
 
-    /**
-     * The Quantity
-     */
-    private TextLabel <JTextField> quantite;
-    private JTextField quantiteTextField;
-
-
 
     private StockSortieDAO ssDAO;
 
     private JButton validerBoutton;
+
+    private JButton addLineForm;
+
+    private JPanel FormPan;
+
+    private JPanel FormPanLine;
 
     /**
      * Constructor
@@ -61,34 +56,55 @@ public class OutputStorage extends JPanel{
      */
     public void View(){
 
-        this.setLayout(new MigLayout("inset 0 5 5 5", "[fill, grow]", "[fill, grow]"));
+        this.setLayout(new BorderLayout());
+        FormPan = new JPanel();
+        FormPan.setLayout(new MigLayout("inset 0 20 20 20", "[fill, grow]", "[fill, grow]"));
 
 
         nomDeLaBoutiqueBox = new JComboBox<Boutique>();
         nomDeLaBoutiqueBox.setPreferredSize(new Dimension(250,50));
         nomDeLaBoutique = new TextLabel (nomDeLaBoutiqueBox, new JLabel("Nom de la boutique"));
-        this.add(nomDeLaBoutique, "cell 0 2 1 1");
+        FormPan.add(nomDeLaBoutique);
 
         dateSortieStockTextField = new JTextField(20);
         dateSortieStockTextField.setPreferredSize(new Dimension(250,50));
         dateSortieStock = new TextLabel(dateSortieStockTextField, new JLabel("Date Achat"));
-        this.add(dateSortieStock, "cell 2 2 1 1");
+        FormPan.add(dateSortieStock);
 
-        quantiteTextField = new JTextField(20);
-        quantiteTextField.setPreferredSize(new Dimension(250,50));
-        quantite = new TextLabel(quantiteTextField, new JLabel("Quantite"));
-        this.add(quantite, "cell 4 2 1 1");
-
+        causeBox = new JComboBox<CauseSortieStock>();
+        causeBox.setPreferredSize(new Dimension(250,50));
+        cause = new TextLabel(causeBox, new JLabel("Cause de la sortie de stock"));
+        FormPan.add(cause, "wrap");
 
 
         validerBoutton = new JButton("Valider");
+        addLineForm = new JButton("Ajout ligne");
 
-        JPanel Buttonpan = new JPanel(new MigLayout("inset 0 0 15 0 ", "[center, grow]"));
-        Buttonpan.add(validerBoutton);
-        this.add(Buttonpan, "dock south");
+        FormPanLine = new JPanel();
+        FormPanLine.setLayout(new MigLayout("inset 0 20 20 20 ", "[fill, grow]", "[fill, grow]"));
+        ArrayList<OutputStorageForm> liste = new ArrayList<>();
+        OutputStorageForm panTemp = new OutputStorageForm();
+        liste.add(panTemp);
+        FormPanLine.add(panTemp, "wrap");
+
+        addLineForm.addActionListener(e -> {
+            OutputStorageForm panTemp1 = new OutputStorageForm();
+            liste.add(panTemp1);
+            FormPanLine.add(panTemp1, "wrap");
+            FormPanLine.repaint();
+            FormPanLine.revalidate();
+        });
+
+        JPanel Buttonpan = new JPanel(new MigLayout("", "[center, grow]"));
+        Buttonpan.add(addLineForm, "cell 0 2 1 1");
+        Buttonpan.add(validerBoutton, "cell 2 2 1 1");
+
+        this.add(FormPanLine, BorderLayout.CENTER);
+        this.add(FormPan, BorderLayout.NORTH);
+        this.add(Buttonpan, BorderLayout.SOUTH);
     }
 
-    private void controler(){
+    /*private void controler(){
         this.validerBoutton.addActionListener(event ->
         {
             StockSortie ssToSend = new StockSortie();
@@ -98,5 +114,5 @@ public class OutputStorage extends JPanel{
 
 
         });
-    }
+    }*/
 }

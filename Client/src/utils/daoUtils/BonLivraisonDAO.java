@@ -1,7 +1,6 @@
 package utils.daoUtils;
 
 import model.BonLivraison;
-import model.Redevance;
 import org.apache.log4j.Logger;
 import utils.Constants;
 import utils.DAO;
