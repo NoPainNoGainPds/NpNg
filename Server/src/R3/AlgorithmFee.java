@@ -24,15 +24,19 @@ import java.util.Date;
 
 
 /**
- * Class which represents the algorithm to use to assign a location to a store
+ * Class which represents the algorithm to calculate and assign a fee to a store
  */
 public class AlgorithmFee {
+    /**
+     * The list of the stores which have to pay
+     */
     private ArrayList<Boutique> listeBoutique;
-    private ArrayList<Redevance> listeRedevance;
     private BoutiqueDAO bDAO;
     private RedevanceDAO rDAO;
 
-
+    /**
+     * Logger
+     */
     Logger logger;
 
     public AlgorithmFee(BoutiqueDAO bDAO,RedevanceDAO rDAO) {
@@ -43,8 +47,8 @@ public class AlgorithmFee {
 
 
     /**
-     * Method to assign a location to a store after having sorted the lists
-     */
+     * Method to calculate and assign a fee to all the stores if they already have not one
+     * */
     public void assignFeeToStore() {
 
         listeBoutique=this.bDAO.findWhoPay();

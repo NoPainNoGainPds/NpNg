@@ -28,28 +28,53 @@ import utils.daoUtils.StockEntreeDAO;
 import utils.daoUtils.StockSortieDAO;
 
 /**
- * Represents the view which include product's details
+ * Represents the view which include fee's details
  */
 public class DetailFee extends JFrame implements Runnable {
     /**
-     * The store
+     * The fee
      */
     private Redevance redevance;
-    private Boutique boutique;
+    /**
+     * The location
+     */
     private Emplacement emplacement;
+    /**
+     * The name of the store
+     */
     private JLabel nom_boutique;
+    /**
+     * The name of the location
+     */
     private JLabel nom_emplacement;
+    /**
+     * The amount of the fee
+     */
     private JLabel montant;
+    /**
+     * The area of the location
+     */
     private JLabel superficie;
-
+    /**
+     * The location category
+     */
     private JLabel categorie_emplacement;
+    /**
+     * The expression to calculate a fee
+     */
     private JLabel formule;
+    /**
+     * The informations for the expression
+     */
     private JLabel abrev;
-    private JLabel msgError;
-
-    private TextLabel <JComboBox<String>> Dest;
-    private JTextField DestField;
-
+    /**
+     * The name of the PDF
+     */
+    private TextLabel <JTextField> NomPdf;
+    private JTextField NomPdfField;
+    /**
+     * The logo of the store
+     */
     private Image img;
     /**
      * Logo of the store
@@ -60,12 +85,15 @@ public class DetailFee extends JFrame implements Runnable {
     /**
      * Constructor
      * @param redevance The fee
+     * @param emplacement The location
      */
     public DetailFee(Redevance redevance, Emplacement emplacement) {
         super("Detail de la redevance");
         this.setSize(new Dimension(600, 700));
+
         this.redevance = redevance;
-        this.emplacement=emplacement;
+        this.emplacement = emplacement;
+
         JPanel panel = new JPanel();
         panel.setLayout(new MigLayout("inset 10", "[fill, grow]", "[fill, grow]"));
         JPanel panel1 =new JPanel();
@@ -73,55 +101,37 @@ public class DetailFee extends JFrame implements Runnable {
         JPanel panel2=new JPanel();
         panel2.setLayout(new MigLayout("inset 10", "[fill, grow]", "[fill, grow]"));
         panel1.setLayout(new MigLayout("inset 10", "[fill, grow]", "[fill, grow]"));
-        JPanel panel3=new JPanel();
-        panel3.setLayout(new MigLayout("inset 10", "[fill, grow]", "[fill, grow]"));
+        JPanel panel4=new JPanel();
+        panel4.setLayout(new MigLayout("inset 10", "[fill, grow]", "[fill, grow]"));
+
         this.img = Toolkit.getDefaultToolkit().getImage(redevance.getId_boutique().getLogo());
         this.logo = new ImageComponent(true);
         this.logo.setImage(this.img);
-        panel.add(this.logo, "cell 0 0 3 3, split 2");
+
 
         SimpleDateFormat formater = new SimpleDateFormat("MMMMM yyyy");
 
         this.nom_boutique = new JLabel("Redevance de " + redevance.getNom_boutique() + " du mois de "+ formater.format(redevance.getDate_redevance()));
-        panel.add(this.nom_boutique, "cell 1 0 3 3");
-
-
         this.nom_emplacement= new JLabel("Nom: " + emplacement.getNom());
-        panel1.add(this.nom_emplacement, "cell 0 0 2 1");
-
         this.superficie = new JLabel("Superficie: " + emplacement.getSuperficie());
-        panel1.add(this.superficie, "cell 0 1");
-
         this.categorie_emplacement = new JLabel("Categorie: " + emplacement.getCat());
-        panel1.add(this.categorie_emplacement, "cell 1 1");
-
-        panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Informations sur l'emplacement"));
-
-
-
-        this.abrev =new JLabel ("s: superficie de l'emplacement / p: prix au m2");
-        panel2.add(this.abrev, "cell 0 0");
-        this.formule = new JLabel ("Formule de calcul: (s*p)*(1-s/80000)");
+        this.abrev =new JLabel ("s: superficie de l'emplacement / p: prix au m2 / f: nb clients");
+        this.formule = new JLabel ("Formule de calcul: (s*p)*(1-s/80000+s/f)");
         this.formule.setForeground(Color.red);
-        panel2.add(this.formule, "cell 0 1");
+
 
         Object[][] donnees = {
-                {"*", "70\u20AC"},
-                {"A", "62,5\u20AC"},
-                {"B", "55\u20AC"},
-                {"C", "47,5\u20AC"},
+                {"*", "65\u20AC"},
+                {"A", "57,5\u20AC"},
+                {"B", "50\u20AC"},
+                {"C", "42,5\u20AC"},
                 {"D", "40\u20AC"},
 
         };
-
         String[] entetes = {"Cat. emplacement", "Prix au m2"};
-
         JTable tableau = new JTable(donnees, entetes);
         JScrollPane j=new JScrollPane(tableau);
         j.setPreferredSize(new Dimension(200,59));
-
-        panel2.add(j, "cell 1 0 10 10");
-        panel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Formule"));
 
 
         this.montant= new JLabel( +redevance.getMontant_redevance()+"\u20AC");
@@ -131,17 +141,10 @@ public class DetailFee extends JFrame implements Runnable {
 
 
 
-        panel.add(panel1, "cell 0 3 1 1");
-        panel.add(panel2, "cell 0 4 1 1");
-        panel.add(this.montant, "cell 0 7");
-        panel.setBorder(BorderFactory.createLineBorder(Color.RED));
-        this.add(panel);
+        NomPdfField = new JTextField(20);
+        NomPdfField.setText("facture.pdf");
+        NomPdf = new TextLabel (NomPdfField, new JLabel("Nom du fichier: "));
 
-
-        DestField = new JTextField(20);
-        DestField.setText("facture.pdf");
-        Dest = new TextLabel (DestField, new JLabel("Destination Facture"));
-        panel.add(Dest, "cell 0 8 3 1");
 
         JButton valid= new JButton("Valider");
         valid.addActionListener((event) -> {
@@ -149,10 +152,34 @@ public class DetailFee extends JFrame implements Runnable {
             //file.getParentFile().mkdirs();
 
             RedevanceDAO rDAO=new RedevanceDAO();
-            rDAO.generPDF(this.DestField.getText(), redevance.getid_Redevance());
+            rDAO.generPDF(this.NomPdfField.getText(), redevance.getid_Redevance());
         });
 
-        panel.add(valid,"cell 4 8 1 1");
+
+        panel.add(this.logo, "cell 0 0 3 3, split 2");
+        panel.add(this.nom_boutique, "cell 3 0 3 3");
+        panel1.add(this.nom_emplacement, "cell 0 0 2 1");
+        panel1.add(this.superficie, "cell 0 1");
+        panel1.add(this.categorie_emplacement, "cell 1 1");
+
+        panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Informations sur l'emplacement"));
+
+        panel2.add(this.abrev, "cell 0 0");
+        panel2.add(this.formule, "cell 0 1");
+        panel2.add(j, "cell 1 0 3 3");
+        panel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Formule"));
+        panel4.add(NomPdf, "cell 0 0 2 1");
+        panel4.add(valid, "cell 0 1 1 1");
+        panel4.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Facture"));
+
+        panel.add(panel1, "cell 0 4 3 1");
+        panel.add(panel2, "cell 0 5 3 1");
+        panel.add(this.montant, "cell 0 6 3 1");
+        panel.add(panel4,"cell 0 7 3 1");
+        panel.setBorder(BorderFactory.createLineBorder(Color.RED));
+        this.add(panel);
+
+
     }
 
 

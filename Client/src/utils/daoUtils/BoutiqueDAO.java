@@ -141,7 +141,10 @@ public class BoutiqueDAO extends DAO<Boutique> {
         return null;
     }
 
-
+    /**
+     * Method to find the stores which have to pay
+     * @return A list of the stores.
+     */
     public ArrayList<Boutique> findWhoPay() {
         try
         {

@@ -46,6 +46,10 @@ public class Redevance {
         this.nom_boutique = id_boutique.getNom();
     }
 
+    /**
+     * Constructor
+     * @param id_redevance id
+     */
     public Redevance(int id_redevance) {
         this.id_redevance = id_redevance;
     }
@@ -78,10 +82,16 @@ public class Redevance {
     public void setId_boutique(Boutique id_boutique) {
         this.id_boutique = id_boutique;
     }
+    /**
+     * get the name of the store
+     */
     public String getNom_boutique() {
         return this.nom_boutique;
     }
-
+    /**
+     * set the name of the store
+     * @param nom_boutique the new name of the store
+     */
     public void setNom_boutique(String nom_boutique) {
         this.nom_boutique = nom_boutique;
     }

@@ -31,6 +31,7 @@ public class Boutique {
      * @param nom name of the store
      * @param categorie categorie of the store
      * @param emplacement location of the store
+     * @param logo logo of the store
      */
     public Boutique(Client c, int id, String nom, int categorie, int emplacement, String logo)
     {
@@ -43,6 +44,14 @@ public class Boutique {
         located = false;
     }
 
+    /**
+     * Constructor of Boutique
+     * @param id id of the store
+     * @param nom name of the store
+     * @param categorie categorie of the store
+     * @param emplacement location of the store
+     * @param logo logo of the store
+     */
     public Boutique(int id, String nom, int categorie, Emplacement emplacement, String logo)
     {
         this.id = id;
@@ -52,6 +61,11 @@ public class Boutique {
         located = false;
     }
 
+    /**
+     * Constructor of Boutique
+     * @param id id of the store
+     * @param emplacement location of the store
+     */
     public Boutique(int id, Emplacement emplacement)
     {
         this.id = id;

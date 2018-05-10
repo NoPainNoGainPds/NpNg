@@ -18,15 +18,28 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Class which represents a fee. It contains the methods which access the database.
+ */
 public class RedevanceDAO extends DAO<Redevance> {
 
     //Log after any action in the CRUD
     private Logger logger = Logger.getLogger(RedevanceDAO.class);
+
+    /**
+     * Constructor.
+     */
     public RedevanceDAO(Connection con)
     {
         super(con);
     }
 
+
+    /**
+     * Add a new fee in the database.
+     * @param obj The fee to add.
+     * @return true if it works, false else.
+     */
     @Override
     public boolean create(Redevance obj) {
         try
@@ -51,6 +64,11 @@ public class RedevanceDAO extends DAO<Redevance> {
         }
     }
 
+    /**
+     * Delete a fee from the database.
+     * @param obj The fee to delete.
+     * @return true if it works, false else.
+     */
     @Override
     public boolean delete(Redevance obj) {
         try
@@ -68,19 +86,32 @@ public class RedevanceDAO extends DAO<Redevance> {
         }
     }
 
+    /**
+     * Update a fee from the database.
+     * @param obj The fee to modify.
+     * @return true if it works, false else.
+     */
     @Override
     public boolean update(Redevance obj) {
 
         return false;
     }
 
+    /**
+     * Find a fee in the database.
+     * @param id The fee's id.
+     * @return The fee found.
+     */
     @Override
     public Redevance find(int id) {
 
         return null;
     }
 
-
+    /**
+     * Get all the fees from the database.
+     * @return A list of the fees.
+     */
     public ArrayList<Redevance> findFromReference() {
         try {
             Statement stmt = this.connection.createStatement();
@@ -103,6 +134,12 @@ public class RedevanceDAO extends DAO<Redevance> {
         }
     }
 
+    /**
+     * Get all the fees of the chosen month and year from the database.
+     * @param annee the year
+     * @param mois the month
+     * @return A list of the fees.
+     */
     public ArrayList<Redevance> findFromReference(int annee, int mois) {
         try {
             Statement stmt = this.connection.createStatement();
@@ -124,7 +161,11 @@ public class RedevanceDAO extends DAO<Redevance> {
         }
     }
 
-
+    /**
+     * Get the fee by its id from the database.
+     * @param id_redevance the id of the fee
+     * @return A list of one fee.
+     */
     public ArrayList<Redevance> findFromReference(int id_redevance) {
         try {
             Statement stmt = this.connection.createStatement();
@@ -146,7 +187,11 @@ public class RedevanceDAO extends DAO<Redevance> {
         }
     }
 
-
+    /**
+     * Get the fee of t of a store id from the database.
+     * @param id_boutique the id of the store
+     * @return A list of the fees.
+     */
     public boolean findFeeAssigned(int id_boutique) {
         try {
             Statement stmt = this.connection.createStatement();

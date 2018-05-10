@@ -11,16 +11,27 @@ import utils.DAO;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * Class which represents a fee. It contains the methods which access the database.
+ */
 public class RedevanceDAO extends DAO<Redevance> {
 
     //Log after any action in the CRUD
     private Logger logger = Logger.getLogger(utils.daoUtils.RedevanceDAO.class);
+
+    /**
+     * Constructor.
+     */
     public RedevanceDAO()
     {
         super(Constants.conServ);
     }
 
+    /**
+     * Add a new fee in the database.
+     * @param obj The fee to add.
+     * @return true if it works, false else.
+     */
     @Override
     public boolean create(Redevance obj) {
         boolean response;
@@ -39,7 +50,11 @@ public class RedevanceDAO extends DAO<Redevance> {
     }
 
 
-
+    /**
+     * Delete a fee from the database.
+     * @param obj The fee to delete.
+     * @return true if it works, false else.
+     */
     @Override
     public boolean delete(Redevance obj) {
         boolean response;
@@ -50,20 +65,41 @@ public class RedevanceDAO extends DAO<Redevance> {
         return false;//a changer
     }
 
+    /**
+     * Update a fee from the database.
+     * @param obj The fee to modify.
+     * @return true if it works, false else.
+     */
     @Override
     public boolean update(Redevance obj) {
         return false;
     }
 
+    /**
+     * Find a fee in the database.
+     * @param id The fee's id.
+     * @return The fee found.
+     */
     @Override
     public Redevance find(int id) {
         return null;
     }
 
+
+    /**
+     * Get the fee by its id from the database.
+     * @param id the id of the fee
+     * @return A list of one fee.
+     */
     @Override
     public ArrayList<Redevance> findFromReference(int id) {
         return null;
     }
+
+    /**
+     * Get all the fees from the database.
+     * @return A list of the fees.
+     */
     @Override
     public ArrayList<Redevance> findFromReference() {
         ArrayList<Redevance> liste = new ArrayList<>();
@@ -81,6 +117,12 @@ public class RedevanceDAO extends DAO<Redevance> {
         return liste;
     }
 
+    /**
+     * Get all the fees of the chosen month and year from the database.
+     * @param annee the year
+     * @param mois the month
+     * @return A list of the fees.
+     */
     public ArrayList<Redevance> findFromReference(int annee, int mois){
         ArrayList<Redevance> liste = new ArrayList<>();
         this.connection.send("{\"name\" : \"Redevance\",\"id\":"+annee+", \"ref\":"+mois+"}");
@@ -96,12 +138,22 @@ public class RedevanceDAO extends DAO<Redevance> {
         }
         return liste;
     }
+
+    /**
+     * Calculate and assign a fee to all stores
+     */
     public void calculFee()
     {
 
         this.connection.send("{\"name\" : \"Redevance\",\"id\":"+(-2)+", \"ref\":"+(-1)+"}");
     }
 
+    /**
+     * Generate a bill in PDF.
+     * @param dest name of PDF
+     * @param id_redevance id of the fee
+     * @return true if it works, false else..
+     */
     public boolean generPDF(String dest, int id_redevance ) {
         boolean response;
         String str = "{\"name\" : \"Facture\",\"id\":"+id_redevance+", \"ref\":\"" + dest + "\"}";

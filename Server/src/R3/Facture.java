@@ -13,11 +13,9 @@ package R3;
         import com.itextpdf.layout.property.UnitValue;
         import model.Redevance;
         import org.apache.log4j.Logger;
-        import utils.Constants;
         import utils.daoUtils.BoutiqueDAO;
         import utils.daoUtils.RedevanceDAO;
 
-        import java.io.File;
         import java.io.FileOutputStream;
         import java.io.IOException;
         import java.text.SimpleDateFormat;
@@ -26,26 +24,41 @@ package R3;
 
 public class Facture {
 
-    public static final String DEST = "C:\\Users\\remys\\Documents/facture.pdf";
+    //public static final String DEST = "C:\\Users\\remys\\Documents/facture.pdf";
     public static final String BOLD = "Client/src/res/OpenSans-Bold.ttf";
-    private String dest;
+    /**
+     * Logger
+     */
     Logger logger;
     private BoutiqueDAO bDAO;
     private RedevanceDAO rDAO;
+    /**
+     * The fee
+     */
+    Redevance redevance;
 
-
+    /**
+     * Constructor
+     * @param bDAO The DAO of the store
+     * @param rDAO The DAO of the fee
+     */
     public Facture(BoutiqueDAO bDAO, RedevanceDAO rDAO){
         this.bDAO = bDAO;
         this.rDAO = rDAO;
         logger = Logger.getLogger(Algorithm.class);
     }
 
+    /**
+     * Create a bill in PDF
+     * @param destination the name of the PDF
+     * @param id_redevance the id of the fee
+     */
     public String createPdf(String destination, int id_redevance) throws IOException{
 
-            Redevance redevance;
-            redevance=rDAO.findFromReference(id_redevance).get(0);
+        redevance=rDAO.findFromReference(id_redevance).get(0);
 
-        FileOutputStream fos = new FileOutputStream("C:\\wamp64\\www\\pdf\\"+destination);
+        //FileOutputStream fos = new FileOutputStream("C:\\wamp64\\www\\pdf\\"+destination);
+        FileOutputStream fos = new FileOutputStream("C:\\MAMP\\htdocs\\Factures\\"+destination);
         PdfWriter writer = new PdfWriter(fos);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
@@ -211,6 +224,7 @@ public class Facture {
 
         document.close();
 
-       return "http://localhost/pdf/facture.pdf";
+       //return "http://localhost/pdf/facture.pdf";
+        return "http://localhost//Factures//"+destination;
     }
 }

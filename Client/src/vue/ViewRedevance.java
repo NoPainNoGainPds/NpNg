@@ -13,29 +13,40 @@ import java.awt.*;
 import java.util.ArrayList;
 
 
-
+/**
+ * Represents the view which allows to manipulate all the fees
+ */
 public class ViewRedevance extends JPanel{
 
     RedevanceDAO rDAO = new RedevanceDAO();
     /**
-     * Weight of the product
+     * Title of the view
      */
     private JLabel titre;
+    /**
+     * A JLabel used to make space in the view
+     */
     private JLabel lignevide;
-    ArrayList<Redevance> list=new ArrayList<>();
     /**
      * List for scroll pane
      */
-    JList<Redevance> jlist=new JList<>();
+    ArrayList<Redevance> list=new ArrayList<>();
+    /**
+     * JList for scroll pane
+     */
+    JList<Redevance> jlist;
     /**
      * Scroll pane for the products
      */
     JScrollPane j=new JScrollPane(jlist);
 
+    /**
+     * Constructor.
+     */
     public ViewRedevance() {
-        //this.setSize(new Dimension(500, 420));
         JPanel panel = new JPanel();
         panel.setLayout(new MigLayout("inset 5", "[fill, grow]", "[fill, grow]"));
+
         this.titre = new JLabel("Redevances de toutes les boutiques" );
         this.lignevide = new JLabel(" " );
 
@@ -150,9 +161,4 @@ public class ViewRedevance extends JPanel{
 
     }
 
-
-
-    public void run() {
-        this.setVisible(true);
-    }
 }
