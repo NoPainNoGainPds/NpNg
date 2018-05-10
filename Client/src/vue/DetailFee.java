@@ -139,7 +139,7 @@ public class DetailFee extends JFrame implements Runnable {
 
 
         DestField = new JTextField(20);
-        DestField.setText("C:\\\\Users\\\\remys\\\\Documents/facture.pdf");
+        DestField.setText("facture.pdf");
         Dest = new TextLabel (DestField, new JLabel("Destination Facture"));
         panel.add(Dest, "cell 0 8 3 1");
 

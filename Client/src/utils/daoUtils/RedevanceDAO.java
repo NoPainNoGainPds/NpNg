@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import utils.Constants;
 import utils.DAO;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -106,7 +107,17 @@ public class RedevanceDAO extends DAO<Redevance> {
         String str = "{\"name\" : \"Facture\",\"id\":"+id_redevance+", \"ref\":\"" + dest + "\"}";
         this.connection.send(str);
         ObjectMapper mapper = new ObjectMapper();
-        Object rep =this.connection.recieve(Boolean.class);
+        Object rep =this.connection.recieve(String.class);
+        System.out.println(rep);
+        try {
+            Runtime runTime = Runtime.getRuntime();
+            Process process = runTime.exec("\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" -new-tab \""+rep+"\"");
+        }catch (RuntimeException e )
+        {
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         return false;//a changer
     }
 }

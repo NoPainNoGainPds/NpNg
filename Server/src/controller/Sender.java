@@ -448,7 +448,7 @@ public class Sender {
     public boolean sendFacture(String dest, int id_redevance){
         try {
             Facture f = new Facture(this.bDAO,this.rDAO);
-            boolean b = f.createPdf(dest, id_redevance);
+            String b = f.createPdf(dest, id_redevance);
             this.mapper.writeValue(this.writer, b);
             this.writer.write("\n".getBytes());
             this.writer.flush();

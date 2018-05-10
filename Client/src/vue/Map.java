@@ -174,15 +174,16 @@ public class Map extends JPanel {
         ArrayList<Point> returnValue = new ArrayList<>();
         for(MyPolygon poly : this.polygons)
         {
-            System.out.println("polygon");
+            //System.out.println("polygon");
             Integer b = poly.getIdEmplacement();
             if(b!=-1)
             {
                 //is in liste ?
+                if(liste!=null)
                 for(Integer value : liste) {
-                    System.out.println("is in ?"+b);
+                    //System.out.println("is in ?"+b);
                     if (value.equals(b)) {
-                        System.out.println("match");
+                        //System.out.println("match");
                         Point p = poly.centerOfPoly();
                         returnValue.add(p);
                     }

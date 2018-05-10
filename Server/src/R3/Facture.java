@@ -13,6 +13,7 @@ package R3;
         import com.itextpdf.layout.property.UnitValue;
         import model.Redevance;
         import org.apache.log4j.Logger;
+        import utils.Constants;
         import utils.daoUtils.BoutiqueDAO;
         import utils.daoUtils.RedevanceDAO;
 
@@ -39,12 +40,12 @@ public class Facture {
         logger = Logger.getLogger(Algorithm.class);
     }
 
-    public boolean createPdf(String destination, int id_redevance) throws IOException{
+    public String createPdf(String destination, int id_redevance) throws IOException{
 
             Redevance redevance;
             redevance=rDAO.findFromReference(id_redevance).get(0);
 
-        FileOutputStream fos = new FileOutputStream(destination);
+        FileOutputStream fos = new FileOutputStream("C:\\wamp64\\www\\pdf\\"+destination);
         PdfWriter writer = new PdfWriter(fos);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
@@ -210,6 +211,6 @@ public class Facture {
 
         document.close();
 
-       return false;
+       return "http://localhost/pdf/facture.pdf";
     }
 }
