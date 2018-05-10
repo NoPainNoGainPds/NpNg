@@ -459,4 +459,25 @@ public class Sender {
             return false;
         }
     }
+
+    public void sendAllProfilsWithoutParcours()
+    {
+        try {
+            ArrayList<Profil> listProfil = this.profDAO.getProfilsWithoutParcours();
+            System.out.println(listProfil.size());
+            for(Profil p : listProfil)
+            {
+                this.mapper.writeValue(this.writer,p);
+                this.writer.write("\n".getBytes());
+                this.writer.flush();
+            }
+            this.writer.write("null\n".getBytes());
+            this.writer.flush();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

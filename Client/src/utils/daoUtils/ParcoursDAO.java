@@ -20,8 +20,8 @@ public class ParcoursDAO extends DAO<Parcours> {
     }
 
     /**
-     * Add a new location to the database.
-     * @param obj The location to add.
+     * Add a new course to the database.
+     * @param obj The course to add.
      * @return true if it works, false else.
      */
     @Override
@@ -30,8 +30,8 @@ public class ParcoursDAO extends DAO<Parcours> {
     }
 
     /**
-     * Delete a location from the database.
-     * @param obj the location to delete.
+     * Delete a course from the database.
+     * @param obj the course to delete.
      * @return true if it works, false else.
      */
     @Override
@@ -40,8 +40,8 @@ public class ParcoursDAO extends DAO<Parcours> {
     }
 
     /**
-     * Update a location from the database.
-     * @param obj The location to modify.
+     * Update a courrse from the database.
+     * @param obj The course to modify.
      * @return true if it works, false else.
      */
     @Override
@@ -50,9 +50,9 @@ public class ParcoursDAO extends DAO<Parcours> {
     }
 
     /**
-     * Find a location in the database.
-     * @param idParcours The location's id.
-     * @return the location found.
+     * Find a course in the database.
+     * @param idParcours The course's id.
+     * @return the course found.
      */
     @Override
     public Parcours find(int idParcours) {

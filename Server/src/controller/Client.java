@@ -190,6 +190,11 @@ public class Client extends Thread {
                         case "deleteFee" :
                             sender.deleteFee(new Redevance(inputFromClient.getId()));
                             break;
+                        case "SearchProfilsWithoutParcours" :
+                            sender.sendAllProfilsWithoutParcours();
+                            break;
+                        //case     ...
+                            //break;
                         default: System.out.println("Not Comparable");
                     }
                     /*
