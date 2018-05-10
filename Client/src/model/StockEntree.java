@@ -24,7 +24,7 @@ public class StockEntree implements ModelObject {
     /**
      * the product
      */
-    private Produit id_produit;
+    private int id_produit;
     /**
      * quantity
      */
@@ -51,7 +51,7 @@ public class StockEntree implements ModelObject {
      * @param montant amount
      * @param date date
      */
-    public StockEntree(int identree_stock, int id_boutique, Produit id_produit, int quantite, int montant, Date date) {
+    public StockEntree(int identree_stock, int id_boutique, int id_produit, int quantite, int montant, Date date) {
         this.identree_stock = identree_stock;
         this.id_boutique = id_boutique;
         this.id_produit = id_produit;
@@ -92,14 +92,14 @@ public class StockEntree implements ModelObject {
      * get the product
      * @return the product
      */
-    public Produit getProduit() {
+    public int getProduit() {
         return this.id_produit;
     }
     /**
      * set the product
      * @param id_produit the new product
      */
-    public void setProduit(Produit id_produit) {
+    public void setProduit(int id_produit) {
         this.id_produit = id_produit;
     }
     /**

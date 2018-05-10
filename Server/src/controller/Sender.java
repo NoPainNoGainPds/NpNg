@@ -75,6 +75,8 @@ public class Sender {
 
     private BonLivraisonDAO blDAO;
 
+    private CauseSortieStockDAO cssDAO;
+
     private PurchaseDAO purchaseDAO;
 
     /**
@@ -96,6 +98,7 @@ public class Sender {
         this.esDAO = new StockEntreeDAO(database);
         this.rDAO = new RedevanceDAO(database);
         this.blDAO = new BonLivraisonDAO(database);
+        this.cssDAO = new CauseSortieStockDAO(database);
         this.cDAO = client.getcDAO();
         this.profDAO = new ProfilDAO(database);
         this.purchaseDAO = new PurchaseDAO(database);

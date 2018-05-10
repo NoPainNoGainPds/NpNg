@@ -10,7 +10,7 @@ import java.util.Date;
 public class StockSortie implements ModelObject {
     private int idsortie_stock;
     private int id_boutique;
-    private Produit id_produit;
+    private int id_produit;
     private int quantite;
     private Date date;
     public StockSortie()
@@ -18,7 +18,7 @@ public class StockSortie implements ModelObject {
 
     }
 
-    public StockSortie(int idsortie_stock, int id_boutique, Produit id_produit, int quantite, Date date) {
+    public StockSortie(int idsortie_stock, int id_boutique, int id_produit, int quantite, Date date) {
         this.idsortie_stock = idsortie_stock;
         this.id_boutique = id_boutique;
         this.id_produit = id_produit;
@@ -42,11 +42,11 @@ public class StockSortie implements ModelObject {
         this.id_boutique = id_boutique;
     }
 
-    public Produit getProduit() {
+    public int getProduit() {
         return id_produit;
     }
 
-    public void setProduit(Produit id_produit) {
+    public void setProduit(int id_produit) {
         this.id_produit = id_produit;
     }
 
