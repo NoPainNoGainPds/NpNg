@@ -80,6 +80,8 @@ public class Client extends Thread {
 
     private BonLivraisonDAO blDAO;
 
+    private CauseSortieStockDAO cssDAO;
+
     /**
      * the sender
      */
@@ -115,6 +117,7 @@ public class Client extends Thread {
         this.cDAO = new ClientDAO(this.database);
         this.rDAO = new RedevanceDAO(this.database);
         this.blDAO = new BonLivraisonDAO(this.database);
+        this.cssDAO = new CauseSortieStockDAO(this.database);
     }
 
     /**

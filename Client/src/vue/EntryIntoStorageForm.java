@@ -26,6 +26,10 @@
 
 
         public EntryIntoStorageForm(){
+            this.view();
+        }
+
+        public void view (){
             this.setLayout(new MigLayout("inset 0 20 20 20 ", "[fill, grow]", "[fill, grow]"));
 
             idProduitTextField = new JTextField(20);
@@ -49,4 +53,19 @@
             this.add(coutUnitaire);
         }
 
+        public JTextField getCoutUnitaireTextField() {
+            return coutUnitaireTextField;
+        }
+
+        public JTextField getIdProduitTextField() {
+            return idProduitTextField;
+        }
+
+        public JTextField getNomProduitTextField() {
+            return nomProduitTextField;
+        }
+
+        public JTextField getQuantiteTextField() {
+            return quantiteTextField;
+        }
     }
