@@ -73,6 +73,11 @@ public class Boutique {
 
     }
 
+    /**
+     * Constructor of Boutique with store category
+     * @param id Store id
+     * @param categorieBoutique Store Category
+     */
 
     public Boutique(int id, CategorieBoutique  categorieBoutique )
     {

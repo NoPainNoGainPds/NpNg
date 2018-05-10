@@ -181,6 +181,10 @@ public class BoutiqueDAO extends DAO<Boutique> {
         return 0;
     }
 
+    /**
+     * Get all the stores with store's category in the database
+     * @return Stores List
+     */
     public ArrayList<Boutique> getStoreWithCategory(){
         try{
             String str = "{\"name\":\"SearchStoreWithCategory\",\"id\":"+0+"}\n";

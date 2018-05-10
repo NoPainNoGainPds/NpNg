@@ -53,6 +53,10 @@ public class ProfilDAO {
         }
     }
 
+    /**
+     * Get profils without course in the database
+     * @return Profil list
+     */
     public ArrayList<Profile> getProfilsWithoutParcours(){
         try{
             String str = "{\"name\":\"SearchProfilsWithoutParcours\",\"id\":"+0+"}\n";

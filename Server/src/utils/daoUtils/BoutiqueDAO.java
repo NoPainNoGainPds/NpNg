@@ -255,6 +255,10 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
     }
 
+    /**
+     * Method to select all stores in database with the store's category
+     * @return Stores list
+     */
     public ArrayList<Boutique> getStoreWithCategory() {
         ArrayList<Boutique> liste = new ArrayList<>();
 

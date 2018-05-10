@@ -36,6 +36,10 @@ public class ProfilDAO {
         return liste;
     }
 
+    /**
+     * Method to select all profil(s) in database without course
+     * @return Profil list
+     */
     public ArrayList<Profil> getProfilsWithoutParcours() {
         ArrayList<Profil> liste = new ArrayList<>();
 

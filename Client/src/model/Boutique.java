@@ -50,6 +50,11 @@ public class Boutique implements ModelObject {
         located = false;
     }
 
+    /**
+     * Constructor of Boutique with store category
+     * @param id Store id
+     * @param categorieBoutique Store Category
+     */
     public Boutique(int id, CategorieBoutique  categorieBoutique )
     {
         this.id = id;

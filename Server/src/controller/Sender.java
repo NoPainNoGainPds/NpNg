@@ -484,6 +484,9 @@ public class Sender {
         }
     }
 
+    /**
+     * Method to send all stores with category
+     */
     public void sendAllStoreWithCategory()
     {
         try {
