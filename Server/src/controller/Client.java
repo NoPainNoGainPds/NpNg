@@ -202,8 +202,9 @@ public class Client extends Thread {
                         case "SearchProfilsWithoutParcours" :
                             sender.sendAllProfilsWithoutParcours();
                             break;
-                        //case     ...
-                            //break;
+                        case  "SearchStoreWithCategory":
+                            sender.sendAllStoreWithCategory();
+                            break;
                         default: System.out.println("Not Comparable");
                     }
                     /*

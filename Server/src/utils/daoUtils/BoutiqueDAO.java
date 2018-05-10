@@ -2,7 +2,9 @@ package utils.daoUtils;
 
 import model.Boutique;
 import controller.Client;
+import model.CategorieBoutique;
 import model.Emplacement;
+import model.Profil;
 import org.apache.log4j.Logger;
 import utils.Constants;
 import utils.DAO;
@@ -253,4 +255,28 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
     }
 
+    public ArrayList<Boutique> getStoreWithCategory() {
+        ArrayList<Boutique> liste = new ArrayList<>();
+
+        try {
+            Statement s = this.connection.createStatement();
+            String requete = "SELECT id_boutique, nom_categorie_boutique FROM boutique as b , categorie_boutique as l WHERE b.id_categorie_boutique = l.id_categorie_boutique";
+            ResultSet r = s.executeQuery(requete);
+
+            while(r.next()) {
+                System.out.println("id :" + r.getInt("id_boutique"));
+                Boutique b  = new Boutique(r.getInt("id_boutique"),new CategorieBoutique(r.getString("nom_categorie_boutique"), 0));
+                liste.add(b);
+                System.out.println("Store :" + b);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        System.out.println(liste.toString());
+        return liste;
+
+    }
 }
+
+

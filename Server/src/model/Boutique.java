@@ -74,6 +74,14 @@ public class Boutique {
     }
 
 
+    public Boutique(int id, CategorieBoutique  categorieBoutique )
+    {
+        this.id = id;
+        this.categorieBoutique = categorieBoutique;
+
+    }
+
+
     /**
      *
      * @return Name of the store

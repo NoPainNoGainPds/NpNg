@@ -1,4 +1,5 @@
 package utils.daoUtils;
+import model.Profile;
 import org.apache.log4j.Logger;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import model.Boutique;
@@ -178,5 +179,28 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     public int getNbBoutiques() {
         return 0;
+    }
+
+    public ArrayList<Boutique> getStoreWithCategory(){
+        try{
+            String str = "{\"name\":\"SearchStoreWithCategory\",\"id\":"+0+"}\n";
+            this.connection.send(str);
+            ArrayList<Boutique> liste = new ArrayList<>();
+            boolean recieved = false;
+            while(!recieved)
+            {
+                Boutique b = (Boutique) this.connection.recieve(Boutique.class);
+                if (b != null) {
+                    liste.add(b);
+                } else {
+                    recieved = true;
+                }
+            }
+            System.out.println(liste.toString());
+            return liste;
+        }catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

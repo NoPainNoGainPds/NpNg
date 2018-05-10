@@ -483,6 +483,27 @@ public class Sender {
             e.printStackTrace();
         }
     }
+
+    public void sendAllStoreWithCategory()
+    {
+        try {
+            ArrayList<Boutique> listStore = this.bDAO.getStoreWithCategory();
+            System.out.println(listStore.size());
+            for(Boutique b : listStore)
+            {
+                this.mapper.writeValue(this.writer,b);
+                this.writer.write("\n".getBytes());
+                this.writer.flush();
+            }
+            this.writer.write("null\n".getBytes());
+            this.writer.flush();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
     public void createStockEntree(Client cl)
     {
         try

@@ -49,6 +49,13 @@ public class Boutique implements ModelObject {
         this.emplacement=emplacement;
         located = false;
     }
+
+    public Boutique(int id, CategorieBoutique  categorieBoutique )
+    {
+        this.id = id;
+        this.categorieBoutique = categorieBoutique;
+
+    }
     /**
      *
      * @return polygon of this store
