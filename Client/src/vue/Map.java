@@ -44,6 +44,10 @@ public class Map extends JPanel {
      */
     private ArrayList<Point> pathCourse;
     /**
+     *
+     */
+    private ArrayList<Integer> intCourse;
+    /**
      * constructor of the map
      */
     private static final int SIZE_OF_POINT = 2;
@@ -84,6 +88,7 @@ public class Map extends JPanel {
         {
             poly.refresh(this.getSize());
         }
+        this.setCourse(this.intCourse);
         //this.clicked = null;
     }
     public void setClickedDefault()
@@ -162,7 +167,31 @@ public class Map extends JPanel {
         return;
     }
 
-
+    public void setCourse(ArrayList<Integer> liste)
+    {
+        //calcul coordinates of stores in the liste to draw course line
+        this.intCourse = liste;
+        ArrayList<Point> returnValue = new ArrayList<>();
+        for(MyPolygon poly : this.polygons)
+        {
+            System.out.println("polygon");
+            Integer b = poly.getIdEmplacement();
+            if(b!=-1)
+            {
+                //is in liste ?
+                for(Integer value : liste) {
+                    System.out.println("is in ?"+b);
+                    if (value.equals(b)) {
+                        System.out.println("match");
+                        Point p = poly.centerOfPoly();
+                        returnValue.add(p);
+                    }
+                }
+            }
+        }
+        this.pathCourse = returnValue;
+    }
+    /*
     public void setCourse(ArrayList<Boutique> liste)
     {
         //calcul coordinates of stores in the liste to draw course line
@@ -181,7 +210,7 @@ public class Map extends JPanel {
             }
         }
         this.pathCourse = returnValue;
-    }
+    }*/
     @Override
     public void paintComponent(Graphics g)
     {

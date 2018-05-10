@@ -58,6 +58,7 @@ public class Boutique implements ModelObject {
 
         MyPolygon poly = this.emplacement.getPolygonsView();
         poly.setBoutique(this);
+        poly.setEmplacement(this.emplacement.getId());
         return poly;
     }
 

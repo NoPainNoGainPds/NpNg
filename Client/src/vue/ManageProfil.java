@@ -23,11 +23,8 @@ public class ManageProfil extends JPanel{
     private Map map;
     private Image imgProf;
 
-    //test view
-    private ArrayList<Boutique> listeB ;
-    public ManageProfil(Map map,ArrayList<Boutique> listeB){
+    public ManageProfil(Map map){
         this.map = map;
-        this.listeB = listeB;
         this.setLayout(new BorderLayout());
         this.cDao = new ClientDAO(Constants.conServ);
         this.profDAO = new ProfilDAO(Constants.conServ);
@@ -61,7 +58,13 @@ public class ManageProfil extends JPanel{
         btn1.addActionListener(e -> this.cDao.AttrProf());
         btn2.addActionListener(e -> this.cDao.delAllProfil());
         btn3.addActionListener(e-> this.cDao.attPurchase());
-        btn4.addActionListener(e-> this.map.setCourse(this.listeB));
+        ArrayList<Integer> listeB = new ArrayList<>();
+        listeB.add(new Integer(1));
+        listeB.add(new Integer(2));
+        listeB.add(new Integer(3));
+        listeB.add(new Integer(4));
+        listeB.add(new Integer(5));
+        btn4.addActionListener(e-> this.map.setCourse(listeB));
 
         panel.add(btn1);
         panel.add(btn2);
