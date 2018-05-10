@@ -108,7 +108,7 @@ public class RedevanceDAO extends DAO<Redevance> {
         this.connection.send(str);
         ObjectMapper mapper = new ObjectMapper();
         Object rep =this.connection.recieve(String.class);
-        System.out.println(rep);
+        //System.out.println(rep);
         try {
             Runtime runTime = Runtime.getRuntime();
             Process process = runTime.exec("\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" -new-tab \""+rep+"\"");

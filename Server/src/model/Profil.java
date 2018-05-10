@@ -1,13 +1,13 @@
 package model;
 
-public class Profile {
+public class Profil {
     private String nom;
     private int value;
-    public Profile()
+    public Profil()
     {
 
     }
-    public Profile(String nom, int value)
+    public Profil(String nom, int value)
     {
         this.nom = nom;
         this.value = value;

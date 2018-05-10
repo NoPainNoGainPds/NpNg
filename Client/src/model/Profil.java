@@ -2,7 +2,7 @@ package model;
 
 public class Profil {
     private String name;
-    private String Id;
+    private int Id;
     private String desc;
 
     public String getName() {
@@ -13,11 +13,11 @@ public class Profil {
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return Id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         Id = id;
     }
 
