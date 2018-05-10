@@ -13,11 +13,13 @@ public class ClientView extends JPanel {
     private ImageComponent iconProfil;
     private JLabel nom,prenom,age,mail,telephone,adrs,profils;
     private ProfilDAO profDAO;
-    public ClientView(ProfilDAO profDAO)
+    private Map map;
+    public ClientView(ProfilDAO profDAO,Map map)
     {
         super();
+        this.map = map;
         this.profDAO = profDAO;
-        this.setLayout(new MigLayout("wrap","[grow]","[][grow]"));
+        this.setLayout(new MigLayout("wrap","[grow]","[][fill]"));
         this.nom = new JLabel("Nom :");
         this.prenom = new JLabel("Prenom :");
         this.age = new JLabel("Age :");
@@ -29,14 +31,15 @@ public class ClientView extends JPanel {
         this.iconProfil = new ImageComponent(this.img,true);
         this.iconProfil.setMinimumSize(new Dimension(75,75));
         this.iconProfil.setImageDimention(75,74);
-        this.add(this.iconProfil,"cell 0 0");
-        this.add(this.nom,"cell 1 0");
-        this.add(this.prenom,"");
-        this.add(this.age);
-        this.add(this.mail);
-        this.add(this.telephone);
-        this.add(this.adrs);
-        this.add(this.profils);
+        this.add(this.iconProfil,"cell 0 0 ");
+        this.add(this.nom,"cell 2 0");
+        this.add(this.prenom,"cell 1 0");
+        this.add(this.age,"cell  0 1");
+        this.add(this.mail,"cell 1 1");
+        this.add(this.telephone,"cell 2 1");
+        this.add(this.adrs,"cell 0 2");
+        this.add(this.profils,"cell 1 2");
+        this.add(this.map,"cell 0 3 4 4, grow, push");
         //ColorCube3D cc3d = new ColorCube3D();
         //cc3d.setMinimumSize(new Dimension(45,45));
         //this.add(cc3d);

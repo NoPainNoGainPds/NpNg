@@ -37,6 +37,15 @@ public class MyPolygon extends Polygon {
             this.addPoint(p.x,p.y);
         }
     }
+    public Point centerOfPoly()  {
+        double centerX = 0, centerY = 0;
+
+        for(int i=0;i<this.npoints;i++) {
+            centerX += this.xpoints[i];
+            centerY += this.ypoints[i];
+        }
+        return new Point((int)(centerX / this.npoints), (int)(centerY / this.npoints));
+    }
     public void setBoutique(Boutique b)
     {
         this.boutique = b;

@@ -98,6 +98,12 @@ public class Fenetre extends JFrame implements Runnable{
         MapController mapC = new MapController(this.map);
         this.map.addMouseMotionListener(mapC);
         this.map.addMouseListener(mapC);
+        //Deuxieme map pour profil
+        Map map2 = new Map();
+        map2.setPolygons(liste);
+        MapController mapC2 = new MapController(map2);
+        map2.addMouseMotionListener(mapC2);
+        map2.addMouseListener(mapC2);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 5.0;
@@ -107,7 +113,7 @@ public class Fenetre extends JFrame implements Runnable{
         gbc.anchor = GridBagConstraints.LINE_START;
         //ajout tabbedpane
         jtp.addTab("MAP",null,this.map,"Show map of Stores");
-        jtp.addTab("Profils",null,new ManageProfil(),"Show all profils and manage");
+        jtp.addTab("Profils",null,new ManageProfil(map2,this.listBoutique),"Show all profils and manage");
         jtp.addTab("Redevance",null,new ViewRedevance(),"Show all fees");
         jtp.addTab("Parcours",null,new ManageParcours(),"Show all parcours");
         jtp.addTab("Stock", null, new ViewDeliveryNote(), "Show stock");

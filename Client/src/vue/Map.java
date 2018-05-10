@@ -4,6 +4,7 @@ import model.Boutique;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -39,8 +40,13 @@ public class Map extends JPanel {
      */
     private boolean over = false;
     /**
+     *
+     */
+    private ArrayList<Point> pathCourse;
+    /**
      * constructor of the map
      */
+    private static final int SIZE_OF_POINT = 2;
     public Map()
     {
 
@@ -155,6 +161,27 @@ public class Map extends JPanel {
         }
         return;
     }
+
+
+    public void setCourse(ArrayList<Boutique> liste)
+    {
+        //calcul coordinates of stores in the liste to draw course line
+        ArrayList<Point> returnValue = new ArrayList<>();
+        for(MyPolygon poly : this.polygons)
+        {
+            Boutique b = poly.getBoutique();
+            if(b!=null)
+            {
+                //is in liste ?
+                if(liste.contains(b))
+                {
+                    Point p = poly.centerOfPoly();
+                    returnValue.add(p);
+                }
+            }
+        }
+        this.pathCourse = returnValue;
+    }
     @Override
     public void paintComponent(Graphics g)
     {
@@ -198,6 +225,17 @@ public class Map extends JPanel {
             g2.draw(this.popUpMap);
             g2.setColor(Color.BLACK);
             g2.drawString(this.popUpMap.b.toString(),this.popUpMap.x+10,this.popUpMap.y+25);
+        }
+        g2.setColor(Color.YELLOW);
+        Point old_p = null;
+        if(this.pathCourse!=null)
+        for(Point p : this.pathCourse)
+        {
+            Shape theCircle = new Ellipse2D.Double(p.getX() - this.SIZE_OF_POINT, p.getY() - this.SIZE_OF_POINT, 2.0 * this.SIZE_OF_POINT, 2.0 * this.SIZE_OF_POINT);
+            g2.draw(theCircle);
+            if(old_p!=null)
+            g2.drawLine(old_p.x,old_p.y,p.x,p.y);
+            old_p = p;
         }
     }
 
