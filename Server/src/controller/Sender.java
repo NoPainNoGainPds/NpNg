@@ -1,6 +1,7 @@
 package controller;
 
 import R3.AlgorithmFee;
+import R3.Facture;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -444,4 +445,18 @@ public class Sender {
         alg.assignFeeToStore();
     }
 
+    public boolean sendFacture(String dest, int id_redevance){
+        try {
+            Facture f = new Facture(this.bDAO,this.rDAO);
+            boolean b = f.createPdf(dest, id_redevance);
+            this.mapper.writeValue(this.writer, b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+            System.out.println("creation redevance");
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -181,6 +181,9 @@ public class Client extends Thread {
                                 sender.calculFee();
                             else sender.sendFee(inputFromClient);
                             break;
+                        case "Facture" :
+                            sender.sendFacture(inputFromClient.getRef() ,inputFromClient.getId());
+                            break;
                         case "newFee" :
                             sender.insertFee(inputFromClient);
                             break;

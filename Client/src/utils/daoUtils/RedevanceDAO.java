@@ -97,9 +97,18 @@ public class RedevanceDAO extends DAO<Redevance> {
     }
     public void calculFee()
     {
+
         this.connection.send("{\"name\" : \"Redevance\",\"id\":"+(-2)+", \"ref\":"+(-1)+"}");
     }
 
+    public boolean generPDF(String dest, int id_redevance ) {
+        boolean response;
+        String str = "{\"name\" : \"Facture\",\"id\":"+id_redevance+", \"ref\":\"" + dest + "\"}";
+        this.connection.send(str);
+        ObjectMapper mapper = new ObjectMapper();
+        Object rep =this.connection.recieve(Boolean.class);
+        return false;//a changer
+    }
 }
 
 

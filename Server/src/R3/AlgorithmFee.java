@@ -58,16 +58,16 @@ public class AlgorithmFee {
                 float c = 0;
                 switch (b.getEmplacement().getCat()) {
                     case "*":
-                        c = 70;
+                        c = 65;
                         break;
                     case "A":
-                        c = 62.5F;
+                        c = 57.5F;
                         break;
                     case "B":
-                        c = 55;
+                        c = 50;
                         break;
                     case "C":
-                        c = 47.5F;
+                        c = 42.5F;
                         break;
                     case "D":
                         c = 40;
@@ -84,7 +84,8 @@ public class AlgorithmFee {
 
                 System.out.println(formater.format(auj));
 
-                red = (s * c) * (1 - s / 10000);
+                red = (s * c) * (1f - s / 80000f);
+
                 Redevance r = new Redevance(0, b, auj, red);
 
                 this.rDAO.create(r);

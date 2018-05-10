@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,11 +17,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
 
+import R3.Facture;
 import javafx.scene.control.RadioButton;
 import model.*;
 import net.miginfocom.swing.MigLayout;
 import utils.MyListModel;
 
+import utils.daoUtils.RedevanceDAO;
 import utils.daoUtils.StockEntreeDAO;
 import utils.daoUtils.StockSortieDAO;
 
@@ -43,6 +46,9 @@ public class DetailFee extends JFrame implements Runnable {
     private JLabel formule;
     private JLabel abrev;
     private JLabel msgError;
+
+    private TextLabel <JComboBox<String>> Dest;
+    private JTextField DestField;
 
     private Image img;
     /**
@@ -95,7 +101,7 @@ public class DetailFee extends JFrame implements Runnable {
 
         this.abrev =new JLabel ("s: superficie de l'emplacement / p: prix au m2");
         panel2.add(this.abrev, "cell 0 0");
-        this.formule = new JLabel ("Formule de calcul: (s*p)*(1-s/10000)");
+        this.formule = new JLabel ("Formule de calcul: (s*p)*(1-s/80000)");
         this.formule.setForeground(Color.red);
         panel2.add(this.formule, "cell 0 1");
 
@@ -131,7 +137,25 @@ public class DetailFee extends JFrame implements Runnable {
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
         this.add(panel);
 
+
+        DestField = new JTextField(20);
+        DestField.setText("C:\\\\Users\\\\remys\\\\Documents/facture.pdf");
+        Dest = new TextLabel (DestField, new JLabel("Destination Facture"));
+        panel.add(Dest, "cell 0 8 3 1");
+
+        JButton valid= new JButton("Valider");
+        valid.addActionListener((event) -> {
+            //File file = new File(this.DestField.getText());
+            //file.getParentFile().mkdirs();
+
+            RedevanceDAO rDAO=new RedevanceDAO();
+            rDAO.generPDF(this.DestField.getText(), redevance.getid_Redevance());
+        });
+
+        panel.add(valid,"cell 4 8 1 1");
     }
+
+
 
     /**
      * Run method

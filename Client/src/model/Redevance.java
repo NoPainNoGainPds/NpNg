@@ -124,7 +124,7 @@ public class Redevance implements ModelObject {
      * @return the display
      */
     public String toString() {
-        return "Boutique: "+this.nom_boutique + "   MONTANT:" + this.montant_redevance+"\u20AC";
+        return "Boutique: "+this.nom_boutique + "   MONTANT: " + this.montant_redevance+"\u20AC";
     }
 
     /**
