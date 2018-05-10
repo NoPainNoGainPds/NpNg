@@ -483,4 +483,56 @@ public class Sender {
             e.printStackTrace();
         }
     }
+    public void createStockEntree(Client cl)
+    {
+        try
+        {
+            Boolean b = true;
+            //demande de l'objet
+            this.mapper.writeValue(this.writer,b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+            //reception de l'objet
+            String str = cl.read();
+            StockEntree seFromClient = this.mapper.readValue(str, StockEntree.class);
+            b = this.esDAO.create(seFromClient);
+            //envoie de la reponse
+            this.mapper.writeValue(this.writer,b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+
+        }catch(JsonMappingException e)
+        {
+            e.printStackTrace();
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void createBonLivraison(Client cl)
+    {
+        try
+        {
+            Boolean b = true;
+            //demande de l'objet
+            this.mapper.writeValue(this.writer,b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+            //reception de l'objet
+            String str = cl.read();
+            BonLivraison blFromClient = this.mapper.readValue(str, BonLivraison.class);
+            b = this.blDAO.create(blFromClient);
+            //envoie de la reponse
+            this.mapper.writeValue(this.writer,b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+
+        }catch(JsonMappingException e)
+        {
+            e.printStackTrace();
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

@@ -25,7 +25,7 @@ public class StockEntreeDAO extends DAO<StockEntree> {
 
     @Override
     public boolean create(StockEntree obj) {
-
+        System.out.println("creation entree stock");
         return false;
     }
 

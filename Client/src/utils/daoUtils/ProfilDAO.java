@@ -1,7 +1,6 @@
 package utils.daoUtils;
 
 
-import model.Profil;
 import model.Profile;
 import org.apache.log4j.Logger;
 import utils.ConnectionServer;

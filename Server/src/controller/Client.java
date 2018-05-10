@@ -193,6 +193,12 @@ public class Client extends Thread {
                         case "deleteFee" :
                             sender.deleteFee(new Redevance(inputFromClient.getId()));
                             break;
+                        case "CreateStockEntree" :
+                            sender.createStockEntree(this);
+                            break;
+                        case "CreateBonLivraison" :
+                            sender.createBonLivraison(this);
+                            break;
                         case "SearchProfilsWithoutParcours" :
                             sender.sendAllProfilsWithoutParcours();
                             break;
@@ -248,7 +254,7 @@ public class Client extends Thread {
      * @return what have been read
      * @throws IOException
      */
-    private String read() throws IOException{
+    public String read() throws IOException{
         String response = "";
         int stream;
         byte[] b = new byte[4096];

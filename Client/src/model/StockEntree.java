@@ -12,7 +12,7 @@ import utils.daoUtils.StockEntreeDAO;
 /**
  * represents an input storage
  */
-public class StockEntree implements ModelObject {
+public class StockEntree {
     /**
      * id of the input storage
      */
@@ -92,7 +92,7 @@ public class StockEntree implements ModelObject {
      * get the product
      * @return the product
      */
-    public int getProduit() {
+    public int getId_produit() {
         return this.id_produit;
     }
     /**
@@ -144,15 +144,9 @@ public class StockEntree implements ModelObject {
      * method to display an input storage
      * @return the display
      */
+
     public String toString() {
         return "QTE:"+this.quantite + "   MONTANT:" + this.montant + "   DATE:" + this.date;
     }
 
-    /**
-     * get the StockEntreeDAO object
-     * @return the DAO
-     */
-    public DAO getDaoClass() {
-        return new StockEntreeDAO();
-    }
 }

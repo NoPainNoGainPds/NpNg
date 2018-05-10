@@ -15,6 +15,16 @@ public class BonLivraisonDAO extends DAO<BonLivraison> {
     }
     @Override
     public boolean create(BonLivraison obj){
+        this.connection.send("{\"name\" : \"CreateBonLivraison\",\"id\":"+0+", \"ref\":"+0+"}");
+        Boolean b = (Boolean)this.connection.recieve(Boolean.class);
+        //
+        if(b)
+        {
+            //envoi de l'objet
+            this.connection.sendObject(obj);
+        }
+        //ack
+        b = (Boolean)this.connection.recieve(Boolean.class);
         return false;
     }
     @Override

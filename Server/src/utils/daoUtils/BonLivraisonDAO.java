@@ -3,6 +3,7 @@ package utils.daoUtils;
 
 import model.BonLivraison;
 import org.apache.log4j.Logger;
+import sun.nio.ch.sctp.SctpStdSocketOption;
 import utils.DAO;
 
 import java.sql.Connection;
@@ -21,6 +22,7 @@ public class BonLivraisonDAO extends DAO<BonLivraison>{
 
     @Override
     public boolean create(BonLivraison obj) {
+        System.out.println("Create BL");
         return false;
     }
 

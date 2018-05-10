@@ -6,6 +6,8 @@
 package model;
 
 import java.util.Date;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.StockEntreeDAO;
@@ -99,6 +101,7 @@ public class StockEntree {
      * get the product
      * @return the product
      */
+    @JsonIgnore
     public Produit getProduit() {
         return this.id_produit;
     }
@@ -107,10 +110,11 @@ public class StockEntree {
      * set the product
      * @param id_produit the new product
      */
-    public void setProduitRef(Produit id_produit) {
+    @JsonIgnore
+    public void setProduit(Produit id_produit) {
         this.id_produit = id_produit;
     }
-
+    public void setId_produit(int id_produit) { this.id_produit = new Produit("",id_produit);}
     /**
      * get the quantity
      * @return the quantity

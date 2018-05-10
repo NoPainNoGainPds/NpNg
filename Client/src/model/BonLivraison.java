@@ -6,7 +6,7 @@ import utils.ModelObject;
 import utils.daoUtils.BonLivraisonDAO;
 import java.util.Date;
 
-public class BonLivraison implements ModelObject {
+public class BonLivraison {
 
     private int id_bonlivraison;
 
@@ -57,7 +57,4 @@ public class BonLivraison implements ModelObject {
         return date_livraison;
     }
 
-    public DAO getDaoClass() {
-        return new BonLivraisonDAO();
-    }
 }

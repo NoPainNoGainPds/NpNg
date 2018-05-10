@@ -19,6 +19,17 @@ public class StockEntreeDAO extends DAO<StockEntree>{
 
         @Override
         public boolean create(StockEntree obj) {
+            //envoi demande creation
+            this.connection.send("{\"name\" : \"CreateStockEntree\",\"id\":"+0+", \"ref\":"+0+"}");
+            Boolean b = (Boolean)this.connection.recieve(Boolean.class);
+            //
+            if(b)
+            {
+                //envoi de l'objet
+                this.connection.sendObject(obj);
+            }
+            //ack
+            b = (Boolean)this.connection.recieve(Boolean.class);
             return false;
         }
 

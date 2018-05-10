@@ -1,21 +1,18 @@
 package vue;
 
-import model.Boutique;
 import model.Client;
-import model.Profil;
-import net.miginfocom.swing.MigLayout;
+import model.Profile;
 import utils.Constants;
 import utils.daoUtils.ClientDAO;
 import utils.daoUtils.ProfilDAO;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class ManageProfil extends JPanel{
-    private ArrayList<Profil> liste;
+    private ArrayList<Profile> liste;
     private ArrayList<Client> listeClient;
     private ClientView clientView;
     private ClientDAO cDao;

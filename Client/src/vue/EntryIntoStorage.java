@@ -69,6 +69,7 @@ public class EntryIntoStorage extends JPanel{
     public EntryIntoStorage(){
         this.View();
         this.seDAO = new StockEntreeDAO();
+        this.blDAO = new BonLivraisonDAO();
         this.controler();
     }
 
@@ -172,7 +173,7 @@ public class EntryIntoStorage extends JPanel{
 
                     blToSend.setDate_livraison(this.dateEntreeStockDate.getDate());
                     blToSend.setId_fournisseur(Integer.parseInt(this.fournisseurTextField.getText()));
-                    blToSend.setMontant_livraison(Float.parseFloat(this.montantTextField.getText()));
+                    //blToSend.setMontant_livraison(Float.parseFloat(this.montantTextField.getText()));
 
                     for (int i = 0; i < liste.size(); i++){
                         StockEntree seToSend = new StockEntree();
