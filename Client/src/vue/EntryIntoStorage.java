@@ -26,8 +26,8 @@ public class EntryIntoStorage extends JPanel{
     /**
      * Textfield to enter name of the store
      */
-    private TextLabel <JComboBox<Boutique>> nomDeLaBoutique;
-    private JComboBox<Boutique> nomDeLaBoutiqueBox;
+    private TextLabel <JComboBox<String>> nomDeLaBoutique;
+    private JComboBox<String> nomDeLaBoutiqueBox;
     /**
      * Textfield to enter the date
      */
@@ -87,27 +87,31 @@ public class EntryIntoStorage extends JPanel{
             FormPan = new JPanel();
             FormPan.setLayout(new MigLayout("inset 0 20 20 20 ", "[fill, grow]", "[fill, grow]"));
 
+            nomDeLaBoutiqueBox = new JComboBox<String>();
+            nomDeLaBoutiqueBox.setPreferredSize(new Dimension(275, 50));
+            ArrayList<Boutique> listB = this.bDAO.findFromReference();
+            //nomDeLaBoutiqueBox.setModel(new DefaultComboBoxModel<Boutique>(listB.toArray(new Boutique[listB.size()])));
+            for(int i = 0; i < listB.size(); i++){
+                nomDeLaBoutiqueBox.addItem("Nom :" +listB.get(i).getNom()+"  Id : "+ listB.get(i).getId());
+            }
+            nomDeLaBoutique = new TextLabel (nomDeLaBoutiqueBox, new JLabel("Nom de la boutique"));
+            FormPan.add(nomDeLaBoutique);
+
             bonLivraisonTextField = new JTextField(20);
-            bonLivraisonTextField.setPreferredSize(new Dimension(250, 50));
+            bonLivraisonTextField.setPreferredSize(new Dimension(175, 50));
             bonLivraison = new TextLabel(bonLivraisonTextField, new JLabel ("Numero du bon de livraison"));
             FormPan.add(bonLivraison);
 
             dateEntreeStockDate = new JDateChooser();
-            dateEntreeStockDate.setPreferredSize(new Dimension(250,50));
+            dateEntreeStockDate.setPreferredSize(new Dimension(175,50));
             dateEntreeStock = new TextLabel(dateEntreeStockDate, new JLabel("Date entree du stock"));
             FormPan.add(dateEntreeStock);
 
             fournisseurTextField = new JTextField(20);
-            fournisseurTextField.setPreferredSize(new Dimension(250,50));
+            fournisseurTextField.setPreferredSize(new Dimension(175,50));
             fournisseur = new TextLabel(fournisseurTextField, new JLabel("id du Fournisseur"));
-            FormPan.add(fournisseur);
+            FormPan.add(fournisseur, "wrap");
 
-            nomDeLaBoutiqueBox = new JComboBox<Boutique>();
-            nomDeLaBoutiqueBox.setPreferredSize(new Dimension(250, 50));
-            ArrayList<Boutique> listB = this.bDAO.findFromReference();
-            nomDeLaBoutiqueBox.setModel(new DefaultComboBoxModel<Boutique>(listB.toArray(new Boutique[listB.size()])));
-            nomDeLaBoutique = new TextLabel (nomDeLaBoutiqueBox, new JLabel("Nom de la boutique"));
-            FormPan.add(nomDeLaBoutique, "wrap");
 
             validerBoutton = new JButton("Valider");
             addLineForm = new JButton("Ajout ligne");
@@ -154,7 +158,7 @@ public class EntryIntoStorage extends JPanel{
                     this.fournisseurTextField.setBackground(Color.RED);
                     valide++;
                 }
-                //Manque combobox boutique
+
                 for (int i = 0; i < liste.size(); i++){
                     if(liste.get(i).getIdProduitTextField().getText().equals("")){
                         liste.get(i).getIdProduitTextField().setBackground(Color.RED);
@@ -179,6 +183,7 @@ public class EntryIntoStorage extends JPanel{
 
                     blToSend.setDate_livraison(this.dateEntreeStockDate.getDate());
                     blToSend.setId_fournisseur(Integer.parseInt(this.fournisseurTextField.getText()));
+                    blToSend.setId_bonlivraison(Integer.parseInt(this.bonLivraisonTextField.getText()));
 
 
                     for (int i = 0; i < liste.size(); i++){
@@ -186,7 +191,8 @@ public class EntryIntoStorage extends JPanel{
                             seToSend.setQuantite(Integer.parseInt(this.liste.get(i).getQuantiteTextField().getText()));
                             seToSend.setId_produit(Integer.parseInt(this.liste.get(i).getIdProduitTextField().getText()));
                             seToSend.setDate(this.dateEntreeStockDate.getDate());
-                            seToSend.setId_boutique(this.nomDeLaBoutique.field.getItemAt(this.nomDeLaBoutique.field.getSelectedIndex()).getId());
+                            //seToSend.setId_boutique(this.nomDeLaBoutique.field.getItemAt(this.nomDeLaBoutique.field.getSelectedIndex()));
+                            //seToSend.setId_boutique(this.nomDeLaBoutique.field.getItemAt(this.nomDeLaBoutique.field.getSelectedIndex()));
                             seToSend.setMontant(Integer.parseInt(this.liste.get(i).getMontantTextField().getText()));
                         this.seDAO.create(seToSend);
                     }

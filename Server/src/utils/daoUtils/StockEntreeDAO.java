@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,8 +31,10 @@ public class StockEntreeDAO extends DAO<StockEntree> {
         try {
             System.out.println("creation entree stock");
             Produit id = obj.getProduit();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String date = dateFormat.format(obj.getDate());
 
-            String requete = "INSERT INTO entree_stock (id_produit, quantite, date_entree,id_boutique, montant) VALUES ('" + id.getId() + "', '" + obj.getQuantite() + "', '"+ obj.getDate()+"', '"+obj.getId_boutique()+"','"+obj.getMontant()+"');";
+            String requete = "INSERT INTO entree_stock (id_produit, quantite, date_entree,id_boutique, montant) VALUES ('" + id.getId() + "', '" + obj.getQuantite() + "', '"+ date +"', '"+obj.getId_boutique()+"','"+obj.getMontant()+"');";
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(requete);
             logger.info(requete);

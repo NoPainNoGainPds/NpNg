@@ -49,7 +49,7 @@
 
             montantTextField = new JTextField(20);
             montantTextField.setPreferredSize(new Dimension(250,50));
-            montant = new TextLabel(montantTextField, new JLabel("Cout Unitaire"));
+            montant = new TextLabel(montantTextField, new JLabel("Montant"));
             this.add(montant);
         }
 
