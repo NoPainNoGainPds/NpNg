@@ -24,7 +24,6 @@ public class ParcoursDAO extends DAO<Parcours> {
      * @param obj The course to add.
      * @return true if it works, false else.
      */
-    @Override
     public boolean create(Parcours obj) {
         return false;
     }
@@ -34,7 +33,6 @@ public class ParcoursDAO extends DAO<Parcours> {
      * @param obj the course to delete.
      * @return true if it works, false else.
      */
-    @Override
     public boolean delete(Parcours obj) {
         return false;
     }
@@ -44,7 +42,6 @@ public class ParcoursDAO extends DAO<Parcours> {
      * @param obj The course to modify.
      * @return true if it works, false else.
      */
-    @Override
     public boolean update(Parcours obj) {
         return false;
     }
@@ -54,18 +51,15 @@ public class ParcoursDAO extends DAO<Parcours> {
      * @param idParcours The course's id.
      * @return the course found.
      */
-    @Override
     public Parcours find(int idParcours) {
 
         return null;
     }
 
-    @Override
     public ArrayList<Parcours> findFromReference(int id) {
         return null;
     }
 
-    @Override
     public ArrayList<Parcours> findFromReference() {
         return null;
     }

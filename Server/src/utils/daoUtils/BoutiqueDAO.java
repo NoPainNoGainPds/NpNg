@@ -268,12 +268,16 @@ public class BoutiqueDAO extends DAO<Boutique> {
 
         try {
             Statement s = this.connection.createStatement();
-            String requete = "SELECT id_boutique, nom_categorie_boutique FROM boutique as b , categorie_boutique as l WHERE b.id_categorie_boutique = l.id_categorie_boutique";
+            String requete = "SELECT id_boutique, id_emplacement ,nom_categorie_boutique FROM boutique as b , categorie_boutique as l WHERE b.id_categorie_boutique = l.id_categorie_boutique";
             ResultSet r = s.executeQuery(requete);
 
             while(r.next()) {
                 System.out.println("id :" + r.getInt("id_boutique"));
-                Boutique b  = new Boutique(r.getInt("id_boutique"),new CategorieBoutique(r.getString("nom_categorie_boutique"), 0));
+                //Boutique b  = new Boutique(r.getInt("id_boutique"),new Emplacement("plop",r.getInt("id_emplacement"),0,"plop"),new CategorieBoutique(r.getString("nom_categorie_boutique"), 0));
+                Boutique b  = new Boutique(r.getInt("id_boutique"),
+                                        new Emplacement("plop",r.getInt("id_emplacement"),0,"plop"),
+                                        new CategorieBoutique(r.getString("nom_categorie_boutique"), 0)
+                                            );
                 liste.add(b);
                 System.out.println("Store :" + b);
             }

@@ -81,9 +81,10 @@ public class Boutique {
      * @param categorieBoutique Store Category
      */
 
-    public Boutique(int id, CategorieBoutique  categorieBoutique )
+    public Boutique(int id, Emplacement emplacement,CategorieBoutique  categorieBoutique )
     {
         this.id = id;
+        this.emplacement = emplacement;
         this.categorieBoutique = categorieBoutique;
 
     }

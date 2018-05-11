@@ -56,9 +56,10 @@ public class Boutique implements ModelObject {
      * @param id Store id
      * @param categorieBoutique Store Category
      */
-    public Boutique(int id, CategorieBoutique  categorieBoutique )
+    public Boutique(int id, Emplacement emplacement ,CategorieBoutique  categorieBoutique )
     {
         this.id = id;
+        this.emplacement = emplacement;
         this.categorieBoutique = categorieBoutique;
 
     }
@@ -136,7 +137,7 @@ public class Boutique implements ModelObject {
     }
     public String toString()
     {
-        return "Boutique:"+this.nom+"; Cat :"+this.categorieBoutique;
+        return "Boutique:"+this.nom+" id boutique :"+this.getId() +"; Emplacement :"+this.emplacement+" Cat :"+this.categorieBoutique;
     }
     public DAO getDaoClass()
     {
