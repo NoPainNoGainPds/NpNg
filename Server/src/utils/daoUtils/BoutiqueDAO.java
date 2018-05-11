@@ -281,6 +281,32 @@ public class BoutiqueDAO extends DAO<Boutique> {
         return liste;
 
     }
+
+    /**
+     * Method to get an array with the stores' criteria's values
+     * @return the array of criteria's values
+     */
+    public int[] getStoreCriteria() {
+        int[] criteriaArray = new int[3];
+        try {
+            Statement stmt = this.connection.createStatement();
+            String query = "select * from store_criteria";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                criteriaArray[0] = rs.getInt("area");
+                criteriaArray[1] = rs.getInt("store_category");
+                criteriaArray[2] = rs.getInt("attendance_rate");
+                return criteriaArray;
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+            logger.info(query);
+        } catch (SQLException e) {
+            logger.error(e.toString());
+        }
+        return null;
+    }
 }
 
 

@@ -71,8 +71,8 @@ public class Algorithm {
         /*
         Get the array with the criteria's values
          */
-        int[] storeCriteria = getStoreCriteria();
-        int[] locationCriteria = getLocationCriteria();
+        int[] storeCriteria = bDAO.getStoreCriteria();
+        int[] locationCriteria =eDAO.getLocationCriteria();
 
         for (int i = 0; i < storeList.size(); i++) {
             /*
@@ -178,64 +178,6 @@ public class Algorithm {
         for (Boutique store : storeList) {
             bDAO.unlocate(store);
         }
-    }
-
-    /**
-     * Method to get an array with the stores' criteria's values
-     * @return the array of criteria's values
-     */
-    @Deprecated
-    public int[] getStoreCriteria() {
-        int[] criteriaArray = new int[3];
-        Database db = new Database();
-        try {
-            Connection connection = db.getConnection();
-            Statement stmt = connection.createStatement();
-            String query = "select * from store_criteria";
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                criteriaArray[0] = rs.getInt("area");
-                criteriaArray[1] = rs.getInt("store_category");
-                criteriaArray[2] = rs.getInt("attendance_rate");
-                return criteriaArray;
-            }
-            rs.close();
-            stmt.close();
-            connection.close();
-            logger.info(query);
-        } catch (SQLException e) {
-            logger.error(e.toString());
-        }
-        return null;
-    }
-
-    /**
-     * Method to get an array with the locations' criteria's values
-     * @return the array of criteria's values
-     *
-     */
-    @Deprecated
-    public int[] getLocationCriteria() {
-        int[] criteriaArray = new int[2];
-        Database db = new Database();
-        try {
-            Connection connection = db.getConnection();
-            Statement stmt = connection.createStatement();
-            String query = "select * from location_criteria";
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                criteriaArray[0] = rs.getInt("area");
-                criteriaArray[1] = rs.getInt("location_category");
-                return criteriaArray;
-            }
-            rs.close();
-            stmt.close();
-            connection.close();
-            logger.info(query);
-        } catch (SQLException e) {
-            logger.error(e.toString());
-        }
-        return null;
     }
 
 }

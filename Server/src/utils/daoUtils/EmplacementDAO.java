@@ -175,4 +175,31 @@ public class EmplacementDAO extends DAO<Emplacement> {
         }
     }
 
+
+    /**
+     * Method to get an array with the locations' criteria's values
+     * @return the array of criteria's values
+     *
+     */
+    public int[] getLocationCriteria() {
+        int[] criteriaArray = new int[2];
+        try {
+            Statement stmt = this.connection.createStatement();
+            String query = "select * from location_criteria";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                criteriaArray[0] = rs.getInt("area");
+                criteriaArray[1] = rs.getInt("location_category");
+                return criteriaArray;
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+            logger.info(query);
+        } catch (SQLException e) {
+            logger.error(e.toString());
+        }
+        return null;
+    }
+
 }
