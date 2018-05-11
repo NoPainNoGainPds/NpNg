@@ -123,7 +123,7 @@ public class DetailFee extends JFrame implements Runnable {
         this.abrev =new JLabel ("s: superficie de l'emplacement");
         this.abrev1 =new JLabel ("c: prix cat. emplacement");
         this.abrev2 =new JLabel ("f: nb visiteurs");
-        this.formule = new JLabel ("Formule de calcul: (s*c)*(1-s/70000+f/s)");
+        this.formule = new JLabel ("Formule de calcul: s*(c-c*s/70000+f/s)");
         this.formule.setForeground(Color.red);
 
 

@@ -89,7 +89,7 @@ public class AlgorithmFee {
 
 
 
-                red = (s * c) * (1f - s / 70000f + f/s);
+                red = s*(c-c * s / 70000f + f/s);
 
                 Redevance r = new Redevance(0, b, auj, red);
 

@@ -19,7 +19,10 @@ package R3;
         import java.io.FileOutputStream;
         import java.io.IOException;
         import java.text.SimpleDateFormat;
+        import java.util.Calendar;
+        import java.util.Date;
 
+        import static java.lang.Integer.parseInt;
         import static sun.security.pkcs11.wrapper.Constants.NEWLINE;
 
 public class Facture {
@@ -96,11 +99,11 @@ public class Facture {
         p1.add(new Text(client).setFont(bold));p1.add(NEWLINE);
         p1.add(telclient);p1.add(NEWLINE);
 
-        // String ch = "Bonjour"; String chInverse = ""; int chLg = ch.length(); // longueur de ch System.out.println("\nch : " + ch); for(int i = chLg -1; i>-1; i--) { chInverse+= ch.substring(i, i +1); } System.out.println("chInverse: " + chInverse);
+        SimpleDateFormat formater3 = new SimpleDateFormat("yyyyMM");
 
         Paragraph p2 = new Paragraph();
         p2.setMultipliedLeading(0.7f);
-        p2.add(new Text("FACTURE N\u00B020185090").setFont(bold));p1.add(NEWLINE);
+        p2.add(new Text("FACTURE N\u00B0"+id_redevance+"-"+formater3.format(redevance.getDate_redevance())).setFont(bold));p1.add(NEWLINE);
 
         SimpleDateFormat formater = new SimpleDateFormat("MMMMM yyyy");
         String titre= "Redevance "+redevance.getNom_boutique()+" du mois de "+ formater.format(redevance.getDate_redevance());
@@ -108,10 +111,17 @@ public class Facture {
         p3.setMultipliedLeading(0.7f);
         p3.add(titre);p1.add(NEWLINE);
 
+        SimpleDateFormat formater2 = new SimpleDateFormat("MM");
+        Calendar cal = Calendar.getInstance();
+        Date datereal=redevance.getDate_redevance();
+        cal.setTime(datereal);
+        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+        datereal = cal.getTime();
+
         SimpleDateFormat formater1 = new SimpleDateFormat("dd MMMMM yyyy");
         Paragraph p4 = new Paragraph();
         p4.setMultipliedLeading(0.7f);
-        p4.add(new Text("R\u00e9alis\u00e9e le "+formater1.format(redevance.getDate_redevance())).setFont(bold));p1.add(NEWLINE);
+        p4.add(new Text("R\u00e9alis\u00e9e le "+formater1.format(datereal)).setFont(bold));p1.add(NEWLINE);
 
 
         Cell NPNG = new Cell()
