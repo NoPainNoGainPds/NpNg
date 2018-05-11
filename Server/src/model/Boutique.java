@@ -21,6 +21,8 @@ public class Boutique {
     private String logo;
     private boolean located;
     private int freq;
+    private String renommee;
+    private String gamme;
     public Boutique()
     {
 
@@ -86,7 +88,14 @@ public class Boutique {
         this.id = id;
         this.emplacement = emplacement;
         this.categorieBoutique = categorieBoutique;
+        located = false;
 
+    }
+
+    public Boutique(int id, String nom, int categorie, Emplacement emplacement, String logo, String renommee, String gamme) {
+        this(id,nom,categorie,emplacement,logo);
+        this.renommee = renommee;
+        this.gamme = gamme;
     }
 
 
@@ -165,5 +174,13 @@ public class Boutique {
     }
     public boolean getLocated() {
         return located;
+    }
+
+    public String getRenommee() {
+        return renommee;
+    }
+
+    public String getGamme() {
+        return gamme;
     }
 }

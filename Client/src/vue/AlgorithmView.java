@@ -37,7 +37,9 @@ public class AlgorithmView extends JPanel {
         });
         unlinkButton.addActionListener((event) -> {
             logger.info("Unlink stores and locations");
+            System.out.println("Unlink");
             eDAO.unassignAllLocations();
+            System.out.println("fin de unassign");
             bDAO.unlocateAllStores();
         });
         createButton.addActionListener((event) -> {

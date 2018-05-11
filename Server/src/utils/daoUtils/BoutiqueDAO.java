@@ -53,7 +53,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
                 nom = obj.getNom();
             else
                 return false;
-            String requete = "INSERT INTO boutique (nom_boutique,id_categorie_boutique,id_emplacement) VALUES (\""+nom+"\","+catBoutique+","+idEmplacement+")";
+            String requete = "INSERT INTO boutique (nom_boutique,id_categorie_boutique,id_emplacement,renommee,gamme) VALUES (\""+nom+"\","+catBoutique+","+idEmplacement+",\""+obj.getRenommee()+"\",\""+obj.getGamme()+"\")";
             Statement stmt = this.connection.createStatement();
             logger.info(requete);
             return (stmt.executeUpdate(requete)>0) ? true : false;
@@ -220,7 +220,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     public void unlocate(Boutique store) {
         try {
-            String query = "update Boutique set located=false where id_boutique="+store.getId()+";";
+            String query = "update Boutique set placee=false,id_emplacement=null where id_boutique="+store.getId()+";";
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(query);
             logger.info(query);
@@ -298,12 +298,12 @@ public class BoutiqueDAO extends DAO<Boutique> {
         int[] criteriaArray = new int[3];
         try {
             Statement stmt = this.connection.createStatement();
-            String query = "select * from store_criteria";
+            String query = "select * from criteres_boutique";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                criteriaArray[0] = rs.getInt("area");
-                criteriaArray[1] = rs.getInt("store_category");
-                criteriaArray[2] = rs.getInt("attendance_rate");
+                criteriaArray[0] = rs.getInt("categorie_boutique");
+                criteriaArray[1] = rs.getInt("renommee");
+                criteriaArray[2] = rs.getInt("gamme");
                 return criteriaArray;
             }
             rs.close();

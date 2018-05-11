@@ -18,7 +18,6 @@ public class Emplacement implements ModelObject{
     /**
      * Location name
      */
-
     private String nom;
     /**
      * The store in the location

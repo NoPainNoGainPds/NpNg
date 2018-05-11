@@ -224,4 +224,5 @@ public class BoutiqueDAO extends DAO<Boutique> {
             e.printStackTrace();
         }
     }
+
 }
