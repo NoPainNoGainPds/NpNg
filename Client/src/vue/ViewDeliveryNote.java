@@ -73,7 +73,7 @@ public class ViewDeliveryNote extends JPanel {
 
 
         this.add(panBouton, BorderLayout.NORTH);
-        this.add(panInfo, BorderLayout.SOUTH);
+        this.add(panInfo, BorderLayout.CENTER);
 
 
     }

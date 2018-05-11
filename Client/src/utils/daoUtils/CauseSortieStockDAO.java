@@ -41,6 +41,30 @@ public class CauseSortieStockDAO extends DAO<CauseSortieStock> {
 
     @Override
     public ArrayList<CauseSortieStock> findFromReference() {
+        try
+        {
+            //envoie du message au serv
+            String str = "{\"name\":\"Cause\",\"id\":-1}";
+            this.connection.send(str);
+
+            ArrayList<CauseSortieStock> liste = new ArrayList<>();
+            boolean recieved = false;
+            while(!recieved)
+            {
+                Object b = (Object)this.connection.recieve(CauseSortieStock.class);
+                if (b != null) {
+                    CauseSortieStock c2 = (CauseSortieStock) b;
+                    liste.add(c2);
+                    //System.out.println(b);
+                } else {
+                    recieved = true;
+                }
+            }
+            return liste;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return null;
     }
 }
