@@ -233,16 +233,20 @@ public class BoutiqueDAO extends DAO<Boutique> {
      * Method to find the stores which have to pay
      * @return A list of the stores.
      */
+    /**
+     * Method to find the stores which have to pay
+     * @return A list of the stores.
+     */
     public ArrayList<Boutique> findWhoPay() {
         try {
             Statement stmt = this.connection.createStatement();
-            String requete =  "select b.id_boutique, e.nom_emplacement, e.id_emplacement, e.superficie, c.nom_categorie_emplacement from boutique b, emplacement e, categorie_emplacement c where b.id_emplacement=e.id_emplacement and e.id_categorie_emplacement=c.id_categorie_emplacement and b.id_emplacement != -1";
+            String requete =  "select b.id_boutique, e.nom_emplacement, e.id_emplacement, e.superficie, c.nom_categorie_emplacement, p.nb_client from boutique b, emplacement e, categorie_emplacement c, performance p where b.id_emplacement=e.id_emplacement and e.id_categorie_emplacement=c.id_categorie_emplacement and p.id_boutique=b.id_boutique and MONTH(p.date_performance)=MONTH(CURRENT_DATE) and YEAR(p.date_performance)=YEAR(CURRENT_DATE) and b.id_emplacement != -1";
 
             ResultSet res = stmt.executeQuery(requete);
             ArrayList list = new ArrayList();
 
             while(res.next()) {
-                list.add(new Boutique (res.getInt("id_boutique"), new Emplacement(res.getString("nom_emplacement"), res.getInt("id_emplacement"), res.getInt("superficie"), res.getString("nom_categorie_emplacement"))));
+                list.add(new Boutique (res.getInt("id_boutique"), new Emplacement(res.getString("nom_emplacement"), res.getInt("id_emplacement"), res.getInt("superficie"), res.getString("nom_categorie_emplacement")), res.getInt("nb_client")));
 
             }
 

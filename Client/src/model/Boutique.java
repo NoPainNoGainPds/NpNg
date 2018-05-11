@@ -22,6 +22,7 @@ public class Boutique implements ModelObject {
     private CategorieBoutique categorieBoutique;
     private String logo;
     private boolean located;
+    private int freq;
     public Boutique()
     {
 
@@ -118,6 +119,20 @@ public class Boutique implements ModelObject {
     public void setListeProduit(ArrayList<Produit> listProduit)
     {
         this.listeProduit = listProduit;
+    }
+    /**
+     * get the number of visitors
+     * @return the number of visitors
+     */
+    public int getFreq() {
+        return this.freq;
+    }
+    /**
+     * set the number of visitors
+     * @param freq the new number of visitors
+     */
+    public void setFreq(int freq) {
+        this.freq = freq;
     }
     public String toString()
     {

@@ -163,7 +163,9 @@ public class RedevanceDAO extends DAO<Redevance> {
         //System.out.println(rep);
         try {
             Runtime runTime = Runtime.getRuntime();
-            Process process = runTime.exec("\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" -new-tab \""+rep+"\"");
+            //Process process = runTime.exec("\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" -new-tab \""+rep+"\"");
+            Process process = runTime.exec("\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" -new-tab \""+rep+"\"");
+
         }catch (RuntimeException e )
         {
             e.printStackTrace();

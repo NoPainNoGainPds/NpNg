@@ -3,6 +3,7 @@ package vue;
 import R3.Algorithm;
 import org.apache.log4j.Logger;
 import utils.Constants;
+import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.EmplacementDAO;
 
 import javax.swing.*;
@@ -10,11 +11,13 @@ import javax.swing.*;
 public class AlgorithmView extends JPanel {
     private JButton launchAlgoButton;
     private EmplacementDAO eDAO;
+    private BoutiqueDAO bDAO;
     Logger logger = Logger.getLogger(this.getClass());
 
-    public AlgorithmView(Algorithm algo) {
+    public AlgorithmView() {
         JPanel panel = new JPanel();
         this.eDAO = new EmplacementDAO();
+        this.bDAO = new BoutiqueDAO();
         panel.setLayout(new BoxLayout(panel,BoxLayout.PAGE_AXIS));
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBorder(BorderFactory.createTitledBorder("Launching / Unlink / Create locations and stores"));
@@ -28,23 +31,25 @@ public class AlgorithmView extends JPanel {
         launchAlgoButton.addActionListener((event) -> {
             logger.info("Launching assignation algorithm");
             System.out.println("Launching assignation algorithm...");
-            //ici je lance la methode dans le dao qui va dire au serveur d'executer l'algo
-            this.eDAO.assignLocationToStore();
+            this.eDAO.assignLocationsToStores();
             JOptionPane jop = new JOptionPane();
             jop.showMessageDialog(this, "Algorithm successfully executed !");
         });
         unlinkButton.addActionListener((event) -> {
             logger.info("Unlink stores and locations");
-            algo.unassignAllLocations();
-            algo.unlocateAllStores();
+            eDAO.unassignAllLocations();
+            bDAO.unlocateAllStores();
         });
         createButton.addActionListener((event) -> {
             logger.info("Populating database");
             JOptionPane jop = new JOptionPane();
-            String value = jop.showInputDialog(this,"How much stores and locations you want ?", "Question", JOptionPane.QUESTION_MESSAGE);
+            String value = jop.showInputDialog(this,"How much stores you want ?", "Nombre de boutiques", JOptionPane.QUESTION_MESSAGE);
             int res = Integer.parseInt(value);
-            algo.createLocations(res);
-            algo.createStores(res);
+            //algo.createStores(res);
+            value = jop.showInputDialog(this,"How much locations you want ?", "Nombre d'emplacements", JOptionPane.QUESTION_MESSAGE);
+            res = Integer.parseInt(value);
+            //algo.createLocations(res);
+
         });
         buttonPanel.add(launchAlgoButton);
         buttonPanel.add(unlinkButton);

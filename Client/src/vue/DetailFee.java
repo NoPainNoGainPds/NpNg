@@ -60,13 +60,17 @@ public class DetailFee extends JFrame implements Runnable {
      */
     private JLabel categorie_emplacement;
     /**
+     * Number of visitors
+     */
+    private JLabel visiteurs;
+    /**
      * The expression to calculate a fee
      */
     private JLabel formule;
     /**
      * The informations for the expression
      */
-    private JLabel abrev;
+    private JLabel abrev;    private JLabel abrev1;    private JLabel abrev2;
     /**
      * The name of the PDF
      */
@@ -113,10 +117,13 @@ public class DetailFee extends JFrame implements Runnable {
 
         this.nom_boutique = new JLabel("Redevance de " + redevance.getNom_boutique() + " du mois de "+ formater.format(redevance.getDate_redevance()));
         this.nom_emplacement= new JLabel("Nom: " + emplacement.getNom());
-        this.superficie = new JLabel("Superficie: " + emplacement.getSuperficie());
+        this.superficie = new JLabel("Superficie: " + emplacement.getSuperficie()+" m2");
         this.categorie_emplacement = new JLabel("Categorie: " + emplacement.getCat());
-        this.abrev =new JLabel ("s: superficie de l'emplacement / p: prix au m2 / f: nb clients");
-        this.formule = new JLabel ("Formule de calcul: (s*p)*(1-s/80000+s/f)");
+        this.visiteurs = new JLabel ("Frequentation du mois: " + redevance.getFreq() +" visiteurs");
+        this.abrev =new JLabel ("s: superficie de l'emplacement");
+        this.abrev1 =new JLabel ("c: prix cat. emplacement");
+        this.abrev2 =new JLabel ("f: nb visiteurs");
+        this.formule = new JLabel ("Formule de calcul: s*(c-c*s/70000+f/s)");
         this.formule.setForeground(Color.red);
 
 
@@ -128,7 +135,7 @@ public class DetailFee extends JFrame implements Runnable {
                 {"D", "40\u20AC"},
 
         };
-        String[] entetes = {"Cat. emplacement", "Prix au m2"};
+        String[] entetes = {"Cat. emplacement", "Prix"};
         JTable tableau = new JTable(donnees, entetes);
         JScrollPane j=new JScrollPane(tableau);
         j.setPreferredSize(new Dimension(200,59));
@@ -158,15 +165,18 @@ public class DetailFee extends JFrame implements Runnable {
 
         panel.add(this.logo, "cell 0 0 3 3, split 2");
         panel.add(this.nom_boutique, "cell 3 0 3 3");
-        panel1.add(this.nom_emplacement, "cell 0 0 2 1");
-        panel1.add(this.superficie, "cell 0 1");
-        panel1.add(this.categorie_emplacement, "cell 1 1");
+        panel1.add(this.nom_emplacement, "cell 0 0");
+        panel1.add(this.superficie, "cell 1 0");
+        panel1.add(this.categorie_emplacement, "cell 0 1");
+        panel1.add(this.visiteurs, "cell 1 1");
 
-        panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Informations sur l'emplacement"));
+        panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Informations"));
 
         panel2.add(this.abrev, "cell 0 0");
-        panel2.add(this.formule, "cell 0 1");
-        panel2.add(j, "cell 1 0 3 3");
+        panel2.add(this.abrev1, "cell 0 1");
+        panel2.add(this.abrev2, "cell 0 2");
+        panel2.add(this.formule, "cell 0 3");
+        panel2.add(j, "cell 1 0 5 5");
         panel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Formule"));
         panel4.add(NomPdf, "cell 0 0 2 1");
         panel4.add(valid, "cell 0 1 1 1");

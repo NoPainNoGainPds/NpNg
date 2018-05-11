@@ -17,6 +17,9 @@ public class Redevance {
      * id of the store
      */
     private Boutique id_boutique;
+    /**
+     * name of the store
+     */
     private String nom_boutique;
     /**
      * amount
@@ -26,6 +29,10 @@ public class Redevance {
      * date of the payment
      */
     private Date date_redevance;
+    /**
+     * number of visitors in the store
+     */
+    private int freq;
     /**
      * Constructor
      */
@@ -44,6 +51,23 @@ public class Redevance {
         this.date_redevance = date_redevance;
         this.montant_redevance = montant_redevance;
         this.nom_boutique = id_boutique.getNom();
+    }
+
+    /**
+     * Constructor
+     * @param id_redevance id
+     * @param id_boutique store id
+     * @param date_redevance date
+     * @param montant_redevance amount
+     * @param freq number of visitors in the store
+     */
+    public Redevance(int id_redevance, Boutique id_boutique, Date date_redevance, float montant_redevance, int freq) {
+        this.id_redevance = id_redevance;
+        this.id_boutique = id_boutique;
+        this.date_redevance = date_redevance;
+        this.montant_redevance = montant_redevance;
+        this.nom_boutique = id_boutique.getNom();
+        this.freq=freq;
     }
 
     /**
@@ -122,6 +146,20 @@ public class Redevance {
      */
     public void setMontant_redevance(float montant_redevance) {
         this.montant_redevance = montant_redevance;
+    }
+    /**
+     * get the number of visitors
+     * @return the number of visitors
+     */
+    public int getFreq() {
+        return this.freq;
+    }
+    /**
+     * set the number of visitors
+     * @param freq the new number of visitors
+     */
+    public void setFreq(int freq) {
+        this.freq = freq;
     }
 
     /**

@@ -20,6 +20,7 @@ public class Boutique {
     private CategorieBoutique categorieBoutique;
     private String logo;
     private boolean located;
+    private int freq;
     public Boutique()
     {
 
@@ -66,10 +67,11 @@ public class Boutique {
      * @param id id of the store
      * @param emplacement location of the store
      */
-    public Boutique(int id, Emplacement emplacement)
+    public Boutique(int id, Emplacement emplacement, int freq)
     {
         this.id = id;
         this.emplacement = emplacement;
+        this.freq=freq;
 
     }
 
@@ -130,6 +132,20 @@ public class Boutique {
     public void setListeProduit(ArrayList<Produit> listProduit)
     {
         this.listeProduit = listProduit;
+    }
+    /**
+     * get the number of visitors
+     * @return the number of visitors
+     */
+    public int getFreq() {
+        return this.freq;
+    }
+    /**
+     * set the number of visitors
+     * @param freq the new number of visitors
+     */
+    public void setFreq(int freq) {
+        this.freq = freq;
     }
     public String toString()
     {

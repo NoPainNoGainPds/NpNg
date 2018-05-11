@@ -143,13 +143,13 @@ public class RedevanceDAO extends DAO<Redevance> {
     public ArrayList<Redevance> findFromReference(int annee, int mois) {
         try {
             Statement stmt = this.connection.createStatement();
-            String requete =  "Select r.id_redevance, r.id_boutique, b.nom_boutique, ROUND(r.montant_redevance,2), r.date_redevance, b.url_logo, b.id_categorie_boutique, b.id_emplacement, e.nom_emplacement, e.superficie, c.nom_categorie_emplacement from redevance r, boutique b, emplacement e, categorie_emplacement c where r.id_boutique=b.id_boutique and b.id_emplacement=e.id_emplacement and e.id_categorie_emplacement=c.id_categorie_emplacement and MONTH(r.date_redevance)="+mois+"+1 and YEAR(r.date_redevance)="+annee+" order by b.nom_boutique";
+            String requete =  "Select r.id_redevance, r.id_boutique, b.nom_boutique, ROUND(r.montant_redevance,2), r.date_redevance, b.url_logo, b.id_categorie_boutique, b.id_emplacement, e.nom_emplacement, e.superficie, c.nom_categorie_emplacement, p.nb_client from redevance r, boutique b, emplacement e, categorie_emplacement c, performance p where r.id_boutique=b.id_boutique and b.id_emplacement=e.id_emplacement and e.id_categorie_emplacement=c.id_categorie_emplacement and p.id_boutique=b.id_boutique and MONTH(r.date_redevance)="+mois+"+1 and YEAR(r.date_redevance)="+annee+" and MONTH(p.date_performance)=MONTH(r.date_redevance) and YEAR(p.date_performance)=YEAR(r.date_redevance) order by b.nom_boutique;";
 
             ResultSet res = stmt.executeQuery(requete);
             ArrayList listRedevance = new ArrayList();
 
             while(res.next()) {
-                listRedevance.add(new Redevance(res.getInt("id_redevance"), new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),new Emplacement(res.getString("nom_emplacement"),res.getInt("id_emplacement"),res.getInt("superficie"),res.getString("nom_categorie_emplacement")), res.getString("url_logo")), res.getDate("date_redevance"), res.getFloat("ROUND(r.montant_redevance,2)")));
+                listRedevance.add(new Redevance(res.getInt("id_redevance"), new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),new Emplacement(res.getString("nom_emplacement"),res.getInt("id_emplacement"),res.getInt("superficie"),res.getString("nom_categorie_emplacement")), res.getString("url_logo")), res.getDate("date_redevance"), res.getFloat("ROUND(r.montant_redevance,2)"), res.getInt("nb_client")));
 
             }
             this.logger.info(requete);
@@ -169,13 +169,13 @@ public class RedevanceDAO extends DAO<Redevance> {
     public ArrayList<Redevance> findFromReference(int id_redevance) {
         try {
             Statement stmt = this.connection.createStatement();
-            String requete =  "Select r.id_redevance, r.id_boutique, b.nom_boutique, ROUND(r.montant_redevance,2), r.date_redevance, b.url_logo, b.id_categorie_boutique, b.id_emplacement, e.nom_emplacement, e.superficie, c.nom_categorie_emplacement from redevance r, boutique b, emplacement e, categorie_emplacement c where r.id_boutique=b.id_boutique and b.id_emplacement=e.id_emplacement and e.id_categorie_emplacement=c.id_categorie_emplacement and r.id_redevance="+id_redevance+"";
+            String requete =  "Select r.id_redevance, r.id_boutique, b.nom_boutique, ROUND(r.montant_redevance,2), r.date_redevance, b.url_logo, b.id_categorie_boutique, b.id_emplacement, e.nom_emplacement, e.superficie, c.nom_categorie_emplacement, p.nb_client from redevance r, boutique b, emplacement e, categorie_emplacement c, performance p where r.id_boutique=b.id_boutique and b.id_emplacement=e.id_emplacement and e.id_categorie_emplacement=c.id_categorie_emplacement and p.id_boutique=b.id_boutique and MONTH(p.date_performance)=MONTH(r.date_redevance) and YEAR(p.date_performance)=YEAR(r.date_redevance) and r.id_redevance="+id_redevance+"";
 
             ResultSet res = stmt.executeQuery(requete);
             ArrayList listRedevance = new ArrayList();
 
             while(res.next()) {
-                listRedevance.add(new Redevance(res.getInt("id_redevance"), new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),new Emplacement(res.getString("nom_emplacement"),res.getInt("id_emplacement"),res.getInt("superficie"),res.getString("nom_categorie_emplacement")), res.getString("url_logo")), res.getDate("date_redevance"), res.getFloat("ROUND(r.montant_redevance,2)")));
+                listRedevance.add(new Redevance(res.getInt("id_redevance"), new Boutique(res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),new Emplacement(res.getString("nom_emplacement"),res.getInt("id_emplacement"),res.getInt("superficie"),res.getString("nom_categorie_emplacement")), res.getString("url_logo")), res.getDate("date_redevance"), res.getFloat("ROUND(r.montant_redevance,2)"), res.getInt("nb_client")));
 
             }
             this.logger.info(requete);

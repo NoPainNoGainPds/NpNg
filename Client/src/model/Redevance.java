@@ -18,15 +18,22 @@ public class Redevance implements ModelObject {
      * id of the store
      */
     private Boutique id_boutique;
+    /**
+     * name of the store
+     */
     private String nom_boutique;
     /**
      * amount
      */
     private float montant_redevance;
     /**
-     * date of the payment
+     * date of the fee
      */
     private Date date_redevance;
+    /**
+     * number of visitors
+     */
+    private int freq;
     /**
      * Constructor
      */
@@ -45,6 +52,23 @@ public class Redevance implements ModelObject {
         this.date_redevance = date_redevance;
         this.montant_redevance = montant_redevance;
         this.nom_boutique = id_boutique.getNom();
+    }
+
+    /**
+     * Constructor
+     * @param id_redevance id
+     * @param id_boutique store id
+     * @param date_redevance date
+     * @param montant_redevance amount
+     * @param freq number of visitors in the store
+     */
+    public Redevance(int id_redevance, Boutique id_boutique, Date date_redevance, float montant_redevance, int freq) {
+        this.id_redevance = id_redevance;
+        this.id_boutique = id_boutique;
+        this.date_redevance = date_redevance;
+        this.montant_redevance = montant_redevance;
+        this.nom_boutique = id_boutique.getNom();
+        this.freq=freq;
     }
 
     /**
@@ -123,7 +147,20 @@ public class Redevance implements ModelObject {
     public void setMontant_redevance(float montant_redevance) {
         this.montant_redevance = montant_redevance;
     }
-
+    /**
+     * get the number of visitors
+     * @return the number of visitors
+     */
+    public int getFreq() {
+        return this.freq;
+    }
+    /**
+     * set the number of visitors
+     * @param freq the new number of visitors
+     */
+    public void setFreq(int freq) {
+        this.freq = freq;
+    }
     /**
      * method to display a fee
      * @return the display

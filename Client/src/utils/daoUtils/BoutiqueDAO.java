@@ -40,7 +40,14 @@ public class BoutiqueDAO extends DAO<Boutique> {
      */
     @Override
     public boolean create(Boutique obj) {
-        return false;
+        try {
+            String str ="{\"name\":\"CreateStore\",\"id\":0}";
+            this.connection.send(str);
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
@@ -206,6 +213,15 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }catch(Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void unlocateAllStores() {
+        try {
+            String str = "{\"name\":\"UnlocateAllStores\",\"id\":"+0+"}\n";
+            this.connection.send(str);
+        } catch(Exception e) {
+            e.printStackTrace();
         }
     }
 }

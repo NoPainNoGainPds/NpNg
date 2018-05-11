@@ -58,8 +58,9 @@ public class AlgorithmFee {
         if (this.rDAO.findFeeAssigned(b.getId())){
 
                 float red = 0;
-                int s = b.getEmplacement().getSuperficie();
+                float s = b.getEmplacement().getSuperficie();
                 float c = 0;
+                float  f = b.getFreq();
                 switch (b.getEmplacement().getCat()) {
                     case "*":
                         c = 65;
@@ -86,14 +87,13 @@ public class AlgorithmFee {
                 Date auj = calendar.getTime();
                 SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-01");
 
-                System.out.println(formater.format(auj));
 
-                red = (s * c) * (1f - s / 80000f);
+
+                red = s*(c-c * s / 70000f + f/s);
 
                 Redevance r = new Redevance(0, b, auj, red);
 
                 this.rDAO.create(r);
-                System.out.println("ok");
 
             }else{ System.out.println("deja assigne");}
 
