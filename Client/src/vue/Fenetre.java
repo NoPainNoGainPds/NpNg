@@ -117,7 +117,7 @@ public class Fenetre extends JFrame implements Runnable{
         jtp.addTab("Redevance",null,new ViewRedevance(),"Show all fees");
         jtp.addTab("Parcours",null,new ManageParcours(),"Show all parcours");
         jtp.addTab("Stock", null, new ViewDeliveryNote(), "Show stock");
-        jtp.addTab("AssignationAlgo",null,new vue.AlgorithmView(new Algorithm(new EmplacementDAO(),new BoutiqueDAO(new ConnectionServer()))));
+        jtp.addTab("AssignationAlgo",null,new vue.AlgorithmView());
         this.add(jtp,gbc);
         //this.add(this.map,gbc);
         //this.add(this.map,BorderLayout.CENTER);

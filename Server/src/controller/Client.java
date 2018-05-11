@@ -205,12 +205,14 @@ public class Client extends Thread {
                         case  "SearchStoreWithCategory":
                             sender.sendAllStoreWithCategory();
                             break;
-                        case "AssignLocationToStore" :
+                        case "AssignLocationsToStores" :
                             sender.assignLocationsToStores();
                             break;
-                        case "UnlocateAndUnassign" :
-                            sender.unassignAllLocations();
+                        case "UnlocateAllStores" :
                             sender.unlocateAllStores();
+                            break;
+                        case "UnassignAllLocations" :
+                            sender.unassignAllLocations();
                             break;
                         default: System.out.println("Not Comparable");
                     }

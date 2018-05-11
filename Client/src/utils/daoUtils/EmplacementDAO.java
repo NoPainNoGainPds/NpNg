@@ -35,7 +35,14 @@ public class EmplacementDAO extends DAO<Emplacement> {
      */
     @Override
     public boolean create(Emplacement obj) {
-        return false;
+        try {
+            String str ="{\"name\":\"CreateLocation\",\"id\":0}";
+            this.connection.send(str);
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
@@ -90,18 +97,25 @@ public class EmplacementDAO extends DAO<Emplacement> {
     {
         return null;
     }
-    //ici la methode que le client va exec
-    public void assignLocationToStore()
+    public void assignLocationsToStores()
     {
         try
         {
             //ici l'objet qui va etre envoye au serveur
-            String str ="{\"name\":\"AssignLocationToStore\",\"id\":0}";
+            String str ="{\"name\":\"AssignLocationsToStores\",\"id\":0}";
             this.connection.send(str);
         }catch(Exception e)
         {
             e.printStackTrace();
-            return;
+        }
+    }
+
+    public void unassignAllLocations() {
+        try {
+            String str ="{\"name\":\"UnassignAllLocations\",\"id\":0}";
+            this.connection.send(str);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
