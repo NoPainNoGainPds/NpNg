@@ -48,6 +48,7 @@ public class Emplacement implements ModelObject{
     {
         this.nom = "fictif";
         this.id = -1;
+        assigned = false;
     }
     /**
      * Constructor
