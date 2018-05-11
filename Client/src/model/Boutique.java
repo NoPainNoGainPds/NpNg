@@ -23,6 +23,8 @@ public class Boutique implements ModelObject {
     private String logo;
     private boolean located;
     private int freq;
+    private String renommee;
+    private String gamme;
     public Boutique()
     {
 
@@ -137,6 +139,20 @@ public class Boutique implements ModelObject {
     public void setFreq(int freq) {
         this.freq = freq;
     }
+
+    public String getRenommee() {
+        return renommee;
+    }
+    public void setRenommee(String renommee) {
+        this.renommee = renommee;
+    }
+    public String getGamme() {
+        return gamme;
+    }
+    public void setGamme(String Gamme) {
+        this.gamme = gamme;
+    }
+
     public String toString()
     {
         return "Boutique:"+this.nom+" id boutique :"+this.getId() +"; Emplacement :"+this.emplacement+" Cat :"+this.categorieBoutique;

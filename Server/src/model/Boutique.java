@@ -179,8 +179,13 @@ public class Boutique {
     public String getRenommee() {
         return renommee;
     }
-
+    public void setRenommee(String renommee) {
+        this.renommee = renommee;
+    }
     public String getGamme() {
         return gamme;
+    }
+    public void setGamme(String Gamme) {
+        this.gamme = gamme;
     }
 }
