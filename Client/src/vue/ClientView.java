@@ -56,7 +56,7 @@ public class ClientView extends JPanel {
         String res = "";
         for(String s : this.profDAO.getProfilClient(this.client.getId()))
         {
-            res+=(s+";");
+            res+=(s+" ; ");
         }
         this.profils.setText("Profils :"+res);
     }

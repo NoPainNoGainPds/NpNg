@@ -30,7 +30,7 @@ public class StockEntreeDAO extends DAO<StockEntree> {
             System.out.println("creation entree stock");
             Produit id = obj.getProduit();
 
-            String requete = "INSERT INTO entree_stock (id_produit, quantite, date_entree, montant) VALUES ('" + id.getId() + "', '" + obj.getQuantite() + "', '"+ obj.getDate()+"', '"+obj.getMontant()+"');";
+            String requete = "INSERT INTO entree_stock (id_produit, quantite, date_entree,id_boutique, montant) VALUES ('" + id.getId() + "', '" + obj.getQuantite() + "', '"+ obj.getDate()+"', '"+obj.getId_boutique()+"','"+obj.getMontant()+"');";
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(requete);
             logger.info(requete);

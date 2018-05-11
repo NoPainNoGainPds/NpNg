@@ -9,6 +9,7 @@ import model.StockEntree;
 import net.miginfocom.swing.MigLayout;
 import utils.Constants;
 import utils.daoUtils.BonLivraisonDAO;
+import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.ProduitDAO;
 import utils.daoUtils.StockEntreeDAO;
 
@@ -63,13 +64,17 @@ public class EntryIntoStorage extends JPanel{
 
     private BonLivraisonDAO blDAO;
 
+    private BoutiqueDAO bDAO;
+
     /**
      * Constructor
      */
     public EntryIntoStorage(){
-        this.View();
+
         this.seDAO = new StockEntreeDAO();
         this.blDAO = new BonLivraisonDAO();
+        this.bDAO = new BoutiqueDAO();
+        this.View();
         this.controler();
     }
 
@@ -99,6 +104,8 @@ public class EntryIntoStorage extends JPanel{
 
             nomDeLaBoutiqueBox = new JComboBox<Boutique>();
             nomDeLaBoutiqueBox.setPreferredSize(new Dimension(250, 50));
+            ArrayList<Boutique> listB = this.bDAO.findFromReference();
+            nomDeLaBoutiqueBox.setModel(new DefaultComboBoxModel<Boutique>(listB.toArray(new Boutique[listB.size()])));
             nomDeLaBoutique = new TextLabel (nomDeLaBoutiqueBox, new JLabel("Nom de la boutique"));
             FormPan.add(nomDeLaBoutique, "wrap");
 
@@ -179,7 +186,7 @@ public class EntryIntoStorage extends JPanel{
                             seToSend.setQuantite(Integer.parseInt(this.liste.get(i).getQuantiteTextField().getText()));
                             seToSend.setId_produit(Integer.parseInt(this.liste.get(i).getIdProduitTextField().getText()));
                             seToSend.setDate(this.dateEntreeStockDate.getDate());
-                            //seToSend.setId_boutique();
+                            seToSend.setId_boutique(this.nomDeLaBoutique.field.getItemAt(this.nomDeLaBoutique.field.getSelectedIndex()).getId());
                             seToSend.setMontant(Integer.parseInt(this.liste.get(i).getMontantTextField().getText()));
                         this.seDAO.create(seToSend);
                     }
