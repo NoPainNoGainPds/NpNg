@@ -369,6 +369,78 @@ public class BoutiqueDAO extends DAO<Boutique> {
         return liste;
 
     }
+    public String getRenommee(Boutique store) {
+        String result = "";
+        try {
+            Statement stmt = this.connection.createStatement();
+            String query = "select renommee from boutique where id_boutique="+store.getId();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                result = rs.getString("renommee");
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public String getGamme(Boutique store) {
+        String result = "";
+        try {
+            Statement stmt = this.connection.createStatement();
+            String query = "select gamme from boutique where id_boutique="+store.getId();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                result = rs.getString("gamme");
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void setLocated(Boutique store) {
+        try {
+            Statement stmt = this.connection.createStatement();
+            String query = "update boutique set placee=1 where id_boutique="+store.getId();
+            stmt.executeUpdate(query);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void setLocation(Boutique store, Emplacement location) {
+        try {
+            Statement stmt = this.connection.createStatement();
+            String query = "update boutique set id_emplacement="+location.getId()+" where id_boutique="+store.getId();
+            stmt.executeUpdate(query);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Boutique> findFromReferencealgo() {
+        try
+        {
+            Statement stmt =  this.connection.createStatement();
+            String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement,url_logo FROM boutique";
+            ResultSet res = stmt.executeQuery(requete);
+            ArrayList<Boutique> listBoutique = new ArrayList<>();
+            while(res.next())
+            {
+                listBoutique.add(new Boutique(this.client,res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),0,res.getString("url_logo")));
+            }
+            stmt.close();
+            logger.info(requete);
+            return listBoutique;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.error(e.toString());
+        }
+        return null;
+    }
 }
 
 

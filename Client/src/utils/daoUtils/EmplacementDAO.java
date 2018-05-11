@@ -97,15 +97,11 @@ public class EmplacementDAO extends DAO<Emplacement> {
     {
         return null;
     }
-    public void assignLocationsToStores()
-    {
-        try
-        {
-            //ici l'objet qui va etre envoye au serveur
+    public void assignLocationsToStores() {
+        try {
             String str ="{\"name\":\"AssignLocationsToStores\",\"id\":0}";
             this.connection.send(str);
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

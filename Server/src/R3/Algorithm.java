@@ -68,6 +68,8 @@ public class Algorithm {
         /*
         Get the array with the criteria's values
          */
+        System.out.println("storelist size :" +storeList.size());
+        System.out.println("location list size : "+locationList.size());
         int[] storeCriteria = bDAO.getStoreCriteria();
         int[] locationCriteria =eDAO.getLocationCriteria();
 
@@ -107,7 +109,7 @@ public class Algorithm {
                     break;
             }
             mark += storeCriteria[1];
-            switch(storeList.get(i).getRenommee()) {
+            switch(bDAO.getRenommee(storeList.get(i))) {
                 case "*" :
                     mark += 5;
                     break;
@@ -129,7 +131,7 @@ public class Algorithm {
             }
 
             mark += storeCriteria[2];
-            switch (storeList.get(i).getGamme()) {
+            switch (bDAO.getGamme(storeList.get(i))) {
                 case "A" :
                     mark += 3;
                     break;
@@ -158,6 +160,46 @@ public class Algorithm {
              /*
             Begin the algorithm by modifying the mark
              */
+             mark += locationCriteria[0];
+             int surface = locationList.get(i).getSuperficie();
+             if(surface <= 250)
+                 mark += 1;
+             if(surface > 250 && surface <= 850)
+                 mark += 2;
+             if(surface > 850 && surface <= 1200)
+                 mark += 3;
+             if(surface > 1200 && surface < 1500)
+                 mark += 4;
+             if(surface > 1500 && surface <= 2000)
+                 mark += 5;
+             if(surface > 2000 && surface <= 5000)
+                 mark += 6;
+             if(surface > 5000 && surface <= 6000)
+                 mark += 7;
+             if (surface > 6000)
+                 mark += 8;
+
+             mark += locationCriteria[1];
+             switch(locationList.get(i).getCat()) {
+                 case "*" :
+                     mark += 5;
+                     break;
+                 case "A" :
+                     mark += 4;
+                     break;
+                 case "B" :
+                     mark += 3;
+                     break;
+                 case "C" :
+                     mark += 2;
+                     break;
+                 case "D" :
+                     mark += 1;
+                     break;
+                 default :
+                     System.out.println("Category not known");
+                     break;
+             }
             /*
             Then create a MarkedLocation with the mark and add it to the list to sort
              */
@@ -191,10 +233,13 @@ public class Algorithm {
         /*
         The better location is assigned to the better store
          */
+        unassignAllLocations();
+        unlocateAllStores();
         for (int i = 0; i < max; i++) {
             markedStoreList.get(i).getStore().setEmplacement(markedLocationList.get(i).getLocation());
-            markedStoreList.get(i).getStore().setLocated(true);
-            markedLocationList.get(i).getLocation().setAssigned(true);
+            bDAO.setLocation(markedStoreList.get(i).getStore(),markedLocationList.get(i).getLocation());
+            bDAO.setLocated(markedStoreList.get(i).getStore());
+            eDAO.setAssigned(markedLocationList.get(i).getLocation());
         }
     }
 

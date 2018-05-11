@@ -212,6 +212,7 @@ public class Client extends Thread {
                             sender.sendAllStoreWithCategory();
                             break;
                         case "AssignLocationsToStores" :
+                            System.out.println("client serveur");
                             sender.assignLocationsToStores();
                             break;
                         case "UnlocateAllStores" :

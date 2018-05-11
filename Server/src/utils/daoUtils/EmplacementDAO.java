@@ -202,4 +202,14 @@ public class EmplacementDAO extends DAO<Emplacement> {
         return null;
     }
 
+    public void setAssigned(Emplacement location) {
+        try {
+            Statement stmt = this.connection.createStatement();
+            String query = "update emplacement set assigne=1 where id_emplacement="+location.getId();
+            stmt.executeUpdate(query);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
