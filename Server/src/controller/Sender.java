@@ -1,5 +1,6 @@
 package controller;
 
+import R3.Algorithm;
 import R3.AlgorithmFee;
 import R3.Facture;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -558,5 +559,20 @@ public class Sender {
         {
             e.printStackTrace();
         }
+    }
+
+    public void assignLocationsToStores() {
+        Algorithm algo = new Algorithm(this.eDAO, this.bDAO);
+        algo.assignLocationsToStores();
+    }
+
+    public void unlocateAllStores() {
+        Algorithm algo = new Algorithm(this.eDAO, this.bDAO);
+        algo.unlocateAllStores();
+    }
+
+    public void unassignAllLocations() {
+        Algorithm algo = new Algorithm(this.eDAO, this.bDAO);
+        algo.unassignAllLocations();
     }
 }
