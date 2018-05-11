@@ -315,6 +315,60 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
         return null;
     }
+
+    public ArrayList<Boutique> getStoresForCategory(String nomProfil,int nbStoreList) {
+        ArrayList<Boutique> liste = new ArrayList<>();
+
+        try {
+            Statement s = this.connection.createStatement();
+            String requete = "SELECT b.id_boutique, id_emplacement ,nom_categorie_boutique FROM boutique as b , categorie_boutique as l, performance AS p WHERE b.id_categorie_boutique = l.id_categorie_boutique AND b.id_boutique = p.id_boutique AND nom_categorie_boutique = '"+nomProfil+"' ORDER BY taux_frequentation, nb_client limit "+nbStoreList;
+            ResultSet r = s.executeQuery(requete);
+
+            while(r.next()) {
+                System.out.println("id :" + r.getInt("id_boutique"));
+                //Boutique b  = new Boutique(r.getInt("id_boutique"),new Emplacement("plop",r.getInt("id_emplacement"),0,"plop"),new CategorieBoutique(r.getString("nom_categorie_boutique"), 0));
+                Boutique b  = new Boutique(r.getInt("id_boutique"),
+                        new Emplacement("plop",r.getInt("id_emplacement"),0,"plop"),
+                        new CategorieBoutique(r.getString("nom_categorie_boutique"), 0)
+                );
+                liste.add(b);
+                System.out.println("Store :" + b);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        System.out.println(liste.toString());
+        return liste;
+
+    }
+
+    public ArrayList<Boutique> getPopularStoresExcludingCategory(String nomProfil,int nbStoreList){
+        ArrayList<Boutique> liste = new ArrayList<>();
+
+        try {
+            Statement s = this.connection.createStatement();
+            String requete = "SELECT b.id_boutique, id_emplacement ,nom_categorie_boutique FROM boutique as b , categorie_boutique as l, performance AS p WHERE b.id_categorie_boutique = l.id_categorie_boutique AND b.id_boutique = p.id_boutique AND nom_categorie_boutique != '"+nomProfil+"' ORDER BY taux_frequentation, nb_client limit "+nbStoreList;
+            ResultSet r = s.executeQuery(requete);
+
+            while(r.next()) {
+                System.out.println("id :" + r.getInt("id_boutique"));
+                //Boutique b  = new Boutique(r.getInt("id_boutique"),new Emplacement("plop",r.getInt("id_emplacement"),0,"plop"),new CategorieBoutique(r.getString("nom_categorie_boutique"), 0));
+                Boutique b  = new Boutique(r.getInt("id_boutique"),
+                        new Emplacement("plop",r.getInt("id_emplacement"),0,"plop"),
+                        new CategorieBoutique(r.getString("nom_categorie_boutique"), 0)
+                );
+                liste.add(b);
+                System.out.println("Store :" + b);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        System.out.println(liste.toString());
+        return liste;
+
+    }
 }
 
 

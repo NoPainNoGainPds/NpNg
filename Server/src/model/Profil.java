@@ -3,6 +3,8 @@ package model;
 public class Profil {
     private String nom;
     private int value;
+    private Parcours parcours;
+
     public Profil()
     {
 
@@ -22,6 +24,14 @@ public class Profil {
 
     public int getValue() {
         return value;
+    }
+
+    public Parcours getParcours() {
+        return parcours;
+    }
+
+    public void setParcours(Parcours parcours) {
+        this.parcours = parcours;
     }
 
     public void setValue(int value) {

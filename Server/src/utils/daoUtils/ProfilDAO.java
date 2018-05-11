@@ -45,7 +45,7 @@ public class ProfilDAO {
 
         try {
             Statement s = this.connection.createStatement();
-            String requete = "SELECT * FROM profil_client WHERE id_profil NOT IN (SELECT id_profil FROM parcours)";
+            String requete = "SELECT * FROM profil_client WHERE id_parcours IS NULL";
             ResultSet r = s.executeQuery(requete);
 
             while(r.next()) {

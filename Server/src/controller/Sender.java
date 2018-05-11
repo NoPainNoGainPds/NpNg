@@ -17,6 +17,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents the sender
@@ -75,6 +76,11 @@ public class Sender {
      */
     private ProfilDAO profDAO;
 
+    /**
+     *
+     */
+    private ParcoursDAO parcoursDAO;
+
     private BonLivraisonDAO blDAO;
 
     private CauseSortieStockDAO cssDAO;
@@ -104,6 +110,7 @@ public class Sender {
         this.cDAO = client.getcDAO();
         this.profDAO = new ProfilDAO(database);
         this.purchaseDAO = new PurchaseDAO(database);
+        this.parcoursDAO = new ParcoursDAO(database);
         this.mapper = mapper;
         this.mapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
         this.writer = writer;
@@ -607,5 +614,57 @@ public class Sender {
     public void unassignAllLocations() {
         Algorithm algo = new Algorithm(this.eDAO, this.bDAO);
         algo.unassignAllLocations();
+    }
+
+    public void assignAllPaths(){
+        try {
+            // Get all profiles without Parcours
+            ArrayList<Profil> listProfil = this.profDAO.getProfilsWithoutParcours();
+            for(Profil p : listProfil) {
+                int idProfil = p.getValue();
+                String nomCompletProfil = p.getNom();
+                String nomProfil;
+                List<Boutique> listBoutiques;
+                if (p.getNom().length() > 2) {
+                    String plus = nomCompletProfil.substring(nomCompletProfil.length() - 2);
+                    if (plus.equals("++")) {
+                        nomProfil = nomCompletProfil.substring(0,nomCompletProfil.length()-2);
+                        // renvoie les boutiques par ordre de frequentation selon nom profil et nb boutiques
+                        listBoutiques = bDAO.getStoresForCategory(nomProfil,8);
+                    } else if ((plus.charAt(1) + "").equals("+")) {
+                        nomProfil = nomCompletProfil.substring(0,nomCompletProfil.length()-1);
+                        listBoutiques = bDAO.getStoresForCategory(nomProfil,6);
+                        // ajouter deux autres boutiques parmi les plus fréquentées
+                        listBoutiques.addAll(bDAO.getPopularStoresExcludingCategory(nomProfil,2));
+                    } else {
+                        nomProfil = nomCompletProfil;
+                        listBoutiques = bDAO.getStoresForCategory(nomProfil,4);
+                        listBoutiques.addAll(bDAO.getPopularStoresExcludingCategory(nomProfil,4));
+
+                    }
+                    System.out.println("Nom profil : " + nomProfil + ", plus : " + plus);
+                    // assigne la liste de boutiques créée à un nouveu parcours pour le profil en question
+                    Parcours path = new Parcours();
+                    path.setStoreList(listBoutiques);
+                    path.setName("parcours "+nomCompletProfil);
+                    parcoursDAO.create(path);
+                }
+            }
+
+
+            for(Profil p : listProfil)
+            {
+                this.mapper.writeValue(this.writer,p);
+                this.writer.write("\n".getBytes());
+                this.writer.flush();
+            }
+            this.writer.write("null\n".getBytes());
+            this.writer.flush();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

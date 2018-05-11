@@ -214,6 +214,9 @@ public class Client extends Thread {
                         case "UnassignAllLocations" :
                             sender.unassignAllLocations();
                             break;
+                        case "AssignPath" :
+                            sender.assignAllPaths();
+                            break;
                         default: System.out.println("Not Comparable");
                     }
                     /*

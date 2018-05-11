@@ -28,6 +28,7 @@ public class Database {
 
 			Class.forName(Constants.DRIVER_NAME).newInstance();
 			//DriverManager.registerDriver(new org.mariadb.jdbc.Driver());
+			int i = 1;
 			System.out.println("*** Driver loaded.");
 		}
 		catch(ClassNotFoundException | InstantiationException | IllegalAccessException e)
