@@ -90,4 +90,18 @@ public class EmplacementDAO extends DAO<Emplacement> {
     {
         return null;
     }
+    //ici la methode que le client va exec
+    public void assignLocationToStore()
+    {
+        try
+        {
+            //ici l'objet qui va etre envoye au serveur
+            String str ="{\"name\":\"AssignLocationToStore\",\"id\":0}";
+            this.connection.send(str);
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return;
+        }
+    }
 }

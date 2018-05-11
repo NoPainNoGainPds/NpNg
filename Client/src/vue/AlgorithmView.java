@@ -2,15 +2,19 @@ package vue;
 
 import R3.Algorithm;
 import org.apache.log4j.Logger;
+import utils.Constants;
+import utils.daoUtils.EmplacementDAO;
 
 import javax.swing.*;
 
 public class AlgorithmView extends JPanel {
     private JButton launchAlgoButton;
+    private EmplacementDAO eDAO;
     Logger logger = Logger.getLogger(this.getClass());
 
     public AlgorithmView(Algorithm algo) {
         JPanel panel = new JPanel();
+        this.eDAO = new EmplacementDAO();
         panel.setLayout(new BoxLayout(panel,BoxLayout.PAGE_AXIS));
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBorder(BorderFactory.createTitledBorder("Launching / Unlink / Create locations and stores"));
@@ -24,7 +28,8 @@ public class AlgorithmView extends JPanel {
         launchAlgoButton.addActionListener((event) -> {
             logger.info("Launching assignation algorithm");
             System.out.println("Launching assignation algorithm...");
-            algo.assignLocationsToStores();
+            //ici je lance la methode dans le dao qui va dire au serveur d'executer l'algo
+            this.eDAO.assignLocationToStore();
             JOptionPane jop = new JOptionPane();
             jop.showMessageDialog(this, "Algorithm successfully executed !");
         });

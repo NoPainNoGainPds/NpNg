@@ -2,6 +2,7 @@ package controller;
 
 import R3.Algorithm;
 import R3.AlgorithmFee;
+import R3.Algorithm;
 import R3.Facture;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
