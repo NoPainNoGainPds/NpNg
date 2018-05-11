@@ -32,7 +32,15 @@ public class StockSortieDAO extends DAO<StockSortie> {
         }catch(JsonProcessingException e){
             e.printStackTrace();
         }
+        /*this.connection.send("{\"name\" : \"CreateStockSortie\",\"id\" : "+0+"}");
+        Boolean b = (Boolean)this.connection.recieve(Boolean.class);
+
+        if (b){
+            this.connection.sendObject(obj);
+        }
+        b = (Boolean)this.connection.recieve(Boolean.class);*/
         return false;
+
     }
 
     @Override

@@ -5,6 +5,10 @@ public class CauseSortieStock {
 
     private String nom_cause;
 
+    public CauseSortieStock(String s){
+        this.nom_cause = s;
+    }
+
     public CauseSortieStock(int id, String nom){
         this.id_cause = id;
         this.nom_cause = nom;
@@ -25,4 +29,10 @@ public class CauseSortieStock {
     public String getNom_cause() {
         return nom_cause;
     }
+
+    @Override
+    public String toString() {
+        return "Cause : "+this.nom_cause;
+    }
 }
+

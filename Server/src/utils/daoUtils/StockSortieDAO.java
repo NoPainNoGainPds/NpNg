@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class StockSortieDAO extends DAO<StockSortie> {
@@ -25,7 +27,22 @@ public class StockSortieDAO extends DAO<StockSortie> {
 
     @Override
     public boolean create(StockSortie obj) {
-        return false;
+        try {
+            System.out.println("Create Sortie Stock");
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String date = dateFormat.format(obj.getDate());
+
+            String requete = "INSERT INTO sortie_stock (date_sortie, id_boutique, id_produit, quantite, id_cause_sortie_stock) VALUES ('"+date+"','"+ obj.getId_boutique() + "', '" + obj.getId_produit() + "', '"+obj.getQuantite()+"' , '"+obj.getId_cause()+"'  );";
+            Statement stmt = this.connection.createStatement();
+            stmt.executeUpdate(requete);
+            logger.info(requete);
+            return true;
+        }catch (SQLException e){
+            e.printStackTrace();
+            logger.error(e.toString());
+            return false;
+        }
     }
 
     @Override
@@ -78,7 +95,7 @@ public class StockSortieDAO extends DAO<StockSortie> {
             ArrayList listSortie = new ArrayList();
 
             while(res.next()) {
-                listSortie.add(new StockSortie(res.getInt("id_sortie"),  res.getInt("id_boutique"), new Produit(res.getString("nom_produit"), res.getInt("id_produit")), res.getInt("quantite"), res.getDate("date_sortie")));
+                listSortie.add(new StockSortie(res.getInt("id_sortie"),  res.getInt("id_boutique"), res.getInt("id_produit"), new Produit(res.getString("nom_produit"), res.getInt("id_produit")), res.getInt("quantite"), res.getDate("date_sortie"), res.getInt("id_cause")));
             }
 
             this.logger.info(requete);

@@ -1,15 +1,19 @@
 package vue;
 
+import com.toedter.calendar.JDateChooser;
 import model.Boutique;
 import model.StockSortie;
 import model.CauseSortieStock;
 import net.miginfocom.swing.MigLayout;
 import sun.awt.CausedFocusEvent;
 import utils.Constants;
+import utils.daoUtils.BoutiqueDAO;
+import utils.daoUtils.CauseSortieStockDAO;
 import utils.daoUtils.StockSortieDAO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -29,11 +33,17 @@ public class OutputStorage extends JPanel{
     /**
      * Release Date
      */
-    private TextLabel <JTextField> dateSortieStock;
-    private JTextField dateSortieStockTextField;
+    private TextLabel <JDateChooser> dateSortieStock;
+    private JDateChooser dateSortieStockDate;
+
+    private ArrayList<OutputStorageForm> liste;
 
 
     private StockSortieDAO ssDAO;
+
+    private BoutiqueDAO bDAO;
+
+    private CauseSortieStockDAO cDAO;
 
     private JButton validerBoutton;
 
@@ -47,8 +57,11 @@ public class OutputStorage extends JPanel{
      * Constructor
      */
     public OutputStorage(){
-        this.View();
         this.ssDAO = new StockSortieDAO();
+        this.bDAO = new BoutiqueDAO();
+        this.cDAO = new CauseSortieStockDAO();
+        this.View();
+        this.controler();
     }
 
     /**
@@ -63,16 +76,23 @@ public class OutputStorage extends JPanel{
 
         nomDeLaBoutiqueBox = new JComboBox<Boutique>();
         nomDeLaBoutiqueBox.setPreferredSize(new Dimension(250,50));
+        ArrayList<Boutique> listB = this.bDAO.findFromReference();
+        nomDeLaBoutiqueBox.setModel(new DefaultComboBoxModel<Boutique>(listB.toArray(new Boutique[listB.size()])));
+        /*for(int i = 0; i < listB.size(); i++){
+            nomDeLaBoutiqueBox.addItem("Nom :" +listB.get(i).getNom()+"  Id : "+ listB.get(i).getId());
+        }*/
         nomDeLaBoutique = new TextLabel (nomDeLaBoutiqueBox, new JLabel("Nom de la boutique"));
         FormPan.add(nomDeLaBoutique);
 
-        dateSortieStockTextField = new JTextField(20);
-        dateSortieStockTextField.setPreferredSize(new Dimension(250,50));
-        dateSortieStock = new TextLabel(dateSortieStockTextField, new JLabel("Date Achat"));
+        dateSortieStockDate = new JDateChooser();
+        dateSortieStockDate.setPreferredSize(new Dimension(250,50));
+        dateSortieStock = new TextLabel(dateSortieStockDate, new JLabel("Date sortie stock"));
         FormPan.add(dateSortieStock);
 
         causeBox = new JComboBox<CauseSortieStock>();
         causeBox.setPreferredSize(new Dimension(250,50));
+        ArrayList<CauseSortieStock> listeC = this.cDAO.findFromReference();
+        causeBox.setModel(new DefaultComboBoxModel<CauseSortieStock>(listeC.toArray(new CauseSortieStock[listeC.size()])));
         cause = new TextLabel(causeBox, new JLabel("Cause de la sortie de stock"));
         FormPan.add(cause, "wrap");
 
@@ -82,7 +102,7 @@ public class OutputStorage extends JPanel{
 
         FormPanLine = new JPanel();
         FormPanLine.setLayout(new MigLayout("inset 0 20 20 20 ", "[fill, grow]", "[fill, grow]"));
-        ArrayList<OutputStorageForm> liste = new ArrayList<>();
+        liste = new ArrayList<>();
         OutputStorageForm panTemp = new OutputStorageForm();
         liste.add(panTemp);
         FormPanLine.add(panTemp, "wrap");
@@ -104,15 +124,40 @@ public class OutputStorage extends JPanel{
         this.add(Buttonpan, BorderLayout.SOUTH);
     }
 
-    /*private void controler(){
+    private void controler(){
         this.validerBoutton.addActionListener(event ->
         {
-            StockSortie ssToSend = new StockSortie();
-            //ssToSend.setDate(...);  Comment on fait la date lol
-            //ssToSend.setId_boutique();  Erreur pcq on recupere un nom et pas l'id
-            ssToSend.setQuantite(Integer.parseInt(this.quantiteTextField.getText()));
+            int valide = 0;
+            if(this.dateSortieStockDate.getDate().equals("")){
+                this.dateSortieStockDate.setBackground(Color.RED);
+                valide++;
+            }
 
-
+            for(int i = 0; i < liste.size(); i++ ) {
+                if(liste.get(i).getIdProduitTextField().getText().equals("")){
+                    liste.get(i).getIdProduitTextField().setBackground(Color.RED);
+                    valide++;
+                }
+                if(liste.get(i).getNomProduitTextField().getText().equals("")){
+                    liste.get(i).getNomProduitTextField().setBackground(Color.RED);
+                    valide++;
+                }
+                if(liste.get(i).getQuantiteTextField().getText().equals("")){
+                    liste.get(i).getQuantiteTextField().setBackground(Color.RED);
+                    valide++;
+                }
+            }
+            if(valide==0) {
+                for(int i = 0; i < liste.size(); i++ ) {
+                    StockSortie ssToSend = new StockSortie();
+                        ssToSend.setId_produit(Integer.parseInt(liste.get(i).getIdProduitTextField().getText()));
+                        ssToSend.setQuantite(Integer.parseInt(liste.get(i).getQuantiteTextField().getText()));
+                        ssToSend.setDate(this.dateSortieStockDate.getDate());
+                        ssToSend.setId_boutique(this.nomDeLaBoutique.field.getItemAt(this.nomDeLaBoutique.field.getSelectedIndex()).getId());
+                        ssToSend.setId_cause(this.cause.field.getItemAt(this.nomDeLaBoutique.field.getSelectedIndex()).getId_cause());
+                    this.ssDAO.create(ssToSend);
+                }
+            }
         });
-    }*/
+    }
 }

@@ -196,9 +196,15 @@ public class Client extends Thread {
                         case "CreateStockEntree" :
                             sender.createStockEntree(this);
                             break;
+                        case "CreateStockSortie" :
+                            sender.createStockSortie(this);
+                            break;
                         case "CreateBonLivraison" :
                             sender.createBonLivraison(this);
                             break;
+                        case "CauseSortieStock" :
+                            sender.sendCauseSortieStock();
+                        break;
                         case "SearchProfilsWithoutParcours" :
                             sender.sendAllProfilsWithoutParcours();
                             break;

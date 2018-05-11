@@ -39,5 +39,15 @@ public class OutputStorageForm extends JPanel {
         this.add(quantite);
     }
 
+    public JTextField getQuantiteTextField() {
+        return quantiteTextField;
+    }
 
+    public JTextField getNomProduitTextField() {
+        return nomProduitTextField;
+    }
+
+    public JTextField getIdProduitTextField() {
+        return idProduitTextField;
+    }
 }

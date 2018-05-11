@@ -19,9 +19,13 @@ public class StockSortie  {
      */
     private int id_boutique;
     /**
+     * product id
+     */
+    private int id_produit;
+    /**
      * the product
      */
-    private Produit id_produit;
+    private Produit produit;
     /**
      * the quantity
      */
@@ -30,6 +34,10 @@ public class StockSortie  {
      * the output storage date
      */
     private Date date;
+    /**
+     * cause id
+     */
+    private int id_cause;
 
     /**
      * Constructor
@@ -43,16 +51,20 @@ public class StockSortie  {
      * Constructor
      * @param idsortie_stock output storage id
      * @param id_boutique store id
-     * @param id_produit product
+     * @param id_produit product id
+     * @param produit product
      * @param quantite quantity
      * @param date date
+     * @param id_cause cause id
      */
-    public StockSortie(int idsortie_stock, int id_boutique, Produit id_produit, int quantite, Date date) {
+    public StockSortie(int idsortie_stock, int id_boutique,int id_produit,Produit produit, int quantite, Date date, int id_cause) {
         this.idsortie_stock = idsortie_stock;
         this.id_boutique = id_boutique;
         this.id_produit = id_produit;
+        this.produit = produit;
         this.quantite = quantite;
         this.date = date;
+        this.id_cause = id_cause;
     }
 
     /**
@@ -92,15 +104,15 @@ public class StockSortie  {
      * @return the product
      */
     public Produit getProduit() {
-        return id_produit;
+        return produit;
     }
 
     /**
      * set the product
-     * @param id_produit the new product
+     * @param produit the new product
      */
-    public void setProduitRef(Produit id_produit) {
-        this.id_produit = id_produit;
+    public void setProduitRef(Produit produit) {
+        this.produit = produit;
     }
 
     /**
@@ -135,4 +147,19 @@ public class StockSortie  {
         this.date = date;
     }
 
+    public void setId_produit(int id_produit) {
+        this.id_produit = id_produit;
+    }
+
+    public int getId_produit() {
+        return id_produit;
+    }
+
+    public void setId_cause(int id_cause) {
+        this.id_cause = id_cause;
+    }
+
+    public int getId_cause() {
+        return id_cause;
+    }
 }

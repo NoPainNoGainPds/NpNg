@@ -3,10 +3,14 @@ package model;
 import utils.DAO;
 import utils.ModelObject;
 
-public class CauseSortieStock implements ModelObject {
+public class CauseSortieStock{
      private int id_cause;
 
      private String nom_cause;
+
+     public CauseSortieStock(String s){
+         this.nom_cause = s;
+     }
 
      public CauseSortieStock(int id, String nom){
          this.id_cause = id;
@@ -30,7 +34,8 @@ public class CauseSortieStock implements ModelObject {
     }
 
     @Override
-    public DAO getDaoClass() {
-        return null;
+    public String toString() {
+        return "Cause : "+this.nom_cause;
     }
+
 }

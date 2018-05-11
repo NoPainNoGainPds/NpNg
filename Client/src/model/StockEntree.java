@@ -19,9 +19,12 @@ public class StockEntree {
      */
     private int id_boutique;
     /**
-     * the product
+     * the product id
      */
     private int id_produit;
+    /**
+     * the product
+     */
     private Produit produit;
     /**
      * quantity

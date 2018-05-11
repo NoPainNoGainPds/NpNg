@@ -337,6 +337,27 @@ public class Sender {
         }
     }
 
+    public void sendCauseSortieStock()
+    {
+        try
+        {
+            ArrayList<String> liste = this.cssDAO.getCauseSortieStock();
+            for(String r : liste)
+            {
+                this.mapper.writeValue(this.writer,r);
+                this.writer.write("\n".getBytes());
+                this.writer.flush();
+            }
+            this.writer.write("null\n".getBytes());
+            this.writer.flush();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Send all fees
      */
@@ -561,6 +582,32 @@ public class Sender {
             String str = cl.read();
             StockEntree seFromClient = this.mapper.readValue(str, StockEntree.class);
             b = this.esDAO.create(seFromClient);
+            //envoie de la reponse
+            this.mapper.writeValue(this.writer,b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+
+        }catch(JsonMappingException e)
+        {
+            e.printStackTrace();
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void createStockSortie (Client cl){
+        try
+        {
+            Boolean b = true;
+            //demande de l'objet
+            this.mapper.writeValue(this.writer,b);
+            this.writer.write("\n".getBytes());
+            this.writer.flush();
+            //reception de l'objet
+            String str = cl.read();
+            StockSortie ssFromClient = this.mapper.readValue(str, StockSortie.class);
+            b = this.ssDAO.create(ssFromClient);
             //envoie de la reponse
             this.mapper.writeValue(this.writer,b);
             this.writer.write("\n".getBytes());

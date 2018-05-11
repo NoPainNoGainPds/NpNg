@@ -44,12 +44,12 @@ public class CauseSortieStockDAO extends DAO<CauseSortieStock> {
         try
         {
             //envoie du message au serv
-            String str = "{\"name\":\"Cause\",\"id\":-1}";
+            String str = "{\"name\":\"CauseSortieStock\",\"id\":-1}";
             this.connection.send(str);
 
             ArrayList<CauseSortieStock> liste = new ArrayList<>();
-            boolean recieved = false;
-            while(!recieved)
+            boolean received = false;
+            while(!received)
             {
                 Object b = (Object)this.connection.recieve(CauseSortieStock.class);
                 if (b != null) {
@@ -57,7 +57,7 @@ public class CauseSortieStockDAO extends DAO<CauseSortieStock> {
                     liste.add(c2);
                     //System.out.println(b);
                 } else {
-                    recieved = true;
+                    received = true;
                 }
             }
             return liste;
