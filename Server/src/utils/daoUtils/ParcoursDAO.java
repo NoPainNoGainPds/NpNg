@@ -53,7 +53,28 @@ public class ParcoursDAO {
     }
 
 
+    public ArrayList<Integer> emplacementParcours(int id_profil){
 
+
+        ArrayList<Integer> liste = new ArrayList<>();
+
+        try {
+            Statement s = this.connection.createStatement();
+            String requete = "SELECT id_emplacement FROM boutique as b JOIN parcours_link as p on b.id_boutique = p.id_boutique JOIN parcours as a ON a.id_parcours = p.id_parcours JOIN profil_client as pc ON pc.id_parcours = a.id_parcours WHERE pc.id_profil = "+id_profil;
+            ResultSet r = s.executeQuery(requete);
+
+            while(r.next()) {
+                liste.add(r.getInt(1));
+                //System.out.println("Emplacement :" + e);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        System.out.println(liste.toString());
+        return liste;
+
+    }
     //public void deleteAll(){
 
        // String requete = "Update profil_client SET id_parcours= null";

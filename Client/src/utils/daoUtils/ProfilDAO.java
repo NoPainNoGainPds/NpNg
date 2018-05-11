@@ -59,10 +59,10 @@ public class ProfilDAO {
      */
     public ArrayList<Profile> getProfilsWithoutParcours(){
         //try{
-            //String str = "{\"name\":\"SearchProfilsWithoutParcours\",\"id\":"+0+"}\n";
+           // String str = "{\"name\":\"SearchProfilsWithoutParcours\",\"id\":"+0+"}\n";
             String str = "{\"name\":\"AssignPath\"}";
             this.conServ.send(str);
-            /*ArrayList<Profile> liste = new ArrayList<>();
+           /* ArrayList<Profile> liste = new ArrayList<>();
             boolean recieved = false;
             while(!recieved)
             {
@@ -79,6 +79,6 @@ public class ProfilDAO {
             e.printStackTrace();
             return null;
         }*/
-            return null;
+           return null;
     }
 }
