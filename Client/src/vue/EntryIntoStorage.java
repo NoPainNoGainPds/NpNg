@@ -178,7 +178,7 @@ public class EntryIntoStorage extends JPanel{
                     for (int i = 0; i < liste.size(); i++){
                         StockEntree seToSend = new StockEntree();
                             seToSend.setQuantite(Integer.parseInt(this.liste.get(i).getQuantiteTextField().getText()));
-                            seToSend.setProduit(Integer.parseInt(this.liste.get(i).getIdProduitTextField().getText()));
+                            seToSend.setId_produit(Integer.parseInt(this.liste.get(i).getIdProduitTextField().getText()));
                         this.seDAO.create(seToSend);
                     }
                     this.blDAO.create(blToSend);

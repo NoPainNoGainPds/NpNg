@@ -25,6 +25,7 @@ public class StockEntree {
      * the product
      */
     private int id_produit;
+    private Produit produit;
     /**
      * quantity
      */
@@ -95,12 +96,23 @@ public class StockEntree {
     public int getId_produit() {
         return this.id_produit;
     }
+    public void setId_produit(int id_produit)
+    {
+        this.id_produit = id_produit;
+    }
+    public void setProduit()
+    {
+        this.produit = produit;
+    }
     /**
      * set the product
-     * @param id_produit the new product
+     * @param produit the new product
      */
-    public void setProduit(int id_produit) {
-        this.id_produit = id_produit;
+    public void setProduit(Produit produit) {
+        this.produit = produit;
+    }
+    public Produit getProduit() {
+        return this.produit;
     }
     /**
      * get the quantity

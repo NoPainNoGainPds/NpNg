@@ -11,6 +11,7 @@ public class StockSortie implements ModelObject {
     private int idsortie_stock;
     private int id_boutique;
     private int id_produit;
+    private Produit produit;
     private int quantite;
     private Date date;
     public StockSortie()
@@ -42,12 +43,20 @@ public class StockSortie implements ModelObject {
         this.id_boutique = id_boutique;
     }
 
-    public int getProduit() {
+    public int getId_produit() {
         return id_produit;
     }
 
-    public void setProduit(int id_produit) {
+    public void setId_produit(int id_produit) {
         this.id_produit = id_produit;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
     }
 
     public int getQuantite() {
