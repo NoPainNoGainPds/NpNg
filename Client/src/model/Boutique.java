@@ -40,6 +40,7 @@ public class Boutique implements ModelObject {
         this.id = id;
         this.nom = nom;
         this.logo = logo;
+        located = false;
     }
 
     public Boutique(int id, String nom, CategorieBoutique categorie, Emplacement emplacement, String logo)
@@ -61,6 +62,7 @@ public class Boutique implements ModelObject {
         this.id = id;
         this.emplacement = emplacement;
         this.categorieBoutique = categorieBoutique;
+        located = false;
 
     }
     /**
