@@ -130,6 +130,7 @@ public class BoutiqueDAO extends DAO<Boutique> {
                 if (b != null) {
                     Boutique b2 = (Boutique) b;
                     liste.add(b2);
+                    System.out.println(b);
                 } else {
                     recieved = true;
                 }

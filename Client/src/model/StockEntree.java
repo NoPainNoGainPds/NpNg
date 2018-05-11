@@ -6,9 +6,6 @@
 package model;
 
 import java.util.Date;
-import utils.DAO;
-import utils.ModelObject;
-import utils.daoUtils.StockEntreeDAO;
 /**
  * represents an input storage
  */
