@@ -79,7 +79,70 @@ public class Algorithm {
             /*
             Begin the algorithm by modifying the mark
              */
+            mark += storeCriteria[0];
+            switch (storeList.get(i).getCategorieBoutique().getNom()) {
+                case "sport" :
+                    mark += 2;
+                    break;
+                case "mobilier" :
+                    mark += 3;
+                    break;
+                case "tech" :
+                    mark += 4;
+                    break;
+                case "alimentaire" :
+                    mark += 5;
+                    break;
+                case "education" :
+                    mark += 1;
+                    break;
+                case "mode" :
+                    mark += 6;
+                    break;
+                case "grande surface" :
+                    mark += 10;
+                    break;
+                default :
+                    System.out.println("Category not known");
+                    break;
+            }
+            mark += storeCriteria[1];
+            switch(storeList.get(i).getRenommee()) {
+                case "*" :
+                    mark += 5;
+                    break;
+                case "A" :
+                    mark += 4;
+                    break;
+                case "B" :
+                    mark += 3;
+                    break;
+                case "C":
+                    mark += 2;
+                    break;
+                case "D" :
+                    mark += 1;
+                    break;
+                default :
+                    System.out.println("Renommee not known");
+                    break;
+            }
 
+            mark += storeCriteria[2];
+            switch (storeList.get(i).getGamme()) {
+                case "A" :
+                    mark += 3;
+                    break;
+                case "B" :
+                    mark += 2;
+                    break;
+                case "C" :
+                    mark += 1;
+                    break;
+                default :
+                    System.out.println("Gamme not known");
+                    break;
+            }
             /*
             Then create a MarkedStore with the mark and add it to the list to sort
              */
@@ -175,6 +238,10 @@ public class Algorithm {
         for (Boutique store : storeList) {
             bDAO.unlocate(store);
         }
+    }
+
+    public ArrayList<Emplacement> getLocationList() {
+        return locationList;
     }
 
 }

@@ -166,7 +166,7 @@ public class EmplacementDAO extends DAO<Emplacement> {
      */
     public void unassign(Emplacement location) {
         try {
-            String query = "update Emplacement set assigned=false where id_emplacement="+location.getId()+";";
+            String query = "update Emplacement set assigne=false where id_emplacement="+location.getId()+";";
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(query);
             logger.info(query);
@@ -185,11 +185,11 @@ public class EmplacementDAO extends DAO<Emplacement> {
         int[] criteriaArray = new int[2];
         try {
             Statement stmt = this.connection.createStatement();
-            String query = "select * from location_criteria";
+            String query = "select * from criteres_emplacement";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                criteriaArray[0] = rs.getInt("area");
-                criteriaArray[1] = rs.getInt("location_category");
+                criteriaArray[0] = rs.getInt("surface");
+                criteriaArray[1] = rs.getInt("categorie_emplacement");
                 return criteriaArray;
             }
             rs.close();
