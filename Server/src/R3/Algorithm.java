@@ -1,16 +1,13 @@
 package R3;
 
-import db.Database;
 import model.Boutique;
 import model.Emplacement;
+import model.MarkedLocation;
+import model.MarkedStore;
 import org.apache.log4j.Logger;
 import utils.daoUtils.BoutiqueDAO;
 import utils.daoUtils.EmplacementDAO;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 

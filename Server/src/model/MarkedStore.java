@@ -1,12 +1,4 @@
-package R3;
-
-import controller.Client;
-import model.Boutique;
-import model.CategorieBoutique;
-import model.Emplacement;
-import model.Produit;
-
-import java.util.ArrayList;
+package model;
 
 /**
  * Represents a store with a mark

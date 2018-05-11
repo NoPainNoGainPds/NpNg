@@ -1,6 +1,4 @@
-package R3;
-
-import model.Emplacement;
+package model;
 
 
 public class MarkedLocation implements Comparable{
