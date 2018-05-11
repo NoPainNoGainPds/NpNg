@@ -22,7 +22,7 @@ public class StockSortieDAO extends DAO<StockSortie> {
     @Override
     public boolean create(StockSortie obj) {
         boolean response;
-        String str = "{\"name\" : \"newOutputStorage\",\"id\" : 0}";
+        String str = "{\"name\" : \"CreateStockSortie\",\"id\" : 0}";
         this.connection.send(str);
         ObjectMapper mapper = new ObjectMapper();
         try {

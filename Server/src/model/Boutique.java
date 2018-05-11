@@ -159,7 +159,7 @@ public class Boutique {
     }
     public String toString()
     {
-        return "Boutique:"+this.nom+"; Emplacement :"+this.emplacement+" Cat :"+this.categorieBoutique;
+        return "Boutique:"+this.nom+" Cat :"+this.categorieBoutique;
     }
 
     public CategorieBoutique getCategorieBoutique() {

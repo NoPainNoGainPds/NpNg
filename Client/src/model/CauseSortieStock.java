@@ -35,7 +35,7 @@ public class CauseSortieStock{
 
     @Override
     public String toString() {
-        return "Cause : "+this.nom_cause;
+        return "Cause : "+this.nom_cause+" ID : "+this.id_cause;
     }
 
 }

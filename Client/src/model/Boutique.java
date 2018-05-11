@@ -155,7 +155,7 @@ public class Boutique implements ModelObject {
 
     public String toString()
     {
-        return "Boutique:"+this.nom+" id boutique :"+this.getId() +"; Emplacement :"+this.emplacement+" Cat :"+this.categorieBoutique;
+        return "Boutique:"+this.nom+" Cat :"+this.categorieBoutique;
     }
     public DAO getDaoClass()
     {
