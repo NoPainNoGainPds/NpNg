@@ -48,7 +48,7 @@ public class CauseSortieStockDAO extends DAO<CauseSortieStock> {
         try
         {
             Statement stmt = this.connection.createStatement();
-            String requete = "SELECT id_cause FROM cause_sortie_stock";
+            String requete = "SELECT * FROM cause_sortie_stock";
             ResultSet res = stmt.executeQuery(requete);
             while(res.next())
             {
