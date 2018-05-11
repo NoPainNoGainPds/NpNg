@@ -224,7 +224,7 @@ public class Facture {
 
         document.close();
 
-       //return "http://localhost/pdf/facture.pdf";
+       //return "http://localhost/pdf/"+destination;
         return "http://localhost//Factures//"+destination;
     }
 }

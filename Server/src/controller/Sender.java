@@ -329,6 +329,10 @@ public class Sender {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Send all fees
+     */
     public void sendAllfees()
     {
         try {
@@ -350,6 +354,10 @@ public class Sender {
         }
     }
 
+    /**
+     * find fee of a month and a year we choose
+     * @param inputFromClient contain the month and the year.
+     */
     public void sendFee(InputFromClient inputFromClient)
     {
         try {
@@ -377,6 +385,10 @@ public class Sender {
         }
     }
 
+    /**
+     * Method to find the stores which have to pay
+     * @return A list of the stores.
+     */
     public void sendStoreWhoPay()
     {
         try {
@@ -398,7 +410,12 @@ public class Sender {
         }
     }
 
-    public void insertFee(InputFromClient valeurici)
+    /**
+     * Add a new fee in the database (not used).
+     * @param inputFromClient .
+     * @return true if it works, false else.
+     */
+    public void insertFee(InputFromClient inputFromClient)
     {
         Redevance fee = null;
         try {
@@ -413,7 +430,11 @@ public class Sender {
         }
     }
 
-
+    /**
+     * Delete a fee from the database.
+     * @param red The fee to delete.
+     * @return true if it works, false else.
+     */
     public boolean deleteFee(Redevance red)
     {
         try {
@@ -445,11 +466,22 @@ public class Sender {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * Calculate and assign a fee to all stores
+     */
     public void calculFee() {
         AlgorithmFee alg = new AlgorithmFee(this.bDAO,this.rDAO);
         alg.assignFeeToStore();
     }
 
+    /**
+     * send a bill in PDF.
+     * @param dest name of PDF
+     * @param id_redevance id of the fee
+     * @return true if it works, false else..
+     */
     public boolean sendFacture(String dest, int id_redevance){
         try {
             Facture f = new Facture(this.bDAO,this.rDAO);
