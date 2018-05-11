@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class StockEntreeDAO extends DAO<StockEntree> {
 
@@ -25,8 +26,20 @@ public class StockEntreeDAO extends DAO<StockEntree> {
 
     @Override
     public boolean create(StockEntree obj) {
-        System.out.println("creation entree stock");
-        return false;
+        try {
+            System.out.println("creation entree stock");
+            Produit id = obj.getProduit();
+
+            String requete = "INSERT INTO entree_stock (id_produit, quantite, date_entree, montant) VALUES ('" + id.getId() + "', '" + obj.getQuantite() + "', '"+ obj.getDate()+"', '"+obj.getMontant()+"');";
+            Statement stmt = this.connection.createStatement();
+            stmt.executeUpdate(requete);
+            logger.info(requete);
+            return true;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            logger.error(e.toString());
+            return false;
+        }
     }
 
     @Override

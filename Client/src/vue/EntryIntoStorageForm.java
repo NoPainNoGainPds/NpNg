@@ -21,8 +21,8 @@
         /**
          * Textfield to enter unitary cost
          */
-        private TextLabel <JTextField> coutUnitaire;
-        private JTextField coutUnitaireTextField;
+        private TextLabel <JTextField> montant;
+        private JTextField montantTextField;
 
 
         public EntryIntoStorageForm(){
@@ -47,14 +47,14 @@
             quantite = new TextLabel(quantiteTextField, new JLabel("Quantite"));
             this.add(quantite);
 
-            coutUnitaireTextField = new JTextField(20);
-            coutUnitaireTextField.setPreferredSize(new Dimension(250,50));
-            coutUnitaire = new TextLabel(coutUnitaireTextField, new JLabel("Cout Unitaire"));
-            this.add(coutUnitaire);
+            montantTextField = new JTextField(20);
+            montantTextField.setPreferredSize(new Dimension(250,50));
+            montant = new TextLabel(montantTextField, new JLabel("Cout Unitaire"));
+            this.add(montant);
         }
 
-        public JTextField getCoutUnitaireTextField() {
-            return coutUnitaireTextField;
+        public JTextField getMontantTextField() {
+            return montantTextField;
         }
 
         public JTextField getIdProduitTextField() {

@@ -161,24 +161,26 @@ public class EntryIntoStorage extends JPanel{
                         liste.get(i).getQuantiteTextField().setBackground(Color.RED);
                         valide ++;
                     }
-                    if(liste.get(i).getCoutUnitaireTextField().getText().equals("")){
-                        liste.get(i).getCoutUnitaireTextField().setBackground(Color.RED);
+                    if(liste.get(i).getMontantTextField().getText().equals("")){
+                        liste.get(i).getMontantTextField().setBackground(Color.RED);
                         valide ++;
                     }
                 }
 
                 if (valide==0){
-                    //StockEntree stToSend = new StockEntree();
                     BonLivraison blToSend = new BonLivraison();
 
                     blToSend.setDate_livraison(this.dateEntreeStockDate.getDate());
                     blToSend.setId_fournisseur(Integer.parseInt(this.fournisseurTextField.getText()));
-                    //blToSend.setMontant_livraison(Float.parseFloat(this.montantTextField.getText()));
+
 
                     for (int i = 0; i < liste.size(); i++){
                         StockEntree seToSend = new StockEntree();
                             seToSend.setQuantite(Integer.parseInt(this.liste.get(i).getQuantiteTextField().getText()));
                             seToSend.setId_produit(Integer.parseInt(this.liste.get(i).getIdProduitTextField().getText()));
+                            seToSend.setDate(this.dateEntreeStockDate.getDate());
+                            //seToSend.setId_boutique();
+                            seToSend.setMontant(Integer.parseInt(this.liste.get(i).getMontantTextField().getText()));
                         this.seDAO.create(seToSend);
                     }
                     this.blDAO.create(blToSend);

@@ -7,7 +7,8 @@ package model;
 
 import java.util.Date;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+//import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import utils.DAO;
 import utils.ModelObject;
 import utils.daoUtils.StockEntreeDAO;
