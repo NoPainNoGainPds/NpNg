@@ -31,13 +31,13 @@ public class ManageParcours extends JPanel{
     {
         JPanel panel = new JPanel();
         JButton btn1 = new JButton("Create Parcours");
-        JButton btn2 = new JButton("Delete profils");
+        //JButton btn2 = new JButton("Delete profils");
 
         btn1.addActionListener(e -> this.profDAO.getProfilsWithoutParcours());
-        btn2.addActionListener(e -> this.bDAO.getStoreWithCategory());
+        //btn2.addActionListener(e -> this.bDAO.getStoreWithCategory());
 
         panel.add(btn1);
-        panel.add(btn2);
+        //panel.add(btn2);
 
 
         return panel;
