@@ -170,6 +170,7 @@ public class Map extends JPanel {
     public void setCourse(ArrayList<Integer> liste)
     {
         //calcul coordinates of stores in the liste to draw course line
+
         this.intCourse = liste;
         ArrayList<Point> returnValue = new ArrayList<>();
         for(MyPolygon poly : this.polygons)

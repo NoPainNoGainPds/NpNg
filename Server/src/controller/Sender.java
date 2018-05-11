@@ -714,4 +714,26 @@ public class Sender {
             e.printStackTrace();
         }
     }
+    public void sendParcours(InputFromClient input)
+    {
+        int profil = this.cDAO.getFirstProfil(input.getId());
+
+        try {
+            ArrayList<Integer> listeInt = this.parcoursDAO.emplacementParcours(profil);
+            System.out.println(listeInt.size());
+            for(Integer b : listeInt)
+            {
+                this.mapper.writeValue(this.writer,b);
+                this.writer.write("\n".getBytes());
+                this.writer.flush();
+            }
+            this.writer.write("null\n".getBytes());
+            this.writer.flush();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

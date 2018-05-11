@@ -223,6 +223,9 @@ public class Client extends Thread {
                         case "AssignPath" :
                             sender.assignAllPaths();
                             break;
+                        case "emplacementParcours":
+                            sender.sendParcours(inputFromClient);
+                            break;
                         default: System.out.println("Not Comparable");
                     }
                     /*

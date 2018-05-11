@@ -14,7 +14,7 @@ public class Main{
     public static void main(String[] args)
     {
         Constants.conServ = new ConnectionServer();
-        Fenetre fen = new Fenetre("Prototype");
+        Fenetre fen = new Fenetre("Client NPNG");
         javax.swing.SwingUtilities.invokeLater(fen);
     }
 }

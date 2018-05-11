@@ -179,4 +179,23 @@ public class ClientDAO extends DAO<ClientModel> {
             e.printStackTrace();
         }
     }
+    public int getFirstProfil(int idClient)
+    {
+        String str = "SELECET MAX(id_profil) from client_profil_client where id_client ="+idClient+";";
+        try
+        {
+            Statement stmt = this.connection.createStatement();
+            ResultSet res = stmt.executeQuery(str);
+            int retour = -1;
+            while(res.next())
+            {
+                retour = res.getInt(1);
+            }
+            return retour;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }

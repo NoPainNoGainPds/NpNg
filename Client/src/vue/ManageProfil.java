@@ -1,9 +1,11 @@
 package vue;
 
 import model.Client;
+import model.Parcours;
 import model.Profile;
 import utils.Constants;
 import utils.daoUtils.ClientDAO;
+import utils.daoUtils.ParcoursDAO;
 import utils.daoUtils.ProfilDAO;
 
 import javax.swing.*;
@@ -19,6 +21,7 @@ public class ManageProfil extends JPanel{
     private ProfilDAO profDAO;
     private Map map;
     private Image imgProf;
+    private Client selected = null;
 
     public ManageProfil(Map map){
         this.map = map;
@@ -39,6 +42,7 @@ public class ManageProfil extends JPanel{
                 //au clique, afficher les achats du client.
                 Client c = listeClient.getSelectedValue();
                 this.clientView.setClient(c);
+                this.selected = c;
             }
         );
         this.clientView = new ClientView(profDAO,this.map);
@@ -61,7 +65,8 @@ public class ManageProfil extends JPanel{
         listeB.add(new Integer(3));
         listeB.add(new Integer(4));
         listeB.add(new Integer(5));
-        btn4.addActionListener(e-> this.map.setCourse(listeB));
+        ParcoursDAO pDAO = new ParcoursDAO();
+        btn4.addActionListener(e-> this.map.setCourse(pDAO.emplacementParcours(this.selected.getId())));
 
         panel.add(btn1);
         panel.add(btn2);

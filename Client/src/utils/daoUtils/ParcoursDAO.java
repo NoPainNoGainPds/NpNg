@@ -63,4 +63,29 @@ public class ParcoursDAO extends DAO<Parcours> {
     public ArrayList<Parcours> findFromReference() {
         return null;
     }
+
+    public ArrayList<Integer> emplacementParcours(int id_profil){
+
+        try{
+            String str = "{\"name\":\"emplacementParcours\",\"id\":"+id_profil+"}\n";
+            this.connection.send(str);
+            ArrayList<Integer> liste = new ArrayList<>();
+            boolean recieved = false;
+            while(!recieved)
+            {
+                Integer b = (Integer) this.connection.recieve(Integer.class);
+                if (b != null) {
+                    liste.add(b);
+                } else {
+                    recieved = true;
+                }
+            }
+            System.out.println(liste.toString());
+            return liste;
+        }catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }
