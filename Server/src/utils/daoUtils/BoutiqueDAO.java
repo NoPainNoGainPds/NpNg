@@ -421,26 +421,6 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
     }
 
-    public ArrayList<Boutique> findFromReferencealgo() {
-        try
-        {
-            Statement stmt =  this.connection.createStatement();
-            String requete = "SELECT id_boutique,nom_boutique,id_categorie_boutique,id_emplacement,url_logo FROM boutique";
-            ResultSet res = stmt.executeQuery(requete);
-            ArrayList<Boutique> listBoutique = new ArrayList<>();
-            while(res.next())
-            {
-                listBoutique.add(new Boutique(this.client,res.getInt("id_boutique"),res.getString("nom_boutique"),res.getInt("id_categorie_boutique"),0,res.getString("url_logo")));
-            }
-            stmt.close();
-            logger.info(requete);
-            return listBoutique;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.toString());
-        }
-        return null;
-    }
 }
 
 
