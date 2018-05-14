@@ -102,7 +102,7 @@ public class Algorithm {
                     mark += 6;
                     break;
                 case "grande surface" :
-                    mark += 10;
+                    mark += 15;
                     break;
                 default :
                     System.out.println("Category not known");
@@ -177,7 +177,7 @@ public class Algorithm {
              if(surface > 5000 && surface <= 6000)
                  mark += 7;
              if (surface > 6000)
-                 mark += 8;
+                 mark += 10;
 
              mark += locationCriteria[1];
              switch(locationList.get(i).getCat()) {
