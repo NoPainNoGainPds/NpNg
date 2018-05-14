@@ -181,7 +181,7 @@ public class ClientDAO extends DAO<ClientModel> {
     }
     public int getFirstProfil(int idClient)
     {
-        String str = "SELECET MAX(id_profil) from client_profil_client where id_client ="+idClient+";";
+        String str = "SELECT MAX(id_profil) from client_profil_client where id_client ="+idClient+";";
         try
         {
             Statement stmt = this.connection.createStatement();

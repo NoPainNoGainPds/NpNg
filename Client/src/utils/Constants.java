@@ -21,4 +21,7 @@ public class Constants {
     //public static  final String host = "172.16.0.8";
     public static final int port = 2013;
     public static  ConnectionServer conServ;
+    public static String OPEN_WITH_MOZ = "\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" -new-tab \"";
+    public static String OPEN_WITH_CHROME = "\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" -new-tab \"";
+    public static String OPEN_WITH_IE = "\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" -new-tab \"";
 }

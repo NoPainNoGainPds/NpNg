@@ -63,5 +63,15 @@ public class ProfilDAO {
 
     }
     //SELECT id_boutique, nom_categorie_boutique FROM boutique as b , categorie_boutique as l WHERE b.id_categorie_boutique = l.id_categorie_boutique
-
+    public void setParcours(Profil p ,int parcours)
+    {
+        try{
+            Statement stmt = this.connection.createStatement();
+            String requete = "UPDATE `profil_client` SET`id_parcours`="+parcours+" WHERE nom_profil = \""+p.getNom()+"\";";
+            stmt.executeUpdate(requete);
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

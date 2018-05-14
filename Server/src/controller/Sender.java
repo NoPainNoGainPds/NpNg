@@ -694,7 +694,8 @@ public class Sender {
                     Parcours path = new Parcours();
                     path.setStoreList(listBoutiques);
                     path.setName("parcours "+nomCompletProfil);
-                    parcoursDAO.create(path);
+                    int id_parcours = parcoursDAO.create(path);
+                    profDAO.setParcours(p,id_parcours);
                 }
             }
 
