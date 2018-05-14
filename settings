@@ -1,5 +1,5 @@
 {
-  "url": "jdbc:mariadb://localhost:3306/mydb-final",
+  "url": "jdbc:mariadb://localhost:3306/finaldb",
   "user":"root",
   "password":""
 }

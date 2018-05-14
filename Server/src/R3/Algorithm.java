@@ -10,6 +10,7 @@ import utils.daoUtils.EmplacementDAO;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 
 /**
@@ -44,6 +45,8 @@ public class Algorithm {
      * A logger. Use to have a trace of what happen during the execution.
      */
     Logger logger;
+
+    private static String CHAR_LIST = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     /**
      * Constructor
@@ -287,6 +290,28 @@ public class Algorithm {
 
     public ArrayList<Emplacement> getLocationList() {
         return locationList;
+    }
+
+    public static String generateRandomString(){
+
+        StringBuffer randStr = new StringBuffer();
+        for(int i=0; i<7; i++){
+            int number = getRandomNumber();
+            char ch = CHAR_LIST.charAt(number);
+            randStr.append(ch);
+        }
+        return randStr.toString();
+    }
+
+    public static int getRandomNumber() {
+        int randomInt = 0;
+        Random randomGenerator = new Random();
+        randomInt = randomGenerator.nextInt(CHAR_LIST.length());
+        if (randomInt - 1 == -1) {
+            return randomInt;
+        } else {
+            return randomInt - 1;
+        }
     }
 
 }

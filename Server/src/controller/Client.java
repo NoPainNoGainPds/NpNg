@@ -227,6 +227,9 @@ public class Client extends Thread {
                         case "emplacementParcours":
                             sender.sendParcours(inputFromClient);
                             break;
+                        case "CreateStores" :
+                            sender.createStores(inputFromClient.getId());
+                            break;
                         default: System.out.println("Not Comparable");
                     }
                     /*

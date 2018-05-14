@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Represents the sender
@@ -735,6 +736,19 @@ public class Sender {
         } catch(IOException e)
         {
             e.printStackTrace();
+        }
+    }
+
+    public void createStores(int val) {
+        Random rand = new Random();
+        String[] renommee = {"*","A","B","C","D"};
+        String[] gamme = {"A","B","C"};
+        for(int i = 0 ; i < val ; i++) {
+            String name = Algorithm.generateRandomString();
+            int id_store_category = rand.nextInt(7) + 1;
+            int val_renommee = rand.nextInt(5);
+            int val_gamme = rand.nextInt(3);
+            bDAO.createStore(name, id_store_category, renommee[val_renommee], gamme[val_gamme]);
         }
     }
 

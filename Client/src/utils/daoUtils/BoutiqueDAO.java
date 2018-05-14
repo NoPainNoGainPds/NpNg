@@ -225,4 +225,13 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
     }
 
+    public void createStores(int nb_stores) {
+        try {
+            String str = "{\"name\":\"CreateStores\",\"id\":"+nb_stores+"}";
+            this.connection.send(str);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

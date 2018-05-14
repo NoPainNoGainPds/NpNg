@@ -63,7 +63,7 @@ public class AlgorithmView extends JPanel {
             JOptionPane jop = new JOptionPane();
             String value = jop.showInputDialog(this,"How much stores you want ?", "Nombre de boutiques", JOptionPane.QUESTION_MESSAGE);
             int res = Integer.parseInt(value);
-            //algo.createStores(res);
+            bDAO.createStores(res);
             value = jop.showInputDialog(this,"How much locations you want ?", "Nombre d'emplacements", JOptionPane.QUESTION_MESSAGE);
             res = Integer.parseInt(value);
             //algo.createLocations(res);

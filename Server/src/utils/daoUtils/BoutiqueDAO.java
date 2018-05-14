@@ -421,6 +421,16 @@ public class BoutiqueDAO extends DAO<Boutique> {
         }
     }
 
+    public void createStore(String name, int id_store_category, String renommee, String gamme) {
+        try {
+            Statement stmt = this.connection.createStatement();
+            String query = "insert into boutique(nom_boutique,id_categorie_boutique,id_emplacement,url_logo,placee,renommee,gamme) values(\""+name+"\","+id_store_category+",0,null,0,\""+renommee+"\",\""+gamme+"\")";
+            stmt.executeUpdate(query);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 
