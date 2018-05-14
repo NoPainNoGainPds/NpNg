@@ -212,4 +212,14 @@ public class EmplacementDAO extends DAO<Emplacement> {
         }
     }
 
+    public void createLocation(String name, int superficie, int id_categorie_emplacement) {
+        try {
+            Statement stmt = this.connection.createStatement();
+            String query = "insert into emplacement(nom_emplacement,superficie,id_categorie_emplacement, assigne) values(\""+name+"\","+superficie+","+id_categorie_emplacement+",0)";
+            stmt.executeUpdate(query);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

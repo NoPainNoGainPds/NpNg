@@ -230,6 +230,9 @@ public class Client extends Thread {
                         case "CreateStores" :
                             sender.createStores(inputFromClient.getId());
                             break;
+                        case "CreateLocations" :
+                            sender.createLocations(inputFromClient.getId());
+                            break;
                         default: System.out.println("Not Comparable");
                     }
                     /*

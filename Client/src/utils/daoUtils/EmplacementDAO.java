@@ -114,4 +114,13 @@ public class EmplacementDAO extends DAO<Emplacement> {
             e.printStackTrace();
         }
     }
+
+    public void createLocations(int nb_locations) {
+        try {
+            String str = "{\"name\":\"CreateLocations\",\"id\":"+nb_locations+"}";
+            this.connection.send(str);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

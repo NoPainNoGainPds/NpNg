@@ -30,7 +30,7 @@ public class AlgorithmView extends JPanel {
         beforeLaunchPanel.setBorder(BorderFactory.createTitledBorder("Before lauching the algorithm"));
         listStores = bDAO.findFromReference();
         String[][] datas_before = new String[listStores.size()][2];
-        String[] headers = {"Boutique", "Emplacement"};
+        String[] headers = {"Store", "Location"};
         for(int i = 0; i < listStores.size(); i++) {
             datas_before[i][0] = listStores.get(i).getNom();
             datas_before[i][1] = listStores.get(i).getEmplacement().getNom();
@@ -54,6 +54,7 @@ public class AlgorithmView extends JPanel {
                 datas_after[i][1] = listStores.get(i).getEmplacement().getNom();
             }
             table_after = new JTable(datas_after, headers);
+            afterLaunchPanel.removeAll();
             afterLaunchPanel.add(new JScrollPane(table_after));
             jop.showMessageDialog(this, "Algorithm successfully executed !");
             this.setVisible(true);
@@ -66,7 +67,7 @@ public class AlgorithmView extends JPanel {
             bDAO.createStores(res);
             value = jop.showInputDialog(this,"How much locations you want ?", "Nombre d'emplacements", JOptionPane.QUESTION_MESSAGE);
             res = Integer.parseInt(value);
-            //algo.createLocations(res);
+            eDAO.createLocations(res);
 
         });
         buttonPanel.add(launchAlgoButton);

@@ -752,4 +752,14 @@ public class Sender {
         }
     }
 
+    public void createLocations(int val) {
+        Random rand = new Random();
+        for(int i = 0 ; i < val ; i++) {
+            String name = Algorithm.generateRandomString();
+            int val_category = rand.nextInt(5) + 1;
+            int val_superficie = rand.nextInt(19980) + 20;
+            eDAO.createLocation(name,val_superficie,val_category);;
+        }
+    }
+
 }
