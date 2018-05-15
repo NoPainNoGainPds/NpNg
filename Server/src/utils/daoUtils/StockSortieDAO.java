@@ -33,7 +33,7 @@ public class StockSortieDAO extends DAO<StockSortie> {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String date = dateFormat.format(obj.getDate());
 
-            String requete = "INSERT INTO sortie_stock (date_sortie, id_boutique, id_produit, quantite, id_cause_sortie_stock) VALUES ('"+date+"','"+ obj.getId_boutique() + "', '" + obj.getId_produit() + "', '"+obj.getQuantite()+"' , '"+obj.getId_cause()+"'  );";
+            String requete = "INSERT INTO sortie_stock (date_sortie, id_boutique, id_produit, quantite, id_cause_sortie_stock) VALUES ('"+date+"','"+ obj.getId_boutique() + "', '" + obj.getId_produit() + "', '"+obj.getQuantite()+"' , '"+obj.getId_cause_sortie_stock()+"'  );";
             Statement stmt = this.connection.createStatement();
             stmt.executeUpdate(requete);
             logger.info(requete);

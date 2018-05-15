@@ -342,8 +342,8 @@ public class Sender {
     {
         try
         {
-            ArrayList<String> liste = this.cssDAO.getCauseSortieStock();
-            for(String r : liste)
+            ArrayList<CauseSortieStock> liste = this.cssDAO.getCauseSortieStock();
+            for(CauseSortieStock r : liste)
             {
                 this.mapper.writeValue(this.writer,r);
                 this.writer.write("\n".getBytes());

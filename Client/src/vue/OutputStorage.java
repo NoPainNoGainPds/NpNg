@@ -154,7 +154,7 @@ public class OutputStorage extends JPanel{
                         ssToSend.setQuantite(Integer.parseInt(liste.get(i).getQuantiteTextField().getText()));
                         ssToSend.setDate(this.dateSortieStockDate.getDate());
                         ssToSend.setId_boutique(this.nomDeLaBoutique.field.getItemAt(this.nomDeLaBoutique.field.getSelectedIndex()).getId());
-                        ssToSend.setId_cause(this.cause.field.getItemAt(this.cause.field.getSelectedIndex()).getId_cause());
+                        ssToSend.setId_cause_sortie_stock(this.cause.field.getItemAt(this.cause.field.getSelectedIndex()).getId_cause_sortie_stock());
                     this.ssDAO.create(ssToSend);
                 }
             }

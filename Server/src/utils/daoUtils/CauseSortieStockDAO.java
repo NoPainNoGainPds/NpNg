@@ -33,26 +33,24 @@ public class CauseSortieStockDAO extends DAO<CauseSortieStock> {
     }
 
     @Override
-    public ArrayList<CauseSortieStock> findFromReference() {
-        return null;
-    }
+    public ArrayList<CauseSortieStock> findFromReference() {return null; }
 
     @Override
     public ArrayList<CauseSortieStock> findFromReference(int id) {
         return null;
     }
 
-    public ArrayList<String> getCauseSortieStock()
+    public ArrayList<CauseSortieStock> getCauseSortieStock()
     {
-        ArrayList<String> liste = new ArrayList<>();
+        ArrayList<CauseSortieStock> liste = new ArrayList<>();
         try
         {
             Statement stmt = this.connection.createStatement();
-            String requete = "SELECT * FROM cause_sortie_stock";
+            String requete = "SELECT id_cause_sortie_stock, nom_cause FROM `cause_sortie_stock`";
             ResultSet res = stmt.executeQuery(requete);
             while(res.next())
             {
-                liste.add(res.getString(1));
+                liste.add(new CauseSortieStock(res.getInt("id_cause_sortie_stock"), res.getString("nom_cause")));
             }
         }catch(SQLException e)
         {

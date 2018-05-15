@@ -37,7 +37,7 @@ public class StockSortie  {
     /**
      * cause id
      */
-    private int id_cause;
+    private int id_cause_sortie_stock;
 
     /**
      * Constructor
@@ -55,16 +55,16 @@ public class StockSortie  {
      * @param produit product
      * @param quantite quantity
      * @param date date
-     * @param id_cause cause id
+     * @param id_cause_sortie_stock cause id
      */
-    public StockSortie(int idsortie_stock, int id_boutique,int id_produit,Produit produit, int quantite, Date date, int id_cause) {
+    public StockSortie(int idsortie_stock, int id_boutique,int id_produit,Produit produit, int quantite, Date date, int id_cause_sortie_stock) {
         this.idsortie_stock = idsortie_stock;
         this.id_boutique = id_boutique;
         this.id_produit = id_produit;
         this.produit = produit;
         this.quantite = quantite;
         this.date = date;
-        this.id_cause = id_cause;
+        this.id_cause_sortie_stock = id_cause_sortie_stock;
     }
 
     /**
@@ -155,11 +155,11 @@ public class StockSortie  {
         return id_produit;
     }
 
-    public void setId_cause(int id_cause) {
-        this.id_cause = id_cause;
+    public void setId_cause_sortie_stock(int id_cause_sortie_stock) {
+        this.id_cause_sortie_stock = id_cause_sortie_stock;
     }
 
-    public int getId_cause() {
-        return id_cause;
+    public int getId_cause_sortie_stock() {
+        return id_cause_sortie_stock;
     }
 }
